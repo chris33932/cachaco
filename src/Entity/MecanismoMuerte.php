@@ -34,6 +34,11 @@ class MecanismoMuerte
         $this->victimas = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getDescripcion();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RepGeografica{% endblock %}
+
+{% block body %}
+    <h1>Edit RepGeografica</h1>
+
+    {{ include('rep_geografica/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rep_geografica_index') }}">back to list</a>
+
+    {{ include('rep_geografica/_delete_form.html.twig') }}
+{% endblock %}

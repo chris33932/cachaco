@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SituacionLaboral{% endblock %}
+
+{% block body %}
+    <h1>SituacionLaboral</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ situacion_laboral.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ situacion_laboral.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('situacion_laboral_index') }}">back to list</a>
+
+    <a href="{{ path('situacion_laboral_edit', {'id': situacion_laboral.id}) }}">edit</a>
+
+    {{ include('situacion_laboral/_delete_form.html.twig') }}
+{% endblock %}

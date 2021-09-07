@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SituacionLaboral{% endblock %}
+
+{% block body %}
+    <h1>Edit SituacionLaboral</h1>
+
+    {{ include('situacion_laboral/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('situacion_laboral_index') }}">back to list</a>
+
+    {{ include('situacion_laboral/_delete_form.html.twig') }}
+{% endblock %}

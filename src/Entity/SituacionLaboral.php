@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SituacionLaboralRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,21 @@ class SituacionLaboral
      */
     private $descripcion;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Victima::class, mappedBy="sit_laboral")
+     */
+    private $victimas;
+
+    public function __construct()
+    {
+        $this->victimas = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getDescripcion();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +52,36 @@ class SituacionLaboral
     public function setDescripcion(string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Victima[]
+     */
+    public function getVictimas(): Collection
+    {
+        return $this->victimas;
+    }
+
+    public function addVictima(Victima $victima): self
+    {
+        if (!$this->victimas->contains($victima)) {
+            $this->victimas[] = $victima;
+            $victima->setSitLaboral($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVictima(Victima $victima): self
+    {
+        if ($this->victimas->removeElement($victima)) {
+            // set the owning side to null (unless already changed)
+            if ($victima->getSitLaboral() === $this) {
+                $victima->setSitLaboral(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RepGeografica{% endblock %}
+
+{% block body %}
+    <h1>Create new RepGeografica</h1>
+
+    {{ include('rep_geografica/_form.html.twig') }}
+
+    <a href="{{ path('rep_geografica_index') }}">back to list</a>
+{% endblock %}

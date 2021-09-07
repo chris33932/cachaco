@@ -1,0 +1,210 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Victima{% endblock %}
+
+{% block body %}
+    <h1>Victima</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ victima.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ victima.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ victima.apellido }}</td>
+            </tr>
+            <tr>
+                <th>DocumentoNro</th>
+                <td>{{ victima.documentoNro }}</td>
+            </tr>
+            <tr>
+                <th>Genero_otro</th>
+                <td>{{ victima.generoOtro }}</td>
+            </tr>
+            <tr>
+                <th>Edad</th>
+                <td>{{ victima.edad }}</td>
+            </tr>
+            <tr>
+                <th>Nacionalidad_otra</th>
+                <td>{{ victima.nacionalidadOtra }}</td>
+            </tr>
+            <tr>
+                <th>Barrio</th>
+                <td>{{ victima.barrio }}</td>
+            </tr>
+            <tr>
+                <th>Calle</th>
+                <td>{{ victima.calle }}</td>
+            </tr>
+            <tr>
+                <th>Altura</th>
+                <td>{{ victima.altura }}</td>
+            </tr>
+            <tr>
+                <th>Interseccion</th>
+                <td>{{ victima.interseccion }}</td>
+            </tr>
+            <tr>
+                <th>Calle_interseccion</th>
+                <td>{{ victima.calleInterseccion }}</td>
+            </tr>
+            <tr>
+                <th>Latitud</th>
+                <td>{{ victima.latitud }}</td>
+            </tr>
+            <tr>
+                <th>Longitud</th>
+                <td>{{ victima.longitud }}</td>
+            </tr>
+            <tr>
+                <th>Fraccion</th>
+                <td>{{ victima.fraccion }}</td>
+            </tr>
+            <tr>
+                <th>Radio</th>
+                <td>{{ victima.radio }}</td>
+            </tr>
+            <tr>
+                <th>Mecanismo_muerte_otro</th>
+                <td>{{ victima.mecanismoMuerteOtro }}</td>
+            </tr>
+            <tr>
+                <th>Tipo_arma_otro</th>
+                <td>{{ victima.tipoArmaOtro }}</td>
+            </tr>
+            <tr>
+                <th>Medida_protecc_vigente</th>
+                <td>{{ victima.medidaProteccVigente }}</td>
+            </tr>
+            <tr>
+                <th>Medida_protecc_especif</th>
+                <td>{{ victima.medidaProteccEspecif }}</td>
+            </tr>
+            <tr>
+                <th>Discapacidad</th>
+                <td>{{ victima.discapacidad }}</td>
+            </tr>
+            <tr>
+                <th>Embarazada</th>
+                <td>{{ victima.embarazada }}</td>
+            </tr>
+            <tr>
+                <th>Privada_libertad</th>
+                <td>{{ victima.privadaLibertad }}</td>
+            </tr>
+            <tr>
+                <th>Ejer_prostitucion</th>
+                <td>{{ victima.ejerProstitucion }}</td>
+            </tr>
+            <tr>
+                <th>Migrante_internacional</th>
+                <td>{{ victima.migranteInternacional }}</td>
+            </tr>
+            <tr>
+                <th>Migrante_intraprov</th>
+                <td>{{ victima.migranteIntraprov }}</td>
+            </tr>
+            <tr>
+                <th>Migrante_interprov</th>
+                <td>{{ victima.migranteInterprov }}</td>
+            </tr>
+            <tr>
+                <th>Pueblo_originario</th>
+                <td>{{ victima.puebloOriginario }}</td>
+            </tr>
+            <tr>
+                <th>Etnia_otro</th>
+                <td>{{ victima.etniaOtro }}</td>
+            </tr>
+            <tr>
+                <th>Hab_nativo_esp</th>
+                <td>{{ victima.habNativoEsp }}</td>
+            </tr>
+            <tr>
+                <th>Homosex_bisex</th>
+                <td>{{ victima.homosexBisex }}</td>
+            </tr>
+            <tr>
+                <th>Ref_activista</th>
+                <td>{{ victima.refActivista }}</td>
+            </tr>
+            <tr>
+                <th>Afro</th>
+                <td>{{ victima.afro }}</td>
+            </tr>
+            <tr>
+                <th>Otra_sit_intersecc</th>
+                <td>{{ victima.otraSitIntersecc }}</td>
+            </tr>
+            <tr>
+                <th>Otra_sit_laboral</th>
+                <td>{{ victima.otraSitLaboral }}</td>
+            </tr>
+            <tr>
+                <th>Hijos_pers_cargo</th>
+                <td>{{ victima.hijosPersCargo }}</td>
+            </tr>
+            <tr>
+                <th>Cant_a_cargo</th>
+                <td>{{ victima.cantACargo }}</td>
+            </tr>
+            <tr>
+                <th>Benef_ley_brisa</th>
+                <td>{{ victima.benefLeyBrisa }}</td>
+            </tr>
+            <tr>
+                <th>Cant_benef</th>
+                <td>{{ victima.cantBenef }}</td>
+            </tr>
+            <tr>
+                <th>Violencia_exc</th>
+                <td>{{ victima.violenciaExc }}</td>
+            </tr>
+            <tr>
+                <th>Femicidio</th>
+                <td>{{ victima.femicidio }}</td>
+            </tr>
+            <tr>
+                <th>Fuerza_seg</th>
+                <td>{{ victima.fuerzaSeg }}</td>
+            </tr>
+            <tr>
+                <th>Otra_fuer_pert</th>
+                <td>{{ victima.otraFuerPert }}</td>
+            </tr>
+            <tr>
+                <th>Sit_detencion</th>
+                <td>{{ victima.sitDetencion }}</td>
+            </tr>
+            <tr>
+                <th>Estado_intox</th>
+                <td>{{ victima.estadoIntox }}</td>
+            </tr>
+            <tr>
+                <th>Est_intox_otro</th>
+                <td>{{ victima.estIntoxOtro }}</td>
+            </tr>
+            <tr>
+                <th>Desap_ant_hecho</th>
+                <td>{{ victima.desapAntHecho }}</td>
+            </tr>
+            <tr>
+                <th>Observacion</th>
+                <td>{{ victima.observacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('victima_index') }}">back to list</a>
+
+    <a href="{{ path('victima_edit', {'id': victima.id}) }}">edit</a>
+
+    {{ include('victima/_delete_form.html.twig') }}
+{% endblock %}

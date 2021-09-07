@@ -1,0 +1,24 @@
+
+.footerCentro {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #c5cad1;
+color: gray;
+text-align: center;
+}
+
+.destacado {
+    margin: 15px 0 10px;
+    
+}
+
+
+/* acerca de victima e imputado */
+.victima{
+    background-color: #a6a29a;
+    color: white;
+    text-align: center;
+}
+

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Victima{% endblock %}
+
+{% block body %}{{ parent() }}
+    <h1>Create new Victima</h1>
+
+    {{ include('victima/_form.html.twig') }}
+
+    <a href="{{ path('victima_index') }}">back to list</a>
+{% endblock %}
+  {% block footer %}
+
+  {% endblock %}
+
+
+{% block javascripts %} {{ parent() }}
+<script>console.log('hola mica')
+
+
+
+alert('https://github.com/chris33932/cachaco.git')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+{% endblock %}
