@@ -54,7 +54,6 @@ class VictimaType extends AbstractType
 
 
 
-
             ->add('etnia_otro')
             ->add('hab_nativo_esp')
             ->add('homosex_bisex')
