@@ -15,21 +15,16 @@
 
 
 {% block javascripts %} {{ parent() }}
-<script>console.log('hola mica')
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
 
+  $(document).ready(function(){
+    $('#victima_tipoDocumento > option[value="1"]').attr('selected', 'selected');
+    });
 
-
-alert('https://github.com/chris33932/cachaco.git')
-
-
-
-
-
-
-
-
-
-
+     $(document).ready(function(){
+    $('#victima_nacionalidad > option[value="1"]').attr('selected', 'selected');
+    });
 
 
 
@@ -37,4 +32,6 @@ alert('https://github.com/chris33932/cachaco.git')
 
 
 </script>
+
+
 {% endblock %}

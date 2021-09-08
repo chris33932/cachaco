@@ -6,6 +6,8 @@ use App\Entity\Victima;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class VictimaType extends AbstractType
 {
@@ -15,7 +17,10 @@ class VictimaType extends AbstractType
             ->add('nombre')
             ->add('apellido')
             ->add('documentoNro')
-            ->add('genero_otro')
+            ->add('genero_otro' ,CheckboxType::class, [
+                'label'    => 'PRUEBA',
+                'required' => false,
+            ])
             ->add('edad')
             ->add('nacionalidad_otra')
             ->add('barrio')
@@ -38,7 +43,21 @@ class VictimaType extends AbstractType
             ->add('migrante_internacional')
             ->add('migrante_intraprov')
             ->add('migrante_interprov')
-            ->add('pueblo_originario')
+            //->add('pueblo_originario')
+            ->add('pueblo_originario', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                    'Si' => 'Si',
+                   
+                ],
+             
+            ])
+
+
+
+
             ->add('etnia_otro')
             ->add('hab_nativo_esp')
             ->add('homosex_bisex')
