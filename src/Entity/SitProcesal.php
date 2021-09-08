@@ -34,6 +34,11 @@ class SitProcesal
         $this->presAutors = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getDescripcion();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

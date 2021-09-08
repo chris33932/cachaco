@@ -22,6 +22,11 @@ class Localidad
      */
     private $nombre;
 
+    public function __toString()
+    {
+        return $this->getNombre();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
