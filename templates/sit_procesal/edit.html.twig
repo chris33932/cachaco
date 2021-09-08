@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SitProcesal{% endblock %}
+
+{% block body %}
+    <h1>Edit SitProcesal</h1>
+
+    {{ include('sit_procesal/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('sit_procesal_index') }}">back to list</a>
+
+    {{ include('sit_procesal/_delete_form.html.twig') }}
+{% endblock %}

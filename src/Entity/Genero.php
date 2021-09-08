@@ -29,9 +29,15 @@ class Genero
      */
     private $victimas;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PresAutor::class, mappedBy="genero")
+     */
+    private $presAutors;
+
     public function __construct()
     {
         $this->victimas = new ArrayCollection();
+        $this->presAutors = new ArrayCollection();
     }
 
     public function __toString()
@@ -80,6 +86,36 @@ class Genero
             // set the owning side to null (unless already changed)
             if ($victima->getGenero() === $this) {
                 $victima->setGenero(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PresAutor[]
+     */
+    public function getPresAutors(): Collection
+    {
+        return $this->presAutors;
+    }
+
+    public function addPresAutor(PresAutor $presAutor): self
+    {
+        if (!$this->presAutors->contains($presAutor)) {
+            $this->presAutors[] = $presAutor;
+            $presAutor->setGenero($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresAutor(PresAutor $presAutor): self
+    {
+        if ($this->presAutors->removeElement($presAutor)) {
+            // set the owning side to null (unless already changed)
+            if ($presAutor->getGenero() === $this) {
+                $presAutor->setGenero(null);
             }
         }
 

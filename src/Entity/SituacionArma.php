@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\NivelInstruccionRepository;
+use App\Repository\SituacionArmaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=NivelInstruccionRepository::class)
+ * @ORM\Entity(repositoryClass=SituacionArmaRepository::class)
  */
-class NivelInstruccion
+class SituacionArma
 {
     /**
      * @ORM\Id
@@ -20,29 +20,18 @@ class NivelInstruccion
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity=Victima::class, mappedBy="niv_inst")
-     */
-    private $victimas;
-
-    /**
-     * @ORM\OneToMany(targetEntity=PresAutor::class, mappedBy="niv_inst")
+     * @ORM\OneToMany(targetEntity=PresAutor::class, mappedBy="sit_arma_fue")
      */
     private $presAutors;
 
     public function __construct()
     {
-        $this->victimas = new ArrayCollection();
         $this->presAutors = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->getDescripcion();
     }
 
     public function getId(): ?int
@@ -63,36 +52,6 @@ class NivelInstruccion
     }
 
     /**
-     * @return Collection|Victima[]
-     */
-    public function getVictimas(): Collection
-    {
-        return $this->victimas;
-    }
-
-    public function addVictima(Victima $victima): self
-    {
-        if (!$this->victimas->contains($victima)) {
-            $this->victimas[] = $victima;
-            $victima->setNivInst($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVictima(Victima $victima): self
-    {
-        if ($this->victimas->removeElement($victima)) {
-            // set the owning side to null (unless already changed)
-            if ($victima->getNivInst() === $this) {
-                $victima->setNivInst(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|PresAutor[]
      */
     public function getPresAutors(): Collection
@@ -104,7 +63,7 @@ class NivelInstruccion
     {
         if (!$this->presAutors->contains($presAutor)) {
             $this->presAutors[] = $presAutor;
-            $presAutor->setNivInst($this);
+            $presAutor->setSitArmaFue($this);
         }
 
         return $this;
@@ -114,8 +73,8 @@ class NivelInstruccion
     {
         if ($this->presAutors->removeElement($presAutor)) {
             // set the owning side to null (unless already changed)
-            if ($presAutor->getNivInst() === $this) {
-                $presAutor->setNivInst(null);
+            if ($presAutor->getSitArmaFue() === $this) {
+                $presAutor->setSitArmaFue(null);
             }
         }
 

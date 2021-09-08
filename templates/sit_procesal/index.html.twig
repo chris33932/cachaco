@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SitProcesal index{% endblock %}
+
+{% block body %}
+    <h1>SitProcesal index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sit_procesal in sit_procesals %}
+            <tr>
+                <td>{{ sit_procesal.id }}</td>
+                <td>{{ sit_procesal.descripcion }}</td>
+                <td>
+                    <a href="{{ path('sit_procesal_show', {'id': sit_procesal.id}) }}">show</a>
+                    <a href="{{ path('sit_procesal_edit', {'id': sit_procesal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sit_procesal_new') }}">Create new</a>
+{% endblock %}

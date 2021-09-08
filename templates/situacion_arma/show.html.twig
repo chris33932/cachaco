@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SituacionArma{% endblock %}
+
+{% block body %}
+    <h1>SituacionArma</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ situacion_arma.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ situacion_arma.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('situacion_arma_index') }}">back to list</a>
+
+    <a href="{{ path('situacion_arma_edit', {'id': situacion_arma.id}) }}">edit</a>
+
+    {{ include('situacion_arma/_delete_form.html.twig') }}
+{% endblock %}

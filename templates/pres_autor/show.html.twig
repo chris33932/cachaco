@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PresAutor{% endblock %}
+
+{% block body %}
+    <h1>PresAutor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pres_autor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ pres_autor.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ pres_autor.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Documento_nro</th>
+                <td>{{ pres_autor.documentoNro }}</td>
+            </tr>
+            <tr>
+                <th>Genero_otro</th>
+                <td>{{ pres_autor.generoOtro }}</td>
+            </tr>
+            <tr>
+                <th>Edad</th>
+                <td>{{ pres_autor.edad }}</td>
+            </tr>
+            <tr>
+                <th>Barrio</th>
+                <td>{{ pres_autor.barrio }}</td>
+            </tr>
+            <tr>
+                <th>Calle</th>
+                <td>{{ pres_autor.calle }}</td>
+            </tr>
+            <tr>
+                <th>Altura</th>
+                <td>{{ pres_autor.altura }}</td>
+            </tr>
+            <tr>
+                <th>Interseccion</th>
+                <td>{{ pres_autor.interseccion }}</td>
+            </tr>
+            <tr>
+                <th>Calle_interseccion</th>
+                <td>{{ pres_autor.calleInterseccion }}</td>
+            </tr>
+            <tr>
+                <th>Latitud</th>
+                <td>{{ pres_autor.latitud }}</td>
+            </tr>
+            <tr>
+                <th>Longitud</th>
+                <td>{{ pres_autor.longitud }}</td>
+            </tr>
+            <tr>
+                <th>Fraccion</th>
+                <td>{{ pres_autor.fraccion }}</td>
+            </tr>
+            <tr>
+                <th>Radio</th>
+                <td>{{ pres_autor.radio }}</td>
+            </tr>
+            <tr>
+                <th>Estado_intox</th>
+                <td>{{ pres_autor.estadoIntox }}</td>
+            </tr>
+            <tr>
+                <th>Est_intox_otro</th>
+                <td>{{ pres_autor.estIntoxOtro }}</td>
+            </tr>
+            <tr>
+                <th>Reincidente</th>
+                <td>{{ pres_autor.reincidente }}</td>
+            </tr>
+            <tr>
+                <th>Nacionalidad_otro</th>
+                <td>{{ pres_autor.nacionalidadOtro }}</td>
+            </tr>
+            <tr>
+                <th>Ant_penal_den</th>
+                <td>{{ pres_autor.antPenalDen }}</td>
+            </tr>
+            <tr>
+                <th>Especif_ant</th>
+                <td>{{ pres_autor.especifAnt }}</td>
+            </tr>
+            <tr>
+                <th>Otra_sit_lab</th>
+                <td>{{ pres_autor.otraSitLab }}</td>
+            </tr>
+            <tr>
+                <th>Fuerza_seg</th>
+                <td>{{ pres_autor.fuerzaSeg }}</td>
+            </tr>
+            <tr>
+                <th>Otra_fuer_seg_pert</th>
+                <td>{{ pres_autor.otraFuerSegPert }}</td>
+            </tr>
+            <tr>
+                <th>Ejer_func</th>
+                <td>{{ pres_autor.ejerFunc }}</td>
+            </tr>
+            <tr>
+                <th>Discapacidad</th>
+                <td>{{ pres_autor.discapacidad }}</td>
+            </tr>
+            <tr>
+                <th>Embarazada</th>
+                <td>{{ pres_autor.embarazada }}</td>
+            </tr>
+            <tr>
+                <th>Priv_libertad</th>
+                <td>{{ pres_autor.privLibertad }}</td>
+            </tr>
+            <tr>
+                <th>Ejer_prostitucion</th>
+                <td>{{ pres_autor.ejerProstitucion }}</td>
+            </tr>
+            <tr>
+                <th>Pert_pueblo_orig</th>
+                <td>{{ pres_autor.pertPuebloOrig }}</td>
+            </tr>
+            <tr>
+                <th>Etnia_otro</th>
+                <td>{{ pres_autor.etniaOtro }}</td>
+            </tr>
+            <tr>
+                <th>Hab_nat_esp</th>
+                <td>{{ pres_autor.habNatEsp }}</td>
+            </tr>
+            <tr>
+                <th>Uso_arma_fuego</th>
+                <td>{{ pres_autor.usoArmaFuego }}</td>
+            </tr>
+            <tr>
+                <th>Comp_hecho_otro</th>
+                <td>{{ pres_autor.compHechoOtro }}</td>
+            </tr>
+            <tr>
+                <th>Observacion</th>
+                <td>{{ pres_autor.observacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('pres_autor_index') }}">back to list</a>
+
+    <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}">edit</a>
+
+    {{ include('pres_autor/_delete_form.html.twig') }}
+{% endblock %}

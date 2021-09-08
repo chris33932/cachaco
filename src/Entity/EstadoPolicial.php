@@ -29,9 +29,15 @@ class EstadoPolicial
      */
     private $victimas;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PresAutor::class, mappedBy="est_pol")
+     */
+    private $presAutors;
+
     public function __construct()
     {
         $this->victimas = new ArrayCollection();
+        $this->presAutors = new ArrayCollection();
     }
 
     public function __toString()
@@ -80,6 +86,36 @@ class EstadoPolicial
             // set the owning side to null (unless already changed)
             if ($victima->getEstPol() === $this) {
                 $victima->setEstPol(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PresAutor[]
+     */
+    public function getPresAutors(): Collection
+    {
+        return $this->presAutors;
+    }
+
+    public function addPresAutor(PresAutor $presAutor): self
+    {
+        if (!$this->presAutors->contains($presAutor)) {
+            $this->presAutors[] = $presAutor;
+            $presAutor->setEstPol($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresAutor(PresAutor $presAutor): self
+    {
+        if ($this->presAutors->removeElement($presAutor)) {
+            // set the owning side to null (unless already changed)
+            if ($presAutor->getEstPol() === $this) {
+                $presAutor->setEstPol(null);
             }
         }
 

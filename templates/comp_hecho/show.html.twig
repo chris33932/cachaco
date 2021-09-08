@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompHecho{% endblock %}
+
+{% block body %}
+    <h1>CompHecho</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ comp_hecho.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ comp_hecho.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('comp_hecho_index') }}">back to list</a>
+
+    <a href="{{ path('comp_hecho_edit', {'id': comp_hecho.id}) }}">edit</a>
+
+    {{ include('comp_hecho/_delete_form.html.twig') }}
+{% endblock %}

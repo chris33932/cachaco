@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PresAutor index{% endblock %}
+
+{% block body %}
+    <h1>PresAutor index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Documento_nro</th>
+                <th>Genero_otro</th>
+                <th>Edad</th>
+                <th>Barrio</th>
+                <th>Calle</th>
+                <th>Altura</th>
+                <th>Interseccion</th>
+                <th>Calle_interseccion</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Fraccion</th>
+                <th>Radio</th>
+                <th>Estado_intox</th>
+                <th>Est_intox_otro</th>
+                <th>Reincidente</th>
+                <th>Nacionalidad_otro</th>
+                <th>Ant_penal_den</th>
+                <th>Especif_ant</th>
+                <th>Otra_sit_lab</th>
+                <th>Fuerza_seg</th>
+                <th>Otra_fuer_seg_pert</th>
+                <th>Ejer_func</th>
+                <th>Discapacidad</th>
+                <th>Embarazada</th>
+                <th>Priv_libertad</th>
+                <th>Ejer_prostitucion</th>
+                <th>Pert_pueblo_orig</th>
+                <th>Etnia_otro</th>
+                <th>Hab_nat_esp</th>
+                <th>Uso_arma_fuego</th>
+                <th>Comp_hecho_otro</th>
+                <th>Observacion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pres_autor in pres_autors %}
+            <tr>
+                <td>{{ pres_autor.id }}</td>
+                <td>{{ pres_autor.nombre }}</td>
+                <td>{{ pres_autor.apellido }}</td>
+                <td>{{ pres_autor.documentoNro }}</td>
+                <td>{{ pres_autor.generoOtro }}</td>
+                <td>{{ pres_autor.edad }}</td>
+                <td>{{ pres_autor.barrio }}</td>
+                <td>{{ pres_autor.calle }}</td>
+                <td>{{ pres_autor.altura }}</td>
+                <td>{{ pres_autor.interseccion }}</td>
+                <td>{{ pres_autor.calleInterseccion }}</td>
+                <td>{{ pres_autor.latitud }}</td>
+                <td>{{ pres_autor.longitud }}</td>
+                <td>{{ pres_autor.fraccion }}</td>
+                <td>{{ pres_autor.radio }}</td>
+                <td>{{ pres_autor.estadoIntox }}</td>
+                <td>{{ pres_autor.estIntoxOtro }}</td>
+                <td>{{ pres_autor.reincidente }}</td>
+                <td>{{ pres_autor.nacionalidadOtro }}</td>
+                <td>{{ pres_autor.antPenalDen }}</td>
+                <td>{{ pres_autor.especifAnt }}</td>
+                <td>{{ pres_autor.otraSitLab }}</td>
+                <td>{{ pres_autor.fuerzaSeg }}</td>
+                <td>{{ pres_autor.otraFuerSegPert }}</td>
+                <td>{{ pres_autor.ejerFunc }}</td>
+                <td>{{ pres_autor.discapacidad }}</td>
+                <td>{{ pres_autor.embarazada }}</td>
+                <td>{{ pres_autor.privLibertad }}</td>
+                <td>{{ pres_autor.ejerProstitucion }}</td>
+                <td>{{ pres_autor.pertPuebloOrig }}</td>
+                <td>{{ pres_autor.etniaOtro }}</td>
+                <td>{{ pres_autor.habNatEsp }}</td>
+                <td>{{ pres_autor.usoArmaFuego }}</td>
+                <td>{{ pres_autor.compHechoOtro }}</td>
+                <td>{{ pres_autor.observacion }}</td>
+                <td>
+                    <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}">show</a>
+                    <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="36">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pres_autor_new') }}">Create new</a>
+{% endblock %}

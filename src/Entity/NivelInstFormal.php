@@ -29,9 +29,15 @@ class NivelInstFormal
      */
     private $victimas;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PresAutor::class, mappedBy="niv_inst_formal")
+     */
+    private $presAutors;
+
     public function __construct()
     {
         $this->victimas = new ArrayCollection();
+        $this->presAutors = new ArrayCollection();
     }
 
     public function __toString()
@@ -80,6 +86,36 @@ class NivelInstFormal
             // set the owning side to null (unless already changed)
             if ($victima->getNivInstForm() === $this) {
                 $victima->setNivInstForm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PresAutor[]
+     */
+    public function getPresAutors(): Collection
+    {
+        return $this->presAutors;
+    }
+
+    public function addPresAutor(PresAutor $presAutor): self
+    {
+        if (!$this->presAutors->contains($presAutor)) {
+            $this->presAutors[] = $presAutor;
+            $presAutor->setNivInstFormal($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresAutor(PresAutor $presAutor): self
+    {
+        if ($this->presAutors->removeElement($presAutor)) {
+            // set the owning side to null (unless already changed)
+            if ($presAutor->getNivInstFormal() === $this) {
+                $presAutor->setNivInstFormal(null);
             }
         }
 

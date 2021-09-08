@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompHecho index{% endblock %}
+
+{% block body %}
+    <h1>CompHecho index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comp_hecho in comp_hechos %}
+            <tr>
+                <td>{{ comp_hecho.id }}</td>
+                <td>{{ comp_hecho.descripcion }}</td>
+                <td>
+                    <a href="{{ path('comp_hecho_show', {'id': comp_hecho.id}) }}">show</a>
+                    <a href="{{ path('comp_hecho_edit', {'id': comp_hecho.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('comp_hecho_new') }}">Create new</a>
+{% endblock %}

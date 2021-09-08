@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SitProcesal{% endblock %}
+
+{% block body %}
+    <h1>SitProcesal</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sit_procesal.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ sit_procesal.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('sit_procesal_index') }}">back to list</a>
+
+    <a href="{{ path('sit_procesal_edit', {'id': sit_procesal.id}) }}">edit</a>
+
+    {{ include('sit_procesal/_delete_form.html.twig') }}
+{% endblock %}

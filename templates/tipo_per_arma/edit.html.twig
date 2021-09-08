@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TipoPerArma{% endblock %}
+
+{% block body %}
+    <h1>Edit TipoPerArma</h1>
+
+    {{ include('tipo_per_arma/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('tipo_per_arma_index') }}">back to list</a>
+
+    {{ include('tipo_per_arma/_delete_form.html.twig') }}
+{% endblock %}

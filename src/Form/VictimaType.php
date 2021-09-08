@@ -17,10 +17,7 @@ class VictimaType extends AbstractType
             ->add('nombre')
             ->add('apellido')
             ->add('documentoNro')
-            ->add('genero_otro' ,CheckboxType::class, [
-                'label'    => 'PRUEBA',
-                'required' => false,
-            ])
+            ->add('genero_otro')
             ->add('edad')
             ->add('nacionalidad_otra')
             ->add('barrio')
@@ -62,6 +59,8 @@ class VictimaType extends AbstractType
             ->add('hab_nativo_esp')
             ->add('homosex_bisex')
             ->add('ref_activista')
+
+         
             ->add('afro')
             ->add('otra_sit_intersecc')
             ->add('otra_sit_laboral')

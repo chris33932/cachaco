@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CompHecho{% endblock %}
+
+{% block body %}
+    <h1>Create new CompHecho</h1>
+
+    {{ include('comp_hecho/_form.html.twig') }}
+
+    <a href="{{ path('comp_hecho_index') }}">back to list</a>
+{% endblock %}

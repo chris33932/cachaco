@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CompHecho{% endblock %}
+
+{% block body %}
+    <h1>Edit CompHecho</h1>
+
+    {{ include('comp_hecho/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('comp_hecho_index') }}">back to list</a>
+
+    {{ include('comp_hecho/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SituacionArma{% endblock %}
+
+{% block body %}
+    <h1>Create new SituacionArma</h1>
+
+    {{ include('situacion_arma/_form.html.twig') }}
+
+    <a href="{{ path('situacion_arma_index') }}">back to list</a>
+{% endblock %}
