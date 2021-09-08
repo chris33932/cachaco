@@ -357,6 +357,21 @@ class Victima
      */
     private $observacion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Provincia::class)
+     */
+    private $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Departamento::class)
+     */
+    private $departamento;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Localidad::class)
+     */
+    private $localidad;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -1174,6 +1189,42 @@ class Victima
     public function setObservacion(?string $observacion): self
     {
         $this->observacion = $observacion;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getDepartamento(): ?Departamento
+    {
+        return $this->departamento;
+    }
+
+    public function setDepartamento(?Departamento $departamento): self
+    {
+        $this->departamento = $departamento;
+
+        return $this;
+    }
+
+    public function getLocalidad(): ?Localidad
+    {
+        return $this->localidad;
+    }
+
+    public function setLocalidad(?Localidad $localidad): self
+    {
+        $this->localidad = $localidad;
 
         return $this;
     }
