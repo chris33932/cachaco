@@ -22,6 +22,11 @@ class Tipologia
      */
     private $descripcion;
 
+    public function __toString()
+    {
+        return $this->getDescripcion();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,230 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hecho{% endblock %}
+
+{% block body %}
+    <h1>Hecho</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ hecho.id }}</td>
+            </tr>
+            <tr>
+                <th>Nro_preventivo</th>
+                <td>{{ hecho.nroPreventivo }}</td>
+            </tr>
+            <tr>
+                <th>Nro_sumario</th>
+                <td>{{ hecho.nroSumario }}</td>
+            </tr>
+            <tr>
+                <th>Nro_exp_jud</th>
+                <td>{{ hecho.nroExpJud }}</td>
+            </tr>
+            <tr>
+                <th>Juzgado</th>
+                <td>{{ hecho.juzgado }}</td>
+            </tr>
+            <tr>
+                <th>Fiscalia</th>
+                <td>{{ hecho.fiscalia }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Anio</th>
+                <td>{{ hecho.anio }}</td>
+            </tr>
+            <tr>
+                <th>Mes</th>
+                <td>{{ hecho.mes }}</td>
+            </tr>
+            <tr>
+                <th>Cod_loc_indec</th>
+                <td>{{ hecho.codLocIndec }}</td>
+            </tr>
+            <tr>
+                <th>Gran_rcia</th>
+                <td>{{ hecho.granRcia }}</td>
+            </tr>
+            <tr>
+                <th>Hora_ocu</th>
+                <td>{{ hecho.horaOcu ? hecho.horaOcu|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Dia_ocu</th>
+                <td>{{ hecho.diaOcu }}</td>
+            </tr>
+            <tr>
+                <th>Franja_h_seis</th>
+                <td>{{ hecho.franjaHSeis }}</td>
+            </tr>
+            <tr>
+                <th>Franja_h_tres</th>
+                <td>{{ hecho.franjaHTres }}</td>
+            </tr>
+            <tr>
+                <th>Barrio_ocu</th>
+                <td>{{ hecho.barrioOcu }}</td>
+            </tr>
+            <tr>
+                <th>Calle_ocu</th>
+                <td>{{ hecho.calleOcu }}</td>
+            </tr>
+            <tr>
+                <th>Altura_ocu</th>
+                <td>{{ hecho.alturaOcu }}</td>
+            </tr>
+            <tr>
+                <th>Intersecc_ocu</th>
+                <td>{{ hecho.interseccOcu }}</td>
+            </tr>
+            <tr>
+                <th>Calle_int_ocu</th>
+                <td>{{ hecho.calleIntOcu }}</td>
+            </tr>
+            <tr>
+                <th>Latitud_ocu</th>
+                <td>{{ hecho.latitudOcu }}</td>
+            </tr>
+            <tr>
+                <th>Longitud_ocu</th>
+                <td>{{ hecho.longitudOcu }}</td>
+            </tr>
+            <tr>
+                <th>Acceso_ocu</th>
+                <td>{{ hecho.accesoOcu }}</td>
+            </tr>
+            <tr>
+                <th>Lugar_ocu_otro</th>
+                <td>{{ hecho.lugarOcuOtro }}</td>
+            </tr>
+            <tr>
+                <th>Dom_part_otro</th>
+                <td>{{ hecho.domPartOtro }}</td>
+            </tr>
+            <tr>
+                <th>Fraccion_ocu</th>
+                <td>{{ hecho.fraccionOcu }}</td>
+            </tr>
+            <tr>
+                <th>Radio_ocu</th>
+                <td>{{ hecho.radioOcu }}</td>
+            </tr>
+            <tr>
+                <th>Coinc_lug_ocu</th>
+                <td>{{ hecho.coincLugOcu }}</td>
+            </tr>
+            <tr>
+                <th>Fecha_hgo</th>
+                <td>{{ hecho.fechaHgo ? hecho.fechaHgo|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Hora_hgo</th>
+                <td>{{ hecho.horaHgo ? hecho.horaHgo|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Dia_hgo</th>
+                <td>{{ hecho.diaHgo }}</td>
+            </tr>
+            <tr>
+                <th>F_hora_hgo_seis</th>
+                <td>{{ hecho.fHoraHgoSeis }}</td>
+            </tr>
+            <tr>
+                <th>F_hora_hgo_tres</th>
+                <td>{{ hecho.fHoraHgoTres }}</td>
+            </tr>
+            <tr>
+                <th>Barrio_hgo</th>
+                <td>{{ hecho.barrioHgo }}</td>
+            </tr>
+            <tr>
+                <th>Calle_hgo</th>
+                <td>{{ hecho.calleHgo }}</td>
+            </tr>
+            <tr>
+                <th>Altura_hgo</th>
+                <td>{{ hecho.alturaHgo }}</td>
+            </tr>
+            <tr>
+                <th>Intersec_hgo</th>
+                <td>{{ hecho.intersecHgo }}</td>
+            </tr>
+            <tr>
+                <th>Calle_int_hgo</th>
+                <td>{{ hecho.calleIntHgo }}</td>
+            </tr>
+            <tr>
+                <th>Latitud_hgo</th>
+                <td>{{ hecho.latitudHgo }}</td>
+            </tr>
+            <tr>
+                <th>Longitud_hgo</th>
+                <td>{{ hecho.longitudHgo }}</td>
+            </tr>
+            <tr>
+                <th>Lug_hgo_otro</th>
+                <td>{{ hecho.lugHgoOtro }}</td>
+            </tr>
+            <tr>
+                <th>Acceso_hgo</th>
+                <td>{{ hecho.accesoHgo }}</td>
+            </tr>
+            <tr>
+                <th>Dom_part_hgo_otro</th>
+                <td>{{ hecho.domPartHgoOtro }}</td>
+            </tr>
+            <tr>
+                <th>Fraccion_hgo</th>
+                <td>{{ hecho.fraccionHgo }}</td>
+            </tr>
+            <tr>
+                <th>Radio_hgo</th>
+                <td>{{ hecho.radioHgo }}</td>
+            </tr>
+            <tr>
+                <th>Oca_delito_otro</th>
+                <td>{{ hecho.ocaDelitoOtro }}</td>
+            </tr>
+            <tr>
+                <th>Orig_reg_otro</th>
+                <td>{{ hecho.origRegOtro }}</td>
+            </tr>
+            <tr>
+                <th>Recep_den_otro</th>
+                <td>{{ hecho.recepDenOtro }}</td>
+            </tr>
+            <tr>
+                <th>Cant_victimas</th>
+                <td>{{ hecho.cantVictimas }}</td>
+            </tr>
+            <tr>
+                <th>Cant_vic_col</th>
+                <td>{{ hecho.cantVicCol }}</td>
+            </tr>
+            <tr>
+                <th>Cant_pres_autor</th>
+                <td>{{ hecho.cantPresAutor }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ hecho.link }}</td>
+            </tr>
+            <tr>
+                <th>Observacion</th>
+                <td>{{ hecho.observacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('hecho_index') }}">back to list</a>
+
+    <a href="{{ path('hecho_edit', {'id': hecho.id}) }}">edit</a>
+
+    {{ include('hecho/_delete_form.html.twig') }}
+{% endblock %}

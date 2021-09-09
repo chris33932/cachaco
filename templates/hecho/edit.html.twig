@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Hecho{% endblock %}
+
+{% block body %}
+    <h1>Edit Hecho</h1>
+
+    {{ include('hecho/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('hecho_index') }}">back to list</a>
+
+    {{ include('hecho/_delete_form.html.twig') }}
+{% endblock %}
