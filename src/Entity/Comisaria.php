@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ComisariaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Comisaria
      * @ORM\ManyToOne(targetEntity=Localidad::class)
      */
     private $localidad;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Hecho::class, mappedBy="comisaria")
+     */
+    private $hechos;
+
+    public function __construct()
+    {
+        $this->hechos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class Comisaria
     public function setLocalidad(?Localidad $localidad): self
     {
         $this->localidad = $localidad;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hecho[]
+     */
+    public function getHechos(): Collection
+    {
+        return $this->hechos;
+    }
+
+    public function addHecho(Hecho $hecho): self
+    {
+        if (!$this->hechos->contains($hecho)) {
+            $this->hechos[] = $hecho;
+            $hecho->setComisaria($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHecho(Hecho $hecho): self
+    {
+        if ($this->hechos->removeElement($hecho)) {
+            // set the owning side to null (unless already changed)
+            if ($hecho->getComisaria() === $this) {
+                $hecho->setComisaria(null);
+            }
+        }
 
         return $this;
     }
