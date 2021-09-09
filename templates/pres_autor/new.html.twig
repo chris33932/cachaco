@@ -12,3 +12,80 @@
 
 {% block footer %}
 {% endblock %}
+
+{% block javascripts %} {{ parent() }}
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function(){
+    $('#pres_autor_tipo_documento > option[value="1"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_nacionalidad > option[value="1"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_sexo > option[value="1"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_genero > option[value="8"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_estado_civil > option[value="7"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_sit_lab > option[value="12"]').attr('selected', 'selected');
+    });
+  
+  $(document).ready(function(){
+    $('#pres_autor_cond_act > option[value="5"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_niv_inst > option[value="4"]').attr('selected', 'selected');
+    });
+  
+  $(document).ready(function(){
+    $('#pres_autor_niv_inst_formal > option[value="14"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_etnia > option[value="6"]').attr('selected', 'selected');
+    });
+  
+  $(document).ready(function(){
+    $('#pres_autor_fuer_seg_pert > option[value="10"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_est_pol > option[value="4"]').attr('selected', 'selected');
+    });
+  
+  $(document).ready(function(){
+    $('#pres_autor_tipo_est_intox > option[value="7"]').attr('selected', 'selected');
+    });
+  
+  $(document).ready(function(){
+    $('#pres_autor_sit_arma_fue > option[value="6"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_per_arma_fue > option[value="7"]').attr('selected', 'selected');
+    });
+  
+  $(document).ready(function(){
+    $('#pres_autor_sit_proc_hecho > option[value="7"]').attr('selected', 'selected');
+    });
+
+  $(document).ready(function(){
+    $('#pres_autor_comp_hecho > option[value="8"]').attr('selected', 'selected');
+    });
+  
+</script>
+
+
+{% endblock %}
