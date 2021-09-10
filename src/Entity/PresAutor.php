@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PresAutorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -302,14 +304,26 @@ class PresAutor
      */
     private $localidad;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DetalleHecho::class, mappedBy="pres_autor")
+     */
+    private $detalleHechos;
+
+    public function __construct()
+    {
+        $this->detalleHechos = new ArrayCollection();
+    }
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNombre(): ?string
+    public function __toString()
     {
-        return $this->nombre;
+        return $this->apellido.'; '.$this->nombre.' || codigo ID: '.$this->id;
     }
 
     public function setNombre(?string $nombre): self
@@ -987,6 +1001,36 @@ class PresAutor
     public function setLocalidad(?Localidad $localidad): self
     {
         $this->localidad = $localidad;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetalleHecho[]
+     */
+    public function getDetalleHechos(): Collection
+    {
+        return $this->detalleHechos;
+    }
+
+    public function addDetalleHecho(DetalleHecho $detalleHecho): self
+    {
+        if (!$this->detalleHechos->contains($detalleHecho)) {
+            $this->detalleHechos[] = $detalleHecho;
+            $detalleHecho->setPresAutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleHecho(DetalleHecho $detalleHecho): self
+    {
+        if ($this->detalleHechos->removeElement($detalleHecho)) {
+            // set the owning side to null (unless already changed)
+            if ($detalleHecho->getPresAutor() === $this) {
+                $detalleHecho->setPresAutor(null);
+            }
+        }
 
         return $this;
     }

@@ -3,11 +3,13 @@
 {% block title %}New Victima{% endblock %}
 
 {% block body %}{{ parent() }}
-    <h1>Create new Victima</h1>
+ 
 
     {{ include('victima/_form.html.twig') }}
 
-    <a href="{{ path('victima_index') }}">back to list</a>
+    
+     <a href="{{ path('victima_index') }}">back to list</a>
+ 
 {% endblock %}
   {% block footer %}
 

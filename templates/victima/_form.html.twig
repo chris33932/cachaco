@@ -1,6 +1,177 @@
-<div class="container">
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4"> <h3 class="text-warning"> Información personal </h3>
+            {{ form_row(form.nombre) }}
+            {{ form_row(form.apellido) }}
+            {{ form_row(form.tipoDocumento ) }}
+            {{ form_row(form.estado_civil ) }}
+
+            {{ form_row(form.edad ) }}
+            {{ form_row(form.documentoNro) }}
+
+            {{ form_row(form.edad_legal ) }}
+
+             {# descripciones........#}
+            {{ form_row(form.radio) }}
+
+            {{ form_row(form.sexo ) }}
+            {{ form_row(form.genero_otro) }}
+            {{ form_row(form.embarazada) }}
+            {{ form_row(form.discapacidad) }}
+            {{ form_row(form.nacionalidad ) }}
+
+            {{ form_row(form.rango_etario) }}
+
+            
+
+            {{ form_row(form.nacionalidad_otra) }}
+            {{ form_row(form.barrio) }}
+            {{ form_row(form.calle) }}
+            {{ form_row(form.altura) }}
+            {{ form_row(form.interseccion) }}
+            {{ form_row(form.calle_interseccion) }}
+            {{ form_row(form.latitud) }}
+            {{ form_row(form.longitud) }}
+            {{ form_row(form.rep_geo ) }}
+
+            {{ form_row(form.fraccion) }}
+
+            {{ form_row(form.genero ) }}
+            
+
+     
+				</div>
+				<div class="col-md-4"><h3 class="text-success">Situación socio económica</h3>
+            {{ form_row(form.sit_laboral ) }}
+            {{ form_row(form.otra_sit_laboral) }}
+
+            {{ form_row(form.niv_inst ) }}
+          
+            {{ form_row(form.niv_inst_form ) }}
+
+            {{ form_row(form.cant_a_cargo) }}
+           
+            {{ form_row(form.hijos_pers_cargo) }}
+
+            
+       
+           {{ form_row(form.benef_ley_brisa) }}
+
+           {{ form_row(form.cant_benef) }}
+     
+           {{ form_row(form.cond_actividad ) }}
+
+            {{ form_row(form.ejer_prostitucion) }}
+            
+            {{ form_row(form.migrante_internacional) }}
+
+            {{ form_row(form.migrante_intraprov) }}
+
+            {{ form_row(form.migrante_interprov) }}
+
+            {{ form_row(form.pueblo_originario) }}
+
+            {{ form_row(form.privada_libertad) }}
+
+            {{ form_row(form.etnia_otro) }}
+
+            {{ form_row(form.privada_libertad) }}
+            {{ form_row(form.afro) }}
+            {{ form_row(form.otra_sit_intersecc) }}
+              
+            {{ form_row(form.hab_nativo_esp) }}
+
+            {{ form_row(form.homosex_bisex ) }}
+          
+          {{ form_row(form.ref_activista) }}
+
+            
+            {{ form_row(form.etnia) }}
+    
+				</div>
+				<div class="col-md-4"> <div class="col"><h3 class="text-info">OTROS</h3>    
+                {{ form_row(form.fuerza_seg) }}
+
+                {{ form_row(form.fuer_seg_pert ) }}
+                {{ form_row(form.otra_fuer_pert) }}
+                {{ form_row(form.est_pol ) }}
+                {{ form_row(form.ejer_funcion ) }}
+
+                 
+                {{ form_row(form.mecanismo_muerte ) }}
+                {{ form_row(form.tipo_arma ) }}
+                
+           
+                
+             
+                
+                {{ form_row(form.mecanismo_muerte_otro) }}
+
+
+                {{ form_row(form.tipo_arma_otro) }}
+
+
+                {{ form_row(form.medida_protecc_vigente) }}
+
+
+                {{ form_row(form.medida_protecc_especif) }}
+
+                
+                {{ form_row(form.violencia_exc) }}
+
+                {{ form_row(form.estado_intox ) }}
+                {{ form_row(form.tipo_est_intox ) }}
+            
+               {{ form_row(form.est_intox_otro ) }}
+
+           
+
+                      
+                                        
+            {#ELIMINAR DE BD {{ form_row(form.sit_detencion ) }}
+#}  
+               
+              
+
+              {{ form_row(form.desap_ant_hecho ) }}
+
+             
+                        
+           
+
+
+               </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"><h3 class="text-info">Información femicidio</h3>    
+               {{ form_row(form.femicidio ) }}
+                {{ form_row(form.tipo_femicidio ) }}
+                {{ form_row(form.cont_femicida ) }}
+             
+
+                     
+             
+
+				</div>
+        	<div class="col-md-12"><h3 class="text-success">Observaciones</h3>    
+             
+                         {{ form_row(form.observacion ) }}
+           
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+        
 {{ form_end(form) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
 </div>

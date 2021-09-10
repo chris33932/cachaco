@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DetalleHecho{% endblock %}
+
+{% block body %}
+    <h1>DetalleHecho</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ detalle_hecho.id }}</td>
+            </tr>
+            <tr>
+                <th>Den_previa</th>
+                <td>{{ detalle_hecho.denPrevia }}</td>
+            </tr>
+            <tr>
+                <th>Den_prev_desc</th>
+                <td>{{ detalle_hecho.denPrevDesc }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('detalle_hecho_index') }}">back to list</a>
+
+    <a href="{{ path('detalle_hecho_edit', {'id': detalle_hecho.id}) }}">edit</a>
+
+    {{ include('detalle_hecho/_delete_form.html.twig') }}
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\HechoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -376,6 +378,16 @@ class Hecho
      * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $observacion;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DetalleHecho::class, mappedBy="hecho" ,cascade={"persist"})
+     */
+    private $detalleHechos;
+
+    public function __construct()
+    {
+        $this->detalleHechos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -1242,6 +1254,36 @@ class Hecho
     public function setObservacion(?string $observacion): self
     {
         $this->observacion = $observacion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetalleHecho[]
+     */
+    public function getDetalleHechos(): Collection
+    {
+        return $this->detalleHechos;
+    }
+
+    public function addDetalleHecho(DetalleHecho $detalleHecho): self
+    {
+        if (!$this->detalleHechos->contains($detalleHecho)) {
+            $this->detalleHechos[] = $detalleHecho;
+            $detalleHecho->setHecho($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleHecho(DetalleHecho $detalleHecho): self
+    {
+        if ($this->detalleHechos->removeElement($detalleHecho)) {
+            // set the owning side to null (unless already changed)
+            if ($detalleHecho->getHecho() === $this) {
+                $detalleHecho->setHecho(null);
+            }
+        }
 
         return $this;
     }

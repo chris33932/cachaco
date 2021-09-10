@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VictimaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,7 +20,8 @@ class Victima
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
+     * @ORM\Column( name="nombre", type="string", length=100, nullable=true)
      */
     private $nombre;
 
@@ -353,7 +356,7 @@ class Victima
     private $desap_ant_hecho;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $observacion;
 
@@ -371,6 +374,23 @@ class Victima
      * @ORM\ManyToOne(targetEntity=Localidad::class)
      */
     private $localidad;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DetalleHecho::class, mappedBy="victima")
+     */
+    private $detalleHechos;
+
+    public function __construct()
+    {
+        $this->detalleHechos = new ArrayCollection();
+    }
+
+   
+
+    public function __toString()
+    {
+        return $this->apellido.'; '.$this->nombre.' || codigo ID: '.$this->id;
+    }
 
     public function getId(): ?int
     {
@@ -1225,6 +1245,36 @@ class Victima
     public function setLocalidad(?Localidad $localidad): self
     {
         $this->localidad = $localidad;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetalleHecho[]
+     */
+    public function getDetalleHechos(): Collection
+    {
+        return $this->detalleHechos;
+    }
+
+    public function addDetalleHecho(DetalleHecho $detalleHecho): self
+    {
+        if (!$this->detalleHechos->contains($detalleHecho)) {
+            $this->detalleHechos[] = $detalleHecho;
+            $detalleHecho->setVictima($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleHecho(DetalleHecho $detalleHecho): self
+    {
+        if ($this->detalleHechos->removeElement($detalleHecho)) {
+            // set the owning side to null (unless already changed)
+            if ($detalleHecho->getVictima() === $this) {
+                $detalleHecho->setVictima(null);
+            }
+        }
 
         return $this;
     }

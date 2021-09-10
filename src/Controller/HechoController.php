@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Hecho;
 use App\Form\HechoType;
 use App\Repository\HechoRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/hecho")
@@ -37,9 +38,34 @@ class HechoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($hecho);
+
+            //aca iria el embebido 
+            $orignalDetalleHecho = new ArrayCollection();
+            foreach ($hecho->getDetalleHechos() as $detalle)
+            {
+                $orignalDetalleHecho->add($hecho);
+             }
+             $form = $this->createForm(HechoType::class, $hecho);
+             
+            $form->handleRequest($request);
+            
+            if ($form->isSubmitted()) {
+                // get rid of the ones that the user got rid of in the interface (DOM)
+                foreach ($orignalDetalleHecho as $detalle) {
+                  
+                    if ($hecho->getDetalleHechos()->contains($detalle) === false) {
+                        $entityManager->remove($detalle);
+                    }
+                }
+                $entityManager->persist($hecho);
+                
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('hecho_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('hecho_show', array('id' => $hecho->getId()));
+
+            //return $this->redirectToRoute('hecho_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('hecho/new.html.twig', [
@@ -48,15 +74,59 @@ class HechoController extends AbstractController
         ]);
     }
 
+    
+
+
+
     /**
      * @Route("/{id}", name="hecho_show", methods={"GET"})
      */
-    public function show(Hecho $hecho): Response
+    public function show(Request $request, $id): Response
     {
-        return $this->render('hecho/show.html.twig', [
-            'hecho' => $hecho,
-        ]);
-    }
+               
+        $entityManager = $this->getDoctrine()->getManager();
+         /**
+         * @var $user User
+         */
+        $hecho = $entityManager->getRepository(Hecho::class)->findOneBy(['id' => $id]);
+       
+        
+        
+               //aca iria el embebido 
+               $orignalDetalleHecho = new ArrayCollection();
+               foreach ($hecho->getDetalleHechos() as $detalle)
+               {
+                   $orignalDetalleHecho->add($hecho);
+                }
+                $form = $this->createForm(HechoType::class, $hecho);
+                
+               $form->handleRequest($request);
+               
+               if ($form->isSubmitted()) {
+                   // get rid of the ones that the user got rid of in the interface (DOM)
+                   foreach ($orignalDetalleHecho as $detalle) {
+                       // check if the exp is in the $user->getExp()
+                      //   dump($user->getExp()->contains($exp));
+                       if ($hecho->getDetalleHechos()->contains($detalle) === false) {
+                           $entityManager->remove($detalle);
+                       }
+                   }
+                   $entityManager->persist($hecho);
+                   
+               }
+   
+               $entityManager->flush();
+              // return $this->redirectToRoute('hecho_show', [], Response::HTTP_SEE_OTHER);
+      
+              
+           return $this->render('hecho/new.html.twig', [
+               'hecho' => $hecho,
+               'form' => $form->createView(),
+           ]);
+       }
+
+
+
 
     /**
      * @Route("/{id}/edit", name="hecho_edit", methods={"GET","POST"})

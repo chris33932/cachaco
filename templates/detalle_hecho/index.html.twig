@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DetalleHecho index{% endblock %}
+
+{% block body %}
+    <h1>DetalleHecho index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Den_previa</th>
+                <th>Den_prev_desc</th>
+                 <th>Victima</th>
+                <th>Presunto Autor</th>
+                <th>id del hecho</th>
+                <th>accion</th>
+           
+            </tr>
+        </thead>
+        <tbody>
+        {% for detalle_hecho in detalle_hechos %}
+            <tr>
+               
+                <td>{{ detalle_hecho.denPrevia }}</td>
+                <td>{{ detalle_hecho.denPrevDesc }}</td>
+                 <td>{{ detalle_hecho.victima }}</td>
+                  <td>{{ detalle_hecho.victima}}</td>
+                  <td>{{ detalle_hecho.hecho}}</td>
+            
+              
+                <td>
+                    <a href="{{ path('detalle_hecho_show', {'id': detalle_hecho.id}) }}">show</a>
+                    <a href="{{ path('detalle_hecho_edit', {'id': detalle_hecho.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('detalle_hecho_new') }}">Create new</a>
+{% endblock %}

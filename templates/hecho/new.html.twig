@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}
 
 {% block title %}New Hecho{% endblock %}
 
@@ -9,7 +9,52 @@
 
     <a href="{{ path('hecho_index') }}">back to list</a>
 {% endblock %}
+#}
+{% extends 'base.html.twig' %}
 
-{% block footer %}
-    
+{% block title %}Hechos{% endblock %}
+
+{% block body %}{{ parent() }}
+
+
+<h1>Nuevo Hecho</h1>
+<div class="container">
+
+     {{form_start(form)}}
+     
+   
+            
+            <div class="" id="hecho_list" data-prototype="{{form_widget(form.detalleHechos.vars.prototype)|e('html_attr') }}"
+                {% for row in form.detalleHechos %}    
+
+
+              
+
+
+                   <div class="card">
+                        <div class="card-header"> 
+                            <strong>Nro hecho: {{(row.vars.value.id)}}</strong> 
+                        </div>
+                        <div class="card-body">
+                           
+                           {{ form_row(row)}}
+
+                        </div>
+                  </div>
+               {% endfor %}
+
+     
+
+ 
+{{ form_end(form) }}
+
+<a href="{{ path('hecho_index') }}">back to list</a>
+</div>
 {% endblock %}
+
+{% block javascript %} {{ parent() }}
+ <script src="{{ asset('js/app.js') }}"></script>
+ {% endblock %}
+
+ {% block footer %}
+ {% endblock %}

@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VictimaType extends AbstractType
 {
@@ -71,11 +72,11 @@ class VictimaType extends AbstractType
             ->add('femicidio')
             ->add('fuerza_seg')
             ->add('otra_fuer_pert')
-            ->add('sit_detencion')
+           // ->add('sit_detencion')
             ->add('estado_intox')
             ->add('est_intox_otro')
             ->add('desap_ant_hecho')
-            ->add('observacion')
+            ->add('observacion', TextType::class)
             ->add('tipoDocumento')
             ->add('sexo')
             ->add('genero')

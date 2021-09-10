@@ -3,15 +3,19 @@
 namespace App\Form;
 
 use App\Entity\Hecho;
+use App\Form\DetalleHechoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class HechoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('nro_preventivo')
             ->add('nro_sumario')
             ->add('nro_exp_jud')
@@ -24,6 +28,9 @@ class HechoType extends AbstractType
             ->add('gran_rcia')
             ->add('hora_ocu')
             ->add('dia_ocu')
+            //--------------------------------
+            //grupo ocurrencia
+            //------------------------------
             ->add('franja_h_seis')
             ->add('franja_h_tres')
             ->add('barrio_ocu')
@@ -84,6 +91,15 @@ class HechoType extends AbstractType
             ->add('origen_reg')
             ->add('recep_den')
             ->add('tipologia')
+            ->add('detalleHechos', CollectionType::class, [
+                'entry_type' => DetalleHechoType::class,
+                'entry_options' => [
+                    'label' => false
+                ], 'by_reference' => false,
+                   'allow_add' => true,
+                   'allow_delete' => true
+            ])
+            ->add('save', SubmitType::class,['attr' => ['class' => 'btn btn-success']])
         ;
     }
 
