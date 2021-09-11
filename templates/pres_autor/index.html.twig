@@ -2,13 +2,21 @@
 
 {% block title %}PresAutor index{% endblock %}
 
-{% block body %}
-    <h1>PresAutor index</h1>
 
-    <table class="table">
-        <thead>
+
+{% block body %} {{ parent() }}
+
+<div class="container-fluid">
+ <h2 class="text-info" >Presuntos autores</h2>
+ 
+  <p class="text-muted">Lista de presuntos autores y datos relevantes:</p>   
+   <br> 
+ 
+  <table class="table table-striped">
+    <thead class="thead-light">
+ 
             <tr>
-                <th>Id</th>
+              <th>Id</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Documento_nro</th>
@@ -82,17 +90,23 @@
 
                 <td>{{ pres_autor.observacion }}</td>
                 <td>
-                    <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}">show</a>
-                    <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}">edit</a>
+                    <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+                    <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}" class="btn btn-warning btn-sm"
+                         alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="36">no records found</td>
+                <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+     <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+                        <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+</div>
+   
 
-    <a href="{{ path('pres_autor_new') }}">Create new</a>
 {% endblock %}
+
+

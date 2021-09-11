@@ -33,7 +33,7 @@
     <body>
         {% block body %}
          <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <a class="navbar-brand" href="#">Hechos</a>
+            <a class="navbar-brand" href="{{ path('hecho_index')}}">Hechos</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -46,8 +46,20 @@
                     <a class="nav-link" href="{{ path('victima_index')}}">Victimas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Imputados</a>
+                    <a class="nav-link" href="{{ path('pres_autor_index')}}">Presunto autor</a>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
+                    Variables presunto autor
+                    </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
+                      <a class="dropdown-item" href="{{ path('tipo_documento_index')}}">Tipo documento</a>
+                      <a class="dropdown-item" href="{{ path('sexo_index')}}">Sexo</a>
+                      <a class="dropdown-item" href="{{ path('genero_index')}}">Género</a>
+                      <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
+                    </div>
+                </li>  
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
                     Variables victima
@@ -62,7 +74,7 @@
                 </li>  
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Variables causa
+                    Variables hecho/detalle
                     </a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Situación Laboral</a>

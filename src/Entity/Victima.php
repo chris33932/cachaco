@@ -389,7 +389,7 @@ class Victima
 
     public function __toString()
     {
-        return $this->apellido.'; '.$this->nombre.' || codigo ID: '.$this->id;
+        return $this->apellido.'; '.$this->nombre.' || nro Documento '.$this->documentoNro.' || codigo ID: '.$this->id ;
     }
 
     public function getId(): ?int
