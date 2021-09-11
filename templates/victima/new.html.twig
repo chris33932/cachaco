@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Victima{% endblock %}
 
+{% block title %}Victima crear{% endblock %}
+ 
+  {% block stylesheets %}{{ parent() }}
+  
+  {% endblock %}
 {% block body %}{{ parent() }}
  
 
     {{ include('victima/_form.html.twig') }}
 
-    
-     <a href="{{ path('victima_index') }}">back to list</a>
+   
+    <div class="caja">
+       
+       <button type="button" class="btn btn-info"><a href="{{ path('victima_index') }}">Volver</a></button>
+     
+    </div> 
  
 {% endblock %}
-  {% block footer %}
 
-  {% endblock %}
+{% block footer %}
 
+  <footer class="py-4 bg-dark">
+ 
+            <div class="container px-5"><p class="sm-5 text-center text-white">Centro de Analisis Chaco - {{ "now"|date("Y") }}</p></div>
+        </footer>
+ {% endblock %}
 
 {% block javascripts %} {{ parent() }}
 <script type="text/javascript" src="js/jquery.min.js"></script>

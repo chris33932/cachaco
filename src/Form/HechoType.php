@@ -7,6 +7,8 @@ use App\Form\DetalleHechoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -21,12 +23,19 @@ class HechoType extends AbstractType
             ->add('nro_exp_jud')
             ->add('juzgado')
             ->add('fiscalia')
-            ->add('fecha')
+            
+            ->add('fecha', DateType::class, [
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ])
             ->add('anio')
             ->add('mes')
             ->add('cod_loc_indec')
             ->add('gran_rcia')
-            ->add('hora_ocu')
+            ->add('hora_ocu',TimeType::class, [
+                'input'  => 'timestamp',
+                'widget' => 'choice',
+            ])
             ->add('dia_ocu')
             //--------------------------------
             //grupo ocurrencia
@@ -46,7 +55,10 @@ class HechoType extends AbstractType
             ->add('fraccion_ocu')
             ->add('radio_ocu')
             ->add('coinc_lug_ocu')
-            ->add('fecha_hgo')
+            ->add('fecha_hgo', DateType::class, [
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ])
             ->add('hora_hgo')
             ->add('dia_hgo')
             ->add('f_hora_hgo_seis')

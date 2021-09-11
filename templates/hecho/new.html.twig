@@ -14,6 +14,9 @@
 
 {% block title %}Hechos{% endblock %}
 
+ {% block stylesheets %} {{ parent() }}
+ {% endblock %}
+
 {% block body %}{{ parent() }}
 
 
@@ -52,9 +55,21 @@
 </div>
 {% endblock %}
 
+
+
+
+
 {% block javascript %} {{ parent() }}
- <script src="{{ asset('js/app.js') }}"></script>
+ <script src="{{ asset('js/app.js') }}"> </script>
+ 
+
  {% endblock %}
+ 
 
  {% block footer %}
+
+  <footer class="py-4 bg-dark">
+ 
+            <div class="container px-5"><p class="sm-5 text-center text-white">Centro de Analisis Chaco - {{ "now"|date("Y") }}</p></div>
+        </footer>
  {% endblock %}

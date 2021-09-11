@@ -1,8 +1,6 @@
 // this variable is the list in the dom, it's initiliazed when the document is ready
 
 
-
-
 var $collectionHolder;
 // the link which we click on to add new items
 var $addNewItem = $('<a href="#" class="btn btn-info">agregar detalle</a>');
@@ -85,3 +83,45 @@ function addRemoveButton ($card) {
     $card.append($cardFooter);
 }
 
+//autocompletado
+alert('hola');
+console.log('gil');
+
+
+  $(document).ready(function(){
+    $('#hecho_rep_geo_ocu > option[value="1"]').attr('selected', 'selected');
+    });
+  
+    var inputDate = document.getElementById("hecho_fecha").valueAsDate;
+    var day = inputDate.getDay();
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    document.getElementById('hecho_dia_ocu').textContent = (hecho[dia]);
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+    $('#rendicion_detalle').find('input[id$="cantidadRendida"]').change(function(){
+        var montoCobrado = $(this).parent().next().next().find('input');
+        var montoACobrar = parseFloat($(this).parent().next().find('input').val());
+        var cantidadARendir = parseFloat($(this).parent().prev().find('input').val());
+        var cantidadRendida = parseFloat($(this).val());
+        var montoUnitario = montoACobrar / cantidadARendir;
+        montoCobrado.val(parseFloat($(this).val()) * montoUnitario);
+    });
+
+    $('#rendicion_detalle').find('input[id$="montoCobrado"]').change(function(){
+        var cantidadARendir = parseFloat($(this).parent().prev().prev().prev().find('input').val());
+        var cantidadRendida = $(this).parent().prev().prev().find('input');
+        var montoACobrar = parseFloat($(this).parent().prev().find('input').val());
+        var montoCobrado = parseFloat($(this).val());
+        var cantidad = montoCobrado * cantidadARendir / montoACobrar;
+
+        cantidadRendida.val(cantidad);
+    })
+});

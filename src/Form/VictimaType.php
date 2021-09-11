@@ -76,7 +76,8 @@ class VictimaType extends AbstractType
             ->add('estado_intox')
             ->add('est_intox_otro')
             ->add('desap_ant_hecho')
-            ->add('observacion', TextType::class)
+            ->add('observacion',  TextType::class, array('data_class' => null, "label" =>
+            "  "))
             ->add('tipoDocumento')
             ->add('sexo')
             ->add('genero')
