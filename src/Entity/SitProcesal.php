@@ -24,15 +24,7 @@ class SitProcesal
      */
     private $descripcion;
 
-    /**
-     * @ORM\OneToMany(targetEntity=PresAutor::class, mappedBy="sit_proc_hecho")
-     */
-    private $presAutors;
-
-    public function __construct()
-    {
-        $this->presAutors = new ArrayCollection();
-    }
+   
 
     public function __toString()
     {
@@ -56,33 +48,5 @@ class SitProcesal
         return $this;
     }
 
-    /**
-     * @return Collection|PresAutor[]
-     */
-    public function getPresAutors(): Collection
-    {
-        return $this->presAutors;
-    }
-
-    public function addPresAutor(PresAutor $presAutor): self
-    {
-        if (!$this->presAutors->contains($presAutor)) {
-            $this->presAutors[] = $presAutor;
-            $presAutor->setSitProcHecho($this);
-        }
-
-        return $this;
-    }
-
-    public function removePresAutor(PresAutor $presAutor): self
-    {
-        if ($this->presAutors->removeElement($presAutor)) {
-            // set the owning side to null (unless already changed)
-            if ($presAutor->getSitProcHecho() === $this) {
-                $presAutor->setSitProcHecho(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }

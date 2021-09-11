@@ -84,8 +84,7 @@ function addRemoveButton ($card) {
 }
 
 //autocompletado
-alert('hola');
-console.log('gil');
+
 
 
   $(document).ready(function(){

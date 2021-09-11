@@ -56,33 +56,5 @@ class CompHecho
         return $this;
     }
 
-    /**
-     * @return Collection|PresAutor[]
-     */
-    public function getPresAutors(): Collection
-    {
-        return $this->presAutors;
-    }
-
-    public function addPresAutor(PresAutor $presAutor): self
-    {
-        if (!$this->presAutors->contains($presAutor)) {
-            $this->presAutors[] = $presAutor;
-            $presAutor->setCompHecho($this);
-        }
-
-        return $this;
-    }
-
-    public function removePresAutor(PresAutor $presAutor): self
-    {
-        if ($this->presAutors->removeElement($presAutor)) {
-            // set the owning side to null (unless already changed)
-            if ($presAutor->getCompHecho() === $this) {
-                $presAutor->setCompHecho(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }

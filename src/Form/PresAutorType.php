@@ -26,8 +26,7 @@ class PresAutorType extends AbstractType
             ->add('longitud')
             ->add('fraccion')
             ->add('radio')
-            ->add('estado_intox')
-            ->add('est_intox_otro')
+      
             ->add('reincidente')
             ->add('nacionalidad_otro')
             ->add('ant_penal_den')
@@ -37,14 +36,14 @@ class PresAutorType extends AbstractType
             ->add('otra_fuer_seg_pert')
             ->add('ejer_func')
             ->add('discapacidad')
-            ->add('embarazada')
-            ->add('priv_libertad')
-            ->add('ejer_prostitucion')
+         
+        
+      
             ->add('pert_pueblo_orig')
             ->add('etnia_otro')
             ->add('hab_nat_esp')
             ->add('uso_arma_fuego')
-            ->add('comp_hecho_otro')
+        
             ->add('observacion')
             ->add('tipo_documento')
             ->add('sexo')
@@ -52,7 +51,7 @@ class PresAutorType extends AbstractType
             ->add('edad_legal')
             ->add('rango_etario')
             ->add('rep_geo')
-            ->add('tipo_est_intox')
+      
             ->add('nacionalidad')
             ->add('estado_civil')
             ->add('sit_lab')
@@ -64,8 +63,8 @@ class PresAutorType extends AbstractType
             ->add('etnia')
             ->add('sit_arma_fue')
             ->add('per_arma_fue')
-            ->add('sit_proc_hecho')
-            ->add('comp_hecho')
+         
+          
         ;
     }
 

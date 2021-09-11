@@ -8,12 +8,25 @@
     <table class="table">
         <thead>
             <tr>
+         
                 <th>Id</th>
-                <th>Den_previa</th>
-                <th>Den_prev_desc</th>
-                 <th>Victima</th>
-                <th>Presunto Autor</th>
-                <th>id del hecho</th>
+                <th>Id del Hecho</th>
+                <th>victima</th>
+                <th>pres_autor</th>
+                 <th>den_previaden_prev_desc</th>
+                 <th>den_prev_desc</th>
+                 <th>vinculo</th>
+                 <th>vinculo_fam_vic</th>
+                 <th>vinculo_fam_otro</th>
+                 <th>vinc_no_fam_otro_vic</th>
+                <th>vinc_no_fam_otro_vic</th>
+               <th>conviviente</th>
+                <th>Situación proc durante hecho</th>
+                 <th>Comp durante hecho</th>
+                  <th>comport durante hecho otro</th>
+                   <th>Est intox</th>
+                      <th>Tipo est intox</th>
+                         <th>Tipo est intox otro</th>
                 <th>accion</th>
            
             </tr>
@@ -22,12 +35,28 @@
         {% for detalle_hecho in detalle_hechos %}
             <tr>
                
-                <td>{{ detalle_hecho.denPrevia }}</td>
-                <td>{{ detalle_hecho.denPrevDesc }}</td>
-                 <td>{{ detalle_hecho.victima }}</td>
-                  <td>{{ detalle_hecho.victima}}</td>
-                  <td>{{ detalle_hecho.hecho}}</td>
-            
+                 <td>{{ detalle_hecho.id }}</td>
+                 <td> {{detalle_hecho.hecho.id}} </td>
+                 
+                  <td>{{ detalle_hecho.victima }}</td>
+                  <td>{{ detalle_hecho.pres_autor}}</td>
+         
+                  <td>{{ detalle_hecho.denPrevia }}</td>
+                  <th>{{detalle_hecho.den_prev_desc}}</th>
+
+                  <td>{{ detalle_hecho.vinculo}}</td>
+                  <td>{{ detalle_hecho.vinculo_fam_vic}}</td>
+                  <td>{{ detalle_hecho.vinculo_fam_otro}}</td>
+                  <td>{{ detalle_hecho.vinc_no_fam_otro_vic}}</td>
+                  <td>{{ detalle_hecho.conviviente}}</td>
+                  <td>{{ detalle_hecho.est_intox}}</td>
+                  <td>{{ detalle_hecho.tipo_e_intox}}</td>
+                  <td>{{ detalle_hecho.est_intox_otro}}</td>
+                  <td>{{ detalle_hecho.sit_procesal}}</td>
+                  <td>{{ detalle_hecho.comp_hecho}}</td>
+                  <td>{{ detalle_hecho.comp_hecho_otro}}</td>
+
+           
               
                 <td>
                     <a href="{{ path('detalle_hecho_show', {'id': detalle_hecho.id}) }}">show</a>
@@ -44,3 +73,8 @@
 
     <a href="{{ path('detalle_hecho_new') }}">Create new</a>
 {% endblock %}
+
+ {% block footer %}{{ parent() }}
+
+ 
+ {% endblock %}

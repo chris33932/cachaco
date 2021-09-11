@@ -17,25 +17,42 @@ class HechoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('nro_preventivo')
 
-            ->add('nro_preventivo')
-            ->add('nro_sumario')
-            ->add('nro_exp_jud')
-            ->add('juzgado')
-            ->add('fiscalia')
+        ->add('nro_sumario')
+        ->add('nro_exp_jud')
+        ->add('juzgado')
+        ->add('fiscalia')
+
             
-            ->add('fecha', DateType::class, [
-                // renders it as a single text box
-                'widget' => 'single_text',
-            ])
-            ->add('anio')
-            ->add('mes')
+        ->add('fecha', DateType::class, [
+            // renders it as a single text box
+            'widget' => 'single_text',
+        ])
+        ->add('anio')
+        ->add('mes')
+
+
+        
+         // coleccion de detalles para cada hecho
+
+         ->add('detalleHechos', CollectionType::class, [
+            'entry_type' => DetalleHechoType::class,
+            'entry_options' => [
+                'label' => false
+            ], 'by_reference' => false,
+               'allow_add' => true,
+               'allow_delete' => true
+        ])
+       
+        
+
+          
+         
+        
             ->add('cod_loc_indec')
             ->add('gran_rcia')
-            ->add('hora_ocu',TimeType::class, [
-                'input'  => 'timestamp',
-                'widget' => 'choice',
-            ])
+            ->add('hora_ocu')
             ->add('dia_ocu')
             //--------------------------------
             //grupo ocurrencia
@@ -103,15 +120,10 @@ class HechoType extends AbstractType
             ->add('origen_reg')
             ->add('recep_den')
             ->add('tipologia')
-            ->add('detalleHechos', CollectionType::class, [
-                'entry_type' => DetalleHechoType::class,
-                'entry_options' => [
-                    'label' => false
-                ], 'by_reference' => false,
-                   'allow_add' => true,
-                   'allow_delete' => true
-            ])
-            ->add('save', SubmitType::class,['attr' => ['class' => 'btn btn-success']])
+             ->add('save', SubmitType::class,['attr' => ['class' => 'btn btn-success']])
+
+          
+            
         ;
     }
 

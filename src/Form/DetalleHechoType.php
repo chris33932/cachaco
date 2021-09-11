@@ -27,6 +27,15 @@ class DetalleHechoType extends AbstractType
             ->add('vinc_no_fam_otro_vic')
             ->add('vinc_no_fam_otro_vic')
             ->add('conviviente')
+            
+            ->add('est_intox')
+            ->add('tipo_e_intox')
+            ->add('est_intox_otro')
+            ->add('sit_procesal')
+            ->add('comp_hecho')
+            ->add('comp_hecho_otro')
+          
+        
 
            
         ;

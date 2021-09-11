@@ -119,21 +119,7 @@ class PresAutor
      */
     private $radio;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $estado_intox;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=EstadoIntox::class, inversedBy="presAutors")
-     */
-    private $tipo_est_intox;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $est_intox_otro;
-
+  
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
@@ -219,21 +205,7 @@ class PresAutor
      */
     private $discapacidad;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $embarazada;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $priv_libertad;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $ejer_prostitucion;
-
+ 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
@@ -269,20 +241,7 @@ class PresAutor
      */
     private $per_arma_fue;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=SitProcesal::class, inversedBy="presAutors")
-     */
-    private $sit_proc_hecho;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=CompHecho::class, inversedBy="presAutors")
-     */
-    private $comp_hecho;
-
-    /**
-     * @ORM\Column(type="string", length=150, nullable=true)
-     */
-    private $comp_hecho_otro;
+   
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
@@ -315,17 +274,18 @@ class PresAutor
     }
 
     
+    public function __toString()
+    {
+        return $this->apellido.'; '.$this->nombre.' || codigo ID: '.$this->id;
+    }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function __toString()
-    {
-        return $this->apellido.'; '.$this->nombre.' || codigo ID: '.$this->id;
-    }
-
+    
     public function setNombre(?string $nombre): self
     {
         $this->nombre = $nombre;
@@ -561,41 +521,7 @@ class PresAutor
         return $this;
     }
 
-    public function getEstadoIntox(): ?string
-    {
-        return $this->estado_intox;
-    }
-
-    public function setEstadoIntox(?string $estado_intox): self
-    {
-        $this->estado_intox = $estado_intox;
-
-        return $this;
-    }
-
-    public function getTipoEstIntox(): ?EstadoIntox
-    {
-        return $this->tipo_est_intox;
-    }
-
-    public function setTipoEstIntox(?EstadoIntox $tipo_est_intox): self
-    {
-        $this->tipo_est_intox = $tipo_est_intox;
-
-        return $this;
-    }
-
-    public function getEstIntoxOtro(): ?string
-    {
-        return $this->est_intox_otro;
-    }
-
-    public function setEstIntoxOtro(?string $est_intox_otro): self
-    {
-        $this->est_intox_otro = $est_intox_otro;
-
-        return $this;
-    }
+  
 
     public function getReincidente(): ?string
     {
@@ -1034,4 +960,17 @@ class PresAutor
 
         return $this;
     }
+
+    /**
+     * Get the value of nombre
+     */ 
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+   
+
+  
+
 }

@@ -1,6 +1,34 @@
-<div class="container">
+{#<div class="container">
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
+</div>#}
+
+<div class="container">
+
+     {{form_start(form)}}
+     <strong>{{ form_row(form.nro_preventivo) }}</strong> 
+            
+            
+            <div class="" id="hecho_list" data-prototype="{{form_widget(form.detalleHechos.vars.prototype)|e('html_attr') }}"
+                {% for row in form.detalleHechos %}    
+
+                   <div class="card">
+                        <div class="card-header"> 
+                            <strong>detalle_hecho_id: {{(row.vars.value.id)}}</strong> 
+                        </div>
+                        <div class="card-body">
+                           
+                           {{ form_row(row)}}
+
+                        </div>
+                  </div>
+               {% endfor %}
+     
+   {{ form_end(form) }}
+
+
 </div>
+
+

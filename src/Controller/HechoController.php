@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\DetalleHecho;
 use App\Entity\Hecho;
 use App\Form\HechoType;
 use App\Repository\HechoRepository;
@@ -50,7 +50,8 @@ class HechoController extends AbstractController
             $form->handleRequest($request);
             
             if ($form->isSubmitted()) {
-                // get rid of the ones that the user got rid of in the interface (DOM)
+               
+           // deshacerse de los que el usuario eliminó en la interfaz (DOM)
                 foreach ($orignalDetalleHecho as $detalle) {
                   
                     if ($hecho->getDetalleHechos()->contains($detalle) === false) {
