@@ -11,129 +11,129 @@
  
   <p class="text-muted">Lista de victimas:</p>   
    <br> 
- 
-  <table class="table table-striped">
-    <thead class="thead-light">
- 
-            <tr>
-               <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>DocumentoNro</th>
-                <th>Genero_otro</th>
-                <th>Edad</th>
-                <th>Nacionalidad_otra</th>
-                <th>Barrio</th>
-                <th>Calle</th>
-                <th>Altura</th>
-                <th>Interseccion</th>
-                <th>Calle_interseccion</th>
-                <th>Latitud</th>
-                <th>Longitud</th>
-                <th>Fraccion</th>
-                <th>Radio</th>
-                <th>Mecanismo_muerte_otro</th>
-                <th>Tipo_arma_otro</th>
-                <th>Medida_protecc_vigente</th>
-                <th>Medida_protecc_especif</th>
-                <th>Discapacidad</th>
-                <th>Embarazada</th>
-                <th>Privada_libertad</th>
-                <th>Ejer_prostitucion</th>
-                <th>Migrante_internacional</th>
-                <th>Migrante_intraprov</th>
-                <th>Migrante_interprov</th>
-                <th>Pueblo_originario</th>
-                <th>Etnia_otro</th>
-                <th>Hab_nativo_esp</th>
-                <th>Homosex_bisex</th>
-                <th>Ref_activista</th>
-                <th>Afro</th>
-                <th>Otra_sit_intersecc</th>
-                <th>Otra_sit_laboral</th>
-                <th>Hijos_pers_cargo</th>
-                <th>Cant_a_cargo</th>
-                <th>Benef_ley_brisa</th>
-                <th>Cant_benef</th>
-                <th>Violencia_exc</th>
-                <th>Femicidio</th>
-                <th>Fuerza_seg</th>
-                <th>Otra_fuer_pert</th>
-                <th>Sit_detencion</th>
-                <th>Estado_intox</th>
-                <th>Est_intox_otro</th>
-                <th>Desap_ant_hecho</th>
-                <th>Observacion</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for victima in victimas %}
-            <tr>
-                <td>{{ victima.id }}</td>
-                <td>{{ victima.nombre }}</td>
-                <td>{{ victima.apellido }}</td>
-                <td>{{ victima.documentoNro }}</td>
-                <td>{{ victima.generoOtro }}</td>
-                <td>{{ victima.edad }}</td>
-                <td>{{ victima.nacionalidadOtra }}</td>
-                <td>{{ victima.barrio }}</td>
-                <td>{{ victima.calle }}</td>
-                <td>{{ victima.altura }}</td>
-                <td>{{ victima.interseccion }}</td>
-                <td>{{ victima.calleInterseccion }}</td>
-                <td>{{ victima.latitud }}</td>
-                <td>{{ victima.longitud }}</td>
-                <td>{{ victima.fraccion }}</td>
-                <td>{{ victima.radio }}</td>
-                <td>{{ victima.mecanismoMuerteOtro }}</td>
-                <td>{{ victima.tipoArmaOtro }}</td>
-                <td>{{ victima.medidaProteccVigente }}</td>
-                <td>{{ victima.medidaProteccEspecif }}</td>
-                <td>{{ victima.discapacidad }}</td>
-                <td>{{ victima.embarazada }}</td>
-                <td>{{ victima.privadaLibertad }}</td>
-                <td>{{ victima.ejerProstitucion }}</td>
-                <td>{{ victima.migranteInternacional }}</td>
-                <td>{{ victima.migranteIntraprov }}</td>
-                <td>{{ victima.migranteInterprov }}</td>
-                <td>{{ victima.puebloOriginario }}</td>
-                <td>{{ victima.etniaOtro }}</td>
-                <td>{{ victima.habNativoEsp }}</td>
-                <td>{{ victima.homosexBisex }}</td>
-                <td>{{ victima.refActivista }}</td>
-                <td>{{ victima.afro }}</td>
-                <td>{{ victima.otraSitIntersecc }}</td>
-                <td>{{ victima.otraSitLaboral }}</td>
-                <td>{{ victima.hijosPersCargo }}</td>
-                <td>{{ victima.cantACargo }}</td>
-                <td>{{ victima.benefLeyBrisa }}</td>
-                <td>{{ victima.cantBenef }}</td>
-                <td>{{ victima.violenciaExc }}</td>
-                <td>{{ victima.femicidio }}</td>
-                <td>{{ victima.fuerzaSeg }}</td>
-                <td>{{ victima.otraFuerPert }}</td>
-                <td>{{ victima.sitDetencion }}</td>
-                <td>{{ victima.estadoIntox }}</td>
-                <td>{{ victima.estIntoxOtro }}</td>
-                <td>{{ victima.desapAntHecho }}</td>
-                <td>{{ victima.observacion }}</td>
-                <td>
-                    <a href="{{ path('victima_show', {'id': victima.id}) }}">show</a>
-                    <a href="{{ path('victima_edit', {'id': victima.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="49">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-     <a href="{{ path('victima_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
-                        <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+ <div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-light">
+    
+                <tr>
+                <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DocumentoNro</th>
+                    <th>Genero_otro</th>
+                    <th>Edad</th>
+                    <th>Nacionalidad_otra</th>
+                    <th>Barrio</th>
+                    <th>Calle</th>
+                    <th>Altura</th>
+                    <th>Interseccion</th>
+                    <th>Calle_interseccion</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
+                    <th>Fraccion</th>
+                    <th>Radio</th>
+                    <th>Mecanismo_muerte_otro</th>
+                    <th>Tipo_arma_otro</th>
+                    <th>Medida_protecc_vigente</th>
+                    <th>Medida_protecc_especif</th>
+                    <th>Discapacidad</th>
+                    <th>Embarazada</th>
+                    <th>Privada_libertad</th>
+                    <th>Ejer_prostitucion</th>
+                    <th>Migrante_internacional</th>
+                    <th>Migrante_intraprov</th>
+                    <th>Migrante_interprov</th>
+                    <th>Pueblo_originario</th>
+                    <th>Etnia_otro</th>
+                    <th>Hab_nativo_esp</th>
+                    <th>Homosex_bisex</th>
+                    <th>Ref_activista</th>
+                    <th>Afro</th>
+                    <th>Otra_sit_intersecc</th>
+                    <th>Otra_sit_laboral</th>
+                    <th>Hijos_pers_cargo</th>
+                    <th>Cant_a_cargo</th>
+                    <th>Benef_ley_brisa</th>
+                    <th>Cant_benef</th>
+                    <th>Violencia_exc</th>
+                    <th>Femicidio</th>
+                    <th>Fuerza_seg</th>
+                    <th>Otra_fuer_pert</th>
+                    <th>Sit_detencion</th>
+                    <th>Estado_intox</th>
+                    <th>Est_intox_otro</th>
+                    <th>Desap_ant_hecho</th>
+                    <th>Observacion</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for victima in victimas %}
+                <tr>
+                    <td>{{ victima.id }}</td>
+                    <td>{{ victima.nombre }}</td>
+                    <td>{{ victima.apellido }}</td>
+                    <td>{{ victima.documentoNro }}</td>
+                    <td>{{ victima.generoOtro }}</td>
+                    <td>{{ victima.edad }}</td>
+                    <td>{{ victima.nacionalidadOtra }}</td>
+                    <td>{{ victima.barrio }}</td>
+                    <td>{{ victima.calle }}</td>
+                    <td>{{ victima.altura }}</td>
+                    <td>{{ victima.interseccion }}</td>
+                    <td>{{ victima.calleInterseccion }}</td>
+                    <td>{{ victima.latitud }}</td>
+                    <td>{{ victima.longitud }}</td>
+                    <td>{{ victima.fraccion }}</td>
+                    <td>{{ victima.radio }}</td>
+                    <td>{{ victima.mecanismoMuerteOtro }}</td>
+                    <td>{{ victima.tipoArmaOtro }}</td>
+                    <td>{{ victima.medidaProteccVigente }}</td>
+                    <td>{{ victima.medidaProteccEspecif }}</td>
+                    <td>{{ victima.discapacidad }}</td>
+                    <td>{{ victima.embarazada }}</td>
+                    <td>{{ victima.privadaLibertad }}</td>
+                    <td>{{ victima.ejerProstitucion }}</td>
+                    <td>{{ victima.migranteInternacional }}</td>
+                    <td>{{ victima.migranteIntraprov }}</td>
+                    <td>{{ victima.migranteInterprov }}</td>
+                    <td>{{ victima.puebloOriginario }}</td>
+                    <td>{{ victima.etniaOtro }}</td>
+                    <td>{{ victima.habNativoEsp }}</td>
+                    <td>{{ victima.homosexBisex }}</td>
+                    <td>{{ victima.refActivista }}</td>
+                    <td>{{ victima.afro }}</td>
+                    <td>{{ victima.otraSitIntersecc }}</td>
+                    <td>{{ victima.otraSitLaboral }}</td>
+                    <td>{{ victima.hijosPersCargo }}</td>
+                    <td>{{ victima.cantACargo }}</td>
+                    <td>{{ victima.benefLeyBrisa }}</td>
+                    <td>{{ victima.cantBenef }}</td>
+                    <td>{{ victima.violenciaExc }}</td>
+                    <td>{{ victima.femicidio }}</td>
+                    <td>{{ victima.fuerzaSeg }}</td>
+                    <td>{{ victima.otraFuerPert }}</td>
+                    <td>{{ victima.sitDetencion }}</td>
+                    <td>{{ victima.estadoIntox }}</td>
+                    <td>{{ victima.estIntoxOtro }}</td>
+                    <td>{{ victima.desapAntHecho }}</td>
+                    <td>{{ victima.observacion }}</td>
+                    <td>
+                        <a href="{{ path('victima_show', {'id': victima.id}) }}">show</a>
+                        <a href="{{ path('victima_edit', {'id': victima.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="49">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('victima_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+                            <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+    </div>
 </div>
-   
 
 {% endblock %}
 

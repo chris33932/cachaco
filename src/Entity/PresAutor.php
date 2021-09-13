@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * @ORM\Entity(repositoryClass=PresAutorRepository::class)
  */
@@ -35,7 +38,7 @@ class PresAutor
     private $tipo_documento;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=11, unique=true, nullable=true)
      */
     private $documento_nro;
 
@@ -55,6 +58,7 @@ class PresAutor
     private $genero_otro;
 
     /**
+     * 
      * @ORM\Column(type="integer", nullable=true)
      */
     private $edad;
@@ -147,6 +151,7 @@ class PresAutor
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * 
      */
     private $especif_ant;
 
@@ -317,12 +322,12 @@ class PresAutor
         return $this;
     }
 
-    public function getDocumentoNro(): ?int
+    public function getDocumentoNro(): ?string
     {
         return $this->documento_nro;
     }
 
-    public function setDocumentoNro(?int $documento_nro): self
+    public function setDocumentoNro(?string $documento_nro): self
     {
         $this->documento_nro = $documento_nro;
 

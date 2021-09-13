@@ -5,8 +5,9 @@
 {% block body %}{{ parent() }}
 
 <div class="container-fluid">
-  <h2>Lista de Hechos</h2>
-  <p>:</p>
+  <h2 class="text-info">Lista de Hechos</h2>
+  <p></p>
+<div class="table-responsive">
   <table class="table">
     <thead class="thead-light">
                     <tr>
@@ -139,7 +140,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
 
      <a href="{{ path('hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                         <span class="glyphicon glyphicon-plus"></span> Nuevo</a>

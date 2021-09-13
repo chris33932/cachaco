@@ -2,15 +2,16 @@
 
 {% block title %}DetalleHecho index{% endblock %}
 
-{% block body %}
-    <h1>DetalleHecho index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-         
+{% block body %}{{ parent() }}
+<div class="container-fluid">
+  <h2 class="text-success">Detalle hecho</h2>
+  <p>Detalles ordenados por cada hecho</p>  
+<div class="table-responsive">          
+  <table class="table table-condensed">
+    <thead>
+        <tr>
                 <th>Id</th>
-                <th>Id del Hecho</th>
+                <th><strong>Id del Hecho</strong></th>
                 <th>victima</th>
                 <th>pres_autor</th>
                  <th>den_previaden_prev_desc</th>
@@ -70,8 +71,10 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('detalle_hecho_new') }}">Create new</a>
+</div>
+  {#<a href="{{ path('detalle_hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+ 
+</div>                       <span class="glyphicon glyphicon-plus"></span> Nuevo</a>#}
 {% endblock %}
 
  {% block footer %}{{ parent() }}
