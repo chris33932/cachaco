@@ -38,7 +38,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $documentoNro;
+    private $documentoNro=-1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sexo::class, inversedBy="victimas")
@@ -53,12 +53,12 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $genero_otro;
+    private $genero_otro="No corresponde";
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $edad;
+    private $edad=-1;
 
     /**
      * @ORM\ManyToOne(targetEntity=RangoEtario::class, inversedBy="victimas")
@@ -78,22 +78,22 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $nacionalidad_otra;
+    private $nacionalidad_otra="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $barrio;
+    private $barrio="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle;
+    private $calle="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $altura;
+    private $altura="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -103,7 +103,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle_interseccion;
+    private $calle_interseccion="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=RepGeografica::class, inversedBy="victimas")
@@ -113,22 +113,22 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $latitud;
+    private $latitud="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $longitud;
+    private $longitud="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $fraccion;
+    private $fraccion="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $radio;
+    private $radio="Sin datos";
 
     /**
      * @ORM\ManyToOne(targetEntity=EstadoCivil::class, inversedBy="victimas")
@@ -143,7 +143,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $mecanismo_muerte_otro;
+    private $mecanismo_muerte_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=TipoArma::class, inversedBy="victimas")
@@ -153,7 +153,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $tipo_arma_otro;
+    private $tipo_arma_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -163,42 +163,42 @@ class Victima
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $medida_protecc_especif;
+    private $medida_protecc_especif="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $discapacidad;
+    private $discapacidad="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $embarazada;
+    private $embarazada="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $privada_libertad;
+    private $privada_libertad="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $ejer_prostitucion;
+    private $ejer_prostitucion="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $migrante_internacional;
+    private $migrante_internacional="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $migrante_intraprov;
+    private $migrante_intraprov="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $migrante_interprov;
+    private $migrante_interprov="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -213,32 +213,32 @@ class Victima
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $etnia_otro;
+    private $etnia_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $hab_nativo_esp;
+    private $hab_nativo_esp="Si";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $homosex_bisex;
+    private $homosex_bisex="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $ref_activista;
+    private $ref_activista="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $afro;
+    private $afro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $otra_sit_intersecc;
+    private $otra_sit_intersecc="Sin datos";
 
     /**
      * @ORM\ManyToOne(targetEntity=SituacionLaboral::class, inversedBy="victimas")
@@ -248,7 +248,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $otra_sit_laboral;
+    private $otra_sit_laboral="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=CondicionActividad::class, inversedBy="victimas")
@@ -258,12 +258,12 @@ class Victima
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $hijos_pers_cargo;
+    private $hijos_pers_cargo="Sin datos";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $cant_a_cargo;
+    private $cant_a_cargo="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
@@ -271,9 +271,9 @@ class Victima
     private $benef_ley_brisa;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $cant_benef;
+    private $cant_benef="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=NivelInstruccion::class, inversedBy="victimas")
@@ -288,12 +288,12 @@ class Victima
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
      */
-    private $violencia_exc;
+    private $violencia_exc="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
      */
-    private $femicidio;
+    private $femicidio="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=TipoFemicidio::class, inversedBy="victimas")
@@ -318,7 +318,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $otra_fuer_pert;
+    private $otra_fuer_pert="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=EstadoPolicial::class, inversedBy="victimas")
@@ -329,11 +329,6 @@ class Victima
      * @ORM\ManyToOne(targetEntity=FuncionMomHecho::class, inversedBy="victimas")
      */
     private $ejer_funcion;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $sit_detencion;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
@@ -348,12 +343,12 @@ class Victima
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $est_intox_otro;
+    private $est_intox_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $desap_ant_hecho;
+    private $desap_ant_hecho="No corresponde";
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -973,12 +968,12 @@ class Victima
         return $this;
     }
 
-    public function getCantACargo(): ?int
+    public function getCantACargo(): ?string
     {
         return $this->cant_a_cargo;
     }
 
-    public function setCantACargo(?int $cant_a_cargo): self
+    public function setCantACargo(?string $cant_a_cargo): self
     {
         $this->cant_a_cargo = $cant_a_cargo;
 
@@ -997,12 +992,12 @@ class Victima
         return $this;
     }
 
-    public function getCantBenef(): ?int
+    public function getCantBenef(): ?string
     {
         return $this->cant_benef;
     }
 
-    public function setCantBenef(?int $cant_benef): self
+    public function setCantBenef(?string $cant_benef): self
     {
         $this->cant_benef = $cant_benef;
 
