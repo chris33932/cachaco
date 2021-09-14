@@ -27,22 +27,22 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $nro_sumario;
+    private $nro_sumario="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $nro_exp_jud;
+    private $nro_exp_jud="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $juzgado;
+    private $juzgado="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $fiscalia;
+    private $fiscalia="Sin datos";
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -112,17 +112,17 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $barrio_ocu;
+    private $barrio_ocu="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle_ocu;
+    private $calle_ocu="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $altura_ocu;
+    private $altura_ocu="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
@@ -132,7 +132,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle_int_ocu;
+    private $calle_int_ocu="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=RepGeografica::class)
@@ -142,12 +142,12 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $latitud_ocu;
+    private $latitud_ocu="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $longitud_ocu;
+    private $longitud_ocu="Sin datos";
 
     /**
      * @ORM\ManyToOne(targetEntity=Zona::class)
@@ -167,7 +167,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $acceso_ocu;
+    private $acceso_ocu="Sin datos";
 
     /**
      * @ORM\ManyToOne(targetEntity=Lugar::class)
@@ -177,7 +177,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $lugar_ocu_otro;
+    private $lugar_ocu_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=TipoDomParticular::class)
@@ -187,17 +187,17 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $dom_part_otro;
+    private $dom_part_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $fraccion_ocu;
+    private $fraccion_ocu="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $radio_ocu;
+    private $radio_ocu="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
@@ -232,27 +232,27 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $barrio_hgo;
+    private $barrio_hgo="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle_hgo;
+    private $calle_hgo="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $altura_hgo;
+    private $altura_hgo="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $intersec_hgo;
+    private $intersec_hgo="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle_int_hgo;
+    private $calle_int_hgo="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=RepGeografica::class)
@@ -262,12 +262,12 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $latitud_hgo;
+    private $latitud_hgo="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $longitud_hgo;
+    private $longitud_hgo="Sin datos";
 
     /**
      * @ORM\ManyToOne(targetEntity=Zona::class)
@@ -282,7 +282,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $lug_hgo_otro;
+    private $lug_hgo_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=TipoLugar::class)
@@ -307,17 +307,17 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $dom_part_hgo_otro;
+    private $dom_part_hgo_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $fraccion_hgo;
+    private $fraccion_hgo="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $radio_hgo;
+    private $radio_hgo="Sin datos";
 
     /**
      * @ORM\ManyToOne(targetEntity=OcasionDelito::class)
@@ -327,7 +327,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $oca_delito_otro;
+    private $oca_delito_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=OrigenRegistro::class)
@@ -337,7 +337,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $orig_reg_otro;
+    private $orig_reg_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=EntRecepDenuncia::class)
@@ -347,7 +347,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $recep_den_otro;
+    private $recep_den_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=Tipologia::class)
@@ -360,7 +360,7 @@ class Hecho
     private $cant_victimas;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $cant_vic_col;
 
@@ -1210,12 +1210,12 @@ class Hecho
         return $this;
     }
 
-    public function getCantVicCol(): ?int
+    public function getCantVicCol(): ?string
     {
         return $this->cant_vic_col;
     }
 
-    public function setCantVicCol(?int $cant_vic_col): self
+    public function setCantVicCol(?string $cant_vic_col): self
     {
         $this->cant_vic_col = $cant_vic_col;
 
