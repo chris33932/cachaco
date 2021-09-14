@@ -21,7 +21,9 @@ class VictimaType extends AbstractType
             ->add('genero_otro')
             ->add('edad')
             ->add('nacionalidad_otra')
-            ->add('barrio')
+            ->add('barrio', null, [
+                'help' => 'Por default Sin datos',
+             ])
             ->add('calle')
             ->add('altura')
             ->add('interseccion')
@@ -72,11 +74,11 @@ class VictimaType extends AbstractType
             ->add('femicidio')
             ->add('fuerza_seg')
             ->add('otra_fuer_pert')
-           // ->add('sit_detencion')
+       
             ->add('estado_intox')
             ->add('est_intox_otro')
             ->add('desap_ant_hecho')
-            ->add('observacion',  TextType::class, array('data_class' => null, "label" =>
+            ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>
             "  "))
             ->add('tipoDocumento')
             ->add('sexo')

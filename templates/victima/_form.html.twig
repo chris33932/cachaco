@@ -21,14 +21,13 @@
             {{ form_row(form.radio) }}
 
             {{ form_row(form.sexo ) }}
+            {{ form_row(form.genero ) }}
             {{ form_row(form.genero_otro) }}
             {{ form_row(form.embarazada) }}
             {{ form_row(form.discapacidad) }}
             {{ form_row(form.nacionalidad ) }}
 
             {{ form_row(form.rango_etario) }}
-
-            
 
             {{ form_row(form.nacionalidad_otra) }}
             {{ form_row(form.barrio) }}
@@ -42,10 +41,6 @@
 
             {{ form_row(form.fraccion) }}
 
-            {{ form_row(form.genero ) }}
-            
-
-     
 				</div>
 				<div class="col-md-4"><h3 class="text-success">Situación socio económica</h3>
                   {{ form_row(form.sit_laboral ) }}
@@ -94,7 +89,7 @@
                   {{ form_row(form.etnia) }}
     
 				</div>
-				<div class="col-md-4"> <div class="col"><h3 class="text-info">OTROS</h3>    
+				<div class="col-md-4"> <div class="col"><h3 class="text-info">Otros</h3>    
                
                   {{ form_row(form.fuerza_seg) }}
 
@@ -121,12 +116,7 @@
 
                   {{ form_row(form.desap_ant_hecho ) }}
 
-                      
-                                        
-            {#ELIMINAR DE BD {{ form_row(form.sit_detencion ) }}#}  
-
-               
-
+              
                </div>
 				</div>
 			</div>
