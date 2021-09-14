@@ -245,7 +245,17 @@ class VictimaType extends AbstractType
             ])
             ->add('otra_fuer_pert')
        
-            ->add('estado_intox')
+            ->add('estado_intox', ChoiceType::class, [ "label" =>
+            "Estado de intoxicación al momento del hecho",
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('est_intox_otro')
             ->add('desap_ant_hecho')
             ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>

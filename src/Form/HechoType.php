@@ -136,7 +136,24 @@ class HechoType extends AbstractType
                 ],
              
             ])
-            ->add('franja_h_tres')
+            ->add('franja_h_tres', ChoiceType::class, [ "label" =>
+            "Franja horaria (cada 3 horas)",
+                'choices' => [
+                    ' ' => ' ',
+                    '00:00 - 02:59' => '00:00 - 02:59',
+                    '03:00 - 05:59' => '03:00 - 05:59',
+                    '06:00 - 08:59' => '06:00 - 08:59',
+                    '09:00 - 11:59' => '09:00 - 11:59',
+                    '12:00 - 14:59' => '12:00 - 14:59',
+                    '15:00 - 17:59' => '15:00 - 17:59',
+                    '18:00 - 20:59' => '18:00 - 20:59',
+                    '21:00 - 23:59' => '21:00 - 23:59',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('barrio_ocu', TextType::class, [ "label" =>
             "Barrio Ocurrencia",])
             ->add('calle_ocu')
@@ -163,15 +180,56 @@ class HechoType extends AbstractType
             ->add('dom_part_otro')
             ->add('fraccion_ocu')
             ->add('radio_ocu')
-            ->add('coinc_lug_ocu')
+            ->add('coinc_lug_ocu', ChoiceType::class, [ "label" =>
+            "Coincidencia entre lugar del hecho y lugar de ocurrencia",
+                'choices' => [
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin datos' => 'Sin datos',
+                    'Sin determinar' => 'Sin determinar',
+                    
+                   
+                ],
+             
+            ])
             ->add('fecha_hgo', DateType::class, [
                 // renders it as a single text box
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')
             ->add('dia_hgo')
-            ->add('f_hora_hgo_seis')
-            ->add('f_hora_hgo_tres')
+            ->add('f_hora_hgo_seis', ChoiceType::class, [ "label" =>
+            "Franja horaria (cada 6 horas)",
+                'choices' => [
+                    ' ' => ' ',
+                    '00:00 - 05:59' => '00:00 - 05:59',
+                    '06:00 - 11:59' => '06:00 - 11:59',
+                    '12:00 - 17:59' => '12:00 - 17:59',
+                    '18:00 - 23:59' => '18:00 - 23:59',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+            ->add('f_hora_hgo_tres', ChoiceType::class, [ "label" =>
+            "Franja horaria (cada 3 horas)",
+                'choices' => [
+                    ' ' => ' ',
+                    '00:00 - 02:59' => '00:00 - 02:59',
+                    '03:00 - 05:59' => '03:00 - 05:59',
+                    '06:00 - 08:59' => '06:00 - 08:59',
+                    '09:00 - 11:59' => '09:00 - 11:59',
+                    '12:00 - 14:59' => '12:00 - 14:59',
+                    '15:00 - 17:59' => '15:00 - 17:59',
+                    '18:00 - 20:59' => '18:00 - 20:59',
+                    '21:00 - 23:59' => '21:00 - 23:59',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('barrio_hgo')
             ->add('calle_hgo')
             ->add('altura_hgo')
@@ -180,7 +238,18 @@ class HechoType extends AbstractType
             ->add('latitud_hgo')
             ->add('longitud_hgo')
             ->add('lug_hgo_otro')
-            ->add('acceso_hgo')
+            ->add('acceso_hgo', ChoiceType::class, [ "label" =>
+            "Acceso",
+                'choices' => [
+                    ' ' => ' ',
+                    'Libre' => 'Libre',
+                    'Restringido' => 'Restringido',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('dom_part_hgo_otro')
             ->add('fraccion_hgo')
             ->add('radio_hgo')
@@ -189,7 +258,7 @@ class HechoType extends AbstractType
             ->add('recep_den_otro')
             ->add('cant_victimas')
             ->add('cant_vic_col', TextType::class, ['data_class' => null, 'required' => false, "label" =>
-            "N° victimas colat."])
+            "Número de víctimas colaterales"])
            
             ->add('comisaria')
             ->add('provincia')
