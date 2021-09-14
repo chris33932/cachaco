@@ -293,7 +293,7 @@ class Victima
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
      */
-    private $femicidio="No corresponde";
+    private $femicidio;
 
     /**
      * @ORM\ManyToOne(targetEntity=TipoFemicidio::class, inversedBy="victimas")

@@ -20,13 +20,10 @@
             {{ form_row(form.nacionalidad ) }}
             {{ form_row(form.nacionalidad_otra) }}
             {{ form_row(form.estado_civil ) }}        
-
-            {{ form_row(form.embarazada) }}
-            {{ form_row(form.discapacidad) }}
+            {{ form_row(form.provincia ) }} 
+            {{ form_row(form.departamento ) }} 
             
-      
-
-            
+            {{ form_row(form.localidad ) }} 
             {{ form_row(form.barrio) }}
             {{ form_row(form.calle) }}
             {{ form_row(form.altura) }}
@@ -37,9 +34,12 @@
             {{ form_row(form.longitud) }}
             {{ form_row(form.fraccion) }}
             {{ form_row(form.radio) }}
-            
+
 				</div>
 				<div class="col-md-4"><h3 class="text-success">Situación socio económica</h3>
+                  {{ form_row(form.discapacidad) }}
+                  {{ form_row(form.embarazada) }}
+            
                   {{ form_row(form.sit_laboral ) }}
                   {{ form_row(form.otra_sit_laboral) }}
 

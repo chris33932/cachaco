@@ -21,6 +21,9 @@ class VictimaType extends AbstractType
             ->add('genero_otro')
             ->add('edad')
             ->add('nacionalidad_otra')
+            ->add('provincia')
+            ->add('departamento')
+            ->add('localidad')
             ->add('barrio', null, [
                 'help' => 'Por default Sin datos',
              ])
