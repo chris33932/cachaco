@@ -49,7 +49,7 @@ class HechoType extends AbstractType
 
           
          
-        
+            ->add('localidad')
             ->add('cod_loc_indec')
             ->add('gran_rcia')
             ->add('hora_ocu')
