@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comisaria index{% endblock %}
+
+{% block body %}
+    <h1>Comisaria index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Calle</th>
+                <th>Altura</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comisarium in comisarias %}
+            <tr>
+                <td>{{ comisarium.id }}</td>
+                <td>{{ comisarium.nombre }}</td>
+                <td>{{ comisarium.calle }}</td>
+                <td>{{ comisarium.altura }}</td>
+                <td>
+                    <a href="{{ path('comisaria_show', {'id': comisarium.id}) }}">show</a>
+                    <a href="{{ path('comisaria_edit', {'id': comisarium.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('comisaria_new') }}">Create new</a>
+{% endblock %}

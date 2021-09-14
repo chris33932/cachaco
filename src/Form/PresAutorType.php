@@ -27,6 +27,9 @@ class PresAutorType extends AbstractType
             ->add('longitud')
             ->add('fraccion')
             ->add('radio')
+            ->add('provincia')
+            ->add('departamento')
+            ->add('localidad')
       
             ->add('reincidente')
             ->add('nacionalidad_otro')

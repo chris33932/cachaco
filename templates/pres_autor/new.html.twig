@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New PresAutor{% endblock %}
+{% block title %}Nuevo PresAutor{% endblock %}
 
 {% block body %}{{ parent() }}
-    <h1>Crear nuevo</h1>
+<div class="container-fluid">
+    <h3 class="text-muted">Alta presunto autor</h3>
 
     {{ include('pres_autor/_form.html.twig') }}
 
     <a href="{{ path('pres_autor_index') }}">Volver a la lista</a>
+</div>
 {% endblock %}
 
 {% block footer %}
