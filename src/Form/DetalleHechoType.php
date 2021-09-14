@@ -17,7 +17,8 @@ class DetalleHechoType extends AbstractType
         $builder
             
             ->add('victima')
-            ->add('pres_autor')
+            ->add('pres_autor', TextType::class, [ "label" =>
+            "Presunto autor",])
             ->add('den_previa', ChoiceType::class, [ "label" =>
             "Denuncia previa de la víctima contra el presunto autor",
                 'choices' => [
@@ -39,24 +40,68 @@ class DetalleHechoType extends AbstractType
                 'choices' => [
                     'Sin datos' => 'Sin datos',
                     'Si' => 'Si',
-                    'No' => 'No',
+                    'No' => 'No',                  
                     'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+            ->add('vinculo_fam_vic', ChoiceType::class, ["label" =>
+            "Vínculo familiar entre la víctima y el presunto autor",
+                'choices' => [                                
+                    'Cónyuge' => 'Cónyuge',
+                    'Pareja' => 'Pareja',
+                    'Ex cónyuge' => 'Ex cónyuge',
+                    'Ex pareja' => 'Ex pareja',
+                    'Separado(a) de hecho' => 'Separado(a) de hecho',
+                    'Hermano(a)' => 'Hermano(a)',
+                    'Hermanastro(a)' => 'Hermanastro(a)',
+                    'Hijo(a)' => 'Hijo(a)',
+                    'Hijastro(a)' => 'Hijastro(a)',
+                    'Padre/madre' => 'Padre/madre',
+                    'Padrastro/madrastra' => 'Padrastro/madrastra',
+                    'Otros vínculos familiares' => 'Otros vínculos familiares',
+                    'Sin vínculo familiar' => 'Sin vínculo familiar',
+                    
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
                    
                 ],
              
             ])
 
-            ->add('vinculo_fam_vic', TextType::class, [ "label" =>
-            "Vínculo familiar entre la víctima y el presunto autor",])
+                      
+            
+           
             ->add('vinculo_fam_otro', TextType::class, [ "label" =>
             "Otro vínculo familiar entre la víctima y el presunto autor",])
-            ->add('vinc_no_fam_otro_vic', TextType::class, [ "label" =>
-            "Vínculo extrafamiliar entre la víctima y el presunto autor",])
+
+            ->add('vinc_no_fam_vic', ChoiceType::class, ["label" =>
+            "Vínculo extrafamiliar entre la víctima y el presunto autor",
+                'choices' => [                                
+                    'Socio(a)' => 'Socio(a)',
+                    'Empleado(a)' => 'Empleado(a)',
+                    'Empleador(a)' => 'Empleador(a)',
+                    'Cliente/proveedor' => 'Cliente/proveedor',
+                    
+                    'Otras relaciones laborales' => 'Otras relaciones laborales',
+                    'Otras relaciones' => 'Otras relaciones',
+                    'Sin vínculo extrafamiliar' => 'Sin vínculo extrafamiliar',
+                    
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+
             ->add('vinc_no_fam_otro_vic', TextType::class, [ "label" =>
             "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
+            
             ->add('conviviente', TextType::class, [ "label" =>
             "Convivencia entre la víctima y el presunto autor al momento del hecho",])
-            
+
             ->add('est_intox', ChoiceType::class, [ "label" =>
             "Estado de intoxicación del presunto autor",
                 'choices' => [
