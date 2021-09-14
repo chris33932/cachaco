@@ -55,17 +55,17 @@ class DetalleHecho
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $vinculo_fam_otro;
+    private $vinculo_fam_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $vinc_no_fam_otro_vic;
+    private $vinc_no_fam_vic;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $v_no_fam_otro_v_otro;
+    private $v_no_fam_otro_v_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -205,12 +205,12 @@ class DetalleHecho
 
     public function getVincNoFamOtroVic(): ?string
     {
-        return $this->vinc_no_fam_otro_vic;
+        return $this->vinc_no_fam_vic;
     }
 
-    public function setVincNoFamOtroVic(?string $vinc_no_fam_otro_vic): self
+    public function setVincNoFamOtroVic(?string $vinc_no_fam_vic): self
     {
-        $this->vinc_no_fam_otro_vic = $vinc_no_fam_otro_vic;
+        $this->vinc_no_fam_vic = $vinc_no_fam_vic;
 
         return $this;
     }
@@ -392,21 +392,21 @@ class DetalleHecho
     }
 
     /**
-     * Get the value of vinc_no_fam_otro_vic
+     * Get the value of vinc_no_fam_vic
      */ 
-    public function getVinc_no_fam_otro_vic()
+    public function getVinc_no_fam_vic()
     {
-        return $this->vinc_no_fam_otro_vic;
+        return $this->vinc_no_fam_vic;
     }
 
     /**
-     * Set the value of vinc_no_fam_otro_vic
+     * Set the value of vinc_no_fam_vic
      *
      * @return  self
      */ 
-    public function setVinc_no_fam_otro_vic($vinc_no_fam_otro_vic)
+    public function setVinc_no_fam_vic($vinc_no_fam_vic)
     {
-        $this->vinc_no_fam_otro_vic = $vinc_no_fam_otro_vic;
+        $this->vinc_no_fam_vic = $vinc_no_fam_vic;
 
         return $this;
     }

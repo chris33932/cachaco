@@ -7,6 +7,7 @@ use App\Entity\DetalleHecho;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DetalleHechoType extends AbstractType
 {
@@ -21,10 +22,30 @@ class DetalleHechoType extends AbstractType
             //->add('hecho')
             
             
-            ->add('vinculo')
-            ->add('vinculo_fam_vic')
+            ->add('vinculo', ChoiceType::class, ["label" =>
+            " Vinculo",
+                'choices' => [                                
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    'Sin datos' => 'Sin datos',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('vinculo_fam_vic', ChoiceType::class, ["label" =>
+            " Vinvulo famliar con la victima",
+                'choices' => [                                
+                    'Cónyuge: persona con quien ha contraído matrimonio civil' => 'Cónyuge: persona con quien ha contraído matrimonio civil',
+                    'Si' => 'Si',
+                    'Sin datos' => 'Sin datos',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('vinculo_fam_otro')
-            ->add('vinc_no_fam_otro_vic')
+            ->add('vinc_no_fam_vic')
             ->add('vinc_no_fam_otro_vic')
             ->add('conviviente')
             

@@ -77,13 +77,7 @@ class PresAutorType extends AbstractType
             ])
             ->add('otra_fuer_seg_pert')
             ->add('ejer_func')
-            ->add('discapacidad')
-         
-        
-      
-            ->add('pert_pueblo_orig')
-            ->add('etnia_otro')
-            ->add('hab_nat_esp')
+ 
             ->add('uso_arma_fuego', ChoiceType::class, [
                 'choices' => [                                
                     'No' => 'No',
@@ -112,7 +106,6 @@ class PresAutorType extends AbstractType
             ->add('niv_inst_formal')
             ->add('fuer_seg_pert')
             ->add('est_pol')
-            ->add('etnia')
             ->add('sit_arma_fue')
             ->add('per_arma_fue')
          

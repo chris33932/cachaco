@@ -205,32 +205,7 @@ class PresAutor
      */
     private $ejer_func;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $discapacidad;
-
- 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $pert_pueblo_orig;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Etnia::class, inversedBy="presAutors")
-     */
-    private $etnia;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $etnia_otro="No corresponde";
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $hab_nat_esp;
-
+  
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
@@ -720,17 +695,8 @@ class PresAutor
         return $this;
     }
 
-    public function getDiscapacidad(): ?string
-    {
-        return $this->discapacidad;
-    }
+    
 
-    public function setDiscapacidad(?string $discapacidad): self
-    {
-        $this->discapacidad = $discapacidad;
-
-        return $this;
-    }
 
     public function getEmbarazada(): ?string
     {
@@ -768,53 +734,6 @@ class PresAutor
         return $this;
     }
 
-    public function getPertPuebloOrig(): ?string
-    {
-        return $this->pert_pueblo_orig;
-    }
-
-    public function setPertPuebloOrig(?string $pert_pueblo_orig): self
-    {
-        $this->pert_pueblo_orig = $pert_pueblo_orig;
-
-        return $this;
-    }
-
-    public function getEtnia(): ?Etnia
-    {
-        return $this->etnia;
-    }
-
-    public function setEtnia(?Etnia $etnia): self
-    {
-        $this->etnia = $etnia;
-
-        return $this;
-    }
-
-    public function getEtniaOtro(): ?string
-    {
-        return $this->etnia_otro;
-    }
-
-    public function setEtniaOtro(?string $etnia_otro): self
-    {
-        $this->etnia_otro = $etnia_otro;
-
-        return $this;
-    }
-
-    public function getHabNatEsp(): ?string
-    {
-        return $this->hab_nat_esp;
-    }
-
-    public function setHabNatEsp(?string $hab_nat_esp): self
-    {
-        $this->hab_nat_esp = $hab_nat_esp;
-
-        return $this;
-    }
 
     public function getUsoArmaFuego(): ?string
     {
