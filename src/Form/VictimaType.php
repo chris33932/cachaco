@@ -29,7 +29,16 @@ class VictimaType extends AbstractType
              ])
             ->add('calle')
             ->add('altura')
-            ->add('interseccion')
+            ->add('interseccion' , ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                    'Si' => 'Si',
+                   
+                ],
+             
+            ])
             ->add('calle_interseccion')
             ->add('latitud')
             ->add('longitud')

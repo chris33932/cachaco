@@ -34,7 +34,6 @@ class HechoType extends AbstractType
 
             ->add('fiscalia')
 
-<<<<<<< HEAD
             ->add('juzgado')
             
                 
@@ -112,13 +111,12 @@ class HechoType extends AbstractType
             ])
             
            
-=======
           
          
             ->add('localidad')
             ->add('cod_loc_indec')
             ->add('gran_rcia')
->>>>>>> bdc7b16535ce7863b33b55a0226bbbca5d920c67
+
             ->add('hora_ocu')
             
             ->add('franja_h_seis')
