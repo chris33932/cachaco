@@ -6,6 +6,7 @@ use App\Entity\PresAutor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PresAutorType extends AbstractType
 {
@@ -44,7 +45,8 @@ class PresAutorType extends AbstractType
             ->add('hab_nat_esp')
             ->add('uso_arma_fuego')
         
-            ->add('observacion')
+            ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>
+            "  "))
             ->add('tipo_documento')
             ->add('sexo')
             ->add('genero')

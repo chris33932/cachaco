@@ -90,5 +90,9 @@ function addRemoveButton ($card) {
   $(document).ready(function(){
     $('#hecho_rep_geo_ocu > option[value="1"]').attr('selected', 'selected');
     });
-  
+
+    $(document).ready(function(){
+    $('#hecho_oca_delito > option[value="6"]').attr('selected', 'selected');
+        });
+      
 
