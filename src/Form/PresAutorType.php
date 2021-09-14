@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class PresAutorType extends AbstractType
 {
@@ -21,7 +23,16 @@ class PresAutorType extends AbstractType
             ->add('barrio')
             ->add('calle')
             ->add('altura')
-            ->add('interseccion')
+            ->add('interseccion', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('calle_interseccion')
             ->add('latitud')
             ->add('longitud')
@@ -31,12 +42,39 @@ class PresAutorType extends AbstractType
             ->add('departamento')
             ->add('localidad')
       
-            ->add('reincidente')
+            ->add('reincidente', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('nacionalidad_otro')
-            ->add('ant_penal_den')
+            ->add('ant_penal_den', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('especif_ant')
             ->add('otra_sit_lab')
-            ->add('fuerza_seg')
+            ->add('fuerza_seg', ChoiceType::class, [
+                'choices' => [
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('otra_fuer_seg_pert')
             ->add('ejer_func')
             ->add('discapacidad')
@@ -46,7 +84,16 @@ class PresAutorType extends AbstractType
             ->add('pert_pueblo_orig')
             ->add('etnia_otro')
             ->add('hab_nat_esp')
-            ->add('uso_arma_fuego')
+            ->add('uso_arma_fuego', ChoiceType::class, [
+                'choices' => [                                
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    'Sin datos' => 'Sin datos',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
         
             ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>
             "  "))

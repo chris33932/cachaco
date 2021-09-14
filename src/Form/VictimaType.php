@@ -32,9 +32,9 @@ class VictimaType extends AbstractType
             ->add('interseccion' , ChoiceType::class, [
                 'choices' => [
                     'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
                     'No' => 'No',
                     'Sin determinar' => 'Sin determinar',
-                    'Si' => 'Si',
                    
                 ],
              
@@ -46,22 +46,95 @@ class VictimaType extends AbstractType
             ->add('radio')
             ->add('mecanismo_muerte_otro')
             ->add('tipo_arma_otro')
-            ->add('medida_protecc_vigente')
+            ->add('medida_protecc_vigente', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('medida_protecc_especif')
-            ->add('discapacidad')
-            ->add('embarazada')
-            ->add('privada_libertad')
-            ->add('ejer_prostitucion')
-            ->add('migrante_internacional')
-            ->add('migrante_intraprov')
-            ->add('migrante_interprov')
+            ->add('discapacidad', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('embarazada', ChoiceType::class, [
+                'choices' => [
+                    'No corresponde' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+            ->add('privada_libertad', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('ejer_prostitucion', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('migrante_internacional', ChoiceType::class, [
+                'choices' => [
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+            ->add('migrante_intraprov', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('migrante_interprov', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             //->add('pueblo_originario')
             ->add('pueblo_originario', ChoiceType::class, [
                 'choices' => [
                     'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
                     'No' => 'No',
                     'Sin determinar' => 'Sin determinar',
-                    'Si' => 'Si',
                    
                 ],
              
@@ -70,21 +143,106 @@ class VictimaType extends AbstractType
 
 
             ->add('etnia_otro')
-            ->add('hab_nativo_esp')
-            ->add('homosex_bisex')
-            ->add('ref_activista')
+            ->add('hab_nativo_esp', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('homosex_bisex', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+            ->add('ref_activista', ChoiceType::class, [
+                'choices' => [
+                    'No corresponde' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
 
          
-            ->add('afro')
+            ->add('afro', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('otra_sit_intersecc')
             ->add('otra_sit_laboral')
-            ->add('hijos_pers_cargo')
+            ->add('hijos_pers_cargo', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('cant_a_cargo')
-            ->add('benef_ley_brisa')
+            ->add('benef_ley_brisa', ChoiceType::class, [
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
             ->add('cant_benef')
-            ->add('violencia_exc')
-            ->add('femicidio')
-            ->add('fuerza_seg')
+            ->add('violencia_exc', ChoiceType::class, [
+                'choices' => [
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+            ->add('femicidio', ChoiceType::class, [
+                'choices' => [
+                    'No' => 'No',
+                    
+                    'Si' => 'Si',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
+            ->add('fuerza_seg', ChoiceType::class, [
+                'choices' => [
+                    'No' => 'No',
+                    
+                    'Si' => 'Si',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('otra_fuer_pert')
        
             ->add('estado_intox')

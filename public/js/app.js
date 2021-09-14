@@ -91,8 +91,41 @@ function addRemoveButton ($card) {
     $('#hecho_rep_geo_ocu > option[value="1"]').attr('selected', 'selected');
     });
 
-    $(document).ready(function(){
+ $(document).ready(function(){
     $('#hecho_oca_delito > option[value="6"]').attr('selected', 'selected');
         });
       
+       
+   $(document).ready(function(){
+        $('#hecho_provincia > option[value="4"]').attr('selected', 'selected');
+           });
+        
+ $(document).ready(function(){
+    $('#hecho_provincia > option[value="4"]').attr('selected', 'selected');
+        });   
+        
+   $(document).ready(function(){
+       $('#hecho_zona_ocu > option[value="1"]').attr('selected', 'selected');
+         });   
+   
+         $(document).ready(function(){
+            $('#hecho_origen_reg > option[value="1"]').attr('selected', 'selected');
+              }); 
+              
+              $(document).ready(function(){
+                $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected');
+                  });
+
+      $(document).ready(function(){
+         $('#hecho_detalleHechos_0_tipo_e_intox > option[value="7"]').attr('selected', 'selected');
+           });
+
+      $(document).ready(function(){
+         $('#hecho_detalleHechos_0_sit_procesal > option[value="7"]').attr('selected', 'selected');
+            });
+
+      $(document).ready(function(){
+         $('#hecho_detalleHechos_0_comp_hecho > option[value="8"]').attr('selected', 'selected');
+            });
+              
 

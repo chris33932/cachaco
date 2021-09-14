@@ -10,37 +10,38 @@
             {{ form_row(form.apellido) }}
             {{ form_row(form.tipo_documento ) }}
             {{ form_row(form.documento_nro ) }}
-            {{ form_row(form.estado_civil ) }}
-            {{ form_row(form.edad ) }}
-           
-            {{ form_row(form.edad_legal ) }}
-            {{ form_row(form.rango_etario) }}
             {{ form_row(form.sexo ) }}
             {{ form_row(form.genero ) }}
             {{ form_row(form.genero_otro) }}
-            {{ form_row(form.discapacidad) }}
-                          
-            {{ form_row(form.nacionalidad ) }}
-            {{ form_row(form.nacionalidad_otro) }}
+            {{ form_row(form.edad ) }}
+            {{ form_row(form.edad_legal ) }}
+            {{ form_row(form.rango_etario) }}
+            
+            {{ form_row(form.provincia ) }} 
+            {{ form_row(form.departamento ) }} 
+            {{ form_row(form.localidad ) }} 
+
             {{ form_row(form.barrio) }}
             {{ form_row(form.calle) }}
             {{ form_row(form.altura) }}
             {{ form_row(form.interseccion) }}
             {{ form_row(form.calle_interseccion) }}
+            {{ form_row(form.rep_geo ) }}
             {{ form_row(form.latitud) }}
             {{ form_row(form.longitud) }}
-            {{ form_row(form.rep_geo ) }}
-
             {{ form_row(form.fraccion) }}
             {{ form_row(form.radio) }}
- 
-            
+            {{ form_row(form.nacionalidad ) }}
+            {{ form_row(form.nacionalidad_otro) }}
 
+            {{ form_row(form.estado_civil ) }}
+                   
+            
      </div>
 	 <div class="col-md-4"><h3 class="text-success">Situación socio económica</h3>
             {{ form_row(form.sit_lab ) }}
             {{ form_row(form.otra_sit_lab) }}
-
+            {{ form_row(form.cond_act ) }}
             {{ form_row(form.niv_inst ) }}
                
             {{ form_row(form.niv_inst_formal ) }}
@@ -51,21 +52,16 @@
    
             {{ form_row(form.especif_ant) }}
                    
-            {{ form_row(form.cond_act ) }}
-        
-            {{ form_row(form.provincia) }}
-
-            {{ form_row(form.departamento) }}
-
-            {{ form_row(form.localidad) }}
-
+            
+        {#
+            {{ form_row(form.discapacidad) }}    
             {{ form_row(form.pert_pueblo_orig) }}
             {{ form_row(form.etnia) }}
             {{ form_row(form.etnia_otro) }}
 
             {{ form_row(form.hab_nat_esp) }}
        
-    
+    #}
 		</div>
 		<div class="col-md-4"> <div class="col"><h3 class="text-info">Otros</h3>    
                

@@ -84,7 +84,7 @@ class HechoType extends AbstractType
              
             ])
             ->add('gran_rcia', ChoiceType::class, [ "label" =>
-            "Gran Rcia",
+            "Gran Resistencia",
                 'choices' => [
                     'Si' => 'Si',
                     'No' => 'No',
@@ -105,6 +105,8 @@ class HechoType extends AbstractType
                     'Miercoles' => 'Miercoles',
                     'Jueves' => 'Jueves',
                     'Viernes' => 'Viernes',
+                    'Sabado' => 'Sabado',
+                    'Domingo' => 'Domingo',
                    
                 ],
              
@@ -114,12 +116,26 @@ class HechoType extends AbstractType
           
          
             ->add('localidad')
-            ->add('cod_loc_indec')
-            ->add('gran_rcia')
+            ->add('cod_loc_indec', TextType::class, [ "label" =>
+            "Codigo de localidad del INDEC",])
 
-            ->add('hora_ocu')
+            ->add('hora_ocu', TextType::class, [ "label" =>
+            "Hora de ocurrencia",])
             
-            ->add('franja_h_seis')
+            ->add('franja_h_seis', ChoiceType::class, [ "label" =>
+            "Franja horaria (cada 6 horas)",
+                'choices' => [
+                    ' ' => ' ',
+                    '00:00 - 05:59' => '00:00 - 05:59',
+                    '06:00 - 11:59' => '06:00 - 11:59',
+                    '12:00 - 17:59' => '12:00 - 17:59',
+                    '18:00 - 23:59' => '18:00 - 23:59',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('franja_h_tres')
             ->add('barrio_ocu', TextType::class, [ "label" =>
             "Barrio Ocurrencia",])

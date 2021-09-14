@@ -40,7 +40,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=11, unique=true, nullable=true)
      */
-    private $documento_nro;
+    private $documento_nro=-1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sexo::class, inversedBy="presAutors")
@@ -61,7 +61,7 @@ class PresAutor
      * 
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $edad;
+    private $edad=-1;
 
     /**
      * @ORM\ManyToOne(targetEntity=EdadLegal::class, inversedBy="presAutors")
@@ -76,17 +76,17 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $barrio;
+    private $barrio="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $calle;
+    private $calle="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $altura;
+    private $altura="Sin datos";    
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -96,7 +96,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $calle_interseccion;
+    private $calle_interseccion="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=RepGeografica::class, inversedBy="presAutors")
@@ -106,22 +106,22 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $latitud;
+    private $latitud="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $longitud;
+    private $longitud="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $fraccion;
+    private $fraccion="Sin datos";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $radio;
+    private $radio="Sin datos";
 
   
     /**
@@ -137,7 +137,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $nacionalidad_otro;
+    private $nacionalidad_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=EstadoCivil::class, inversedBy="presAutors")
@@ -153,7 +153,7 @@ class PresAutor
      * @ORM\Column(type="string", length=100, nullable=true)
      * 
      */
-    private $especif_ant;
+    private $especif_ant="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=SituacionLaboral::class, inversedBy="presAutors")
@@ -163,7 +163,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $otra_sit_lab;
+    private $otra_sit_lab="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=CondicionActividad::class, inversedBy="presAutors")
@@ -193,7 +193,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $otra_fuer_seg_pert;
+    private $otra_fuer_seg_pert="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=EstadoPolicial::class, inversedBy="presAutors")
@@ -224,7 +224,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $etnia_otro;
+    private $etnia_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
