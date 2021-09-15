@@ -9,3 +9,18 @@
 
     <a href="{{ path('detalle_hecho_index') }}">back to list</a>
 {% endblock %}
+
+{% block javascripts %} {{ parent() }}
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function(){
+    $('#hecho_detalleHechos_0_tipo_e_intox > option[value="5"]').attr('selected', 'selected');
+    });
+
+  
+  
+</script>
+
+
+{% endblock %}

@@ -106,7 +106,7 @@ class HechoType extends AbstractType
             ])
             
 
-            ->add('hora_ocu', TextType::class, [ "label" =>
+            ->add('hora_ocu', TimeType::class, [ "label" =>
             "Hora de ocurrencia",])
 
             ->add('dia_ocu', ChoiceType::class, [ "label" =>
@@ -201,9 +201,14 @@ class HechoType extends AbstractType
                    
                 ],
              
-            ])
-                        
+            ])         
+           
+            
 
+
+            //--------------------------------
+            //grupo hallazgo
+            //------------------------------
             ->add('fecha_hgo', DateType::class, [
                 // renders it as a single text box
                 'widget' => 'single_text',
@@ -216,6 +221,7 @@ class HechoType extends AbstractType
             ->add('altura_hgo')
             ->add('intersec_hgo')
             ->add('calle_int_hgo')
+            ->add('rep_geo_hgo')
             ->add('latitud_hgo')
             ->add('longitud_hgo')
 
@@ -236,35 +242,29 @@ class HechoType extends AbstractType
             ->add('dom_part_hgo_otro')
             ->add('fraccion_hgo')
             ->add('radio_hgo')
-            
-            ->add('orig_reg_otro')
-            ->add('recep_den_otro')
-            ->add('cant_victimas')
-            ->add('cant_vic_col', TextType::class, ['data_class' => null, 'required' => false, "label" =>
-            "Número de víctimas colaterales"])
-           
-            
-            ->add('localidad')
-            
-           
-            ->add('rep_geo_hgo')
-
-
-            //--------------------------------
-            //grupo hallazgo
-            //------------------------------
             ->add('zona_hgo')
             ->add('tipo_esp_hgo')
             ->add('tipo_lug_hgo')
             ->add('lugar_hgo')
             ->add('dom_part_hgo')
+
             ->add('oca_delito', EntityType::class, [ 'class' => OcasionDelito::class ,"label" => "En ocasión de otro delito",]
                   )
             ->add('oca_delito_otro', TextType::class, [ "label" =>
             "En ocasión delito otro",])
             ->add('origen_reg')
+            ->add('orig_reg_otro')
             ->add('recep_den')
+            ->add('recep_den_otro')
             ->add('tipologia')
+            
+           
+            ->add('cant_victimas')
+            ->add('cant_vic_col', TextType::class, ['data_class' => null, 'required' => false, "label" =>
+            "Número de víctimas colaterales"])
+           
+            
+            
             ->add('cant_pres_autor')
             ->add('link')
             ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>

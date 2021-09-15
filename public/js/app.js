@@ -116,16 +116,8 @@ function addRemoveButton ($card) {
                 $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected');
                   });
 
-      $(document).ready(function(){
-         $('#hecho_detalleHechos_0_tipo_e_intox > option[value="7"]').attr('selected', 'selected');
-           });
-
-      $(document).ready(function(){
-         $('#hecho_detalleHechos_0_sit_procesal > option[value="7"]').attr('selected', 'selected');
-            });
-
-      $(document).ready(function(){
-         $('#hecho_detalleHechos_0_comp_hecho > option[value="8"]').attr('selected', 'selected');
-            });
+      
               
+
+        
 

@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\CompHecho;
 use App\Entity\DetalleHecho;
-
+use App\Entity\EstadoIntox;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -98,9 +100,18 @@ class DetalleHechoType extends AbstractType
 
             ->add('vinc_no_fam_otro_vic', TextType::class, [ "label" =>
             "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
-            
-            ->add('conviviente', TextType::class, [ "label" =>
-            "Convivencia entre la víctima y el presunto autor al momento del hecho",])
+           
+            ->add('conviviente', ChoiceType::class, [ "label" =>
+            " Convivencia entre la víctima y el presunto autor al momento del hecho",
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Si' => 'Si',
+                    'No' => 'No',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
 
             ->add('est_intox', ChoiceType::class, [ "label" =>
             "Estado de intoxicación del presunto autor",
@@ -113,14 +124,18 @@ class DetalleHechoType extends AbstractType
                 ],
              
             ])
-            ->add('tipo_e_intox', TextType::class, [ "label" =>
-            "Tipo de estado de intoxicación del presunto autor al momento del hecho",])
+            
+            ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
+
             ->add('est_intox_otro', TextType::class, [ "label" =>
             "Otro estado de intoxicación del presunto autor al momento del hecho",])
-            ->add('sit_procesal', TextType::class, [ "label" =>
-            "Situación procesal del presunto autor al momento del hecho",])
-            ->add('comp_hecho', TextType::class, [ "label" =>
-            "Comportamiento del presunto autor al momento del hecho",])
+            
+            
+            ->add('sit_procesal', EntityType::class, [ 'class' => EstadoIntox::class ,"label" => "Situación procesal del presunto autor al momento del hecho",]
+                  )
+           
+            ->add('comp_hecho', EntityType::class, [ 'class' => CompHecho::class ,"label" => "Comportamiento del presunto autor al momento del hecho",]
+                  )
             ->add('comp_hecho_otro', TextType::class, [ "label" =>
             "Otro comportamiento del presunto autor al momento del hecho",])
           
