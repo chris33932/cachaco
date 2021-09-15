@@ -224,17 +224,17 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $barrio_hgo="Sin datos";
+    private $barrio_hgo="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calle_hgo="Sin datos";
+    private $calle_hgo="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $altura_hgo="Sin datos";
+    private $altura_hgo="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
@@ -254,12 +254,12 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $latitud_hgo="Sin datos";
+    private $latitud_hgo="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $longitud_hgo="Sin datos";
+    private $longitud_hgo="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=Zona::class)
@@ -304,12 +304,12 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $fraccion_hgo="Sin datos";
+    private $fraccion_hgo="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $radio_hgo="Sin datos";
+    private $radio_hgo="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=OcasionDelito::class)

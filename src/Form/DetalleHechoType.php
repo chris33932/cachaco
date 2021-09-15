@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\CompHecho;
 use App\Entity\DetalleHecho;
 use App\Entity\EstadoIntox;
+use App\Entity\SitProcesal;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -120,6 +120,8 @@ class HechoType extends AbstractType
                     'Viernes' => 'Viernes',
                     'Sabado' => 'Sabado',
                     'Domingo' => 'Domingo',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
                    
                 ],
              
@@ -226,7 +228,23 @@ class HechoType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')
-            ->add('dia_hgo')
+            ->add('dia_hgo', ChoiceType::class, [ "label" =>
+            "Día de Ocurrencia",
+                'choices' => [
+                    'No corresponde' => 'No corresponde',
+                    'Lunes' => 'Lunes',
+                    'Martes' => 'Martes',
+                    'Miercoles' => 'Miercoles',
+                    'Jueves' => 'Jueves',
+                    'Viernes' => 'Viernes',
+                    'Sabado' => 'Sabado',
+                    'Domingo' => 'Domingo',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             
             ->add('barrio_hgo')
             ->add('calle_hgo')
