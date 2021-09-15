@@ -257,7 +257,18 @@ class VictimaType extends AbstractType
              
             ])
             ->add('est_intox_otro')
-            ->add('desap_ant_hecho')
+            ->add('desap_ant_hecho', ChoiceType::class, [ "label" =>
+            "Desaparición de la víctima antes del hallazgo del cuerpo",
+                'choices' => [
+                    
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
             ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>
             "  "))
             ->add('tipoDocumento')

@@ -76,7 +76,18 @@ class PresAutorType extends AbstractType
              
             ])
             ->add('otra_fuer_seg_pert')
-            ->add('ejer_func')
+            ->add('ejer_func', ChoiceType::class, [ "label" =>
+            "Ejercicio de funciones",
+                'choices' => [
+                    'No corresponde' => 'No corresponde',
+                    'En servicio' => 'En servicio',
+                    'De franco' => 'De franco',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+                   
+                ],
+             
+            ])
  
             ->add('uso_arma_fuego', ChoiceType::class, [
                 'choices' => [                                

@@ -131,7 +131,7 @@ class DetalleHechoType extends AbstractType
             "Otro estado de intoxicación del presunto autor al momento del hecho",])
             
             
-            ->add('sit_procesal', EntityType::class, [ 'class' => EstadoIntox::class ,"label" => "Situación procesal del presunto autor al momento del hecho",]
+            ->add('sit_procesal', EntityType::class, [ 'class' => SitProcesal::class ,"label" => "Situación procesal del presunto autor al momento del hecho",]
                   )
            
             ->add('comp_hecho', EntityType::class, [ 'class' => CompHecho::class ,"label" => "Comportamiento del presunto autor al momento del hecho",]
