@@ -203,12 +203,12 @@ class DetalleHecho
         return $this;
     }
 
-    public function getVincNoFamOtroVic(): ?string
+    public function getVincNoFamVic(): ?string
     {
         return $this->vinc_no_fam_vic;
     }
 
-    public function setVincNoFamOtroVic(?string $vinc_no_fam_vic): self
+    public function setVincNoFamVic(?string $vinc_no_fam_vic): self
     {
         $this->vinc_no_fam_vic = $vinc_no_fam_vic;
 

@@ -19,8 +19,7 @@ class DetalleHechoType extends AbstractType
         $builder
             
             ->add('victima')
-            ->add('pres_autor', TextType::class, [ "label" =>
-            "Presunto autor",])
+            ->add('pres_autor')
             ->add('den_previa', ChoiceType::class, [ "label" =>
             "Denuncia previa de la víctima contra el presunto autor",
                 'choices' => [
