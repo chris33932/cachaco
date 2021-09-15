@@ -219,15 +219,7 @@ class Hecho
      */
     private $dia_hgo;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $f_hora_hgo_seis;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $f_hora_hgo_tres;
+   
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -874,29 +866,7 @@ class Hecho
         return $this;
     }
 
-    public function getFHoraHgoSeis(): ?string
-    {
-        return $this->f_hora_hgo_seis;
-    }
-
-    public function setFHoraHgoSeis(?string $f_hora_hgo_seis): self
-    {
-        $this->f_hora_hgo_seis = $f_hora_hgo_seis;
-
-        return $this;
-    }
-
-    public function getFHoraHgoTres(): ?string
-    {
-        return $this->f_hora_hgo_tres;
-    }
-
-    public function setFHoraHgoTres(?string $f_hora_hgo_tres): self
-    {
-        $this->f_hora_hgo_tres = $f_hora_hgo_tres;
-
-        return $this;
-    }
+   
 
     public function getBarrioHgo(): ?string
     {

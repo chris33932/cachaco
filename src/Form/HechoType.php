@@ -31,15 +31,10 @@ class HechoType extends AbstractType
 
             ->add('nro_sumario')
             ->add('nro_exp_jud')
-
+            ->add('juzgado')
             ->add('fiscalia')
 
-            ->add('juzgado')
             
-                
-            ->add('fecha', DateType::class, [ // renders it as a single text box
-                'widget' => 'single_text', 'required' => false
-            ])
             ->add('anio')
             ->add('mes', ChoiceType::class, [ "label" =>
             "Mes",
@@ -61,7 +56,10 @@ class HechoType extends AbstractType
                    
                 ],
              
-            ])
+            ])    
+            
+            ->add('comisaria')
+            
             ->add('cod_loc_indec', ChoiceType::class, [ "label" =>
             "Código Localidad INDEC",
                 'choices' => [
@@ -83,6 +81,14 @@ class HechoType extends AbstractType
                 ],
              
             ])
+            
+
+            ->add('provincia')
+            ->add('departamento')
+            ->add('localidad')
+            ->add('cod_loc_indec', TextType::class, [ "label" =>
+            "Codigo de localidad del INDEC",])
+
             ->add('gran_rcia', ChoiceType::class, [ "label" =>
             "Gran Resistencia",
                 'choices' => [
@@ -95,7 +101,14 @@ class HechoType extends AbstractType
                 ],
              
             ])
-           
+            ->add('fecha', DateType::class, [ // renders it as a single text box
+                'widget' => 'single_text', 'required' => false
+            ])
+            
+
+            ->add('hora_ocu', TextType::class, [ "label" =>
+            "Hora de ocurrencia",])
+
             ->add('dia_ocu', ChoiceType::class, [ "label" =>
             "Día de Ocurrencia",
                 'choices' => [
@@ -112,15 +125,6 @@ class HechoType extends AbstractType
              
             ])
             
-           
-          
-         
-            ->add('localidad')
-            ->add('cod_loc_indec', TextType::class, [ "label" =>
-            "Codigo de localidad del INDEC",])
-
-            ->add('hora_ocu', TextType::class, [ "label" =>
-            "Hora de ocurrencia",])
             
             ->add('franja_h_seis', ChoiceType::class, [ "label" =>
             "Franja horaria (cada 6 horas)",
@@ -173,10 +177,16 @@ class HechoType extends AbstractType
             ])
             ->add('calle_int_ocu', TextType::class, [ "label" =>
             "Calle intersección Ocurrencia",])
+            ->add('rep_geo_ocu')
             ->add('latitud_ocu')
             ->add('longitud_ocu')
+            ->add('zona_ocu')
+            ->add('tipo_esp_ocu')
+            ->add('tipo_lug_ocu')
             ->add('acceso_ocu')
+            ->add('lugar_ocu')
             ->add('lugar_ocu_otro')
+            ->add('dom_part_ocu')
             ->add('dom_part_otro')
             ->add('fraccion_ocu')
             ->add('radio_ocu')
@@ -192,44 +202,15 @@ class HechoType extends AbstractType
                 ],
              
             ])
+                        
+
             ->add('fecha_hgo', DateType::class, [
                 // renders it as a single text box
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')
             ->add('dia_hgo')
-            ->add('f_hora_hgo_seis', ChoiceType::class, [ "label" =>
-            "Franja horaria (cada 6 horas)",
-                'choices' => [
-                    ' ' => ' ',
-                    '00:00 - 05:59' => '00:00 - 05:59',
-                    '06:00 - 11:59' => '06:00 - 11:59',
-                    '12:00 - 17:59' => '12:00 - 17:59',
-                    '18:00 - 23:59' => '18:00 - 23:59',
-                    'Sin determinar' => 'Sin determinar',
-                    'Sin datos' => 'Sin datos',
-                   
-                ],
-             
-            ])
-            ->add('f_hora_hgo_tres', ChoiceType::class, [ "label" =>
-            "Franja horaria (cada 3 horas)",
-                'choices' => [
-                    ' ' => ' ',
-                    '00:00 - 02:59' => '00:00 - 02:59',
-                    '03:00 - 05:59' => '03:00 - 05:59',
-                    '06:00 - 08:59' => '06:00 - 08:59',
-                    '09:00 - 11:59' => '09:00 - 11:59',
-                    '12:00 - 14:59' => '12:00 - 14:59',
-                    '15:00 - 17:59' => '15:00 - 17:59',
-                    '18:00 - 20:59' => '18:00 - 20:59',
-                    '21:00 - 23:59' => '21:00 - 23:59',
-                    'Sin determinar' => 'Sin determinar',
-                    'Sin datos' => 'Sin datos',
-                   
-                ],
-             
-            ])
+            
             ->add('barrio_hgo')
             ->add('calle_hgo')
             ->add('altura_hgo')
@@ -237,6 +218,8 @@ class HechoType extends AbstractType
             ->add('calle_int_hgo')
             ->add('latitud_hgo')
             ->add('longitud_hgo')
+
+
             ->add('lug_hgo_otro')
             ->add('acceso_hgo', ChoiceType::class, [ "label" =>
             "Acceso",
@@ -260,16 +243,10 @@ class HechoType extends AbstractType
             ->add('cant_vic_col', TextType::class, ['data_class' => null, 'required' => false, "label" =>
             "Número de víctimas colaterales"])
            
-            ->add('comisaria')
-            ->add('provincia')
-            ->add('departamento')
+            
             ->add('localidad')
-            ->add('rep_geo_ocu')
-            ->add('zona_ocu')
-            ->add('tipo_esp_ocu')
-            ->add('tipo_lug_ocu')
-            ->add('lugar_ocu')
-            ->add('dom_part_ocu')
+            
+           
             ->add('rep_geo_hgo')
 
 
