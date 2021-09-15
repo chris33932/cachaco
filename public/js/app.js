@@ -112,14 +112,14 @@ $(document).ready(function(){
             $('#hecho_origen_reg > option[value="1"]').attr('selected', 'selected');
               }); 
               
-              $(document).ready(function(){
-                $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected');
-                  });
+    $(document).ready(function(){
+    $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected');
+    });
 
 
-                  $(document).ready(function(){
-                    $('#hecho_rep_geo_hgo > option[value="4"]').attr('selected', 'selected');
-                      });
+    $(document).ready(function(){
+    $('#hecho_rep_geo_hgo > option[value="4"]').attr('selected', 'selected');
+    });
 
 
 

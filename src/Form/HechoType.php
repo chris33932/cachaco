@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Hecho;
 use App\Entity\OcasionDelito;
 use App\Form\DetalleHechoType;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -120,8 +121,6 @@ class HechoType extends AbstractType
                     'Viernes' => 'Viernes',
                     'Sabado' => 'Sabado',
                     'Domingo' => 'Domingo',
-                    'Sin determinar' => 'Sin determinar',
-                    'Sin datos' => 'Sin datos',
                    
                 ],
              
@@ -185,19 +184,7 @@ class HechoType extends AbstractType
             ->add('zona_ocu')
             ->add('tipo_esp_ocu')
             ->add('tipo_lug_ocu')
-            ->add('acceso_ocu', ChoiceType::class, [ "label" =>
-            "Acceso",
-                'choices' => [
-                    
-                    'Libre' => 'Si',
-                    'No' => 'No',
-                    'Sin datos' => 'Sin datos',
-                    'Sin determinar' => 'Sin determinar',
-                    
-                   
-                ],
-             
-            ])
+            ->add('acceso_ocu')
             ->add('lugar_ocu')
             ->add('lugar_ocu_otro')
             ->add('dom_part_ocu')
@@ -223,28 +210,11 @@ class HechoType extends AbstractType
             //--------------------------------
             //grupo hallazgo
             //------------------------------
-            ->add('fecha_hgo', DateType::class, [
-                // renders it as a single text box
+            ->add('fecha_hgo', DateType::class, [ 'required' => false,        // renders it as a single text box
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')
-            ->add('dia_hgo', ChoiceType::class, [ "label" =>
-            "Día de Ocurrencia",
-                'choices' => [
-                    'No corresponde' => 'No corresponde',
-                    'Lunes' => 'Lunes',
-                    'Martes' => 'Martes',
-                    'Miercoles' => 'Miercoles',
-                    'Jueves' => 'Jueves',
-                    'Viernes' => 'Viernes',
-                    'Sabado' => 'Sabado',
-                    'Domingo' => 'Domingo',
-                    'Sin determinar' => 'Sin determinar',
-                    'Sin datos' => 'Sin datos',
-                   
-                ],
-             
-            ])
+            ->add('dia_hgo')
             
             ->add('barrio_hgo')
             ->add('calle_hgo')
@@ -260,7 +230,7 @@ class HechoType extends AbstractType
             ->add('acceso_hgo', ChoiceType::class, [ "label" =>
             "Acceso",
                 'choices' => [
-                    'No corresponde' => 'No corresponde',
+                    ' ' => ' ',
                     'Libre' => 'Libre',
                     'Restringido' => 'Restringido',
                     'Sin determinar' => 'Sin determinar',

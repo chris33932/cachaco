@@ -98,8 +98,8 @@ class DetalleHechoType extends AbstractType
              
             ])
 
-            ->add('vinc_no_fam_otro_vic', TextType::class, [ "label" =>
-            "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
+         //   ->add('vinc_no_fam_otro_vic', TextType::class, [ "label" =>
+         // "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
            
             ->add('conviviente', ChoiceType::class, [ "label" =>
             " Convivencia entre la víctima y el presunto autor al momento del hecho",
