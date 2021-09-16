@@ -102,8 +102,8 @@ class HechoType extends AbstractType
                 ],
              
             ])
-            ->add('fecha', DateType::class, [ // renders it as a single text box
-                'widget' => 'single_text', 'required' => false
+            ->add('fecha', DateType::class, [ 'required' => false, // renders it as a single text box
+                'widget' => 'single_text',
             ])
             
 
@@ -210,7 +210,12 @@ class HechoType extends AbstractType
             //--------------------------------
             //grupo hallazgo
             //------------------------------
+<<<<<<< HEAD
             ->add('fecha_hgo', DateType::class, [ 'required' => false,        // renders it as a single text box
+=======
+            ->add('fecha_hgo', DateType::class, [ 'required' => false,
+                // renders it as a single text box
+>>>>>>> f38fb1b6766d401b400ce48d6cd3804dc70b363e
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')

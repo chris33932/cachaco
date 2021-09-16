@@ -64,7 +64,7 @@ class HechoController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('hecho_show', array('id' => $hecho->getId()));
+            return $this->redirectToRoute('hecho_index');
 
             //return $this->redirectToRoute('hecho_show', [], Response::HTTP_SEE_OTHER);
         }
@@ -87,7 +87,7 @@ class HechoController extends AbstractController
                
         $entityManager = $this->getDoctrine()->getManager();
          /**
-         * @var $user User
+         * @var $detalleHecho DetalleHecho
          */
         $hecho = $entityManager->getRepository(Hecho::class)->findOneBy(['id' => $id]);
        

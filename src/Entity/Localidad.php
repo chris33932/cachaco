@@ -22,6 +22,11 @@ class Localidad
      */
     private $nombre;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Departamento::class)
+     */
+    private $departamento;
+
     public function __toString()
     {
         return $this->getNombre();
@@ -40,6 +45,18 @@ class Localidad
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getDepartamento(): ?Departamento
+    {
+        return $this->departamento;
+    }
+
+    public function setDepartamento(?Departamento $departamento): self
+    {
+        $this->departamento = $departamento;
 
         return $this;
     }

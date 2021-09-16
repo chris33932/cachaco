@@ -6,6 +6,7 @@ use App\Entity\CompHecho;
 use App\Entity\DetalleHecho;
 use App\Entity\EstadoIntox;
 use App\Entity\SitProcesal;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +22,7 @@ class DetalleHechoType extends AbstractType
             
             ->add('victima')
             ->add('pres_autor')
+            
             ->add('den_previa', ChoiceType::class, [ "label" =>
             "Denuncia previa de la víctima contra el presunto autor",
                 'choices' => [
@@ -32,26 +34,26 @@ class DetalleHechoType extends AbstractType
                 ],
              
             ])
-            ->add('den_prev_desc', TextType::class, [ "label" =>
-            "Descripción de la(s) denuncia(s) previa(s)",])
-            //->add('hecho')
+            ->add('den_prev_desc', TextType::class, [ 'required'=>False, "label" =>
+            "Descripción denuncias previas"])
             
-            
-            ->add('vinculo', ChoiceType::class, [ "label" =>
-            "Vínculo entre la víctima y el presunto autor",
+            ->add('vinculo', ChoiceType::class, [
                 'choices' => [
                     'Sin datos' => 'Sin datos',
                     'Si' => 'Si',
                     'No' => 'No',                  
                     'Sin determinar' => 'Sin determinar',
                     'Sin datos' => 'Sin datos',
+                    "label" =>
+                    "Vínculo entre la víctima y el presunto autor",
                    
                 ],
              
             ])
-            ->add('vinculo_fam_vic', ChoiceType::class, ["label" =>
+            ->add('vinculo_familiar', ChoiceType::class, ["label" =>
             "Vínculo familiar entre la víctima y el presunto autor",
-                'choices' => [                                
+                'choices' => [     
+                    'Sin datos' => 'Sin datos',                           
                     'Cónyuge' => 'Cónyuge',
                     'Pareja' => 'Pareja',
                     'Ex cónyuge' => 'Ex cónyuge',
@@ -67,7 +69,7 @@ class DetalleHechoType extends AbstractType
                     'Sin vínculo familiar' => 'Sin vínculo familiar',
                     
                     'Sin determinar' => 'Sin determinar',
-                    'Sin datos' => 'Sin datos',
+                   
                    
                 ],
              
@@ -76,12 +78,12 @@ class DetalleHechoType extends AbstractType
                       
             
            
-            ->add('vinculo_fam_otro', TextType::class, [ "label" =>
+            ->add('vinculo_familiar_otro', TextType::class, [ 'data_class' => null, 'required'=>false,"label" =>
             "Otro vínculo familiar entre la víctima y el presunto autor",])
 
-            ->add('vinc_no_fam_vic', ChoiceType::class, ["label" =>
-            "Vínculo extrafamiliar entre la víctima y el presunto autor",
-                'choices' => [                                
+            ->add('vinculo_no_familiar', ChoiceType::class, [
+                'choices' => [        
+                    'Sin datos' => 'Sin datos',                        
                     'Socio(a)' => 'Socio(a)',
                     'Empleado(a)' => 'Empleado(a)',
                     'Empleador(a)' => 'Empleador(a)',
@@ -92,14 +94,16 @@ class DetalleHechoType extends AbstractType
                     'Sin vínculo extrafamiliar' => 'Sin vínculo extrafamiliar',
                     
                     'Sin determinar' => 'Sin determinar',
-                    'Sin datos' => 'Sin datos',
+                    
+                  
                    
-                ],
+                ],  "label" =>
+                "Vínculo extrafamiliar entre la víctima y el presunto autor",
              
             ])
 
-         //   ->add('vinc_no_fam_otro_vic', TextType::class, [ "label" =>
-         // "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
+            ->add('vinculo_no_familiar_otro', TextType::class, [ 'required' => false,"label" =>
+            "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
            
             ->add('conviviente', ChoiceType::class, [ "label" =>
             " Convivencia entre la víctima y el presunto autor al momento del hecho",
@@ -127,8 +131,8 @@ class DetalleHechoType extends AbstractType
             
             ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
 
-            ->add('est_intox_otro', TextType::class, [ "label" =>
-            "Otro estado de intoxicación del presunto autor al momento del hecho",])
+            ->add('est_intox_otro', TextType::class, [ 'required'=>false, "label" =>
+            "Otro estado de intoxicación del presunto autor al momento del hecho"])
             
             
             ->add('sit_procesal', EntityType::class, [ 'class' => SitProcesal::class ,"label" => "Situación procesal del presunto autor al momento del hecho",]
@@ -136,8 +140,8 @@ class DetalleHechoType extends AbstractType
            
             ->add('comp_hecho', EntityType::class, [ 'class' => CompHecho::class ,"label" => "Comportamiento del presunto autor al momento del hecho",]
                   )
-            ->add('comp_hecho_otro', TextType::class, [ "label" =>
-            "Otro comportamiento del presunto autor al momento del hecho",])
+            ->add('comp_hecho_otro', TextType::class, ['required'=>false, "label" =>
+            "Otro comportamiento del presunto autor al momento del hecho"])
           
         
 

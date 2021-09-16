@@ -20,7 +20,7 @@
 
 {% block body %}{{ parent() }}
 
-<h3>Crear nuevo hecho</h3>
+<h3 class="display-5"><p class="text-center">Crear nuevo hecho</p></h3>
  {{ include('hecho/_form.html.twig') }}
 
 <a href="{{ path('hecho_index') }}" >Volver</a>

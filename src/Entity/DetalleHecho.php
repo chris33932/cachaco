@@ -38,9 +38,9 @@ class DetalleHecho
     private $den_previa;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $den_prev_desc;
+    private $den_prev_desc="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -50,22 +50,22 @@ class DetalleHecho
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $vinculo_fam_vic;
+    private $vinculo_familiar;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $vinculo_fam_otro="No corresponde";
+    private $vinculo_familiar_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $vinc_no_fam_vic;
+    private $vinculo_no_familiar;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $v_no_fam_otro_v_otro="No corresponde";
+    private $vinculo_no_familiar_otro="No corresponde";
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -85,7 +85,7 @@ class DetalleHecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $est_intox_otro;
+    private $est_intox_otro="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=SitProcesal::class)
@@ -100,7 +100,7 @@ class DetalleHecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $comp_hecho_otro;
+    private $comp_hecho_otro="No corresponde";
 
     public function getId(): ?int
     {
@@ -179,50 +179,50 @@ class DetalleHecho
         return $this;
     }
 
-    public function getVinculoFamVic(): ?string
+    public function getVinculoFamiliar(): ?string
     {
-        return $this->vinculo_fam_vic;
+        return $this->vinculo_familiar;
     }
 
-    public function setVinculoFamVic(?string $vinculo_fam_vic): self
+    public function setVinculoFamiliar(?string $vinculo_familiar): self
     {
-        $this->vinculo_fam_vic = $vinculo_fam_vic;
+        $this->vinculo_familiar = $vinculo_familiar;
 
         return $this;
     }
 
-    public function getVinculoFamOtro(): ?string
+    public function getVinculoFamiliarOtro(): ?string
     {
-        return $this->vinculo_fam_otro;
+        return $this->vinculo_familiar_otro;
     }
 
-    public function setVinculoFamOtro(?string $vinculo_fam_otro): self
+    public function setVinculoFamiliarOtro(?string $vinculo_familiar_otro): self
     {
-        $this->vinculo_fam_otro = $vinculo_fam_otro;
+        $this->vinculo_familiar_otro = $vinculo_familiar_otro;
 
         return $this;
     }
 
-    public function getVincNoFamVic(): ?string
+    public function getVinculoNoFamiliar(): ?string
     {
-        return $this->vinc_no_fam_vic;
+        return $this->vinculo_no_familiar;
     }
 
-    public function setVincNoFamVic(?string $vinc_no_fam_vic): self
+    public function setVinculoNoFamiliar(?string $vinculo_no_familiar): self
     {
-        $this->vinc_no_fam_vic = $vinc_no_fam_vic;
+        $this->vinculo_no_familiar = $vinculo_no_familiar;
 
         return $this;
     }
 
-    public function getVNoFamOtroVOtro(): ?string
+    public function getVinculoNoFamiliarOtro(): ?string
     {
-        return $this->v_no_fam_otro_v_otro;
+        return $this->vinculo_no_familiar_otro;
     }
 
-    public function setVNoFamOtroVOtro(?string $v_no_fam_otro_v_otro): self
+    public function setVinculoNoFamiliarOtro(?string $vinculo_no_familiar_otro): self
     {
-        $this->v_no_fam_otro_v_otro = $v_no_fam_otro_v_otro;
+        $this->vinculo_no_familiar_otro = $vinculo_no_familiar_otro;
 
         return $this;
     }
@@ -311,223 +311,6 @@ class DetalleHecho
         return $this;
     }
 
-    /**
-     * Get the value of pres_autor
-     */ 
-    public function getPres_autor()
-    {
-        return $this->pres_autor;
-    }
-
-    /**
-     * Set the value of pres_autor
-     *
-     * @return  self
-     */ 
-    public function setPres_autor($pres_autor)
-    {
-        $this->pres_autor = $pres_autor;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of den_prev_desc
-     */ 
-    public function getDen_prev_desc()
-    {
-        return $this->den_prev_desc;
-    }
-
-    /**
-     * Set the value of den_prev_desc
-     *
-     * @return  self
-     */ 
-    public function setDen_prev_desc($den_prev_desc)
-    {
-        $this->den_prev_desc = $den_prev_desc;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of vinculo_fam_otro
-     */ 
-    public function getVinculo_fam_otro()
-    {
-        return $this->vinculo_fam_otro;
-    }
-
-    /**
-     * Set the value of vinculo_fam_otro
-     *
-     * @return  self
-     */ 
-    public function setVinculo_fam_otro($vinculo_fam_otro)
-    {
-        $this->vinculo_fam_otro = $vinculo_fam_otro;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of vinculo_fam_vic
-     */ 
-    public function getVinculo_fam_vic()
-    {
-        return $this->vinculo_fam_vic;
-    }
-
-    /**
-     * Set the value of vinculo_fam_vic
-     *
-     * @return  self
-     */ 
-    public function setVinculo_fam_vic($vinculo_fam_vic)
-    {
-        $this->vinculo_fam_vic = $vinculo_fam_vic;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of vinc_no_fam_vic
-     */ 
-    public function getVinc_no_fam_vic()
-    {
-        return $this->vinc_no_fam_vic;
-    }
-
-    /**
-     * Set the value of vinc_no_fam_vic
-     *
-     * @return  self
-     */ 
-    public function setVinc_no_fam_vic($vinc_no_fam_vic)
-    {
-        $this->vinc_no_fam_vic = $vinc_no_fam_vic;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of est_intox
-     */ 
-    public function getEst_intox()
-    {
-        return $this->est_intox;
-    }
-
-    /**
-     * Set the value of est_intox
-     *
-     * @return  self
-     */ 
-    public function setEst_intox($est_intox)
-    {
-        $this->est_intox = $est_intox;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of tipo_e_intox
-     */ 
-    public function getTipo_e_intox()
-    {
-        return $this->tipo_e_intox;
-    }
-
-    /**
-     * Set the value of tipo_e_intox
-     *
-     * @return  self
-     */ 
-    public function setTipo_e_intox($tipo_e_intox)
-    {
-        $this->tipo_e_intox = $tipo_e_intox;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of est_intox_otro
-     */ 
-    public function getEst_intox_otro()
-    {
-        return $this->est_intox_otro;
-    }
-
-    /**
-     * Set the value of est_intox_otro
-     *
-     * @return  self
-     */ 
-    public function setEst_intox_otro($est_intox_otro)
-    {
-        $this->est_intox_otro = $est_intox_otro;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of sit_procesal
-     */ 
-    public function getSit_procesal()
-    {
-        return $this->sit_procesal;
-    }
-
-    /**
-     * Set the value of sit_procesal
-     *
-     * @return  self
-     */ 
-    public function setSit_procesal($sit_procesal)
-    {
-        $this->sit_procesal = $sit_procesal;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of comp_hecho
-     */ 
-    public function getComp_hecho()
-    {
-        return $this->comp_hecho;
-    }
-
-    /**
-     * Set the value of comp_hecho
-     *
-     * @return  self
-     */ 
-    public function setComp_hecho($comp_hecho)
-    {
-        $this->comp_hecho = $comp_hecho;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of comp_hecho_otro
-     */ 
-    public function getComp_hecho_otro()
-    {
-        return $this->comp_hecho_otro;
-    }
-
-    /**
-     * Set the value of comp_hecho_otro
-     *
-     * @return  self
-     */ 
-    public function setComp_hecho_otro($comp_hecho_otro)
-    {
-        $this->comp_hecho_otro = $comp_hecho_otro;
-
-        return $this;
-    }
+   
+   
 }
