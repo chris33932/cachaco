@@ -184,7 +184,19 @@ class HechoType extends AbstractType
             ->add('zona_ocu')
             ->add('tipo_esp_ocu')
             ->add('tipo_lug_ocu')
-            ->add('acceso_ocu')
+            ->add('acceso_ocu', ChoiceType::class, [ "label" =>
+            "Acceso",
+                'choices' => [
+                    'No corresponde ' => 'No corresponde',
+                    'Libre' => 'Libre',
+                    'Restringido' => 'Restringido',
+                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos',
+
+                   
+                ],
+             
+            ])
             ->add('lugar_ocu')
             ->add('lugar_ocu_otro')
             ->add('dom_part_ocu')
@@ -210,12 +222,8 @@ class HechoType extends AbstractType
             //--------------------------------
             //grupo hallazgo
             //------------------------------
-<<<<<<< HEAD
-            ->add('fecha_hgo', DateType::class, [ 'required' => false,        // renders it as a single text box
-=======
             ->add('fecha_hgo', DateType::class, [ 'required' => false,
                 // renders it as a single text box
->>>>>>> f38fb1b6766d401b400ce48d6cd3804dc70b363e
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')
@@ -235,11 +243,12 @@ class HechoType extends AbstractType
             ->add('acceso_hgo', ChoiceType::class, [ "label" =>
             "Acceso",
                 'choices' => [
-                    ' ' => ' ',
+                    'No corresponde ' => 'No corresponde',
                     'Libre' => 'Libre',
                     'Restringido' => 'Restringido',
                     'Sin determinar' => 'Sin determinar',
                     'Sin datos' => 'Sin datos',
+
                    
                 ],
              

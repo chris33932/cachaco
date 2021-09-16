@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 use App\Repository\DetalleHechoRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,7 +42,7 @@ class DetalleHecho
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $den_prev_desc="No corresponde";
+    private $den_prev_desc;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -100,7 +102,7 @@ class DetalleHecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $comp_hecho_otro="No corresponde";
+    private $comp_hecho_otro;
 
     public function getId(): ?int
     {
@@ -130,6 +132,12 @@ class DetalleHecho
 
         return $this;
     }
+
+
+
+
+
+    
 
     public function getPresAutor(): ?PresAutor
     {
