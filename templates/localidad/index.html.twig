@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th>departamento</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ localidad.id }}</td>
                 <td>{{ localidad.nombre }}</td>
+                <td>{{ localidad.departamento }}</td>
                 <td>
                     <a href="{{ path('localidad_show', {'id': localidad.id}) }}">show</a>
                     <a href="{{ path('localidad_edit', {'id': localidad.id}) }}">edit</a>

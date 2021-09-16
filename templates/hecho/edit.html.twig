@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Hecho{% endblock %}
+{% block title %}Editar Hecho{% endblock %}
 
 {% block body %}
-    <h1>Edit Hecho</h1>
+    {{ parent() }}
 
     {{ include('hecho/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('hecho_index') }}">back to list</a>
+    <a href="{{ path('hecho_index') }}" class="btn btn-info btn-sm" alt="Volver">
+                        <span class="glyphicon glyphicon-step-backward"></span> Volver</a>
 
-    {{ include('hecho/_delete_form.html.twig') }}
+
+    {#{{ include('hecho/_delete_form.html.twig') }}#}
 {% endblock %}
+ {% block footer %}
+
+  <footer class="py-4 bg-dark">
+           <div class="container px-5"><p class="sm-5 text-center text-white">Centro de Analisis Chaco - {{ "now"|date("Y") }}</p></div>
+        </footer>
+ {% endblock %}

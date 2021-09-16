@@ -87,7 +87,7 @@ class HechoController extends AbstractController
                
         $entityManager = $this->getDoctrine()->getManager();
          /**
-         * @var $user User
+         * @var $detalleHecho DetalleHecho
          */
         $hecho = $entityManager->getRepository(Hecho::class)->findOneBy(['id' => $id]);
        

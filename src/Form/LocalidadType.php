@@ -13,6 +13,7 @@ class LocalidadType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('departamento')
         ;
     }
 

@@ -122,13 +122,15 @@
                         <td>{{ hecho.cantPresAutor }}</td>
                         <td>{{ hecho.link }}</td>
                         <td>{{ hecho.observacion }}</td>
-                        {#<th>{{ hecho.detalle_hecho.victima}}</th>#}
-                    {# <th>{{ hecho.detalle_hecho.autor}}</th>#}
-                        
-                        <th>{{ hecho.observacion}}</th>
+                    
+                      
                         <td>
-                            <a href="{{ path('hecho_show', {'id': hecho.id}) }}">show</a>
-                          {# <a href="{{ path('hecho_edit', {'id': hecho.id}) }}">edit</a>#} 
+                        
+                            <a href="{{ path('hecho_show', {'id': hecho.id}) }}" class="btn btn-info btn-sm" alt="Ver">
+                            <span class="glyphicon glyphicon-eye-open">Ver</a>
+                          
+                          <a href="{{ path('hecho_edit', {'id': hecho.id}) }}" class="btn btn-warning btn-sm" alt="Editar">
+                            <span class="glyphicon glyphicon-eye-open">Modificar</a>
                 </td>
             </tr>
         {% else %}
