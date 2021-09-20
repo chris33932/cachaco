@@ -38,7 +38,7 @@ class PresAutor
     private $tipo_documento;
 
     /**
-     * @ORM\Column(type="string", length=11, unique=true, nullable=true)
+     * @ORM\Column(type="string", length=11, nullable=true)
      */
     private $documento_nro;
 

@@ -227,7 +227,21 @@ class HechoType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('hora_hgo')
-            ->add('dia_hgo')
+            ->add('dia_hgo', ChoiceType::class, [ "label" =>
+            "Día de Hallazgo",
+                'choices' => [
+                    ' ' => ' ',
+                    'Lunes' => 'Lunes',
+                    'Martes' => 'Martes',
+                    'Miercoles' => 'Miercoles',
+                    'Jueves' => 'Jueves',
+                    'Viernes' => 'Viernes',
+                    'Sabado' => 'Sabado',
+                    'Domingo' => 'Domingo',
+                   
+                ],
+             
+            ])
             
             ->add('barrio_hgo')
             ->add('calle_hgo')
