@@ -51,7 +51,7 @@ class Comisaria
 
     public function __toString()
     {
-        return $this->getNombre();
+        return $this->getLocalidad().' - '.$this->getNombre();
     }
 
     public function getId(): ?int

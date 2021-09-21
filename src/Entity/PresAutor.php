@@ -40,7 +40,7 @@ class PresAutor
     /**
      * @ORM\Column(type="string", length=11, nullable=true)
      */
-    private $documento_nro;
+    private $documento_nro=-1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sexo::class, inversedBy="presAutors")
