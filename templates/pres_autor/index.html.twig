@@ -11,6 +11,8 @@
  
   <p class="text-muted">Lista de presuntos autores y datos relevantes:</p>   
    <br> 
+    <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+                   <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
  <div class="table-responsive">
     <table class="table table-striped">
         <thead class="thead-light">
@@ -93,8 +95,9 @@
             </tbody>
         </table>
      <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
-</div>                     <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
-</div>
+                   <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+    </div>
+</div>  
    
 
 {% endblock %}

@@ -17,7 +17,9 @@ class VictimaType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellido')
-            ->add('documentoNro')
+            ->add('documentoNro', null, [
+                'help' => 'Dejar vacio en caso de no contar con el dato',
+             ])
             ->add('genero_otro')
             ->add('edad')
             ->add('nacionalidad_otra')

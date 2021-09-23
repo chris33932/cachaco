@@ -21,7 +21,12 @@ class PresAutorController extends AbstractController
     public function index(PresAutorRepository $presAutorRepository): Response
     {
         return $this->render('pres_autor/index.html.twig', [
-            'pres_autors' => $presAutorRepository->findAll(),
+            'pres_autors' => $presAutorRepository->findBy(
+                array(),              //$where
+                array('id'=>'DESC'),  //$orderBy
+                //10,                 //$limit
+                //0,                  //$offset
+            ),
         ]);
     }
 

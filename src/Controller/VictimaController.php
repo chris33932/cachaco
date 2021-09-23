@@ -21,7 +21,12 @@ class VictimaController extends AbstractController
     public function index(VictimaRepository $victimaRepository): Response
     {
         return $this->render('victima/index.html.twig', [
-            'victimas' => $victimaRepository->findAll(),
+            'victimas' => $victimaRepository->findBy(
+                array(),              //$where
+                array('id'=>'DESC'),  //$orderBy
+                //10,                 //$limit
+                //0,                  //$offset
+            ),
         ]);
     }
 

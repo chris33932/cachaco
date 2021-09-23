@@ -21,7 +21,12 @@ class DetalleHechoController extends AbstractController
     public function index(DetalleHechoRepository $detalleHechoRepository): Response
     {
         return $this->render('detalle_hecho/index.html.twig', [
-            'detalle_hechos' => $detalleHechoRepository->findAll(),
+            'detalle_hechos' => $detalleHechoRepository->findBy(
+                array(),              //$where
+                array('hecho'=>'DESC'),  //$orderBy
+                //10,                 //$limit
+                //0,                  //$offset
+            ),
         ]);
     }
 

@@ -27,11 +27,36 @@
 
 {% endblock %}
 
+{% block javascripts %} {{ parent() }}
+<script>
+    $(document).ready(function () {
+            $('#hecho_fecha').change(function () {
+                extraer = $('#hecho_fecha').val(); //el formato de fecha es aaaa-mm-dd
+                $fechaAnio = extraer.substring(0,4); //por eso 0 a la izq. y 4 a la der.
+                $fechaMes = parseInt(extraer.substring(5, 7));
+               
 
+                $('#hecho_anio').val($fechaAnio);
 
+                var mesesLetra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                var mesLetra = mesesLetra[$fechaMes - 1];
 
+                 //calculo mes
+                $('#hecho_mes').val(mesLetra);
+              
+                 
+                // calculo dia
+                let dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"];
+                let date  = new Date(document.getElementById("hecho_fecha").value);
 
+                let fechaNum = date.getUTCDate();
+                $('#hecho_dia_ocu').val(dias[date.getDay()]);
+             
+            });
+        });
 
+</script>
+ {% endblock %}
  
 
  {% block footer %}

@@ -204,7 +204,7 @@ class HechoType extends AbstractType
             ->add('fraccion_ocu')
             ->add('radio_ocu')
             ->add('coinc_lug_ocu', ChoiceType::class, [ "label" =>
-            "Coincidencia entre lugar del hecho y lugar de ocurrencia",
+            "Coincidencia entre lugar de ocurrencia y lugar de hallazgo",
                 'choices' => [
                     'Si' => 'Si',
                     'No' => 'No',
@@ -262,10 +262,7 @@ class HechoType extends AbstractType
                     'Restringido' => 'Restringido',
                     'Sin determinar' => 'Sin determinar',
                     'Sin datos' => 'Sin datos',
-
-                   
                 ],
-             
             ])
             ->add('dom_part_hgo_otro')
             ->add('fraccion_hgo')

@@ -48,10 +48,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('pres_autor_index')}}">Presunto autor</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('detalle_hecho_index')}}">Detalles Hechos</a>
+                </li>
                 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
-                    Variables presunto autor
+                    Variables victima/presunto autor
                     </a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
@@ -61,24 +64,13 @@
                       <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
                     </div>
                 </li>  
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
-                    Variables victima
-                    </a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
-                      <a class="dropdown-item" href="{{ path('tipo_documento_index')}}">Tipo documento</a>
-                      <a class="dropdown-item" href="{{ path('sexo_index')}}">Sexo</a>
-                      <a class="dropdown-item" href="{{ path('genero_index')}}">Género</a>
-                      <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
-                    </div>
-                </li>  
+               
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     Variables hecho/detalle
                     </a>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{ path('detalle_hecho_index')}}">Detalles por cada hecho</a>
+                     
                       <a class="dropdown-item" href="{{ path('comisaria_index')}}">Comisaria</a>
                       <a class="dropdown-item" href="{{ path('tipo_documento_index')}}">Tipo documento</a>
                       <a class="dropdown-item" href="{{ path('sexo_index')}}">Sexo</a>

@@ -17,7 +17,9 @@ class PresAutorType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellido')
-            ->add('documento_nro')
+            ->add('documento_nro', null, [
+                'help' => 'Dejar vacio en caso de no contar con el dato',
+             ])
             ->add('genero_otro')
             ->add('edad')
             ->add('barrio')

@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\VictimaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=VictimaRepository::class)
+ * @UniqueEntity(fields={"documentoNro"}, message="Este DNI ya esta dado de alta")
  */
 class Victima
 {
@@ -36,9 +39,9 @@ class Victima
     private $tipoDocumento;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true, unique=true)
      */
-    private $documentoNro=-1;
+    private $documentoNro;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sexo::class, inversedBy="victimas")

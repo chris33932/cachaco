@@ -1,78 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}DetalleHecho index{% endblock %}
+{% block title %}Detalle de hechos{% endblock %}
 
 {% block body %}{{ parent() }}
+
 <div class="container-fluid">
-  <h2 class="text-success">Detalle hecho</h2>
-  <p>Detalles ordenados por cada hecho</p>  
-<div class="table-responsive">          
-  <table class="table table-condensed">
-    <thead>
-        <tr>
-                <th>Id</th>
-                <th><strong>Id del Hecho</strong></th>
-                <th>victima</th>
-                <th>pres_autor</th>
-                 <th>den_previaden_prev_desc</th>
-                 <th>den_prev_desc</th>
-                 <th>vinculo</th>
-                 <th>vinculo_familiar</th>
-                 <th>vinculo_fam_otro</th>
-                 <th>vinc_no_familiar</th>
-                <th>vinculo_no_familiar_otro</th>
-               <th>conviviente</th>
-                <th>Situación proc durante hecho</th>
-                 <th>Comp durante hecho</th>
-                  <th>comport durante hecho otro</th>
-                   <th>Est intox</th>
-                      <th>Tipo est intox</th>
-                         <th>Tipo est intox otro</th>
-                <th>accion</th>
-           
-            </tr>
-        </thead>
-        <tbody>
-        {% for detalle_hecho in detalle_hechos %}
-            <tr>
-               
-                 <td>{{ detalle_hecho.id }}</td>
-                 <td> {{detalle_hecho.hecho.id}} </td>
-                 
-                  <td>{{ detalle_hecho.victima }}</td>
-                  <td>{{ detalle_hecho.presAutor}}</td>
-         
-                  <td>{{ detalle_hecho.denPrevia }}</td>
-                  <th>{{detalle_hecho.denPrevDesc}}</th>
+   <div class="page-header">
+     <h3 class="text-success">Detalles de hechos</h3>
+  </div>
+  <p class="text-muted">Lista ordenada de detalles para cada hecho</p>   
+  <div class="table-responsive">          
+    <table class="table table-condensed">
+      <thead class="thead-light"> 
+          <tr>
+                  <th class="bg-primary text-white">Hecho_Id</th>
+                  <th class="bg-info text-white">Detalle_id</th>
+                  
+                  <th>Victima</th>
+                  <th>Presunto_Autor</th>
+                  <th>Denunicia_Previa</th>
+                  <th>Descripción</th>
+                  <th>Vinculo</th>
+                  <th>Vinculo_Fliar.</th>
+                  <th>Vinculo_Fliar._Otro</th>
+                  <th>Vinc_No_Fliar.</th>
+                  <th>Vinc_No_Fliar. Otro</th>
+                  <th>Conviviente</th>
+                  <th>Situación_proc_durante_hecho</th>
+                  <th>Comp_durante_hecho</th>
+                  <th>comp_durante_hecho_otro</th>
+                  <th>Estado_intox.</th>
+                  <th>Tipo_Est._intox</th>
+                  <th>Tipo_Est._intox_otro</th>
+                {# <th>accion</th>#}
+            
+              </tr>
+          </thead>
+          <tbody>
+          {% for detalle_hecho in detalle_hechos %}
+              <tr>
 
-                  <td>{{ detalle_hecho.vinculo}}</td>
-                  <td>{{ detalle_hecho.vinculoFamiliar}}</td>
-                  <td>{{ detalle_hecho.vinculoFamiliarOtro}}</td>
-                  <td>{{ detalle_hecho.VinculoNoFamiliar}}</td>
-                  <td>{{ detalle_hecho.VinculoNoFamiliarOtro}}</td>
-                  <td>{{ detalle_hecho.conviviente}}</td>
-                  <td>{{ detalle_hecho.estIntox}}</td>
-                  <td>{{ detalle_hecho.tipoEIntox}}</td>
-                  <td>{{ detalle_hecho.estIntoxOtro}}</td>
-                  <td>{{ detalle_hecho.sitProcesal}}</td>
-                  <td>{{ detalle_hecho.compHecho}}</td>
-                  <td>{{ detalle_hecho.compHechoOtro}}</td>
+                  <td><a href="{{ path('hecho_show', { 'id': detalle_hecho.hecho.id }) }}">{{ detalle_hecho.hecho.id }}</a></td>
 
-           
-              
-                <td>
-                    <a href="{{ path('detalle_hecho_show', {'id': detalle_hecho.id}) }}">show</a>
-                    <a href="{{ path('detalle_hecho_edit', {'id': detalle_hecho.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+                  <td>{{ detalle_hecho.id }}</td>
+                  
+                  
+                    <td>{{ detalle_hecho.victima }}</td>
+                    <td>{{ detalle_hecho.presAutor}}</td>
+          
+                    <td>{{ detalle_hecho.denPrevia }}</td>
+                    <th class="text-nowrap">{{detalle_hecho.denPrevDesc}}</th>
+
+                    <td>{{ detalle_hecho.vinculo}}</td>
+                    <td>{{ detalle_hecho.vinculoFamiliar}}</td>
+                    <td>{{ detalle_hecho.vinculoFamiliarOtro}}</td>
+                    <td>{{ detalle_hecho.VinculoNoFamiliar}}</td>
+                    <td>{{ detalle_hecho.VinculoNoFamiliarOtro}}</td>
+                    <td>{{ detalle_hecho.conviviente}}</td>
+                    <td>{{ detalle_hecho.estIntox}}</td>
+                    <td>{{ detalle_hecho.tipoEIntox}}</td>
+                    <td>{{ detalle_hecho.estIntoxOtro}}</td>
+                    <td>{{ detalle_hecho.sitProcesal}}</td>
+                    <td>{{ detalle_hecho.compHecho}}</td>
+                    <td>{{ detalle_hecho.compHechoOtro}}</td>
+
+            
+                
+                {# <td>
+                      <a href="{{ path('detalle_hecho_show', {'id': detalle_hecho.id}) }}">show</a>
+                      <a href="{{ path('detalle_hecho_edit', {'id': detalle_hecho.id}) }}">edit</a>
+                  </td>#}
+              </tr>
+          {% else %}
+              <tr>
+                  <td colspan="4">no records found</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+  </div>
   {#<a href="{{ path('detalle_hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
  
 </div>                       <span class="glyphicon glyphicon-plus"></span> Nuevo</a>#}
