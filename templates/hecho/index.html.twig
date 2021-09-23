@@ -68,7 +68,7 @@
                         <th>Cant_pres_autor</th>
                        {# <th>Link</th>#}
                        {# <th>Observacion</th>#}
-                        <th>actions</th>
+                        <th>Acciones</th>
                     
                     </tr>
                 </thead>
@@ -131,11 +131,10 @@
                       
                         <td>
                         
-                            <a href="{{ path('hecho_show', {'id': hecho.id}) }}" class="btn btn-info btn-sm" alt="Ver">
-                            <span class="glyphicon glyphicon-eye-open">Ver</a>
+                            <a href="{{ path('hecho_show', {'id': hecho.id}) }}"class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
                           
-                          <a href="{{ path('hecho_edit', {'id': hecho.id}) }}" class="btn btn-warning btn-sm" alt="Editar">
-                            <span class="glyphicon glyphicon-eye-open">Modificar</a>
+                          <a href="{{ path('hecho_edit', {'id': hecho.id}) }}"class="btn btn-warning btn-sm"
+                            alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
                 </td>
             </tr>
         {% else %}

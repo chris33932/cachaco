@@ -5,9 +5,11 @@
  
   {% block stylesheets %}{{ parent() }}
   
+  
   {% endblock %}
 {% block body %}{{ parent() }}
- 
+ <div class="container-fluid">
+    <h3 class="text-muted">Alta nueva víctima</h3>
 
     {{ include('victima/_form.html.twig') }}
 

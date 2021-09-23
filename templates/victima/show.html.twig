@@ -3,9 +3,10 @@
 {% block title %}Victima{% endblock %}
 
 {% block body %}
-    <h1>Victima</h1>
+<div class="container">
+    <h1 class="text-info">Victima</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -199,9 +200,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('victima_index') }}">back to list</a>
+    <a href="{{ path('victima_index') }}">Volver</a>
 
-    <a href="{{ path('victima_edit', {'id': victima.id}) }}">edit</a>
-
+    <a href="{{ path('victima_edit', {'id': victima.id}) }}">Editar</a>
+ <div class="caja">
     {{ include('victima/_delete_form.html.twig') }}
+ </div>
+</div>
 {% endblock %}

@@ -24,13 +24,13 @@
                     <th>DocumentoNro</th>
                     <th>Genero_otro</th>
                     <th>Edad</th>
-                    <th>Nacionalidad_otra</th>
+                    {#<th>Nacionalidad_otra</th>#}
                     <th>Barrio</th>
                     <th>Calle</th>
                     <th>Altura</th>
                     <th>Interseccion</th>
                     <th>Calle_interseccion</th>
-                    <th>Latitud</th>
+                    {#<th>Latitud</th>
                     <th>Longitud</th>
                     <th>Fraccion</th>
                     <th>Radio</th>
@@ -64,9 +64,9 @@
                     
                     <th>Estado_intox</th>
                     <th>Est_intox_otro</th>
-                    <th>Desap_ant_hecho</th>
+                    <th>Desap_ant_hecho</th>#}
                    
-                    <th>actions</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,13 +78,13 @@
                     <td>{{ victima.documentoNro }}</td>
                     <td>{{ victima.generoOtro }}</td>
                     <td>{{ victima.edad }}</td>
-                    <td>{{ victima.nacionalidadOtra }}</td>
+                    {#<td>{{ victima.nacionalidadOtra }}</td>#}
                     <td>{{ victima.barrio }}</td>
                     <td>{{ victima.calle }}</td>
                     <td>{{ victima.altura }}</td>
                     <td>{{ victima.interseccion }}</td>
                     <td>{{ victima.calleInterseccion }}</td>
-                    <td>{{ victima.latitud }}</td>
+                    {#<td>{{ victima.latitud }}</td>
                     <td>{{ victima.longitud }}</td>
                     <td>{{ victima.fraccion }}</td>
                     <td>{{ victima.radio }}</td>
@@ -118,11 +118,12 @@
                   
                     <td>{{ victima.estadoIntox }}</td>
                     <td>{{ victima.estIntoxOtro }}</td>
-                    <td>{{ victima.desapAntHecho }}</td>
+                    <td>{{ victima.desapAntHecho }}</td>#}
                             
                     <td>
-                        <a href="{{ path('victima_show', {'id': victima.id}) }}">Mostrar</a>
-                        <a href="{{ path('victima_edit', {'id': victima.id}) }}">Editar</a>
+                        <a href="{{ path('victima_show', {'id': victima.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+                        <a href="{{ path('victima_edit', {'id': victima.id}) }}"  class="btn btn-warning btn-sm"
+                            alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
                     </td>
                 </tr>
             {% else %}

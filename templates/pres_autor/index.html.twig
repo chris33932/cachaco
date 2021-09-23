@@ -29,7 +29,7 @@
                     <th>Altura</th>
                     <th>Interseccion</th>
                     <th>Calle_interseccion</th>
-                    <th>Latitud</th>
+                   {#} <th>Latitud</th>
                     <th>Longitud</th>
                     <th>Fraccion</th>
                     <th>Radio</th>
@@ -45,8 +45,8 @@
          
                     <th>Uso_arma_fuego</th>
         
-                    <th>Observacion</th>
-                    <th>actions</th>
+                    <th>Observacion</th>#}
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,7 +63,7 @@
                     <td>{{ pres_autor.altura }}</td>
                     <td>{{ pres_autor.interseccion }}</td>
                     <td>{{ pres_autor.calleInterseccion }}</td>
-                    <td>{{ pres_autor.latitud }}</td>
+                    {#<td>{{ pres_autor.latitud }}</td>
                     <td>{{ pres_autor.longitud }}</td>
                     <td>{{ pres_autor.fraccion }}</td>
                     <td>{{ pres_autor.radio }}</td>
@@ -80,9 +80,9 @@
               
                     <td>{{ pres_autor.usoArmaFuego }}</td>
 
-                    <td>{{ pres_autor.observacion }}</td>
+                    <td>{{ pres_autor.observacion }}</td>#}
                     <td>
-                        {#<a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>#}
+                        <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
                         <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}" class="btn btn-warning btn-sm"
                             alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
                     </td>

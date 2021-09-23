@@ -3,128 +3,112 @@
 {% block title %}PresAutor{% endblock %}
 
 {% block body %}
-    <h1>PresAutor</h1>
+<div class="container">
+    <h1>Presunto Autor</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th class="text-info">Id</th>
                 <td>{{ pres_autor.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
+                <th class="text-info">Nombre</th>
                 <td>{{ pres_autor.nombre }}</td>
             </tr>
             <tr>
-                <th>Apellido</th>
+                <th class="text-info">Apellido</th>
                 <td>{{ pres_autor.apellido }}</td>
             </tr>
             <tr>
-                <th>Documento_nro</th>
+                <th class="text-info">Documento_nro</th>
                 <td>{{ pres_autor.documentoNro }}</td>
             </tr>
             <tr>
-                <th>Genero_otro</th>
+                <th class="text-info">Genero_otro</th>
                 <td>{{ pres_autor.generoOtro }}</td>
             </tr>
             <tr>
-                <th>Edad</th>
+                <th class="text-info">Edad</th>
                 <td>{{ pres_autor.edad }}</td>
             </tr>
             <tr>
-                <th>Barrio</th>
+                <th class="text-info">Barrio</th>
                 <td>{{ pres_autor.barrio }}</td>
             </tr>
             <tr>
-                <th>Calle</th>
+                <th class="text-info">Calle</th>
                 <td>{{ pres_autor.calle }}</td>
             </tr>
             <tr>
-                <th>Altura</th>
+                <th class="text-info">Altura</th>
                 <td>{{ pres_autor.altura }}</td>
             </tr>
             <tr>
-                <th>Interseccion</th>
+                <th class="text-info">Interseccion</th>
                 <td>{{ pres_autor.interseccion }}</td>
             </tr>
             <tr>
-                <th>Calle_interseccion</th>
+                <th class="text-info">Calle_interseccion</th>
                 <td>{{ pres_autor.calleInterseccion }}</td>
             </tr>
             <tr>
-                <th>Latitud</th>
+                <th class="text-info">Latitud</th>
                 <td>{{ pres_autor.latitud }}</td>
             </tr>
             <tr>
-                <th>Longitud</th>
+                <th class="text-info">Longitud</th>
                 <td>{{ pres_autor.longitud }}</td>
             </tr>
             <tr>
-                <th>Fraccion</th>
+                <th class="text-info">Fraccion</th>
                 <td>{{ pres_autor.fraccion }}</td>
             </tr>
             <tr>
-                <th>Radio</th>
+                <th class="text-info">Radio</th>
                 <td>{{ pres_autor.radio }}</td>
             </tr>
   
             <tr>
-                <th>Reincidente</th>
+                <th class="text-info">Reincidente</th>
                 <td>{{ pres_autor.reincidente }}</td>
             </tr>
             <tr>
-                <th>Nacionalidad_otro</th>
+                <th class="text-info">Nacionalidad_otro</th>
                 <td>{{ pres_autor.nacionalidadOtro }}</td>
             </tr>
             <tr>
-                <th>Ant_penal_den</th>
+                <th class="text-info">Ant_penal_den</th>
                 <td>{{ pres_autor.antPenalDen }}</td>
             </tr>
             <tr>
-                <th>Especif_ant</th>
+                <th class="text-info">Especif_ant</th>
                 <td>{{ pres_autor.especifAnt }}</td>
             </tr>
             <tr>
-                <th>Otra_sit_lab</th>
+                <th class="text-info">Otra_sit_lab</th>
                 <td>{{ pres_autor.otraSitLab }}</td>
             </tr>
             <tr>
-                <th>Fuerza_seg</th>
+                <th class="text-info">Fuerza_seg</th>
                 <td>{{ pres_autor.fuerzaSeg }}</td>
             </tr>
             <tr>
-                <th>Otra_fuer_seg_pert</th>
+                <th class="text-info">Otra_fuer_seg_pert</th>
                 <td>{{ pres_autor.otraFuerSegPert }}</td>
             </tr>
             <tr>
-                <th>Ejer_func</th>
+                <th class="text-info">Ejer_func</th>
                 <td>{{ pres_autor.ejerFunc }}</td>
             </tr>
+           
             <tr>
-                <th>Discapacidad</th>
-                <td>{{ pres_autor.discapacidad }}</td>
-            </tr>
-  
-
-            <tr>
-                <th>Pert_pueblo_orig</th>
-                <td>{{ pres_autor.pertPuebloOrig }}</td>
-            </tr>
-            <tr>
-                <th>Etnia_otro</th>
-                <td>{{ pres_autor.etniaOtro }}</td>
-            </tr>
-            <tr>
-                <th>Hab_nat_esp</th>
-                <td>{{ pres_autor.habNatEsp }}</td>
-            </tr>
-            <tr>
-                <th>Uso_arma_fuego</th>
+                <th class="text-info">Uso_arma_fuego</th>
                 <td>{{ pres_autor.usoArmaFuego }}</td>
             </tr>
     
             <tr>
-                <th>Observacion</th>
+                <th class="text-info">Observacion</th>
                 <td>{{ pres_autor.observacion }}</td>
             </tr>
         </tbody>
@@ -133,6 +117,7 @@
     <a href="{{ path('pres_autor_index') }}">back to list</a>
 
     <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}">edit</a>
+</div>
 
     {{ include('pres_autor/_delete_form.html.twig') }}
 {% endblock %}
