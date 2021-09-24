@@ -20,8 +20,8 @@
                         <th>Nro_preventivo</th>
                         <th>Nro_sumario</th>
                         <th>Nro_exp_jud</th>
-                        <th>Juzgado</th>
-                        <th>Fiscalia</th>
+                        {#<th>Juzgado</th>
+                        <th>Fiscalia</th>#}
                         <th>Fecha</th>
                         <th>Anio</th>
                         <th>Mes</th>
@@ -29,12 +29,12 @@
                         <th>Gran_rcia</th>
                         <th>Hora_ocu</th>
                         <th>Dia_ocu</th>
-                        <th>Franja_h_seis</th>
+                        {#<th>Franja_h_seis</th>
                         <th>Franja_h_tres</th>
                         <th>Barrio_ocu</th>
                         <th>Calle_ocu</th>
                         <th>Altura_ocu</th>
-                        <th>Intersecc_ocu</th>
+                        {#<th>Intersecc_ocu</th>
                         <th>Calle_int_ocu</th>
                         <th>Latitud_ocu</th>
                         <th>Longitud_ocu</th>
@@ -79,8 +79,8 @@
                         <td>{{ hecho.nroPreventivo }}</td>
                         <td>{{ hecho.nroSumario }}</td>
                         <td>{{ hecho.nroExpJud }}</td>
-                        <td>{{ hecho.juzgado }}</td>
-                        <td>{{ hecho.fiscalia }}</td>
+                        {#<td>{{ hecho.juzgado }}</td>
+                        <td>{{ hecho.fiscalia }}</td>#}
                         <td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>
                         <td>{{ hecho.anio }}</td>
                         <td>{{ hecho.mes }}</td>
@@ -88,7 +88,7 @@
                         <td>{{ hecho.granRcia }}</td>
                         <td>{{ hecho.horaOcu ? hecho.horaOcu|date('H:i:s') : '' }}</td>
                         <td>{{ hecho.diaOcu }}</td>
-                        <td>{{ hecho.franjaHSeis }}</td>
+                        {#<td>{{ hecho.franjaHSeis }}</td>
                         <td>{{ hecho.franjaHTres }}</td>
                         <td>{{ hecho.barrioOcu }}</td>
                         <td>{{ hecho.calleOcu }}</td>

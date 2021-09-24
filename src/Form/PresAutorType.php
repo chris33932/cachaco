@@ -15,8 +15,12 @@ class PresAutorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('apellido')
+            ->add('nombre', null, [
+                'help' => 'En caso de no contar con el dato, guardar: "Sin datos_n°prev" ',
+             ])
+            ->add('apellido', null, [
+                'help' => 'En caso de no contar con el dato, guardar: "Sin datos_n°prev" ',
+             ])
             ->add('documento_nro', null, [
                 'help' => 'Dejar vacio en caso de no contar con el dato',
              ])
