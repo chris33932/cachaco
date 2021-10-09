@@ -55,12 +55,12 @@
             });
         });
 
-        $(document).ready(function () {
-            $('#hecho_hora_ocu_hour').change(function () {
-                obtieneHora = $('#hecho_hora_ocu_hour').val(); //obtiene el valor hora 
-              console.log(obtieneHora);
+    $(document).ready(function () {
+    $('#hecho_hora_ocu_hour').change(function () {
+    obtieneHora = $('#hecho_hora_ocu_hour').val(); //obtiene el valor hora 
+    //console.log(obtieneHora);
          
-        switch (true) {
+    switch (true) {
                           
             case obtieneHora >= 0 && obtieneHora < 6 :
                 $('#hecho_franja_h_seis').val('00:00 - 05:59');
@@ -77,17 +77,15 @@
             default:
                 $('#hecho_franja_h_seis').val('Sin determinar');
         }
- 
-             
-            });
-        });
+           
+          });
+    });
 
 
          $(document).ready(function () {
             $('#hecho_hora_ocu_hour').change(function () {
                 obtieneHora3 = $('#hecho_hora_ocu_hour').val(); //obtiene el valor hora 
-              console.log(obtieneHora3);
-         
+                     
         switch (true) {
                           
             case obtieneHora3 >= 0 && obtieneHora3 < 3 :
@@ -122,6 +120,44 @@
             });
         });
 
+</script>
+
+<script>{#  CUANDO DESHABILITO LOS CAMPOS GUARDA NULL
+    $(document).ready(function () {
+            $('#hecho_coinc_lug_ocu').change(function () {
+                coincide = $('#hecho_coinc_lug_ocu').val(); //el formato de fecha es aaaa-mm-dd
+                console.log(coincide);
+               if (coincide = 'Si' ) {
+                    $("#hecho_fecha_hgo").attr("disabled", "disabled")
+                    $("#hecho_hora_hgo_minute").attr("disabled", "disabled")
+                    $("#hecho_hora_hgo_hour").attr("disabled", "disabled")
+                    $("#hecho_dia_hgo").attr("disabled", "disabled")
+                    $("#hecho_barrio_hgo").attr("disabled", "disabled")
+                    $("#hecho_calle_hgo").attr("disabled", "disabled")
+                    $("#hecho_altura_hgo").attr("disabled", "disabled")
+                    $("#hecho_intersec_hgo").attr("disabled", "disabled")
+                    $("#hecho_calle_int_hgo").attr("disabled", "disabled")
+                    $("#hecho_rep_geo_hgo").attr("disabled", "disabled")
+                    $("#hecho_latitud_hgo").attr("disabled", "disabled")
+                    $("#hecho_longitud_hgo").attr("disabled", "disabled")
+                    $("#hecho_lug_hgo_otro").attr("disabled", "disabled")
+                    $("#hecho_acceso_hgo").attr("disabled", "disabled")
+                    $("#hecho_dom_part_hgo_otro").attr("disabled", "disabled")
+                    $("#hecho_fraccion_hgo").attr("disabled", "disabled")
+                    $("#hecho_radio_hgo").attr("disabled", "disabled")
+                    $("#hecho_zona_hgo").attr("disabled", "disabled")
+                    $("#hecho_tipo_esp_hgo").attr("disabled", "disabled")
+                    $("#hecho_tipo_lug_hgo").attr("disabled", "disabled")
+                    $("#hecho_lugar_hgo").attr("disabled", "disabled")
+                    $("#hecho_dom_part_hgo").attr("disabled", "disabled")
+                  
+                    } else {
+                    greeting = "Good evening";
+                    }
+            
+             
+            });
+        });#}
 </script>
  {% endblock %}
  

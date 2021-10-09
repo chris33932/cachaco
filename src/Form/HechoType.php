@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Departamento;
 use App\Entity\Hecho;
 use App\Entity\OcasionDelito;
 use App\Form\DetalleHechoType;
@@ -75,7 +76,7 @@ class HechoType extends AbstractType
             ])    
                         
             ->add('provincia')
-            ->add('departamento')
+            ->add('departamento' )
             ->add('localidad')
             ->add('cod_loc_indec', TextType::class, [ "label" =>
             "Codigo de localidad del INDEC",])
@@ -83,10 +84,10 @@ class HechoType extends AbstractType
             ->add('gran_rcia', ChoiceType::class, [ "label" =>
             "Gran Resistencia",
                 'choices' => [
+                    'Sin datos' => 'Sin datos',
                     'Si' => 'Si',
                     'No' => 'No',
-                    'Sin datos' => 'Sin datos',
-                    'Sin determinar' => 'Sin determinar',
+                    'Sin datos' => 'Sin datos'
                     
                    
                 ],
@@ -180,6 +181,8 @@ class HechoType extends AbstractType
                 'choices' => [
                     'Si' => 'Si',
                     'No' => 'No',
+                   
+              
                     'Sin datos' => 'Sin datos',
                     'Sin determinar' => 'Sin determinar',
                     

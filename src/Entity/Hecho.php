@@ -70,6 +70,7 @@ class Hecho
     private $provincia;
 
     /**
+     * 
      * @ORM\ManyToOne(targetEntity=Departamento::class)
      */
     private $departamento;
@@ -284,7 +285,7 @@ class Hecho
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $acceso_hgo;
+    private $acceso_hgo="No corresponde";
 
     /**
      * @ORM\ManyToOne(targetEntity=Lugar::class)
