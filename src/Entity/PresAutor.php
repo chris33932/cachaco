@@ -24,12 +24,12 @@ class PresAutor
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $nombre;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $apellido;
 
@@ -54,13 +54,13 @@ class PresAutor
     private $genero;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $genero_otro="No corresponde";
 
     /**
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $edad=-1;
 
@@ -75,27 +75,27 @@ class PresAutor
     private $rango_etario;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $barrio="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $calle="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $altura="Sin datos";    
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $interseccion;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $calle_interseccion="No corresponde";
 
@@ -105,28 +105,28 @@ class PresAutor
     private $rep_geo;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $latitud="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $longitud="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $fraccion="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $radio="Sin datos";
 
   
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $reincidente;
 
@@ -136,7 +136,7 @@ class PresAutor
     private $nacionalidad;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $nacionalidad_otro="No corresponde";
 
@@ -146,12 +146,12 @@ class PresAutor
     private $estado_civil;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $ant_penal_den;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      * 
      */
     private $especif_ant="No corresponde";
@@ -162,7 +162,7 @@ class PresAutor
     private $sit_lab;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $otra_sit_lab="No corresponde";
 
@@ -182,7 +182,7 @@ class PresAutor
     private $niv_inst_formal;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $fuerza_seg;
 
@@ -192,7 +192,7 @@ class PresAutor
     private $fuer_seg_pert;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $otra_fuer_seg_pert="No corresponde";
 
@@ -202,13 +202,13 @@ class PresAutor
     private $est_pol;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $ejer_func;
 
   
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $uso_arma_fuego;
 
@@ -225,7 +225,7 @@ class PresAutor
    
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", length=500, nullable=false)
      */
     private $observacion;
 

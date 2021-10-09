@@ -376,6 +376,11 @@ class Hecho
      */
     private $detalleHechos;
 
+    /**
+     * @ORM\Column(type="object")
+     */
+    private $creado;
+
     public function __construct()
     {
         $this->detalleHechos = new ArrayCollection();
@@ -1254,6 +1259,18 @@ class Hecho
                 $detalleHecho->setHecho(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreado()
+    {
+        return $this->creado;
+    }
+
+    public function setCreado($creado): self
+    {
+        $this->creado = $creado;
 
         return $this;
     }

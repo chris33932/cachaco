@@ -88,43 +88,17 @@ function addRemoveButton ($card) {
 
 
   $(document).ready(function(){
-    $('#hecho_rep_geo_ocu > option[value="1"]').attr('selected', 'selected');
+    $('#hecho_rep_geo_ocu > option[value="1"]').attr('selected', 'selected'),
+    $('#hecho_oca_delito > option[value="6"]').attr('selected', 'selected'),
+    $('#hecho_provincia > option[value="4"]').attr('selected', 'selected'),
+    $('#hecho_provincia > option[value="4"]').attr('selected', 'selected'),
+    $('#hecho_zona_ocu > option[value="1"]').attr('selected', 'selected'),
+    $('#hecho_origen_reg > option[value="1"]').attr('selected', 'selected'),
+    $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected'),
+    $('#hecho_rep_geo_hgo > option[value="4"]').attr('selected', 'selected')
+    ;
     });
 
- $(document).ready(function(){
-    $('#hecho_oca_delito > option[value="6"]').attr('selected', 'selected');
-        });
-      
-       
-   $(document).ready(function(){
-        $('#hecho_provincia > option[value="4"]').attr('selected', 'selected');
-           });
-        
- $(document).ready(function(){
-    $('#hecho_provincia > option[value="4"]').attr('selected', 'selected');
-        });   
-        
-   $(document).ready(function(){
-       $('#hecho_zona_ocu > option[value="1"]').attr('selected', 'selected');
-         });   
-   
-$(document).ready(function(){
-            $('#hecho_origen_reg > option[value="1"]').attr('selected', 'selected');
-              }); 
-              
-    $(document).ready(function(){
-    $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected');
-    });
-
-
-    $(document).ready(function(){
-    $('#hecho_rep_geo_hgo > option[value="4"]').attr('selected', 'selected');
-    });
-
-
-
-      
-              
 
         
 

@@ -55,6 +55,73 @@
             });
         });
 
+        $(document).ready(function () {
+            $('#hecho_hora_ocu_hour').change(function () {
+                obtieneHora = $('#hecho_hora_ocu_hour').val(); //obtiene el valor hora 
+              console.log(obtieneHora);
+         
+        switch (true) {
+                          
+            case obtieneHora >= 0 && obtieneHora < 6 :
+                $('#hecho_franja_h_seis').val('00:00 - 05:59');
+                break;
+            case obtieneHora >= 6 && obtieneHora < 12 :
+                $('#hecho_franja_h_seis').val('06:00 - 11:59');
+                break;
+            case obtieneHora >= 12 && obtieneHora < 18 :
+                $('#hecho_franja_h_seis').val('12:00 - 17:59');
+                break;
+            case obtieneHora >= 18 && obtieneHora <= 23 :
+                $('#hecho_franja_h_seis').val('18:00 - 23:59');
+                break;
+            default:
+                $('#hecho_franja_h_seis').val('Sin determinar');
+        }
+ 
+             
+            });
+        });
+
+
+         $(document).ready(function () {
+            $('#hecho_hora_ocu_hour').change(function () {
+                obtieneHora3 = $('#hecho_hora_ocu_hour').val(); //obtiene el valor hora 
+              console.log(obtieneHora3);
+         
+        switch (true) {
+                          
+            case obtieneHora3 >= 0 && obtieneHora3 < 3 :
+                $('#hecho_franja_h_tres').val('00:00 - 02:59');
+                break;
+            case obtieneHora3 >= 3 && obtieneHora3 < 6 :
+                $('#hecho_franja_h_tres').val('03:00 - 05:59');
+                break;
+            case obtieneHora3 >= 6 && obtieneHora3 < 9 :
+                $('#hecho_franja_h_tres').val('06:00 - 08:59');
+                break;
+            case obtieneHora3 >= 9 && obtieneHora3 < 12 :
+                $('#hecho_franja_h_tres').val('09:00 - 11:59');
+                break;
+                 case obtieneHora3 >= 12 && obtieneHora3 < 15 :
+                $('#hecho_franja_h_tres').val('12:00 - 14:59');
+                break;
+            case obtieneHora3 >= 15 && obtieneHora3 < 18 :
+                $('#hecho_franja_h_tres').val('15:00 - 17:59');
+                break;
+            case obtieneHora3 >= 18 && obtieneHora3 < 21 :
+                $('#hecho_franja_h_tres').val('18:00 - 20:59');
+                break;
+            case obtieneHora3 >= 21 && obtieneHora3 <= 23 :
+                $('#hecho_franja_h_tres').val('21:00 - 23:59');
+                break;
+            default:
+                $('#hecho_franja_h_tres').val('Sin determinar');
+        }
+ 
+             
+            });
+        });
+
 </script>
  {% endblock %}
  

@@ -36,7 +36,7 @@ class DetalleHechoType extends AbstractType
              
             ])
             ->add('den_prev_desc', TextType::class, [ 'required'=>False, "label" =>
-            "Descripción denuncias previas"])
+            "Descripción denuncias previas", 'empty_data' => 'No corresponde'])
             
             ->add('vinculo', ChoiceType::class, [
                 'choices' => [
@@ -80,7 +80,7 @@ class DetalleHechoType extends AbstractType
             
            
             ->add('vinculo_familiar_otro', TextType::class, [ 'data_class' => null, 'required'=>false,"label" =>
-            "Otro vínculo familiar entre la víctima y el presunto autor",])
+            "Otro vínculo familiar entre la víctima y el presunto autor",'empty_data' => 'No corresponde'])
 
             ->add('vinculo_no_familiar', ChoiceType::class, [
                 'choices' => [        
@@ -104,7 +104,7 @@ class DetalleHechoType extends AbstractType
             ])
 
             ->add('vinculo_no_familiar_otro', TextType::class, [ 'required' => false,"label" =>
-            "Otro vínculo extrafamiliar entre la víctima y el presunto autor",])
+            "Otro vínculo extrafamiliar entre la víctima y el presunto autor",'empty_data' => 'No corresponde'])
            
             ->add('conviviente', ChoiceType::class, [ "label" =>
             " Convivencia entre la víctima y el presunto autor al momento del hecho",
@@ -133,16 +133,18 @@ class DetalleHechoType extends AbstractType
             ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
 
             ->add('est_intox_otro', TextType::class, [ 'required'=>false, "label" =>
-            "Otro estado de intoxicación del presunto autor al momento del hecho"])
+            "Otro estado de intoxicación del presunto autor al momento del hecho",'empty_data' => 'No corresponde'])
             
             
-            ->add('sit_procesal', EntityType::class, [ 'class' => SitProcesal::class ,"label" => "Situación procesal del presunto autor al momento del hecho",]
+            ->add('sit_procesal', EntityType::class, [ 'class' => SitProcesal::class ,"label" => "Situación procesal del presunto autor al momento del hecho",
+            'empty_data' => 'Sin datos']
                   )
            
-            ->add('comp_hecho', EntityType::class, [ 'class' => CompHecho::class ,"label" => "Comportamiento del presunto autor al momento del hecho",]
+            ->add('comp_hecho', EntityType::class, [ 'class' => CompHecho::class ,"label" => "Comportamiento del presunto autor al momento del hecho",
+            'empty_data' => 'Sin datos']
                   )
             ->add('comp_hecho_otro', TextType::class, ['required'=>false, "label" =>
-            "Otro comportamiento del presunto autor al momento del hecho"])
+            "Otro comportamiento del presunto autor al momento del hecho", 'empty_data' => 'No corresponde'])
           
         
 

@@ -24,12 +24,12 @@ class Victima
 
     /**
      * @var string
-     * @ORM\Column( name="nombre", type="string", length=100, nullable=true)
+     * @ORM\Column( name="nombre", type="string", length=100, nullable=false)
      */
     private $nombre;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $apellido;
 
@@ -54,12 +54,12 @@ class Victima
     private $genero;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $genero_otro="No corresponde";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $edad=-1;
 
@@ -79,32 +79,32 @@ class Victima
     private $nacionalidad;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $nacionalidad_otra="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $barrio="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $calle="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $altura="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $interseccion;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $calle_interseccion="No corresponde";
 
@@ -114,22 +114,22 @@ class Victima
     private $rep_geo;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $latitud="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $longitud="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $fraccion="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $radio="Sin datos";
 
@@ -144,7 +144,7 @@ class Victima
     private $mecanismo_muerte;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $mecanismo_muerte_otro="No corresponde";
 
@@ -154,57 +154,57 @@ class Victima
     private $tipo_arma;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $tipo_arma_otro="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $medida_protecc_vigente;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $medida_protecc_especif="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $discapacidad="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $embarazada="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $privada_libertad="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $ejer_prostitucion="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $migrante_internacional="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $migrante_intraprov="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $migrante_interprov="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $pueblo_originario;
 
@@ -214,32 +214,32 @@ class Victima
     private $etnia;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $etnia_otro="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $hab_nativo_esp="Si";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $homosex_bisex="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $ref_activista="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $afro="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $otra_sit_intersecc="Sin datos";
 
@@ -249,7 +249,7 @@ class Victima
     private $sit_laboral;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $otra_sit_laboral="No corresponde";
 
@@ -259,22 +259,22 @@ class Victima
     private $cond_actividad;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $hijos_pers_cargo="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $cant_a_cargo="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=false)
      */
     private $benef_ley_brisa;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $cant_benef="No corresponde";
 
@@ -289,12 +289,12 @@ class Victima
     private $niv_inst_form;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=false)
      */
     private $violencia_exc="Sin datos";
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=false)
      */
     private $femicidio;
 
@@ -309,7 +309,7 @@ class Victima
     private $cont_femicida;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=false)
      */
     private $fuerza_seg;
 
@@ -319,7 +319,7 @@ class Victima
     private $fuer_seg_pert;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $otra_fuer_pert="No corresponde";
 
@@ -334,7 +334,7 @@ class Victima
     private $ejer_funcion;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=false)
      */
     private $estado_intox;
 
@@ -344,17 +344,17 @@ class Victima
     private $tipo_est_intox;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $est_intox_otro="No corresponde";
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $desap_ant_hecho="No corresponde";
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      */
     private $observacion;
 

@@ -21,9 +21,17 @@ class HechoController extends AbstractController
      */
     public function index(HechoRepository $hechoRepository): Response
     {
+         {
         return $this->render('hecho/index.html.twig', [
-            'hechos' => $hechoRepository->findAll(),
+            'hechos' => $hechoRepository->findBy(
+                array(),              //$where
+                array('anio'=>'DESC',
+                       'id' =>'DESC'),  //$orderBy
+                //10,                 //$limit
+                //0,                  //$offset
+            ),
         ]);
+    }
     }
 
     /**
@@ -32,6 +40,8 @@ class HechoController extends AbstractController
     public function new(Request $request): Response
     {
         $hecho = new Hecho();
+        $username = $this->getUser()->getUsername();
+        $hecho->setCreado($username);
         $form = $this->createForm(HechoType::class, $hecho);
         $form->handleRequest($request);
 

@@ -27,15 +27,15 @@ class HechoType extends AbstractType
             //--------------------------------
             //grupo ocurrencia
             //------------------------------
-
             ->add('nro_preventivo')
-
             ->add('nro_sumario')
             ->add('nro_exp_jud')
             ->add('juzgado')
             ->add('fiscalia')
-
-            
+            ->add('comisaria')
+            ->add('fecha', DateType::class, [ 'required' => false, // renders it as a single text box
+            'widget' => 'single_text',
+        ])
             ->add('anio')
             ->add('mes', ChoiceType::class, [ "label" =>
             "Mes",
@@ -57,33 +57,23 @@ class HechoType extends AbstractType
                    
                 ],
              
-            ])    
-            
-            ->add('comisaria')
-            
-            ->add('cod_loc_indec', ChoiceType::class, [ "label" =>
-            "Código Localidad INDEC",
+            ])
+            ->add('dia_ocu', ChoiceType::class, [ "label" =>
+            "Día de Ocurrencia",
                 'choices' => [
-                    ' falta hacer' => ' ',
-                    'Enero' => 'Enero',
-                    'Febrero' => 'Febrero',
-                    'Marzo' => 'Marzo',
-                    'Abril' => 'Abril',
-                    'Mayo' => 'Mayo',
-                    'Junio' => 'Junio',
-                    'Julio' => 'Julio',
-                    'Agosto' => 'Agosto',
-                    'Septiembre' => 'Septiembre',
-                    'Octubre' => 'Octubre',
-                    'Noviembre' => 'Noviembre',
-                    'Diciembre' => 'Diciembre',
-                
+                    ' ' => ' ',
+                    'Lunes' => 'Lunes',
+                    'Martes' => 'Martes',
+                    'Miercoles' => 'Miercoles',
+                    'Jueves' => 'Jueves',
+                    'Viernes' => 'Viernes',
+                    'Sabado' => 'Sabado',
+                    'Domingo' => 'Domingo',
                    
                 ],
              
-            ])
-            
-
+            ])    
+                        
             ->add('provincia')
             ->add('departamento')
             ->add('localidad')
@@ -102,29 +92,11 @@ class HechoType extends AbstractType
                 ],
              
             ])
-            ->add('fecha', DateType::class, [ 'required' => false, // renders it as a single text box
-                'widget' => 'single_text',
-            ])
-            
-
+                      
             ->add('hora_ocu', TimeType::class, [ "label" =>
             "Hora de ocurrencia",])
 
-            ->add('dia_ocu', ChoiceType::class, [ "label" =>
-            "Día de Ocurrencia",
-                'choices' => [
-                    ' ' => ' ',
-                    'Lunes' => 'Lunes',
-                    'Martes' => 'Martes',
-                    'Miercoles' => 'Miercoles',
-                    'Jueves' => 'Jueves',
-                    'Viernes' => 'Viernes',
-                    'Sabado' => 'Sabado',
-                    'Domingo' => 'Domingo',
-                   
-                ],
-             
-            ])
+         
             
             
             ->add('franja_h_seis', ChoiceType::class, [ "label" =>
