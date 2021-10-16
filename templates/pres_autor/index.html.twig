@@ -6,10 +6,21 @@
 
 {% block body %} {{ parent() }}
 
+<div class="page-header" >
+  <h2 class="text-success" >Presuntos autores</h2>
+  
+    <div class="col-xs-3" >
+         {{ form_start(buscar) }}
+         {{ form_widget(buscar) }}
+         {{ form_end(buscar) }}
+    </div>
+
+</div>
+
 <div class="container-fluid">
- <h2 class="text-info" >Presuntos autores</h2>
+   <h2 class="text-info" ></h2>
  
-  <p class="text-muted">Lista de presuntos autores y datos relevantes:</p>   
+  <p class="text-muted">.</p>   
    <br> 
     <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                    <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
@@ -50,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for pres_autor in pres_autors %}
+            {% for pres_autor in presautores %}
                 <tr>
                     <td>{{ pres_autor.id }}</td>
                     <td>{{ pres_autor.nombre }}</td>

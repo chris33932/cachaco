@@ -6,6 +6,8 @@ use App\Entity\CompHecho;
 use App\Entity\DetalleHecho;
 use App\Entity\EstadoIntox;
 use App\Entity\SitProcesal;
+use App\Entity\SituacionArma;
+use App\Entity\TipoPerArma;
 use phpDocumentor\Reflection\PseudoTypes\False_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -117,7 +119,27 @@ class DetalleHechoType extends AbstractType
                 ],
              
             ])
+            ->add('uso_arma_fue', ChoiceType::class, ["label" =>
+            "Uso de arma de fuego",
+                'choices' => [                                
+                    'No' => 'No',
+                    'Si' => 'Si',
+                    'Sin datos' => 'Sin datos',
+                    'Sin determinar' => 'Sin determinar',
+                   
+                ],
+             
+            ])
+           
+            ->add('sit_arma_fue'  ,EntityType::class, ['class' => SituacionArma::class, "label" => "Situación del arma",'empty_data' => 'Sin datos']      )
 
+            ->add('per_arma_fue'  ,EntityType::class, ['class' => TipoPerArma::class, "label" => "Permiso del arma",'empty_data' => 'Sin datos']      )
+            
+            ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
+
+            ->add('est_intox_otro', TextType::class, [ 'required'=>false, "label" =>
+            "Otro estado de intoxicación del presunto autor al momento del hecho",'empty_data' => 'No corresponde'])
+            
             ->add('est_intox', ChoiceType::class, [ "label" =>
             "Estado de intoxicación del presunto autor",
                 'choices' => [
@@ -129,12 +151,6 @@ class DetalleHechoType extends AbstractType
                 ],
              
             ])
-            
-            ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
-
-            ->add('est_intox_otro', TextType::class, [ 'required'=>false, "label" =>
-            "Otro estado de intoxicación del presunto autor al momento del hecho",'empty_data' => 'No corresponde'])
-            
             
             ->add('sit_procesal', EntityType::class, [ 'class' => SitProcesal::class ,"label" => "Situación procesal del presunto autor al momento del hecho",
             'empty_data' => 'Sin datos']

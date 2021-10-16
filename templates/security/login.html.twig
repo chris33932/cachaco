@@ -35,7 +35,7 @@
 {% block body %}
 
             <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a class="navbar-brand" href="{{ path('app_login')}}">CENTRO DE ANALISIS - CHACO</a>
+                <a class="navbar-brand" href="{{ path('hecho_index')}}">Centro de analisis chaco</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -56,10 +56,10 @@
                                 </a>
                             </li>
                             {% else %}
-                                <a href="{{ path('app_login')  }}">
+                                {#<a href="{{ path('app_login')  }}">
                                     <span class="glyphicon glyphicon-log-in" alt="Iniciar Sesión"></span>
                                     Ingresar
-                                </a>
+                                </a>#}
                             {% endif %}
                             </li>
                         </ul>

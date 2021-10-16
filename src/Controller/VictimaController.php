@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Victima;
+use App\Form\BuscarType;
 use App\Form\VictimaType;
 use App\Repository\VictimaRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/victima")
@@ -18,17 +20,48 @@ class VictimaController extends AbstractController
     /**
      * @Route("/", name="victima_index", methods={"GET"})
      */
-    public function index(VictimaRepository $victimaRepository): Response
+    public function index(Request $request, $filtro=null)
     {
-        return $this->render('victima/index.html.twig', [
-            'victimas' => $victimaRepository->findBy(
-                array(),              //$where
-                array('id'=>'DESC'),  //$orderBy
-                //10,                 //$limit
-                //0,                  //$offset
-            ),
-        ]);
+        $repository = $this->getDoctrine()->getRepository(Victima::class);
+
+        if ($filtro){
+            $victimas = $repository->findByNombreOId($filtro);
+        }
+        else
+        {
+            $victimas = $repository->findAll();
+        }
+        $buscarForm = $this->createForm(BuscarType::class, null, array(
+            'action' => $this->generateUrl('victima_buscar'),
+        ));
+
+        if ($request->isXmlHttpRequest()){
+            $resultado = array();
+
+            foreach($victimas as $victima){
+                $resultado[] = array(
+                    "label" => $victima->__toString(),
+                    "value" => $victima->__toString(),
+                    "id" => $victima->getId(),
+                    "id" => $victima->getNombre(),
+                    "id" => $victima->getApellido(),
+                );
+            }
+
+            $response = new JsonResponse();
+            $response->setStatusCode(200);
+            $response->setData(json_encode($resultado, JSON_FORCE_OBJECT));
+
+            return $response;
+        }else{
+            return $this->render('victima/index.html.twig', array(
+                'victimas' => $victimas,
+                'buscar' => $buscarForm->createView(),
+            ));
+        }
     }
+
+   
 
     /**
      * @Route("/new", name="victima_new", methods={"GET","POST"})
@@ -53,6 +86,18 @@ class VictimaController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/buscar", name="victima_buscar")
+     */
+    public function buscarAction(Request $request){
+        $filtro = $request->get('buscar')['query'];
+
+        return $this->forward('App\Controller\VictimaController::index', array(
+                                'request' => $request,
+                                'filtro' => $filtro,
+        ));
+    }
+
     /**
      * @Route("/{id}", name="victima_show", methods={"GET"})
      */
@@ -62,6 +107,7 @@ class VictimaController extends AbstractController
             'victima' => $victima,
         ]);
     }
+    
 
     /**
      * @Route("/{id}/edit", name="victima_edit", methods={"GET","POST"})
@@ -82,6 +128,8 @@ class VictimaController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
 
     /**
      * @Route("/{id}", name="victima_delete", methods={"POST"})

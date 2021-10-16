@@ -5,11 +5,21 @@
 
 
 {% block body %} {{ parent() }}
+<div class="page-header">
+  <h2 class="text-info" >Victimas</h2>
+  
+    <div class="col-xs-3">
+         {{ form_start(buscar) }}
+         {{ form_widget(buscar) }}
+         {{ form_end(buscar) }}
+    </div>
+
+</div>
 
 <div class="container-fluid">
-   <h2 class="text-info" >Victimas</h2>
+   <h2 class="text-info" ></h2>
  
-  <p class="text-muted">Lista de victimas:</p>   
+  <p class="text-muted">.</p>   
    <br> 
    <a href="{{ path('victima_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                             <span class="glyphicon glyphicon-plus"></span> Nuevo</a>

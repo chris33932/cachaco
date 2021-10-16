@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Centro de Analisis{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+           <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+     
+  
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+           
+			
+			      <script
+                src="https://code.jquery.com/jquery-2.2.4.min.js"
+                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+                crossorigin="anonymous"></script>
+               <script src="{{ asset('js/app.js') }}"></script>
+               <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+               <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+               <script src="{{ asset('js/jquery.min.js') }}"></script>
+           
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+     <h1 class="display-1" style="padding-top:40px;">Centro de analisis</h1>
+  
+      <p class="lead text-muted">Centro de Análisis Integral de la Información sobre Delitos y Violencias - Chaco</p>
+      <br>
+      <p>
+        <a href="{{ path('app_login')}}" class="btn btn-primary my-2">Ingresar</a>
+        <a href="{{ path('app_register')}}" class="btn btn-secondary my-2">Registrarse</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+
+  {% endblock %}
+
+ </body> 
+
+  {% block footer %}
+
+ {<footer class="footerCentro">
+           <div class="container px-5" >
+             <p class="sm-5 text-center text-white" style="padding-top:30px;">Centro de Analisis Chaco - {{ "now"|date("Y") }}</p>
+           </div>
+  </footer>
+ {% endblock %}
+</html>

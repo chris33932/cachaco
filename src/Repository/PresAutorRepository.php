@@ -18,6 +18,22 @@ class PresAutorRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, PresAutor::class);
     }
+    public function findByNombreOId($query)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->select('p')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->like('p.id', ':query'),
+                    $qb->expr()->like('p.nombre', ':query'),
+                    $qb->expr()->like('p.apellido', ':query')
+                )
+            )->orderBy('p.apellido', 'ASC');
+        $qb->setParameter('query', $query.'%');
+
+        return $qb->getQuery()->getResult();
+    }
 
     // /**
     //  * @return PresAutor[] Returns an array of PresAutor objects

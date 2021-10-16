@@ -19,6 +19,23 @@ class VictimaRepository extends ServiceEntityRepository
         parent::__construct($registry, Victima::class);
     }
 
+    public function findByNombreOId($query)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        $qb->select('v')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->like('v.id', ':query'),
+                    $qb->expr()->like('v.nombre', ':query'),
+                    $qb->expr()->like('v.apellido', ':query')
+                )
+            )->orderBy('v.apellido', 'ASC');
+        $qb->setParameter('query', $query.'%');
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Victima[] Returns an array of Victima objects
     //  */

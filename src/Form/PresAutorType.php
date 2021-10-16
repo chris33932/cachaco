@@ -95,23 +95,28 @@ class PresAutorType extends AbstractType
              
             ])
  
-            ->add('uso_arma_fuego', ChoiceType::class, [
-                'choices' => [                                
-                    'No' => 'No',
-                    'Si' => 'Si',
-                    'Sin datos' => 'Sin datos',
-                    'Sin determinar' => 'Sin determinar',
-                   
-                ],
-             
-            ])
+          
         
             ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>
             "  "))
             ->add('tipo_documento')
             ->add('sexo')
             ->add('genero')
-            ->add('edad_legal')
+            ->add('edad_legal', ChoiceType::class, [ "label" =>
+            "Edad legal",
+                'choices' => [
+                    'Sin datos' => 'Sin datos',
+                    'Adulto' => 'Adulto',
+                    'Menor' => 'Menor',
+                    
+                    
+                ],             
+            ])
+
+
+              
+
+
             ->add('rango_etario')
             ->add('rep_geo')
       
@@ -123,8 +128,7 @@ class PresAutorType extends AbstractType
             ->add('niv_inst_formal')
             ->add('fuer_seg_pert')
             ->add('est_pol')
-            ->add('sit_arma_fue')
-            ->add('per_arma_fue')
+           
          
           
         ;

@@ -20,80 +20,85 @@
 <script>
 
   $(document).ready(function(){
-    $('#pres_autor_rep_geo > option[value="5"]').attr('selected', 'selected');
+    $('#pres_autor_rep_geo > option[value="5"]').attr('selected', 'selected'),
+    $('#pres_autor_tipo_documento > option[value="1"]').attr('selected', 'selected'),
+    $('#pres_autor_provincia > option[value="4"]').attr('selected', 'selected'),
+    $('#pres_autor_nacionalidad > option[value="1"]').attr('selected', 'selected'),
+    $('#pres_autor_sexo > option[value="1"]').attr('selected', 'selected'),
+    $('#pres_autor_genero > option[value="8"]').attr('selected', 'selected'),
+    $('#pres_autor_estado_civil > option[value="7"]').attr('selected', 'selected'),
+    $('#pres_autor_sit_lab > option[value="12"]').attr('selected', 'selected'),
+    $('#pres_autor_cond_act > option[value="5"]').attr('selected', 'selected'),
+    $('#pres_autor_niv_inst > option[value="4"]').attr('selected', 'selected'),
+    $('#pres_autor_niv_inst_formal > option[value="14"]').attr('selected', 'selected'),
+    $('#pres_autor_etnia > option[value="6"]').attr('selected', 'selected'),
+    $('#pres_autor_fuer_seg_pert > option[value="10"]').attr('selected', 'selected'),
+    $('#pres_autor_est_pol > option[value="4"]').attr('selected', 'selected'),
+    $('#pres_autor_tipo_est_intox > option[value="1"]').attr('selected', 'selected'),
+    $('#pres_autor_sit_arma_fue > option[value="6"]').attr('selected', 'selected'),
+    $('#pres_autor_per_arma_fue > option[value="7"]').attr('selected', 'selected'),
+    $('#pres_autor_sit_proc_hecho > option[value="7"]').attr('selected', 'selected'),
+    $('#pres_autor_comp_hecho > option[value="8"]').attr('selected', 'selected')
     });
 
-  $(document).ready(function(){
-    $('#pres_autor_tipo_documento > option[value="1"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_provincia > option[value="4"]').attr('selected', 'selected');
-    });
 
-  $(document).ready(function(){
-    $('#pres_autor_nacionalidad > option[value="1"]').attr('selected', 'selected');
-    });
+  //para calculo edad legal
+         $(document).ready(function () {
+            $('#pres_autor_edad').change(function () {
+                obtieneedad = $('#pres_autor_edad').val(); 
+                console.log(obtieneedad)    
+            switch (true) {
+                case obtieneedad >= 0 && obtieneedad  <= 17:
+                    $('#pres_autor_edad_legal').val('Menor');
+                break;
+                case obtieneedad >= 18:
+                    $('#pres_autor_edad_legal').val('Adulto');
+                break;
+            default:
+                $('#pres_autor_edad_legal').val('Sin datos');
+        }
 
-  $(document).ready(function(){
-    $('#pres_autor_sexo > option[value="1"]').attr('selected', 'selected');
-    });
 
-  $(document).ready(function(){
-    $('#pres_autor_genero > option[value="8"]').attr('selected', 'selected');
-    });
+             
+            });
+        });
 
-  $(document).ready(function(){
-    $('#pres_autor_estado_civil > option[value="7"]').attr('selected', 'selected');
-    });
 
-  $(document).ready(function(){
-    $('#pres_autor_sit_lab > option[value="12"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_cond_act > option[value="5"]').attr('selected', 'selected');
-    });
+  //para calculo de rango etario
+         $(document).ready(function () {
+            $('#pres_autor_edad').change(function () {
+                obtieneedad2 = $('#pres_autor_edad').val(); 
+                console.log(obtieneedad2)    
+        switch (true) {
+                          
+            case obtieneedad2 >= 0 && obtieneedad2 <= 14 :
+                $('#pres_autor_rango_etario').val(1);
+                break;
+            case obtieneedad2 >= 15 && obtieneedad2 < 30:
+                $('#pres_autor_rango_etario').val(2);
+                break;
+            case obtieneedad2 >= 30 && obtieneedad2 < 45:
+                $('#pres_autor_rango_etario').val(3);
+                break;
+            case obtieneedad2 >= 45 && obtieneedad2 < 60:
+                $('#pres_autor_rango_etario').val(4);
+                break;
+            case obtieneedad2 >= 60:
+                $('#pres_autor_rango_etario').val(5);
+                break;
 
-  $(document).ready(function(){
-    $('#pres_autor_niv_inst > option[value="4"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_niv_inst_formal > option[value="14"]').attr('selected', 'selected');
-    });
+            default:
+                $('#pres_autor_rango_etario').val(7);
+        }
 
-  $(document).ready(function(){
-    $('#pres_autor_etnia > option[value="6"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_fuer_seg_pert > option[value="10"]').attr('selected', 'selected');
-    });
 
-  $(document).ready(function(){
-    $('#pres_autor_est_pol > option[value="4"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_tipo_est_intox > option[value="1"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_sit_arma_fue > option[value="6"]').attr('selected', 'selected');
-    });
+             
+            });
+        });
 
-  $(document).ready(function(){
-    $('#pres_autor_per_arma_fue > option[value="7"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#pres_autor_sit_proc_hecho > option[value="7"]').attr('selected', 'selected');
-    });
+        
 
-  $(document).ready(function(){
-    $('#pres_autor_comp_hecho > option[value="8"]').attr('selected', 'selected');
-    });
+ 
   
 </script>
 

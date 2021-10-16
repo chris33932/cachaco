@@ -74,6 +74,10 @@ class DetalleHecho
      */
     private $conviviente;
 
+ 
+
+   
+
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
@@ -103,6 +107,21 @@ class DetalleHecho
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $comp_hecho_otro;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $uso_arma_fue;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SituacionArma::class)
+     */
+    private $sit_arma_fue;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TipoPerArma::class)
+     */
+    private $per_arma_fue;
 
     public function getId(): ?int
     {
@@ -315,6 +334,42 @@ class DetalleHecho
     public function setCompHechoOtro(?string $comp_hecho_otro): self
     {
         $this->comp_hecho_otro = $comp_hecho_otro;
+
+        return $this;
+    }
+
+    public function getUsoArmaFue(): ?string
+    {
+        return $this->uso_arma_fue;
+    }
+
+    public function setUsoArmaFue(string $uso_arma_fue): self
+    {
+        $this->uso_arma_fue = $uso_arma_fue;
+
+        return $this;
+    }
+
+    public function getSitArmaFue(): ?SituacionArma
+    {
+        return $this->sit_arma_fue;
+    }
+
+    public function setSitArmaFue(?SituacionArma $sit_arma_fue): self
+    {
+        $this->sit_arma_fue = $sit_arma_fue;
+
+        return $this;
+    }
+
+    public function getPerArmaFue(): ?TipoPerArma
+    {
+        return $this->per_arma_fue;
+    }
+
+    public function setPerArmaFue(?TipoPerArma $per_arma_fue): self
+    {
+        $this->per_arma_fue = $per_arma_fue;
 
         return $this;
     }

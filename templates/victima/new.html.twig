@@ -35,84 +35,82 @@
 <script>
 
   $(document).ready(function(){
-    $('#victima_tipoDocumento > option[value="1"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_nacionalidad > option[value="1"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_sexo > option[value="1"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_genero > option[value="8"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_estado_civil > option[value="7"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_sit_laboral > option[value="12"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#victima_cond_actividad > option[value="5"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_niv_inst > option[value="4"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
-    $('#victima_niv_inst_form > option[value="14"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
-    $('#victima_niv_inst_form > option[value="14"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
+    $('#victima_tipoDocumento > option[value="1"]').attr('selected', 'selected'),
+    $('#victima_nacionalidad > option[value="1"]').attr('selected', 'selected'),
+    $('#victima_sexo > option[value="1"]').attr('selected', 'selected'),
+    $('#victima_genero > option[value="8"]').attr('selected', 'selected'),
+    $('#victima_estado_civil > option[value="7"]').attr('selected', 'selected'),
+    $('#victima_sit_laboral > option[value="12"]').attr('selected', 'selected'),
+    $('#victima_cond_actividad > option[value="5"]').attr('selected', 'selected')
+    $('#victima_niv_inst > option[value="4"]').attr('selected', 'selected'),
+    $('#victima_niv_inst_form > option[value="14"]').attr('selected', 'selected'),
+    $('#victima_niv_inst_form > option[value="14"]').attr('selected', 'selected'),
     $('#victima_tipo_femicidio > option[value="4"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
     $('#victima_cont_femicida > option[value="6"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
     $('#victima_fuer_seg_pert > option[value="10"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
     $('#victima_est_pol > option[value="4"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
     $('#victima_ejer_funcion > option[value="3"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
     $('#victima_tipo_est_intox > option[value="1"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
     $('#victima_provincia > option[value="4"]').attr('selected', 'selected');
-    });
-  
-  $(document).ready(function(){
     $('#victima_rep_geo > option[value="5"]').attr('selected', 'selected');
-    });
-
-  $(document).ready(function(){
+    $('#victima_etnia > option[value="6"]').attr('selected', 'selected');
     $('#victima_etnia > option[value="6"]').attr('selected', 'selected');
     });
 
-  $(document).ready(function(){
-    $('#victima_etnia > option[value="6"]').attr('selected', 'selected');
-    });
+    //para calculo edad legal
+         $(document).ready(function () {
+            $('#victima_edad').change(function () {
+                obtieneedad = $('#victima_edad').val(); 
+                console.log(obtieneedad)    
+            switch (true) {
+                case obtieneedad >= 0 && obtieneedad  <= 17:
+                    $('#victima_edad_legal').val(2);
+                break;
+                case obtieneedad >= 18:
+                    $('#victima_edad_legal').val(1);
+                break;
+            default:
+                $('#victima_edad_legal').val(7);
+        }
+
+
+             
+            });
+        });
+
+
+  //para calculo de rango etario
+         $(document).ready(function () {
+            $('#victima_edad').change(function () {
+                obtieneedad2 = $('#victima_edad').val(); 
+                console.log(obtieneedad2)    
+        switch (true) {
+                          
+            case obtieneedad2 >= 0 && obtieneedad2 <= 14 :
+                $('#victima_rango_etario').val(1);
+                break;
+            case obtieneedad2 >= 15 && obtieneedad2 < 30:
+                $('#victima_rango_etario').val(2);
+                break;
+            case obtieneedad2 >= 30 && obtieneedad2 < 45:
+                $('#victima_rango_etario').val(3);
+                break;
+            case obtieneedad2 >= 45 && obtieneedad2 < 60:
+                $('#victima_rango_etario').val(4);
+                break;
+            case obtieneedad2 >= 60:
+                $('#victima_rango_etario').val(5);
+                break;
+
+            default:
+                $('#victima_rango_etario').val(7);
+        }
+
+
+             
+            });
+        });
+
   
 </script>
 

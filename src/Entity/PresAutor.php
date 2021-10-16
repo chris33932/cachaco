@@ -65,7 +65,7 @@ class PresAutor
     private $edad=-1;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EdadLegal::class, inversedBy="presAutors")
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $edad_legal;
 
@@ -207,20 +207,7 @@ class PresAutor
     private $ejer_func;
 
   
-    /**
-     * @ORM\Column(type="string", length=50, nullable=false)
-     */
-    private $uso_arma_fuego;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=SituacionArma::class, inversedBy="presAutors")
-     */
-    private $sit_arma_fue;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=TipoPerArma::class, inversedBy="presAutors")
-     */
-    private $per_arma_fue;
+   
 
    
 
@@ -358,12 +345,12 @@ class PresAutor
         return $this;
     }
 
-    public function getEdadLegal(): ?EdadLegal
+    public function getEdadLegal(): ?string
     {
         return $this->edad_legal;
     }
 
-    public function setEdadLegal(?EdadLegal $edad_legal): self
+    public function setEdadLegal(?string $edad_legal): self
     {
         $this->edad_legal = $edad_legal;
 
@@ -735,42 +722,6 @@ class PresAutor
         return $this;
     }
 
-
-    public function getUsoArmaFuego(): ?string
-    {
-        return $this->uso_arma_fuego;
-    }
-
-    public function setUsoArmaFuego(?string $uso_arma_fuego): self
-    {
-        $this->uso_arma_fuego = $uso_arma_fuego;
-
-        return $this;
-    }
-
-    public function getSitArmaFue(): ?SituacionArma
-    {
-        return $this->sit_arma_fue;
-    }
-
-    public function setSitArmaFue(?SituacionArma $sit_arma_fue): self
-    {
-        $this->sit_arma_fue = $sit_arma_fue;
-
-        return $this;
-    }
-
-    public function getPerArmaFue(): ?TipoPerArma
-    {
-        return $this->per_arma_fue;
-    }
-
-    public function setPerArmaFue(?TipoPerArma $per_arma_fue): self
-    {
-        $this->per_arma_fue = $per_arma_fue;
-
-        return $this;
-    }
 
     public function getSitProcHecho(): ?SitProcesal
     {

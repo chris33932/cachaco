@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Form\BuscarType;
 use App\Entity\PresAutor;
 use App\Form\PresAutorType;
 use App\Repository\PresAutorRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/pres/autor")
@@ -18,16 +20,45 @@ class PresAutorController extends AbstractController
     /**
      * @Route("/", name="pres_autor_index", methods={"GET"})
      */
-    public function index(PresAutorRepository $presAutorRepository): Response
+    public function index(Request $request,  $filtro=null): Response
     {
-        return $this->render('pres_autor/index.html.twig', [
-            'pres_autors' => $presAutorRepository->findBy(
-                array(),              //$where
-                array('id'=>'DESC'),  //$orderBy
-                //10,                 //$limit
-                //0,                  //$offset
-            ),
-        ]);
+        $repository = $this->getDoctrine()->getRepository(PresAutor::class);
+
+        if ($filtro){
+            $presautores = $repository->findByNombreOId($filtro);
+        }
+        else
+        {
+            $presautores = $repository->findAll();
+        }
+        $buscarForm = $this->createForm(BuscarType::class, null, array(
+            'action' => $this->generateUrl('presautor_buscar'),
+        ));
+
+        if ($request->isXmlHttpRequest()){
+            $resultado = array();
+
+            foreach($presautores as $presautor){
+                $resultado[] = array(
+                    "label" => $presautor->__toString(),
+                    "value" => $presautor->__toString(),
+                    "id" => $presautor->getId(),
+                    "id" => $presautor->getNombre(),
+                    "id" => $presautor->getApellido(),
+                );
+            }
+
+            $response = new JsonResponse();
+            $response->setStatusCode(200);
+            $response->setData(json_encode($resultado, JSON_FORCE_OBJECT));
+
+            return $response;
+        }else{                  
+            return $this->render('pres_autor/index.html.twig', array(
+                'presautores' => $presautores,
+                'buscar' => $buscarForm->createView(),
+            ));
+        }
     }
 
     /**
@@ -51,6 +82,19 @@ class PresAutorController extends AbstractController
             'pres_autor' => $presAutor,
             'form' => $form->createView(),
         ]);
+    }
+
+
+      /**
+     * @Route("/buscar", name="presautor_buscar")
+     */
+    public function buscarAction(Request $request){
+        $filtro = $request->get('buscar')['query'];
+
+        return $this->forward('App\Controller\PresAutorController::index', array(
+                                'request' => $request,
+                                'filtro' => $filtro,
+        ));
     }
 
     /**
