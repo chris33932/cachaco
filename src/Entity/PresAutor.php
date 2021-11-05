@@ -244,7 +244,7 @@ class PresAutor
     
     public function __toString()
     {
-        return $this->apellido.'; '.$this->nombre.' || nro Documento '.$this->documento_nro.' || codigo ID: '.$this->id ;
+        return $this->apellido.'; '.$this->nombre.' || ID: '.$this->id ;
     }
 
 

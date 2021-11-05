@@ -3,17 +3,22 @@
 {% block title %}Hechos{% endblock %}
 
 {% block body %}{{ parent() }}
-<div class="page-header" >
-   <h2 class="text-secondary">Lista de Hechos</h2>
-   <p class="text-muted">Listado de hechos:</p>   
-</div>
 
-<div class="container-fluid">
- 
-   <br> 
+   <h2 class="text-secondary">Hechos</h2>
+        <div class="col-xs-3">
+                {{ form_start(buscar) }}
+                 {{ form_row(buscar,  { label: 'Buscar por Nro Preventivo, Id o Año' }) }}
+                         
+                {{ form_end(buscar) }}
+            </div>
+
+</div>
+<div class="col-xs-12">
  <a href="{{ path('hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                         <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
-                 
+</div>
+<div class="container-fluid">
+                
 <div class="table-responsive">
   <table class="table">
     <thead class="thead-light">

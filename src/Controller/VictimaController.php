@@ -140,6 +140,7 @@ class VictimaController extends AbstractController
      */
     public function delete(Request $request, Victima $victima): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN', 'No está autorizado');
         if ($this->isCsrfTokenValid('delete'.$victima->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($victima);

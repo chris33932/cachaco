@@ -17,11 +17,10 @@ class BuscarType extends AbstractType
     {
 
         $builder
-            ->add('query', SearchType::class, array('label' => 'Buscar por nombre, apellido o Id',
+            ->add('query', SearchType::class, array('label' => ' ',
                 'required' => false,'attr' =>
-                array('class' => 'form-control','style'=>'margin-bottom:15px'),
-                'empty_data' => null,'attr' =>
-                array('class' => 'form-control','style'=>'margin-bottom:15px')
+                array('class' => 'form-control','style'=>'margin-bottom:15px', 'placeholder' => 'Buscar'),
+               
             ))
         ;
     }

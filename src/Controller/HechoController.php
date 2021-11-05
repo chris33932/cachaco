@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\DetalleHecho;
 use App\Entity\Hecho;
 use App\Form\HechoType;
+use App\Entity\DetalleHecho;
+use App\Form\BuscarType;
 use App\Repository\HechoRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -19,17 +21,50 @@ class HechoController extends AbstractController
     /**
      * @Route("/", name="hecho_index", methods={"GET"})
      */
-    public function index(HechoRepository $hechoRepository): Response
+    public function index(Request $request, $filtro=null, HechoRepository $hechoRepository): Response
     {
-         {
-        return $this->render('hecho/index.html.twig', [
-            'hechos' => $hechoRepository->findBy(
+
+        if($filtro){
+            $hechos= $hechoRepository->findBynroPreventivoOId($filtro);
+
+        }
+        else
+        {
+            $hechos=$hechoRepository->findBy(
                 array(),              //$where
                 array('anio'=>'DESC',
                        'id' =>'DESC'),  //$orderBy
                 //10,                 //$limit
                 //0,                  //$offset
-            ),
+            );
+        }
+        $buscarForm = $this->createForm(BuscarType::class, null, array(
+            'action' => $this->generateUrl('hecho_buscar'),
+        ));
+
+        if ($request->isXmlHttpRequest()){
+            $resultado = array();
+
+            foreach($hechos as $hecho){
+                $resultado[] = array(
+                    "label" => $hecho->__toString(),
+                    "value" => $hecho->__toString(),
+                    "id" => $hecho->getId(),
+                    "id" => $hecho->getNroPreventivo(),
+                    "id" => $hecho->getAnio(),
+                    
+                );
+            }
+
+            $response = new JsonResponse();
+            $response->setStatusCode(200);
+            $response->setData(json_encode($resultado, JSON_FORCE_OBJECT));
+
+            return $response;
+        }else{
+        return $this->render('hecho/index.html.twig', [
+            'hechos' => $hechos,
+            'buscar' => $buscarForm->createView(),
         ]);
     }
     }
@@ -83,6 +118,19 @@ class HechoController extends AbstractController
             'hecho' => $hecho,
             'form' => $form->createView(),
         ]);
+        
+    }
+
+     /**
+     * @Route("/buscar", name="hecho_buscar")
+     */
+    public function buscarAction(Request $request){
+        $filtro = $request->get('buscar')['query'];
+
+        return $this->forward('App\Controller\HechoController::index', array(
+                                'request' => $request,
+                                'filtro' => $filtro,
+        ));
     }
 
     
