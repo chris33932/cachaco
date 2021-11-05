@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Victima;
+use App\Entity\DetalleHecho;
 use App\Form\BuscarType;
 use App\Form\VictimaType;
 use App\Repository\VictimaRepository;
@@ -103,8 +104,11 @@ class VictimaController extends AbstractController
      */
     public function show(Victima $victima): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $detallehechos = $em->getRepository('App:detalleHecho')->findByVictimaId($victima->getId());
         return $this->render('victima/show.html.twig', [
             'victima' => $victima,
+            'detallehechos' => $detallehechos,
         ]);
     }
     

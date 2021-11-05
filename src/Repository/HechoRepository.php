@@ -19,6 +19,22 @@ class HechoRepository extends ServiceEntityRepository
         parent::__construct($registry, Hecho::class);
     }
 
+    public function findByProductoId($productoId){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('e, partial p.{id, codigo, nombre}, partial a.{id, nombre}')
+            ->from('AppBundle:Existencia', 'e')
+            ->innerJoin('e.almacen', 'a')
+            ->innerJoin('e.producto', 'p')
+            ->where($qb->expr()->eq('p.id', ':productoId'));
+
+        $qb->setParameter('productoId', $productoId);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    
+
     // /**
     //  * @return Hecho[] Returns an array of Hecho objects
     //  */
