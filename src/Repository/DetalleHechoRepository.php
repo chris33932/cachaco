@@ -18,6 +18,21 @@ class DetalleHechoRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, DetalleHecho::class);
     }
+    public function findByVictimaId($victimaId){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('d, partial v.{id, nombre, apellido}, partial h.{id, nro_preventivo, mes, anio, lugar_ocu}')
+            ->from('App:detalleHecho', 'd')
+            ->innerJoin('d.hecho', 'h')
+            ->innerJoin('d.victima', 'v')
+            ->where($qb->expr()->eq('v.id', ':victimaId'));
+
+        $qb->setParameter('victimaId', $victimaId);
+
+        return $qb->getQuery()->getResult();
+
+        
+
+    }
 
     // /**
     //  * @return DetalleHecho[] Returns an array of DetalleHecho objects
