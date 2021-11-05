@@ -18,6 +18,22 @@ class HechoRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Hecho::class);
     }
+    public function findBynroPreventivoOId($query)
+    {
+        $qb = $this->createQueryBuilder('h');
+
+        $qb->select('h')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->like('h.id', ':query'),
+                    $qb->expr()->like('h.anio', ':query'),
+                    $qb->expr()->like('h.nro_preventivo', ':query')
+                )
+            )->orderBy('h.id', 'ASC');
+        $qb->setParameter('query', $query.'%');
+
+        return $qb->getQuery()->getResult();
+    }
 
     public function findByProductoId($productoId){
         $qb = $this->getEntityManager()->createQueryBuilder();
