@@ -2,19 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Departamento;
 use App\Entity\Hecho;
+use App\Entity\Departamento;
 use App\Entity\OcasionDelito;
 use App\Form\DetalleHechoType;
-use Doctrine\Common\Annotations\Annotation\Required;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -28,7 +29,9 @@ class HechoType extends AbstractType
             //--------------------------------
             //grupo ocurrencia
             //------------------------------
-            ->add('nro_preventivo')
+       
+            ->add('nro_preventivo', TextType::class, [ 'required' => true, // renders it as a single text box
+            ])
             ->add('nro_sumario')
             ->add('nro_exp_jud')
             ->add('juzgado')
@@ -259,13 +262,13 @@ class HechoType extends AbstractType
             ->add('tipologia')
             
            
-            ->add('cant_victimas')
+            ->add('cant_victimas',NumberType::class, [ 'required' => true])
             ->add('cant_vic_col', TextType::class, ['data_class' => null, 'required' => false, "label" =>
             "Número de víctimas colaterales"])
            
             
             
-            ->add('cant_pres_autor')
+            ->add('cant_pres_autor',NumberType::class, [ 'required' => true])
             ->add('link')
             ->add('observacion',  TextType::class, array('data_class' => null, 'required' => false, "label" =>
             "Observación"))

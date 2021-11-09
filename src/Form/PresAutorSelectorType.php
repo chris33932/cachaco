@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Form\DataTransformer\IssueToNumberTransformer;
+
 use App\Form\DataTransformer\PresAutorToDescripcionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 use AppBundle\Form\DataTransformer\ProductoToDescripcionTransformer;
 
-class VictimaSelectorType extends AbstractType
+class PresAutorSelectorType extends AbstractType
 {
     private $transformer;
 
@@ -33,7 +33,7 @@ class VictimaSelectorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'invalid_message' => 'El presunto autor seleccionada no existe.',
+            'invalid_message' => 'El presunto autor seleccionado no existe.',
             'empty_value' => null,
         ));
     }

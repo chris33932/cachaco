@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Reportes{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('reporte_index') }}" alt="Reportes">REPORTE</a></li>
+    <li>MENU</li>
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+
+<div class="container-fluid">
+       <caption><h1  class="text-center">Reportes</h1></caption>
+ 
+
+    <div class="row"  style="padding-top:30px">
+                    <div class="col-sm-4 text-center" style="background-color:aliceblue;"> 
+                    <div class="table-responsive text-center">
+    <caption><h1>Reportes</h1></caption>
+    <ul class="nav nav-pills nav-stacked" style="background-color:  #F0FFF0";>
+        <li><a href="{{ path('victimas_reportes') }}">victimasReortes</a></li>
+        <li><a href="#" alt=""></a></li>
+        <li><a href="#" alt=""></a></li>
+    
+    </ul>
+</div> </div>
+                    
+                    <div class="col-sm-4 text-center" style="background-color:powderblue;">
+                      <div class="btn-group" style="center">
+                         <button type="button" class="btn btn-primary"> Victimas </button>
+                         <button type="button" class="btn btn-primary"> Presuntos Autores </button>
+                         <button type="button" class="btn btn-primary "> Hechos </button>
+                         <button type="button" class="btn btn-primary"> Femicidios </button>
+                      </div>
+                    </div>
+                  
+                    <div class="col-sm-4 text-center" style="background-color:aliceblue;">   </div>
+        </div>
+    </div>
+</div>
+
+ 
+{% endblock %}

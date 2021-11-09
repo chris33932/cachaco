@@ -1,0 +1,34 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes víctimas{% endblock %}
+
+
+{% block reporte %}
+<div class="table table-responsive">
+    <table class="table table-hover">
+        <caption class="text-center">victimas_reportes por departamento en rango {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}.</caption>
+        <thead>
+            <tr>
+                <th>Descripcion</th>
+                <th>Cantidad</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in datos %}
+            <tr>
+                <td>{{ fila.descripcion }}</td>
+                <td>{{ fila.cantidad  }}</td>
+              
+            </tr>
+            {% else %}
+            <tr><td>No hay resultados disponibles...</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ parent() }}
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}

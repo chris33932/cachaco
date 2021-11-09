@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+{% block title %}Reporte Base{% endblock %}
+{% block body %}
+    {{ parent() }}
+    <div class="row pull-right">
+        <div class="col-md-5 col-md-offset-7">
+            {{ form_start(formFechas) }}
+            <div class="input-group date">
+                <span class="input-group-addon">{{ form_label(formFechas.fechaDesde) }}</span>
+                {{ form_widget(formFechas.fechaDesde) }}
+                {{ form_errors(formFechas.fechaDesde) }}
+                <span class="input-group-addon">{{ form_label(formFechas.fechaHasta) }}</span>
+                {{ form_widget(formFechas.fechaHasta) }}
+                {{ form_errors(formFechas.fechaHasta) }}
+                <div class="input-group-btn">
+                    <button class="form-control" type="submit" value="Filtrar">&nbsp;<span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </div>
+            {{ form_end(formFechas) }}
+        </div>
+    </div>
+    {% block reporte %}
+    {% endblock %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-5">
+            <div id="botones-exportar" class="btn-group" role="group">
+                <a id="excel" class="btn btn-default" href="#" alt="Exportar a excel">
+                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Excel</a>
+                <a id="imprimir" class="btn btn-default" href="#" alt="imprimir">
+                  <span class="glyphicon glyphicon-print"></span>&nbsp;Imprimir</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+        $.fn.datepicker.dates['en'] = {
+            days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+            daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+            monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            today: "Hoy",
+            clear: "Limpiar",
+            format: "dd/mm/yyyy",
+            titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+            weekStart: 0
+        };
+        // configura el datepicker de bootstrap
+        $('.js-datepicker').datepicker({
+            todayHighlight: true,
+        });
+
+        $('#excel').on('click', function(e) {
+            e.preventDefault();
+            var form = $("form[name='rango_fecha']");
+            var actionOriginal = form.attr('action');
+            form.attr('action', actionOriginal + '.xlsx' )
+            form.submit();
+            form.attr('action', actionOriginal);
+
+        });
+    });
+</script>
+{% endblock %}

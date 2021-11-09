@@ -3,8 +3,16 @@
 namespace App\Repository;
 
 use App\Entity\Victima;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+use AppBundle\Form\RangoFechaType;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Victima|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +43,60 @@ class VictimaRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+
+
+    public function victimasPorDepartamento($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    departamento.descripcion	 AS descripcion,
+                    COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+                FROM hecho 
+                hecho
+	            INNER JOIN
+	            departamento
+	            ON 
+		        hecho.departamento_id = departamento.id
+	            INNER JOIN
+	            detalle_hecho
+	            ON 
+		        hecho.id = detalle_hecho.hecho_id
+	            INNER JOIN
+	            victima
+	            ON 
+		        
+		        detalle_hecho.victima_id = victima.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY
+            	departamento.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+
+
+
+
 
     // /**
     //  * @return Victima[] Returns an array of Victima objects
