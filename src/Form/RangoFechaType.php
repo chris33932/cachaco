@@ -18,23 +18,14 @@ class RangoFechaType extends AbstractType
     {
 
         $builder
-            ->add('fechaDesde', DateType::class, array(
-                'label' => 'Desde',
-                'required' => true,
-                'attr' => ['class' => 'form-control js-datepicker'],
-                'empty_data' => null,
-                'widget' => 'single_text',
-                'html5' => false,
-                'format' => 'dd/MM/yyyy',
-            ))->add('fechaHasta', DateType::class, array(
-                'label' => 'Hasta',
-                'required' => true,
-                'widget' => 'single_text',
-                'attr' => ['class' => 'form-control js-datepicker'],
-                'empty_data' => null,
-                'html5' => false,
-                'format' => 'dd/MM/yyyy',
-            ));
+            ->add('fechaDesde',  DateType::class, [ 'required' => false,
+            // renders it as a single text box
+            'widget' => 'single_text',
+        ])
+        ->add('fechaHasta',  DateType::class, [ 'required' => false,
+        // renders it as a single text box
+        'widget' => 'single_text',
+    ]);
     }
 
     public function configureOptions(OptionsResolver $resolver){

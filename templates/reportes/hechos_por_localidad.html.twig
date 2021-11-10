@@ -1,31 +1,41 @@
 {% extends "reportes/baseRepo.html.twig" %}
-{% block title %}Reportes víctimas{% endblock %}
+{% block title %}Reportes{% endblock %}
 
 
 {% block reporte %}
 <div class="container">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de víctimas por departamento</h3>  
+    <caption class="text-justify" > <h3>Distribución de hechos por localidad</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
-            <thead>
+            <thead style="background-color: aliceblue;">
                 <tr>
-                    <th>Nombre de Departamento</th>
-                    <th>Cantidad</th>
-                
+                    <th><strong>Localidad</strong></th>
+                    <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
             <tbody>
+                {% set sum = 0%}
                 {% for fila in datos %}
+                {% set sum = sum + fila.cantidad %}
+               
                 <tr>
                     <td>{{ fila.descripcion }}</td>
                     <td>{{ fila.cantidad  }}</td>
-                
+                 
+                               
                 </tr>
+               
                 {% else %}
                 <tr><td>No hay resultados disponibles...</td></tr>
                 {% endfor %}
+                 <tr>
+                    <td style="background-color: lavender;"><strong>Total</strong></td>
+                    <td style="background-color: lavender;"><strong>{{ sum  }}</strong></td>
+                   
+                </tr>
+           
             </tbody>
         </table>
       

@@ -2,7 +2,8 @@
 {% block title %}Reporte Base{% endblock %}
 {% block body %}
     {{ parent() }}
-    <div class="row pull-right">
+<div class="container">
+    <div class="row pull-center">
         <div class="col-md-5 col-md-offset-7">
             {{ form_start(formFechas) }}
             <div class="input-group date">
@@ -19,6 +20,7 @@
             {{ form_end(formFechas) }}
         </div>
     </div>
+</div>
     {% block reporte %}
     {% endblock %}
     <div class="row">

@@ -2,6 +2,16 @@
 
 namespace App\Repository;
 
+use AppBundle\Form\RangoFechaType;
+use Doctrine\ORM\Query\ResultSetMapping;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+
 use App\Entity\Hecho;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -35,19 +45,82 @@ class HechoRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findByProductoId($productoId){
-        $qb = $this->getEntityManager()->createQueryBuilder();
+    
+        public function hechosPorTipologia($fechaDesde, $fechaHasta){
+         $sql = <<<'SQL'
+                    SELECT
+                    tipologia.descripcion AS descripcion,
+                     COUNT(hecho.id) AS cantidad
+                    FROM hecho 
+                    hecho
+                    INNER JOIN
+                    tipologia
+                    ON 
+                    hecho.tipologia_id = tipologia.id
+                    WHERE hecho.fecha > :fechaDesde
+                        AND hecho.fecha < :fechaHasta
+                        GROUP BY
+                        tipologia.descripcion
+            SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
 
-        $qb->select('e, partial p.{id, codigo, nombre}, partial a.{id, nombre}')
-            ->from('AppBundle:Existencia', 'e')
-            ->innerJoin('e.almacen', 'a')
-            ->innerJoin('e.producto', 'p')
-            ->where($qb->expr()->eq('p.id', ':productoId'));
-
-        $qb->setParameter('productoId', $productoId);
-
-        return $qb->getQuery()->getResult();
-    }
+        
+        public function hechosPorLodalidad($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                       SELECT
+                       localidad.nombre AS descripcion,
+                        COUNT(hecho.id) AS cantidad
+                       FROM hecho 
+                       hecho
+                       INNER JOIN
+                       localidad
+                       ON 
+                       hecho.localidad_id = localidad.id
+                       WHERE hecho.fecha > :fechaDesde
+                           AND hecho.fecha < :fechaHasta
+                           GROUP BY
+                           localidad.id
+                           ORDER BY cantidad
+               SQL;
+       
+               $rsm = new ResultSetMapping();
+       
+               $rsm->addScalarResult('descripcion', 'descripcion');
+               $rsm->addScalarResult('cantidad', 'cantidad');
+              
+       
+               $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+       
+               $fechaDesdeCorregida = clone $fechaDesde;
+               $fechaHastaCorregida = clone $fechaHasta;
+       
+               $fechaDesdeCorregida->setTime(0, 0, 0);
+               $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+       
+               $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                   ->setParameter(':fechaHasta', $fechaHastaCorregida);
+       
+               return $query->getArrayResult();
+           }
 
     
 
