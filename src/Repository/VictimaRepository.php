@@ -51,7 +51,7 @@ class VictimaRepository extends ServiceEntityRepository
                 SELECT
                     departamento.descripcion	 AS descripcion,
                     COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
-                FROM hecho 
+                FROM 
                 hecho
 	            INNER JOIN
 	            departamento
@@ -147,6 +147,100 @@ SQL;
 
             return $query->getArrayResult();
     }
+
+
+
+    public function victimasPorRangoEtario($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    rango_etario.descripcion	 AS descripcion,
+                    COUNT(DISTINCT victima_id) AS cantidad
+                FROM 
+                hecho
+	            INNER JOIN
+	            detalle_hecho
+	            ON 
+		        hecho.id = detalle_hecho.hecho_id
+	            INNER JOIN
+	            victima
+	            ON 
+		        victima.id = detalle_hecho.victima_id
+	            INNER JOIN
+	            rango_etario
+	            ON 
+                victima.rango_etario_id = rango_etario.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY
+                rango_etario.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+    public function victimasPorEdadLegal($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    edad_legal.descripcion	 AS descripcion,
+                    COUNT(DISTINCT victima_id) AS cantidad
+                    FROM
+                    hecho
+                    INNER JOIN
+                    detalle_hecho
+                    ON 
+                        hecho.id = detalle_hecho.hecho_id
+                    INNER JOIN
+                    victima
+                    ON 
+                        victima.id = detalle_hecho.victima_id
+                    INNER JOIN
+                    edad_legal
+                    ON 
+		        victima.edad_legal_id = edad_legal.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY
+                edad_legal.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
 
 
 

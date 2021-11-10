@@ -122,6 +122,118 @@ class HechoRepository extends ServiceEntityRepository
                return $query->getArrayResult();
            }
 
+
+
+
+           public function hechosPorDepartamento($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                       SELECT
+                       departamento.descripcion AS descripcion,
+                        COUNT(hecho.id) AS cantidad
+                       FROM hecho 
+                       hecho
+                       INNER JOIN
+                       departamento
+                       ON 
+                       hecho.departamento_id = departamento.id
+                       WHERE hecho.fecha > :fechaDesde
+                           AND hecho.fecha < :fechaHasta
+                           GROUP BY
+                           departamento.id
+                           ORDER BY cantidad
+               SQL;
+       
+               $rsm = new ResultSetMapping();
+       
+               $rsm->addScalarResult('descripcion', 'descripcion');
+               $rsm->addScalarResult('cantidad', 'cantidad');
+              
+       
+               $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+       
+               $fechaDesdeCorregida = clone $fechaDesde;
+               $fechaHastaCorregida = clone $fechaHasta;
+       
+               $fechaDesdeCorregida->setTime(0, 0, 0);
+               $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+       
+               $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                   ->setParameter(':fechaHasta', $fechaHastaCorregida);
+       
+               return $query->getArrayResult();
+           }
+
+
+
+           public function hechosPorRangoHorarioTres($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                       SELECT
+                       hecho.franja_h_tres AS descripcion,
+                        COUNT(hecho.id) AS cantidad
+                       FROM hecho 
+                           WHERE hecho.fecha > :fechaDesde
+                           AND hecho.fecha < :fechaHasta
+                           GROUP BY
+                           hecho.franja_h_tres
+                           ORDER BY cantidad
+               SQL;
+       
+               $rsm = new ResultSetMapping();
+       
+               $rsm->addScalarResult('descripcion', 'descripcion');
+               $rsm->addScalarResult('cantidad', 'cantidad');
+              
+       
+               $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+       
+               $fechaDesdeCorregida = clone $fechaDesde;
+               $fechaHastaCorregida = clone $fechaHasta;
+       
+               $fechaDesdeCorregida->setTime(0, 0, 0);
+               $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+       
+               $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                   ->setParameter(':fechaHasta', $fechaHastaCorregida);
+       
+               return $query->getArrayResult();
+           }
+
+
+           public function hechosPorRangoHorarioSeis($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                       SELECT
+                       hecho.franja_h_seis AS descripcion,
+                        COUNT(hecho.id) AS cantidad
+                       FROM hecho 
+                           WHERE hecho.fecha > :fechaDesde
+                           AND hecho.fecha < :fechaHasta
+                           GROUP BY
+                           hecho.franja_h_tres
+                           ORDER BY cantidad
+               SQL;
+       
+               $rsm = new ResultSetMapping();
+       
+               $rsm->addScalarResult('descripcion', 'descripcion');
+               $rsm->addScalarResult('cantidad', 'cantidad');
+              
+       
+               $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+       
+               $fechaDesdeCorregida = clone $fechaDesde;
+               $fechaHastaCorregida = clone $fechaHasta;
+       
+               $fechaDesdeCorregida->setTime(0, 0, 0);
+               $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+       
+               $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                   ->setParameter(':fechaHasta', $fechaHastaCorregida);
+       
+               return $query->getArrayResult();
+           }
+
+
+
     
 
     // /**
