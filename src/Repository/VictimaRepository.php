@@ -455,6 +455,47 @@ SQL;
         return $query->getArrayResult();
     }
 
+    public function victimasPorClase($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+
+                victima.fuerza_seg AS descripcion,
+                COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+                FROM
+                hecho
+                INNER JOIN
+                detalle_hecho
+                ON 
+                    hecho.id = detalle_hecho.hecho_id
+                INNER JOIN
+                victima
+                ON 
+                    detalle_hecho.victima_id = victima.id
+                    WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY victima.fuerza_seg
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
 
 
 

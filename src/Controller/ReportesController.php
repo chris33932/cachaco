@@ -460,6 +460,69 @@ class ReportesController extends AbstractController
     }
 
 
+    //------------------------- VICTIMAS POR CLASE------------------------------//
+    //------------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/victimas_por_clase", name="victimas_por_clase")
+     */
+    public function victimasPorClaseAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('victimas_por_clase'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->victimasPorClase($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hecho',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/victimas_por_clase.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
 
 
     //------------------------- HECHOS POR TIPOLOGIA------------------------------//
