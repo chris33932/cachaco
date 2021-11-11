@@ -12,18 +12,19 @@
 
 
     <div class="jumbotron">
-        <h2 class="text-justify">Reportes</h2>
+        <h2 class="text-muted">Reportes</h2>
         <p> </p>
 
                    
         <div class="row">
-                <div class="col" style="background-color:">
+                <div class="col-lg-3" style="background-color:">
                 </div>
 
-                <div class="col">
+                <div class="col-lg-6">
                       <div class="btn-group">
                          <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown">
+                                
                                 Hechos
                                 </button>
                                 <div class="dropdown-menu">
@@ -38,15 +39,15 @@
                                     <a class="dropdown-item" href="#">
                                     <a class="dropdown-item" href="#">Distribución de hechos por ...</a>
                                     
-                                    <a class="dropdown-item" href="#">Distribución de víctimas por rango etario</a>
+                                    <a class="dropdown-item" href="#">Distribución de hechos por.......</a>
 
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary">Femicidios</button>
-                            <button type="button" class="btn btn-primary">Presuntos Autores</button>
+                            <button type="button" class="btn btn-primary  btn-lg dropdown-toggle">Femicidios</button>
+                            <button type="button" class="btn btn-primary  btn-lg dropdown-toggle">Presuntos Autores</button>
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-primary btn-lg  dropdown-toggle" data-toggle="dropdown">
                                 Víctimas
                                 </button>
                                 <div class="dropdown-menu">
@@ -59,17 +60,17 @@
                                     <a class="dropdown-item" href="{{ path('victimas_por_dia_mes') }}">Distribución de víctimas día y mes</a>
                                     <a class="dropdown-item" href="{{ path('victimas_por_sexo_genero') }}">Distribución de víctimas sexo y género</a>
                                     
-                                    <a class="dropdown-item" href="#">Distribución de víctimas por </a>
-                                    <a class="dropdown-item" href="#">Distribución de víctimas por mes</a>
+                                    <a class="dropdown-item" href="{{ path('victimas_por_mecanismo') }}">Distribución de víctimas por mecanismo de muerte</a>
+                                    <a class="dropdown-item" href="#">Distribución de víctimas por.......</a>
                                     
-                                    <a class="dropdown-item" href="#">Distribución de víctimas por rango etario</a>
+                                    <a class="dropdown-item" href="#">Distribución de víctimas por......</a>
 
                                 </div>
                             </div>
                         </div>
                 </div>
 
-                <div class="col" style="background-color:">
+                <div class="col-lg-3" style="background-color:">
                 </div>
         </div>
 

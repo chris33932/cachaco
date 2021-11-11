@@ -410,6 +410,51 @@ SQL;
         return $query->getArrayResult();
     }
 
+    public function victimasPorMecanismo($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+        mecanismo_muerte.descripcion AS descripcion,
+        COUNT( DISTINCT detalle_hecho.victima_id) AS cantidad
+            
+        FROM
+            hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            victima
+            ON 
+                detalle_hecho.victima_id = victima.id
+            INNER JOIN
+            mecanismo_muerte
+            ON 
+            victima.mecanismo_muerte_id = mecanismo_muerte.id
+            WHERE hecho.fecha > :fechaDesde
+            AND hecho.fecha < :fechaHasta
+            GROUP BY mecanismo_muerte.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
 
 
 

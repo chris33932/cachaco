@@ -32,15 +32,15 @@
                 <th>Id</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Documento_nro</th>
-                    <th>Genero_otro</th>
+                    <th>Documento</th>
+                   {#} <th>Genero_otro</th>
                     <th>Edad</th>
                     <th>Barrio</th>
                     <th>Calle</th>
                     <th>Altura</th>
                     <th>Interseccion</th>
                     <th>Calle_interseccion</th>
-                   {#} <th>Latitud</th>
+                    <th>Latitud</th>
                     <th>Longitud</th>
                     <th>Fraccion</th>
                     <th>Radio</th>
@@ -67,14 +67,14 @@
                     <td>{{ pres_autor.nombre }}</td>
                     <td>{{ pres_autor.apellido }}</td>
                     <td>{{ pres_autor.documentoNro }}</td>
-                    <td>{{ pres_autor.generoOtro }}</td>
+                    {#<td>{{ pres_autor.generoOtro }}</td>
                     <td>{{ pres_autor.edad }}</td>
                     <td>{{ pres_autor.barrio }}</td>
                     <td>{{ pres_autor.calle }}</td>
                     <td>{{ pres_autor.altura }}</td>
                     <td>{{ pres_autor.interseccion }}</td>
                     <td>{{ pres_autor.calleInterseccion }}</td>
-                    {#<td>{{ pres_autor.latitud }}</td>
+                    <td>{{ pres_autor.latitud }}</td>
                     <td>{{ pres_autor.longitud }}</td>
                     <td>{{ pres_autor.fraccion }}</td>
                     <td>{{ pres_autor.radio }}</td>
@@ -88,9 +88,6 @@
                     <td>{{ pres_autor.otraFuerSegPert }}</td>
                     <td>{{ pres_autor.ejerFunc }}</td>
             
-              
-                    <td>{{ pres_autor.usoArmaFuego }}</td>
-
                     <td>{{ pres_autor.observacion }}</td>#}
                     <td>
                         <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
