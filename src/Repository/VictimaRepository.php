@@ -97,8 +97,8 @@ SQL;
     public function victimasPorLocalidad($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
         SELECT
-        localidad.nombre, 
-        COUNT(DISTINCT detalle_hecho.victima_id)
+        localidad.nombre AS descripcion, 
+        COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
 
         FROM
         hecho
@@ -114,15 +114,11 @@ SQL;
         victima
         ON 
             detalle_hecho.victima_id = victima.id
-        GROUP BY
-        localidad.nombre
-
         WHERE hecho.fecha > :fechaDesde
         AND hecho.fecha < :fechaHasta
-
         GROUP BY
         localidad.nombre
-            
+
 
 
 
@@ -239,6 +235,181 @@ SQL;
 
         return $query->getArrayResult();
     }
+
+
+    public function victimasPorMes($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    mes	  AS descripcion,
+                    COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+                    FROM
+                    detalle_hecho
+	                INNER JOIN
+	                hecho
+	                ON 
+		            detalle_hecho.hecho_id = hecho.id
+                    INNER JOIN
+                    victima
+                    ON 
+            		detalle_hecho.victima_id = victima.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY mes
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+    public function victimasPorDia($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    dia_ocu	 AS descripcion,
+                    COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+                    FROM
+                    detalle_hecho
+	                INNER JOIN
+	                hecho
+	                ON 
+		            detalle_hecho.hecho_id = hecho.id
+                    INNER JOIN
+                    victima
+                    ON 
+            		detalle_hecho.victima_id = victima.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY
+                    dia_ocu
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+    public function victimasPorSexo($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    sexo.descripcion  AS descripcion,
+                    COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+                    FROM
+                    hecho
+	                INNER JOIN
+	                detalle_hecho
+	                ON 
+		            hecho.id = detalle_hecho.hecho_id
+                    INNER JOIN
+                    victima
+                    ON 
+            		detalle_hecho.victima_id = victima.id
+                    INNER JOIN
+                    sexo
+                    ON 
+		           victima.sexo_id = sexo.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY sexo.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+
+    public function victimasPorGenero($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT
+                    genero.descripcion  AS descripcion,
+                    COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+                    FROM
+                    detalle_hecho
+	                INNER JOIN
+	                hecho
+	                ON 
+		            detalle_hecho.hecho_id = hecho.id
+                    INNER JOIN
+                    victima
+                    ON 
+            		detalle_hecho.victima_id = victima.id
+                    INNER JOIN
+                    genero
+                    ON 
+	            	genero.id = victima.genero_id 
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY genero.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
 
 
 

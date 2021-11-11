@@ -266,6 +266,138 @@ class ReportesController extends AbstractController
         }
     }
 
+     //------------------------- VICTIMAS POR DIA Y MES------------------------------//
+    //-------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/victimas_por_sexo_genero", name="victimas_por_sexo_genero")
+     */
+    public function victimasPorSexoGeneroAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('victimas_por_sexo_genero'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->victimasPorSexo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:Victima')
+                    ->victimasPorGenero($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victima',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/victimas_por_sexo_genero.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+    //------------------------- VICTIMAS POR DIA Y MES---------------------------------//
+    //-------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/victimas_por_dia_mes", name="victimas_por_dia_mes")
+     */
+    public function victimasPorDiaMesAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('victimas_por_dia_mes'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Hecho')
+                    ->hechosPorDia($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:Hecho')
+                    ->hechosPorMes($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hecho',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/victimas_por_dia_mes.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
 
 
     //------------------------- HECHOS POR TIPOLOGIA------------------------------//
@@ -515,6 +647,134 @@ class ReportesController extends AbstractController
             ));
         }
     }
+
+     //------------------------- HECHOS POR DIA Y MES------------------------------//
+    //-------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/hechos_por_dia_mes", name="hechos_por_dia_mes")
+     */
+    public function hechosPorDiaMesAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('hechos_por_dia_mes'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Hecho')
+                    ->hechosPorDia($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:Hecho')
+                    ->hechosPorMes($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hecho',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/hechos_por_dia_mes.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+    //------------------------- HECHOS EN OCASION OTRO DELITO------------------------------//
+    //------------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/hechos_en_ocasion_otro_delito", name="hechos_en_ocasion_otro_delito")
+     */
+    public function hechosEnOcasionOtroDelitoAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('hechos_en_ocasion_otro_delito'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Hecho')
+                    ->hechosEnOcasionOtroDelito($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hecho',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/hechos_en_ocasion_otro_delito.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
 
 
 

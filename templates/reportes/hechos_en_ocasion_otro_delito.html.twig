@@ -5,14 +5,14 @@
 {% block reporte %}
 <div class="container">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de hechos por rango horario</h3>  
+    <caption class="text-justify" > <h3>Distribución de hechos en ocasión de otro delito</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
             <thead style="background-color: aliceblue;">
                 <tr>
-                    <th><strong>Rango horario C/3 </strong></th>
-                    <th><strong>Cantidad </strong></th>          
+                    <th><strong>Descripción</strong></th>
+                    <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
             <tbody>
@@ -31,42 +31,8 @@
                 <tr><td>No hay resultados disponibles...</td></tr>
                 {% endfor %}
                  <tr>
-                    <td style="background-color: lightblue;"><strong>Total</strong></td>
-                    <td style="background-color: lightblue;"><strong>{{ sum  }}</strong></td>
-                   
-                </tr>
-           
-            </tbody>
-        </table>
-
-        {# rango hora cada seis#}
-
-        <table class="table table-hover">
-            
-            <thead style="background-color: cadetblue;">
-                <tr>
-                    <th><strong>Rango horario C/6</strong></th>
-                    <th><strong>Cantidad</strong></th>          
-                </tr>
-            </thead>
-            <tbody>
-                {% set sum2 = 0%}
-                {% for fila in datos2 %}
-                {% set sum2 = sum2 + fila.cantidad %}
-               
-                <tr>
-                    <td>{{ fila.descripcion }}</td>
-                    <td>{{ fila.cantidad  }}</td>
-                 
-                               
-                </tr>
-               
-                {% else %}
-                <tr><td>No hay resultados disponibles...</td></tr>
-                {% endfor %}
-                 <tr>
                     <td style="background-color: lavender;"><strong>Total</strong></td>
-                    <td style="background-color: lavender;"><strong>{{ sum2  }}</strong></td>
+                    <td style="background-color: lavender;"><strong>{{ sum  }}</strong></td>
                    
                 </tr>
            

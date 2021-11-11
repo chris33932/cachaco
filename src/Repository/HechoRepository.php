@@ -234,6 +234,122 @@ class HechoRepository extends ServiceEntityRepository
 
 
 
+
+
+
+
+           public function hechosPorDia($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                   SELECT
+                   dia_ocu AS descripcion,
+                   COUNT(hecho.id) AS cantidad
+                   FROM
+                   hecho
+                   WHERE hecho.fecha > :fechaDesde
+                   AND hecho.fecha < :fechaHasta
+                   GROUP BY
+                   dia_ocu
+    SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+
+        public function hechosPorMes($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                    SELECT
+	               mes AS descripcion,
+	               COUNT(hecho.id) AS cantidad
+	
+                   FROM
+	               hecho
+                   WHERE hecho.fecha > :fechaDesde
+                   AND hecho.fecha < :fechaHasta
+                   GROUP BY
+                   mes
+SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+        public function hechosEnOcasionOtroDelito($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                   SELECT
+                   ocasion_delito.descripcion AS descripcion,
+                   COUNT(hecho.id) AS cantidad
+                   FROM
+                   hecho
+                   INNER JOIN
+	               ocasion_delito
+	               ON 
+	            	hecho.oca_delito_id = ocasion_delito.id
+                   WHERE hecho.fecha > :fechaDesde
+                   AND hecho.fecha < :fechaHasta
+                   GROUP BY
+                   ocasion_delito.descripcion
+
+SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+
+
+       
+
+
+
     
 
     // /**
