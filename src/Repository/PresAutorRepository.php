@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\PresAutor;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,6 +35,101 @@ class PresAutorRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+
+    public function presuntoAutorPorSexo($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT 
+            sexo.descripcion AS descripcion,
+            COUNT( DISTINCT	pres_autor.id) AS cantidad
+                
+            FROM
+                hecho
+                INNER JOIN
+                detalle_hecho
+                ON 
+                    hecho.id = detalle_hecho.hecho_id
+                INNER JOIN
+                pres_autor
+                ON 
+                    pres_autor.id = detalle_hecho.pres_autor_id
+                INNER JOIN
+                sexo
+                ON 
+                    pres_autor.sexo_id = sexo.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY
+                    sexo.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+    public function presuntoAutorPorGenero($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT 
+            genero.descripcion AS descripcion,
+            COUNT( DISTINCT	pres_autor.id) AS cantidad
+                
+            FROM
+                hecho
+                INNER JOIN
+                detalle_hecho
+                ON 
+                    hecho.id = detalle_hecho.hecho_id
+                INNER JOIN
+                pres_autor
+                ON 
+                    pres_autor.id = detalle_hecho.pres_autor_id
+                INNER JOIN
+                sexo
+                ON 
+                    pres_autor.genero_id = genero.id
+                WHERE hecho.fecha > :fechaDesde
+                    AND hecho.fecha < :fechaHasta
+                    GROUP BY
+                    genero.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
 
     // /**
     //  * @return PresAutor[] Returns an array of PresAutor objects

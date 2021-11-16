@@ -1,0 +1,97 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes{% endblock %}
+
+
+{% block reporte %}
+<div class="container">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h3>Distribución de presuntos autores por sexo y género</h3>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+        <table class="table table-hover">
+            
+            <thead style="background-color: aliceblue;">
+                <tr>
+                    <th><strong>Distribución de hechos por sexo </strong></th>
+                    <th><strong>Cantidad </strong></th>          
+                </tr>
+            </thead>
+            <tbody>
+                {% set sum = 0%}
+                {% for fila in datos %}
+                {% set sum = sum + fila.cantidad %}
+               
+                <tr>
+                    <td>{{ fila.descripcion }}</td>
+                    <td>{{ fila.cantidad  }}</td>
+                 
+                               
+                </tr>
+               
+                {% else %}
+                <tr><td>No hay resultados disponibles...</td></tr>
+                {% endfor %}
+                 <tr>
+                    <td style="background-color: lightblue;"><strong>Total</strong></td>
+                    <td style="background-color: lightblue;"><strong>{{ sum  }}</strong></td>
+                   
+                </tr>
+           
+            </tbody>
+        </table>
+
+       
+       
+
+        <table class="table table-hover">
+            
+            <thead style="background-color: cadetblue;">
+                <tr>
+                    <th><strong>Distribución de víctimas por género</strong></th>
+                    <th><strong>Cantidad</strong></th>          
+                </tr>
+            </thead>
+            <tbody>
+                {% set sum2 = 0%}
+                {% for fila in datos2 %}
+                {% set sum2 = sum2 + fila.cantidad %}
+               
+                <tr>
+                    <td>{{ fila.descripcion }}</td>
+                    <td>{{ fila.cantidad  }}</td>
+                 
+                               
+                </tr>
+               
+                {% else %}
+                <tr><td>No hay resultados disponibles...</td></tr>
+                {% endfor %}
+                 <tr>
+                    <td style="background-color: lavender;"><strong>Total</strong></td>
+                    <td style="background-color: lavender;"><strong>{{ sum2  }}</strong></td>
+                   
+                </tr>
+           
+            </tbody>
+        </table>
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

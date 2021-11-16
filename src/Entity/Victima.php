@@ -354,7 +354,7 @@ class Victima
     private $desap_ant_hecho="No corresponde";
 
     /**
-     * @ORM\Column(type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $observacion;
 

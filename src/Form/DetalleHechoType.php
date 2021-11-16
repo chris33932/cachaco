@@ -40,15 +40,14 @@ class DetalleHechoType extends AbstractType
             ->add('den_prev_desc', TextType::class, [ 'required'=>False, "label" =>
             "Descripción denuncias previas", 'empty_data' => 'No corresponde'])
             
-            ->add('vinculo', ChoiceType::class, [
+            ->add('vinculo', ChoiceType::class, ["label" =>
+                "Vínculo entre la víctima y el presunto autor",   
                 'choices' => [
-                    'Sin datos' => 'Sin datos',
-                    'Si' => 'Si',
-                    'No' => 'No',                  
+                    'No' => 'No',  
+                    'Si' => 'Si',           
                     'Sin determinar' => 'Sin determinar',
                     'Sin datos' => 'Sin datos',
-                    "label" =>
-                    "Vínculo entre la víctima y el presunto autor",
+                  
                    
                 ],
              
@@ -56,6 +55,7 @@ class DetalleHechoType extends AbstractType
             ->add('vinculo_familiar', ChoiceType::class, ["label" =>
             "Vínculo familiar entre la víctima y el presunto autor",
                 'choices' => [     
+                    'Sin vínculo familiar' => 'Sin vínculo familiar',
                     'Sin datos' => 'Sin datos',                           
                     'Cónyuge' => 'Cónyuge',
                     'Pareja' => 'Pareja',
@@ -69,7 +69,7 @@ class DetalleHechoType extends AbstractType
                     'Padre/madre' => 'Padre/madre',
                     'Padrastro/madrastra' => 'Padrastro/madrastra',
                     'Otros vínculos familiares' => 'Otros vínculos familiares',
-                    'Sin vínculo familiar' => 'Sin vínculo familiar',
+                    
                     
                     'Sin determinar' => 'Sin determinar',
                    
@@ -85,7 +85,8 @@ class DetalleHechoType extends AbstractType
             "Otro vínculo familiar entre la víctima y el presunto autor",'empty_data' => 'No corresponde'])
 
             ->add('vinculo_no_familiar', ChoiceType::class, [
-                'choices' => [        
+                'choices' => [  
+                    'Sin vínculo extrafamiliar' => 'Sin vínculo extrafamiliar',      
                     'Sin datos' => 'Sin datos',                        
                     'Socio(a)' => 'Socio(a)',
                     'Empleado(a)' => 'Empleado(a)',
@@ -94,7 +95,7 @@ class DetalleHechoType extends AbstractType
                     
                     'Otras relaciones laborales' => 'Otras relaciones laborales',
                     'Otras relaciones' => 'Otras relaciones',
-                    'Sin vínculo extrafamiliar' => 'Sin vínculo extrafamiliar',
+                    
                     
                     'Sin determinar' => 'Sin determinar',
                     
@@ -111,9 +112,10 @@ class DetalleHechoType extends AbstractType
             ->add('conviviente', ChoiceType::class, [ "label" =>
             " Convivencia entre la víctima y el presunto autor al momento del hecho",
                 'choices' => [
+                    'No' => 'No',
                     'Sin datos' => 'Sin datos',
                     'Si' => 'Si',
-                    'No' => 'No',
+                    
                     'Sin determinar' => 'Sin determinar',
                    
                 ],
@@ -131,15 +133,15 @@ class DetalleHechoType extends AbstractType
              
             ])
            
-            ->add('sit_arma_fue'  ,EntityType::class, ['class' => SituacionArma::class, "label" => "Situación del arma",'empty_data' => 'Sin datos']      )
+            ->add('sit_arma_fue'  ,EntityType::class, ['class' => SituacionArma::class, 
+                  "label" => "Situación del arma",'empty_data' => 'No corresponde']      )
 
-            ->add('per_arma_fue'  ,EntityType::class, ['class' => TipoPerArma::class, "label" => "Permiso del arma",'empty_data' => 'Sin datos']      )
+            ->add('per_arma_fue'  ,EntityType::class, ['class' => TipoPerArma::class, 
+                 "label" => "Permiso del arma",'empty_data' => 'No corresponde']      )
             
-            ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
+            ->add('tipo_e_intox'  ,EntityType::class, ['class' => EstadoIntox::class, 
+                 "label" => "Tipo de estado de intoxicación del presunto autor al momento del hecho"]      )
 
-            ->add('est_intox_otro', TextType::class, [ 'required'=>false, "label" =>
-            "Otro estado de intoxicación del presunto autor al momento del hecho",'empty_data' => 'No corresponde'])
-            
             ->add('est_intox', ChoiceType::class, [ "label" =>
             "Estado de intoxicación del presunto autor",
                 'choices' => [
@@ -151,6 +153,9 @@ class DetalleHechoType extends AbstractType
                 ],
              
             ])
+            
+            ->add('est_intox_otro', TextType::class, [ 'required'=>false, "label" =>
+            "Otro estado de intoxicación del presunto autor al momento del hecho",'empty_data' => 'No corresponde'])
             
             ->add('sit_procesal', EntityType::class, [ 'class' => SitProcesal::class ,"label" => "Situación procesal del presunto autor al momento del hecho",
             'empty_data' => 'Sin datos']

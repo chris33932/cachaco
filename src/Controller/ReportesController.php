@@ -266,8 +266,8 @@ class ReportesController extends AbstractController
         }
     }
 
-     //------------------------- VICTIMAS POR DIA Y MES------------------------------//
-    //-------------------------------------------------------------------------------//
+     //------------------------- VICTIMAS POR SEXO Y GENERO------------------------------//
+    //-----------------------------------------------------------------------------------//
 
     
      /**
@@ -895,6 +895,73 @@ class ReportesController extends AbstractController
                     'fecha_desde' => $rangoFecha['fechaDesde'],
                     'fecha_hasta' => $rangoFecha['fechaHasta'],
                     'datos' => $datos,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+     //------------------------- PRESUNTOS AUTORES POR SEXO Y GENERO------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/pres_autor_por_sexo_genero", name="pres_autor_por_sexo_genero")
+     */
+    public function presAutorPorSexoGeneroAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('victimas_por_sexo_genero'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->presAutorPorSexo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:Victima')
+                    ->presAutorPorGenero($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victima',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/pres_autor_por_sexo_genero.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
                     'formFechas' => $formFechas->createView()
             ));
         }

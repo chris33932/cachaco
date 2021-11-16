@@ -154,7 +154,9 @@ class HechoType extends AbstractType
             ])
             ->add('calle_int_ocu', TextType::class, [ "label" =>
             "Calle intersección Ocurrencia",])
+  
             ->add('rep_geo_ocu')
+
             ->add('latitud_ocu')
             ->add('longitud_ocu')
             ->add('zona_ocu')

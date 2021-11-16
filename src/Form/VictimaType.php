@@ -75,7 +75,7 @@ class VictimaType extends AbstractType
             ])
             ->add('embarazada', ChoiceType::class, [
                 'choices' => [
-                    'No corresponde' => 'Sin datos',
+                    'No corresponde' => 'No corresponde',
                     'Si' => 'Si',
                     'No' => 'No',
                     'Sin determinar' => 'Sin determinar',

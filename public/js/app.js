@@ -94,7 +94,7 @@ function addRemoveButton ($card) {
     
 
     // Campos ocurrencia
-    $('#hecho_rep_geo_ocu > option[value="5"]').attr('selected', 'selected'),
+    $('#hecho_rep_geo_ocu > option[value="3"]').attr('selected', 'selected'),
     $('#hecho_departamento > option[value="25"]').attr('selected', 'selected'),
     $('#hecho_localidad > option[value="77"]').attr('selected', 'selected'),
     $('#hecho_tipo_esp_ocu > option[value="5"]').attr('selected', 'selected'),
