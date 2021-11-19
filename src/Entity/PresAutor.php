@@ -207,12 +207,11 @@ class PresAutor
     private $ejer_func;
 
   
-   
 
    
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $observacion;
 

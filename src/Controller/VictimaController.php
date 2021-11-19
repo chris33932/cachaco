@@ -30,7 +30,13 @@ class VictimaController extends AbstractController
         }
         else
         {
-            $victimas = $repository->findAll();
+            $victimas = $repository->findBy(
+                array(),              //$where
+                array(//'anio'=>'DESC',
+                       'id' =>'DESC'),  //$orderBy
+                //10,                 //$limit
+                //0,                  //$offset
+            );
         }
         $buscarForm = $this->createForm(BuscarType::class, null, array(
             'action' => $this->generateUrl('victima_buscar'),

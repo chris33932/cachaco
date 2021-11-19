@@ -29,7 +29,13 @@ class PresAutorController extends AbstractController
         }
         else
         {
-            $presautores = $repository->findAll();
+            $presautores = $repository->findBy(
+                array(),              //$where
+                array(//'anio'=>'DESC',
+                       'id' =>'DESC'),  //$orderBy
+                //10,                 //$limit
+                //0,                  //$offset
+            );
         }
         $buscarForm = $this->createForm(BuscarType::class, null, array(
             'action' => $this->generateUrl('presautor_buscar'),

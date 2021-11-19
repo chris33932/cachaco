@@ -25,8 +25,8 @@
                     <tr>
                         <th>Id</th>
                         <th>N°.prev</th>
-                        <th>N°.sumario</th>
-                        <th>N°.exp_jud</th>
+                        <th>Depto.</th>
+                        <th>Localidad</th>
                         {#<th>Juzgado</th>
                         <th>Fiscalia</th>#}
                         <th>Fecha</th>
@@ -85,9 +85,9 @@
                     <tr>
                         <td>{{ hecho.id }}</td>
                         <td>{{ hecho.nroPreventivo }}</td>
-                        <td>{{ hecho.nroSumario }}</td>
-                        <td>{{ hecho.nroExpJud }}</td>
-                        {#<td>{{ hecho.juzgado }}</td>
+                        <td>{{ hecho.departamento }}</td>
+                        <td>{{ hecho.localidad }}</td>
+                        {#<td>{{ hecho.localidad }}</td>
                         <td>{{ hecho.fiscalia }}</td>#}
                         <td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>
                         <td>{{ hecho.anio }}</td>
