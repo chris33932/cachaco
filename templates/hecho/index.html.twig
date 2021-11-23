@@ -27,53 +27,57 @@
                         <th>N°.prev</th>
                         <th>Depto.</th>
                         <th>Localidad</th>
-                        {#<th>Juzgado</th>
-                        <th>Fiscalia</th>#}
+                        {#<th>Juzgado</th>#}
+                        {#<th>Fiscalia</th>#}
                         <th>Fecha</th>
                         <th>Anio</th>
-                        <th>Mes</th>
-                        <th>Cod_Indec</th>
-                        <th>Gran_Rcia</th>
-                        <th>Hora_ocu</th>
-                        <th>Dia_ocu</th>
+                        {#<th>Mes</th>#}
+                        {#<th>Cod_Indec</th>#}
+                        {#<th>Gran_Rcia</th>#}
+                        {#<th>Hora_ocu</th>#}
+                        {#<th>Dia_ocu</th>#}
                         <th>Usuario</th>
-                        {#<th>Franja_h_seis</th>
-                        <th>Franja_h_tres</th>
-                        <th>Barrio_ocu</th>
-                        <th>Calle_ocu</th>
-                        <th>Altura_ocu</th>
-                        {#<th>Intersecc_ocu</th>
-                        <th>Calle_int_ocu</th>
-                        <th>Latitud_ocu</th>
-                        <th>Longitud_ocu</th>
+                        {#<th>Franja_h_seis</th>#}
+                        {#<th>Franja_h_tres</th>#}
+                        {#<th>Barrio_ocu</th>#}
+                        {#<th>Calle_ocu</th>#}
+                        {#<th>Altura_ocu</th>#}
+                        {#<th>Intersecc_ocu</th>#}
+                        {#<th>Calle_int_ocu</th>#}
+                        {#<th>Latitud_ocu</th>#}
+                        {#<th>Longitud_ocu</th>#}
+                        <th>Zona_ocu</th>
+                        <th>Tipo_esp_ocu</th>
+                        <th>Tipo_lug_ocu</th>
                         <th>Acceso_ocu</th>
-                        <th>Lugar_ocu_otro</th>
-                        <th>Dom_part_otro</th>
-                        <th>Fraccion_ocu</th>
-                        <th>Radio_ocu</th>
-                        <th>Coinc_lug_ocu</th>
-                        <th>Fecha_hgo</th>
-                        <th>Hora_hgo</th>
-                        <th>Dia_hgo</th>
+                        <th>Lugar_ocu</th>
+                        {#<th>Lugar_ocu_otro</th>#}
+                        {#<th>Dom_part_otro</th>#}
+                        {#<th>Fraccion_ocu</th>#}
+                        {#<th>Radio_ocu</th>#}
+                        {#<th>Coinc_lug_ocu</th>#}
+                        {#<th>Fecha_hgo</th>
+                        {#<th>Hora_hgo</th>
+                        {#<th>Dia_hgo</th>
                        
-                        <th>Barrio_hgo</th>
-                        <th>Calle_hgo</th>
-                        <th>Altura_hgo</th>
-                        <th>Intersec_hgo</th>
-                        <th>Calle_int_hgo</th>
-                        <th>Latitud_hgo</th>
-                        <th>Longitud_hgo</th>
-                        <th>Lug_hgo_otro</th>
-                        <th>Acceso_hgo</th>
-                        <th>Dom_part_hgo_otro</th>
-                        <th>Fraccion_hgo</th>
-                        <th>Radio_hgo</th>
-                        <th>Oca_delito_otro</th>
-                        <th>Orig_reg_otro</th>
-                        <th>Recep_den_otro</th>
-                        <th>Cant_victimas</th>
-                        <th>Cant_vic_col</th>
-                        <th>Cant_pres_autor</th>
+                        {#<th>Barrio_hgo</th>
+                        {#<th>Calle_hgo</th>
+                        {#<th>Altura_hgo</th>
+                        {#<th>Intersec_hgo</th>
+                        {#<th>Calle_int_hgo</th>
+                        {#<th>Latitud_hgo</th>
+                        {#<th>Longitud_hgo</th>
+                        {#<th>Lug_hgo_otro</th>
+                        {#<th>Acceso_hgo</th>
+                        {#<th>Dom_part_hgo_otro</th>
+                        {#<th>Fraccion_hgo</th>
+                        {#<th>Radio_hgo</th>
+                        {#<th>Oca_delito_otro</th>
+                        {#<th>Orig_reg_otro</th>
+                        {#<th>Recep_den_otro</th>
+                        {#<th>Cant_victimas</th>
+                        {#<th>Cant_vic_col</th>
+                        {#<th>Cant_pres_autor</th>
                        {# <th>Link</th>#}
                        {# <th>Observacion</th>#}
                         <th>Acciones</th>
@@ -87,53 +91,62 @@
                         <td>{{ hecho.nroPreventivo }}</td>
                         <td>{{ hecho.departamento }}</td>
                         <td>{{ hecho.localidad }}</td>
-                        {#<td>{{ hecho.localidad }}</td>
-                        <td>{{ hecho.fiscalia }}</td>#}
+                    
+                        {#<td>{{ hecho.fiscalia }}</td>#}
                         <td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>
                         <td>{{ hecho.anio }}</td>
-                        <td>{{ hecho.mes }}</td>
-                        <td>{{ hecho.codLocIndec }}</td>
-                        <td>{{ hecho.granRcia }}</td>
-                        <td>{{ hecho.horaOcu ? hecho.horaOcu|date('H:i:s') : '' }}</td>
-                        <td>{{ hecho.diaOcu }}</td>
+                        {#<td>{{ hecho.mes }}</td>
+                        {#<td>{{ hecho.codLocIndec }}</td>
+                        {#<td>{{ hecho.granRcia }}</td>
+                        {#<td>{{ hecho.horaOcu ? hecho.horaOcu|date('H:i:s') : '' }}</td>
+                        {#<td>{{ hecho.diaOcu }}</td>#}
                          <td>{{ hecho.Creado }}</td>
-                        {#<td>{{ hecho.franjaHSeis }}</td>
-                        <td>{{ hecho.franjaHTres }}</td>
-                        <td>{{ hecho.barrioOcu }}</td>
-                        <td>{{ hecho.calleOcu }}</td>
-                        <td>{{ hecho.alturaOcu }}</td>
-                        <td>{{ hecho.interseccOcu }}</td>
-                        <td>{{ hecho.calleIntOcu }}</td>
-                        <td>{{ hecho.latitudOcu }}</td>
-                        <td>{{ hecho.longitudOcu }}</td>
+                        {#<td>{{ hecho.franjaHSeis }}</td>#}
+                        {#<td>{{ hecho.franjaHTres }}</td>#}
+                        {#<td>{{ hecho.barrioOcu }}</td>#}
+                        {#<td>{{ hecho.calleOcu }}</td>#}
+                        {#<td>{{ hecho.alturaOcu }}</td>#}
+                        {#<td>{{ hecho.interseccOcu }}</td>#}
+                        {#<td>{{ hecho.calleIntOcu }}</td>#}
+                        {#<td>{{ hecho.latitudOcu }}</td>#}
+                        {#<td>{{ hecho.longitudOcu }}</td>#}
+
+                   
+
+
+                        <td>{{ hecho.zonaOcu }}</td>
+                        <td>{{ hecho.tipoEspOcu }}</td>
+                        <td>{{ hecho.tipoLugOcu }}</td>
                         <td>{{ hecho.accesoOcu }}</td>
-                        <td>{{ hecho.lugarOcuOtro }}</td>
-                        <td>{{ hecho.domPartOtro }}</td>
-                        <td>{{ hecho.fraccionOcu }}</td>
-                        <td>{{ hecho.radioOcu }}</td>
-                        <td>{{ hecho.coincLugOcu }}</td>
-                        <td>{{ hecho.fechaHgo ? hecho.fechaHgo|date('Y-m-d') : '' }}</td>
-                        <td>{{ hecho.horaHgo ? hecho.horaHgo|date('H:i:s') : '' }}</td>
-                        <td>{{ hecho.diaHgo }}</td>
+                        <td>{{ hecho.lugarOcu }}</td>
+
+                        {#<td>{{ hecho.lugarOcuOtro }}</td>#}
+                        {#<td>{{ hecho.domPartOtro }}</td>#}
+                        {#<td>{{ hecho.fraccionOcu }}</td>#}
+                        {#<td>{{ hecho.radioOcu }}</td>#}
+                        {#<td>{{ hecho.coincLugOcu }}</td>#}
+                        {#<td>{{ hecho.fechaHgo ? hecho.fechaHgo|date('Y-m-d') : '' }}</td>#}
+                        {#<td>{{ hecho.horaHgo ? hecho.horaHgo|date('H:i:s') : '' }}</td>#}
+                        {#<td>{{ hecho.diaHgo }}</td>#}
                       
-                        <td>{{ hecho.barrioHgo }}</td>
-                        <td>{{ hecho.calleHgo }}</td>
-                        <td>{{ hecho.alturaHgo }}</td>
-                        <td>{{ hecho.intersecHgo }}</td>
-                        <td>{{ hecho.calleIntHgo }}</td>
-                        <td>{{ hecho.latitudHgo }}</td>
-                        <td>{{ hecho.longitudHgo }}</td>
-                        <td>{{ hecho.lugHgoOtro }}</td>
-                        <td>{{ hecho.accesoHgo }}</td>
-                        <td>{{ hecho.domPartHgoOtro }}</td>
-                        <td>{{ hecho.fraccionHgo }}</td>
-                        <td>{{ hecho.radioHgo }}</td>
-                        <td>{{ hecho.ocaDelitoOtro }}</td>
-                        <td>{{ hecho.origRegOtro }}</td>
-                        <td>{{ hecho.recepDenOtro }}</td>
-                        <td>{{ hecho.cantVictimas }}</td>
-                        <td>{{ hecho.cantVicCol }}</td>
-                        <td>{{ hecho.cantPresAutor }}</td>
+                        {#<td>{{ hecho.barrioHgo }}</td>#}
+                        {#<td>{{ hecho.calleHgo }}</td>#}
+                        {#<td>{{ hecho.alturaHgo }}</td>#}
+                        {#<td>{{ hecho.intersecHgo }}</td>#}
+                        {#<td>{{ hecho.calleIntHgo }}</td>#}
+                        {#<td>{{ hecho.latitudHgo }}</td>#}
+                        {#<td>{{ hecho.longitudHgo }}</td>#}
+                        {#<td>{{ hecho.lugHgoOtro }}</td>#}
+                        {#<td>{{ hecho.accesoHgo }}</td>#}
+                        {#<td>{{ hecho.domPartHgoOtro }}</td>#}
+                        {#<td>{{ hecho.fraccionHgo }}</td>#}
+                        {#<td>{{ hecho.radioHgo }}</td>#}
+                        {#<td>{{ hecho.ocaDelitoOtro }}</td>#}
+                        {#<td>{{ hecho.origRegOtro }}</td>#}
+                        {#<td>{{ hecho.recepDenOtro }}</td>#}
+                        {#<td>{{ hecho.cantVictimas }}</td>#}
+                        {#<td>{{ hecho.cantVicCol }}</td>#}
+                        {#<td>{{ hecho.cantPresAutor }}</td>#}
                          {#<td>{{ hecho.link }}</td>#}
                          {#<td>{{ hecho.observacion }}</td>#}
                     

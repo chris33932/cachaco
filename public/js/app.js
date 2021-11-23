@@ -89,33 +89,33 @@ function addRemoveButton ($card) {
 
   $(document).ready(function(){
     // Campos hecho
-    $('#hecho_comisaria > option[value="103"]').attr('selected', 'selected'),
-    $('#hecho_tipologia > option[value="2"]').attr('selected', 'selected'),
+    //$('#hecho_comisaria > option[value="103"]').attr('selected', 'selected'),
+    //$('#hecho_tipologia > option[value="2"]').attr('selected', 'selected'),
     
 
-    // Campos ocurrencia
-    $('#hecho_rep_geo_ocu > option[value="3"]').attr('selected', 'selected'),
-   // $('#hecho_departamento > option[value="25"]').attr('selected', 'selected'),
+     // Campos ocurrencia
+    //$('#hecho_rep_geo_ocu > option[value="3"]').attr('selected', 'selected'),
+    //$('#hecho_departamento > option[value="25"]').attr('selected', 'selected'),
     //$('#hecho_localidad > option[value="77"]').attr('selected', 'selected'),
-    $('#hecho_tipo_esp_ocu > option[value="5"]').attr('selected', 'selected'),
-    $('#hecho_zona_ocu > option[value="5"]').attr('selected', 'selected'),
-    $('#hecho_tipo_lug_ocu > option[value="6"]').attr('selected', 'selected'),
-    $('#hecho_lugar_ocu > option[value="14"]').attr('selected', 'selected'),
-    $('#hecho_dom_part_ocu > option[value="6"]').attr('selected', 'selected'),
-    $('#hecho_oca_delito > option[value="6"]').attr('selected', 'selected'),
-    $('#hecho_provincia > option[value="4"]').attr('selected', 'selected'),
-    $('#hecho_provincia > option[value="4"]').attr('selected', 'selected'),
-    $('#hecho_origen_reg > option[value="1"]').attr('selected', 'selected'),
-    $('#hecho_recep_den > option[value="1"]').attr('selected', 'selected'),
+    //$('#hecho_tipo_esp_ocu > option[value="5"]').attr('selected', 'selected'),
+    //$('#hecho_zona_ocu > option[value="5"]').attr('selected', 'selected'),
+    //$('#hecho_tipo_lug_ocu > option[value="6"]').attr('selected', 'selected'),
+    //$('#hecho_lugar_ocu > option[value="14"]').attr('selected', 'selected'),
+    //$('#hecho_dom_part_ocu > option[value="6"]').attr('selected', 'selected'),
+    //$('#hecho_oca_delito > option[value="6"]').attr('selected', 'selected'),
+    //$('#hecho_provincia > option[value="4"]').attr('selected', 'selected'),
+    //$('#hecho_provincia > option[value="4"]').attr('selected', 'selected'),
+    //$('#hecho_origen_reg > option[value="1"]').attr('selected', 'selected'),
+    //$('#hecho_recep_den > option[value="1"]').attr('selected', 'selected'),
    
     // Campos hallazgo
     
-    $('#hecho_rep_geo_hgo > option[value="4"]').attr('selected', 'selected'),
-    $('#hecho_zona_hgo > option[value="4"]').attr('selected', 'selected')
-    $('#hecho_tipo_esp_hgo > option[value="3"]').attr('selected', 'selected')
-    $('#hecho_tipo_lug_hgo > option[value="4"]').attr('selected', 'selected')
-    $('#hecho_lugar_hgo > option[value="12"]').attr('selected', 'selected')
-    $('#hecho_dom_part_hgo > option[value="7"]').attr('selected', 'selected')
+    //$('#hecho_rep_geo_hgo > option[value="4"]').attr('selected', 'selected'),
+    //$('#hecho_zona_hgo > option[value="4"]').attr('selected', 'selected')
+    //$('#hecho_tipo_esp_hgo > option[value="3"]').attr('selected', 'selected')
+    //$('#hecho_tipo_lug_hgo > option[value="4"]').attr('selected', 'selected')
+    //$('#hecho_lugar_hgo > option[value="12"]').attr('selected', 'selected')
+    //$('#hecho_dom_part_hgo > option[value="7"]').attr('selected', 'selected')
     
     
     
