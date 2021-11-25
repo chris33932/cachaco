@@ -30,9 +30,32 @@ class DetalleHechoRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
 
-        
+    }
+
+    public function findByHechoId($hechoId){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('d, partial v.{id, nombre, apellido}, partial v.{id, nombre, apellido},  partial p.{id, nombre, apellido}')
+            ->from('App:detalleHecho', 'd')
+            ->innerJoin('d.hecho', 'h')
+            ->innerJoin('d.victima', 'v')
+            ->innerJoin('d.pres_autor', 'p')
+            ->where($qb->expr()->eq('h.id', ':hechoId'));
+
+        $qb->setParameter('hechoId', $hechoId);
+
+        return $qb->getQuery()->getResult();
 
     }
+
+
+
+
+
+
+
+
+
+
 
     // /**
     //  * @return DetalleHecho[] Returns an array of DetalleHecho objects

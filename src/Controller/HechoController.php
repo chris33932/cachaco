@@ -140,49 +140,23 @@ class HechoController extends AbstractController
     /**
      * @Route("/{id}", name="hecho_show", methods={"GET"})
      */
-    public function show(Request $request, $id): Response
+    public function show(Hecho $hecho): Response
     {
                
-        $entityManager = $this->getDoctrine()->getManager();
-         /**
-         * @var $detalleHecho DetalleHecho
-         */
-        $hecho = $entityManager->getRepository(Hecho::class)->findOneBy(['id' => $id]);
-       
-        
-        
-               //aca iria el embebido 
-               $orignalDetalleHecho = new ArrayCollection();
-               foreach ($hecho->getDetalleHechos() as $detalle)
-               {
-                   $orignalDetalleHecho->add($hecho);
-                }
-                $form = $this->createForm(HechoType::class, $hecho);
-                
-               $form->handleRequest($request);
-               
-               if ($form->isSubmitted()) {
-                   // get rid of the ones that the user got rid of in the interface (DOM)
-                   foreach ($orignalDetalleHecho as $detalle) {
-                       // check if the exp is in the $user->getExp()
-                      //   dump($user->getExp()->contains($exp));
-                       if ($hecho->getDetalleHechos()->contains($detalle) === false) {
-                           $entityManager->remove($detalle);
-                       }
-                   }
-                   $entityManager->persist($hecho);
-                   
-               }
-   
-               $entityManager->flush();
-              // return $this->redirectToRoute('hecho_show', [], Response::HTTP_SEE_OTHER);
-      
+        $em = $this->getDoctrine()->getManager();
+        $detallehechos = $em->getRepository('App:detalleHecho')->findByHechoId($hecho->getId());
+        return $this->render('hecho/show.html.twig', [
+            'hecho' => $hecho,
+            'detallehechos' => $detallehechos,
+        ]);
               
-           return $this->render('hecho/new.html.twig', [
-               'hecho' => $hecho,
-               'form' => $form->createView(),
-           ]);
+          
        }
+
+
+
+
+       
 
 
 

@@ -3,7 +3,7 @@
 {% block title %}Victima{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
 		<div class="col-md-8">
             <h1 class="text-info"  style="padding-top:50px">Victima</h1>
@@ -213,42 +213,34 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-12">
+	<div class="container">
+		
         <h1 class="text-info" ><p class="text-center" >Información del Hecho</p></h1>
        <table class="table">
          <thead>
-             <tr class="row"  style="background-color: #F0FFF0">
+             <tr>
                  
-                <th class="col-md-1">Lugar</th>
-                <th class="col-md-1">denuncia previa</th>
-                <th class="col-md-1">imputado</th>
-                <th class="col-md-1">nro preventivo</th>
-                <th  class="col-md-1">mes</th>
-                <th class="col-md-1">anio</th>
-                <th class="col-md-1">Accion</th>
-                 <th class="col-md-1">mes</th>
-                <th  class="col-md-1">anio</th>
-                <th  class="col-md-1">Accion</th>
-                 <th class="col-md-1" >anio</th>
-                <th class="col-md-1">Accion</th>
+                <td>Lugar</td>
+                <td>denuncia previa</td>
+                <td >imputado</td>
+                <td>nro preventivo</td>
+                <td>mes</td>
+                <td>anio</td>
+                <td>Accion</td>
+              
 
             </tr>
         </thead>
         <tbody>
             {% for detallehecho in detallehechos %}
-            <tr class="row">
+            <tr>
                 <td>{{ detallehecho.hecho.lugarOcu }}</td>
                 <td>{{ detallehecho.denPrevia }}</td>
                 <td>{{ detallehecho.presAutor }}</td>
                 <td>{{ detallehecho.hecho.nroPreventivo }}</td>
                 <td>{{ detallehecho.hecho.mes }}</td>
                 <td>{{ detallehecho.hecho.anio }}</td>
-                <td>{{ detallehecho.hecho.nroPreventivo }}</td>
-                <td>{{ detallehecho.hecho.mes }}</td>
-                <td>{{ detallehecho.hecho.anio }}</td>
-                 <td>{{ detallehecho.hecho.mes }}</td>
-                <td>{{ detallehecho.hecho.anio }}</td>
+               
                 <td>
                     <a href="{{ path('hecho_show', { 'id': detallehecho.hecho.id } ) }}"
                         alt="Ver almacen {{ detallehecho.hecho.nroPreventivo }}"
@@ -256,13 +248,16 @@
                     <span class="glyphicon glyphicon-eye-open"></span>&nbsp;Ver</a>
                 </td>
             </tr>
+                {% else %}
+            <tr>
+                  <td colspan="3">no records found</td>
+             </tr>
             {% endfor %}
         </tbody>
 
     </table>
-		</div>
-	</div>
 </div>
+
 
      
     

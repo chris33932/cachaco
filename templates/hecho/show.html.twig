@@ -3,7 +3,12 @@
 {% block title %}Hecho{% endblock %}
 
 {% block body %}
-    <h1>Hecho</h1>
+    
+
+<div class="container">
+	<div class="col-md-8">
+            <h1 class="text-info"  style="padding-top:50px; padding-bottom:50px">Hecho</h1>
+             <table class="table table-hover">
 
     <table class="table">
         <tbody>
@@ -119,7 +124,7 @@
                 <th>Coinc_lug_ocu</th>
                 <td>{{ hecho.coincLugOcu }}</td>
             </tr>
-            <tr>
+            {#<tr>
                 <th>Fecha_hgo</th>
                 <td>{{ hecho.fechaHgo ? hecho.fechaHgo|date('Y-m-d') : '' }}</td>
             </tr>
@@ -198,7 +203,7 @@
             <tr>
                 <th>Recep_den_otro</th>
                 <td>{{ hecho.recepDenOtro }}</td>
-            </tr>
+            </tr>#}
             <tr>
                 <th>Cant_victimas</th>
                 <td>{{ hecho.cantVictimas }}</td>
@@ -221,10 +226,89 @@
             </tr>
         </tbody>
     </table>
+    </div>
+    <div class="col-md-4" >
+        <h2 class="text-secondary" style="padding-top:100px" >Opciones</h2>
 
-    <a href="{{ path('hecho_index') }}">back to list</a>
+           <a href="{{ path('hecho_index') }}" class="btn btn-secondary btn-block" type="button">Volver</a> 
+           <a href="{{ path('hecho_edit', {'id': hecho.id}) }}" class="btn btn-info btn-block" type="button">Editar</a> 
+                
+		</div>
 
-    <a href="{{ path('hecho_edit', {'id': hecho.id}) }}">edit</a>
 
-    {{ include('hecho/_delete_form.html.twig') }}
+</div>
+
+
+
+
+
+
+<div class="container" style="background-color: #FFFAF0">
+       <h1 class="text-info" >
+       <p class="text-center" style="padding-top:30px">Más Información </p></h1>    
+       <table class="table">
+         <thead>
+             <tr>
+                 
+                <td ><strong class="text-info">Id_victima</strong></td>
+                <td><strong class="text-info">Nombre_victima</strong></td>
+                <td><strong class="text-info">Apellido_victima</strong></td>
+                <td><strong class="text-secondary">Id_PresAutor</strong></td>
+                <td><strong class="text-secondary">NombrePresAutor</strong></td>
+                <td><strong class="text-secondary">ApellidoPresAutor</strong></td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for detallehecho in detallehechos %}
+            <tr>
+                <td>{{ detallehecho.victima.id }}</td>
+                <td>{{ detallehecho.victima.nombre }}</td>
+                <td>{{ detallehecho.victima.apellido }}</td>
+
+                <td>{{ detallehecho.presAutor.id }}</td>
+                <td>{{ detallehecho.presAutor.nombre }}</td>
+                <td>{{ detallehecho.presAutor.apellido }}</td>
+            </tr>
+                 {% else %}
+            <tr>
+                  <td colspan="3">no records found</td>
+             </tr>
+
+
+                {#<td>
+                    <a href="{{ path('hecho_show', { 'id': detallehecho.hecho.id } ) }}"
+                        alt="Ver almacen {{ detallehecho.hecho.nroPreventivo }}"
+                        class="btn btn-info btn-ms">
+                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;Ver</a>
+                </td>
+            </tr>#}
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
