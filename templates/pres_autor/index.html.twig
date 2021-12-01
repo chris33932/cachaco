@@ -6,102 +6,111 @@
 
 {% block body %} {{ parent() }}
 
-<div class="page-header" >
-  <h2 class="text-success" >Presuntos autores</h2>
-  
-    <div class="col-xs-3" >
-         {{ form_start(buscar) }}
-         {{ form_widget(buscar) }}
-         {{ form_end(buscar) }}
-    </div>
+<div class="container-fluid">
+        <h2 class="text-success" >Presuntos autores</h2>
+        
+            <div class="col-xs-3">
+                {{ form_start(buscar) }}
+                {{ form_row(buscar,  { label: 'Buscar por Id, Nombre o Apellido' }) }}
+                {{ form_end(buscar) }}
+            </div>
 
+        </div>
+        
+        <div class="col-xs-12">
+        <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+                                    <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+        </div>
 </div>
 
+
 <div class="container-fluid">
-   <h2 class="text-info" ></h2>
- 
-  <p class="text-muted">.</p>   
-   <br> 
-    <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
-                   <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
- <div class="table-responsive">
-    <table class="table table-striped">
-        <thead class="thead-light">
-    
-                <tr>
-                <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Documento</th>
-                   {#} <th>Genero_otro</th>
-                    <th>Edad</th>
-                    <th>Barrio</th>
-                    <th>Calle</th>
-                    <th>Altura</th>
-                    <th>Interseccion</th>
-                    <th>Calle_interseccion</th>
-                    <th>Latitud</th>
-                    <th>Longitud</th>
-                    <th>Fraccion</th>
-                    <th>Radio</th>
-                
-                    <th>Reincidente</th>
-                    <th>Nacionalidad_otro</th>
-                    <th>Ant_penal_den</th>
-                    <th>Especif_ant</th>
-                    <th>Otra_sit_lab</th>
-                    <th>Fuerza_seg</th>
-                    <th>Otra_fuer_seg_pert</th>
-                    <th>Ejer_func</th>
-         
-                    <th>Uso_arma_fuego</th>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="thead-light">
         
-                    <th>Observacion</th>#}
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for pres_autor in presautores %}
-                <tr>
-                    <td>{{ pres_autor.id }}</td>
-                    <td>{{ pres_autor.nombre }}</td>
-                    <td>{{ pres_autor.apellido }}</td>
-                    <td>{{ pres_autor.documentoNro }}</td>
-                    {#<td>{{ pres_autor.generoOtro }}</td>
-                    <td>{{ pres_autor.edad }}</td>
-                    <td>{{ pres_autor.barrio }}</td>
-                    <td>{{ pres_autor.calle }}</td>
-                    <td>{{ pres_autor.altura }}</td>
-                    <td>{{ pres_autor.interseccion }}</td>
-                    <td>{{ pres_autor.calleInterseccion }}</td>
-                    <td>{{ pres_autor.latitud }}</td>
-                    <td>{{ pres_autor.longitud }}</td>
-                    <td>{{ pres_autor.fraccion }}</td>
-                    <td>{{ pres_autor.radio }}</td>
-    
-                    <td>{{ pres_autor.reincidente }}</td>
-                    <td>{{ pres_autor.nacionalidadOtro }}</td>
-                    <td>{{ pres_autor.antPenalDen }}</td>
-                    <td>{{ pres_autor.especifAnt }}</td>
-                    <td>{{ pres_autor.otraSitLab }}</td>
-                    <td>{{ pres_autor.fuerzaSeg }}</td>
-                    <td>{{ pres_autor.otraFuerSegPert }}</td>
-                    <td>{{ pres_autor.ejerFunc }}</td>
+                    <tr>
+                    <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Documento</th>
+                    {# <th>Genero_otro</th>#}
+                        <th>Edad</th>
+                        <th>Departamento</th>
+                        <th>Localidad</th>
+
+                    {#  <th>Barrio</th>
+                        <th>Calle</th>
+                        <th>Altura</th>
+                        <th>Interseccion</th>
+                        <th>Calle_interseccion</th>
+                        <th>Latitud</th>
+                        <th>Longitud</th>
+                        <th>Fraccion</th>
+                        <th>Radio</th>
+                    
+                        <th>Reincidente</th>
+                        <th>Nacionalidad_otro</th>
+                        <th>Ant_penal_den</th>
+                        <th>Especif_ant</th>
+                        <th>Otra_sit_lab</th>
+                        <th>Fuerza_seg</th>
+                        <th>Otra_fuer_seg_pert</th>
+                        <th>Ejer_func</th>
             
-                    <td>{{ pres_autor.observacion }}</td>#}
-                    <td>
-                        <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
-                        <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}" class="btn btn-warning btn-sm"
-                            alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                        <th>Uso_arma_fuego</th>
+            
+                        <th>Observacion</th>#}
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pres_autor in presautores %}
+                    <tr>
+                        <td>{{ pres_autor.id }}</td>
+                        <td>{{ pres_autor.nombre }}</td>
+                        <td>{{ pres_autor.apellido }}</td>
+                        <td>{{ pres_autor.documentoNro }}</td>
+                        <td>{{ pres_autor.edad }}</td>
+                        <td>{{ pres_autor.departamento }}</td>
+                        <td>{{ pres_autor.localidad }}</td>
+
+
+                        {#<td>{{ pres_autor.generoOtro }}</td>
+                        <td>{{ pres_autor.edad }}</td>
+                        <td>{{ pres_autor.barrio }}</td>
+                        <td>{{ pres_autor.calle }}</td>
+                        <td>{{ pres_autor.altura }}</td>
+                        <td>{{ pres_autor.interseccion }}</td>
+                        <td>{{ pres_autor.calleInterseccion }}</td>
+                        <td>{{ pres_autor.latitud }}</td>
+                        <td>{{ pres_autor.longitud }}</td>
+                        <td>{{ pres_autor.fraccion }}</td>
+                        <td>{{ pres_autor.radio }}</td>
+        
+                        <td>{{ pres_autor.reincidente }}</td>
+                        <td>{{ pres_autor.nacionalidadOtro }}</td>
+                        <td>{{ pres_autor.antPenalDen }}</td>
+                        <td>{{ pres_autor.especifAnt }}</td>
+                        <td>{{ pres_autor.otraSitLab }}</td>
+                        <td>{{ pres_autor.fuerzaSeg }}</td>
+                        <td>{{ pres_autor.otraFuerSegPert }}</td>
+                        <td>{{ pres_autor.ejerFunc }}</td>
+                
+                        <td>{{ pres_autor.observacion }}</td>#}
+                        <td>
+                            <a href="{{ path('pres_autor_show', {'id': pres_autor.id}) }}" class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+                            <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}" class="btn btn-warning btn-sm"
+                                alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
      <a href="{{ path('pres_autor_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                    <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
     </div>

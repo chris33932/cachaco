@@ -23,7 +23,7 @@
                 <div class="col-lg-6">
                       <div class="btn-group">
                          <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-primary btn-md dropdown-toggle" data-toggle="dropdown">
                                 
                                 Hechos
                                 </button>
@@ -43,11 +43,47 @@
 
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary  btn-lg dropdown-toggle">Femicidios</button>
-                            <button type="button" class="btn btn-primary  btn-lg dropdown-toggle">Presuntos Autores</button>
+
+
+                             <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-md dropdown-toggle" data-toggle="dropdown">
+                                
+                                Femicidios
+                                </button>
+                                <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="{{ path('femicidios') }}"> Información sobre femicidios</a>
+                                   
+
+                                </div>
+                            </div>
+
+
+                                 <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-md dropdown-toggle" data-toggle="dropdown">
+                                
+                                Presuntos Autores
+                                </button>
+                                <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="{{ path('hechos_por_tipologia') }}">Hechos por tipología</a>
+                                    <a class="dropdown-item" href="{{ path('hechos_por_localidad') }}">Distribución de hechos por localidad</a>
+                                    <a class="dropdown-item" href="{{ path('hechos_por_departamento') }}">Distribución de hechos por departamento</a>
+                                    <a class="dropdown-item" href="{{ path('hechos_por_rango_horario_tres') }}">Distribución de hechos por rango horario</a>
+                                    <a class="dropdown-item" href="{{ path('hechos_por_dia_mes') }}">Distribución de hechos por mes y día</a>
+                                    <a class="dropdown-item" href="{{ path('hechos_en_ocasion_otro_delito') }}">Distribución de homicidio en ocasión de otro delito</a>
+                                    
+                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="#">Distribución de hechos por ...</a>
+                                    
+                                    <a class="dropdown-item" href="#">Distribución de hechos por.......</a>
+
+                                </div>
+                            </div>
+
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-lg  dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-primary btn-md  dropdown-toggle" data-toggle="dropdown">
                                 Víctimas
                                 </button>
                                 <div class="dropdown-menu">
@@ -80,6 +116,22 @@
     
 </div>
  
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+        $(".btn-group").button("toggle");
+
+</script>
 {% endblock %}
 
    

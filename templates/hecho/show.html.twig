@@ -6,11 +6,10 @@
     
 
 <div class="container">
-	<div class="col-md-8">
-            <h1 class="text-info"  style="padding-top:50px; padding-bottom:50px">Hecho</h1>
+	 <h1 class="text-info"  style="padding-top:50px; padding-bottom:50px">Hecho</h1>
+        <div class="table-responsive">
              <table class="table table-hover">
 
-    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -224,17 +223,15 @@
                 <th>Observacion</th>
                 <td>{{ hecho.observacion }}</td>
             </tr>
+            <tr>
+                <th><span class="text-secondary" style="padding-top:100px" >Opciones</span></th>
+                <td>
+                  <a href="{{ path('hecho_index') }}" class="btn btn-secondary" type="button">Volver</a> 
+                  <a href="{{ path('hecho_edit', {'id': hecho.id}) }}" class="btn btn-info" type="button">Editar</a> </td>
+            </tr>
         </tbody>
     </table>
     </div>
-    <div class="col-md-4" >
-        <h2 class="text-secondary" style="padding-top:100px" >Opciones</h2>
-
-           <a href="{{ path('hecho_index') }}" class="btn btn-secondary btn-block" type="button">Volver</a> 
-           <a href="{{ path('hecho_edit', {'id': hecho.id}) }}" class="btn btn-info btn-block" type="button">Editar</a> 
-                
-		</div>
-
 
 </div>
 
@@ -272,7 +269,7 @@
             </tr>
                  {% else %}
             <tr>
-                  <td colspan="3">no records found</td>
+                  <td colspan="3">No se hallaron registros....</td>
              </tr>
 
 

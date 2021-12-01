@@ -19,24 +19,24 @@
 </div>
 <div class="container-fluid">
                 
-<div class="table-responsive">
-  <table class="table">
-    <thead class="thead-light">
+<div class="table-responsive-sm">
+  <table class="table table-bordered">
+    <thead class="table-info">
                     <tr>
                         <th>Id</th>
-                        <th>N°.prev</th>
-                        <th>Depto.</th>
+                        <th>N° Prev.</th>
+                        <th>Departamento</th>
                         <th>Localidad</th>
                         {#<th>Juzgado</th>#}
                         {#<th>Fiscalia</th>#}
-                        <th>Fecha</th>
-                        <th>Anio</th>
+                        {#<th>Fecha</th>#}
+                        <th>Año</th>
                         {#<th>Mes</th>#}
                         {#<th>Cod_Indec</th>#}
                         {#<th>Gran_Rcia</th>#}
                         {#<th>Hora_ocu</th>#}
                         {#<th>Dia_ocu</th>#}
-                        <th>Usuario</th>
+                        
                         {#<th>Franja_h_seis</th>#}
                         {#<th>Franja_h_tres</th>#}
                         {#<th>Barrio_ocu</th>#}
@@ -49,7 +49,7 @@
                         <th>Zona_ocu</th>
                         <th>Tipo_esp_ocu</th>
                         <th>Tipo_lug_ocu</th>
-                        <th>Acceso_ocu</th>
+                        {#<th>Acceso_ocu</th>#}
                         <th>Lugar_ocu</th>
                         {#<th>Lugar_ocu_otro</th>#}
                         {#<th>Dom_part_otro</th>#}
@@ -80,6 +80,7 @@
                         {#<th>Cant_pres_autor</th>
                        {# <th>Link</th>#}
                        {# <th>Observacion</th>#}
+                        <th>Usuario</th>
                         <th>Acciones</th>
                     
                     </tr>
@@ -93,14 +94,13 @@
                         <td>{{ hecho.localidad }}</td>
                     
                         {#<td>{{ hecho.fiscalia }}</td>#}
-                        <td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>
+                        {#<td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>#}
                         <td>{{ hecho.anio }}</td>
                         {#<td>{{ hecho.mes }}</td>
                         {#<td>{{ hecho.codLocIndec }}</td>
                         {#<td>{{ hecho.granRcia }}</td>
                         {#<td>{{ hecho.horaOcu ? hecho.horaOcu|date('H:i:s') : '' }}</td>
                         {#<td>{{ hecho.diaOcu }}</td>#}
-                         <td>{{ hecho.Creado }}</td>
                         {#<td>{{ hecho.franjaHSeis }}</td>#}
                         {#<td>{{ hecho.franjaHTres }}</td>#}
                         {#<td>{{ hecho.barrioOcu }}</td>#}
@@ -114,7 +114,7 @@
                    
 
 
-                        <td>{{ hecho.zonaOcu }}</td>
+                        {#<td>{{ hecho.zonaOcu }}</td>#}
                         <td>{{ hecho.tipoEspOcu }}</td>
                         <td>{{ hecho.tipoLugOcu }}</td>
                         <td>{{ hecho.accesoOcu }}</td>
@@ -149,15 +149,16 @@
                         {#<td>{{ hecho.cantPresAutor }}</td>#}
                          {#<td>{{ hecho.link }}</td>#}
                          {#<td>{{ hecho.observacion }}</td>#}
+                         <td>{{ hecho.Creado }}</td>
                     
                       
                         <td>
-                        
-                            <a href="{{ path('hecho_show', {'id': hecho.id}) }}"class="btn btn-info btn-sm" alt="Ver"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+                          <a href="{{ path('hecho_show', {'id': hecho.id}) }}"class="btn btn-info btn-sm" alt="Ver">
+                           <span class="glyphicon glyphicon-eye-open"></span> Ver</a>
                           
-                          <a href="{{ path('hecho_edit', {'id': hecho.id}) }}"class="btn btn-warning btn-sm"
-                            alt="Editar"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>
-                </td>
+                          <a href="{{ path('hecho_edit', {'id': hecho.id}) }}"class="btn btn-warning btn-sm" alt="Editar">
+                           <span class="glyphicon glyphicon-pencil"></span> Modificar</a>
+                        </td>
             </tr>
         {% else %}
             <tr>
@@ -166,7 +167,9 @@
         {% endfor %}
         </tbody>
     </table>
-</div>
+   </div>
+ </div>
+
 
      <a href="{{ path('hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                         <span class="glyphicon glyphicon-plus"></span> Nuevo</a>

@@ -104,8 +104,8 @@ SQL;
                 sexo
                 ON 
                     pres_autor.genero_id = genero.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY
                     genero.descripcion
 SQL;

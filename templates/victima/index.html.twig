@@ -5,26 +5,25 @@
 
 
 {% block body %} {{ parent() }}
-<h2 class="text-info" >Victimas</h2>
-  
-    <div class="col-xs-3">
-         {{ form_start(buscar) }}
-        {{ form_row(buscar,  { label: 'Buscar por Id, Nombre o Apellido' }) }}
-         {{ form_end(buscar) }}
-    </div>
-
-</div>
-  
-<div class="col-xs-12">
-   <a href="{{ path('victima_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
-                            <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
-</div>
-
 <div class="container-fluid">
-   <h2 class="text-info" ></h2>
- 
- <div class="table-responsive">
-    <table class="table table-striped">
+        <h2 class="text-info" >Victimas</h2>
+        
+            <div class="col-xs-3">
+                {{ form_start(buscar) }}
+                {{ form_row(buscar,  { label: 'Buscar por Id, Nombre o Apellido' }) }}
+                {{ form_end(buscar) }}
+            </div>
+
+        </div>
+        
+        <div class="col-xs-12">
+        <a href="{{ path('victima_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+                                    <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+        </div>
+</div>
+
+ <div class="container-fluid">
+    <table class="table table-bordered">
         <thead class="thead-light">
     
                 <tr>
@@ -34,6 +33,8 @@
                     <th>Documento</th>
                     {#<th>Genero_otro</th>#}
                     <th>Edad</th>
+                     <th>Departamento</th>
+                    <th>Localidad</th>
                     {#<th>Nacionalidad_otra</th>
                     <th>Barrio</th>
                     <th>Calle</th>
@@ -88,6 +89,8 @@
                     <td>{{ victima.documentoNro }}</td>
                    {# <td>{{ victima.generoOtro }}</td>#}
                     <td>{{ victima.edad }}</td>
+                    <td>{{ victima.departamento }}</td>
+                    <td>{{ victima.localidad }}</td>
                     {#<td>{{ victima.nacionalidadOtra }}</td>#}
                     {#<td>{{ victima.barrio }}</td>
                     <td>{{ victima.calle }}</td>
@@ -138,14 +141,14 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="49">no records found</td>
+                    <td colspan="49">No se hallaron registros...</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         <a href="{{ path('victima_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
                             <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
-    </div>
+   
 </div>
 
 {% endblock %}

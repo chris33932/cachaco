@@ -3,9 +3,10 @@
 {% block title %}Victima{% endblock %}
 
 {% block body %}
+
+
 <div class="container">
-	<div class="row">
-		<div class="col-md-8">
+   <div class="table table-responsive">
             <h1 class="text-info"  style="padding-top:50px">Victima</h1>
              <table class="table table-hover">
                 <tbody>
@@ -198,34 +199,33 @@
                         <th>Observacion</th>
                         <td>{{ victima.observacion }}</td>
                     </tr>
+                     <tr>
+                        <th>Opciones</th>
+                        <td> <a href="{{ path('victima_index') }}" class="btn btn-secondary" type="button">Volver</a> 
+                             <a href="{{ path('victima_edit', {'id': victima.id}) }}" class="btn btn-info " type="button">Editar</a> 
+                            {#{{ include('victima/_delete_form.html.twig') }} </td>#}
+                    </tr>
                 </tbody>
              </table>
 		</div>
-		<div class="col-md-4">
-        <h2 class="text-secondary" style="padding-top:100px" >Opciones</h2>
-
-           <a href="{{ path('victima_index') }}" class="btn btn-secondary btn-block" type="button">Volver</a> 
-           <a href="{{ path('victima_edit', {'id': victima.id}) }}" class="btn btn-info btn-block" type="button">Editar</a> 
-
-            {{ include('victima/_delete_form.html.twig') }} 
-
+		
+    </div>
                 
-		</div>
-	</div>
+</div>
 
 	<div class="container">
 		
         <h1 class="text-info" ><p class="text-center" >Información del Hecho</p></h1>
        <table class="table">
-         <thead>
+         <thead  style="background-color:#d3ecec">
              <tr>
                  
                 <td>Lugar</td>
-                <td>denuncia previa</td>
-                <td >imputado</td>
-                <td>nro preventivo</td>
-                <td>mes</td>
-                <td>anio</td>
+                <td>Denuncia previa</td>
+                <td >Imputado</td>
+                <td>Nro preventivo</td>
+                <td>Mes</td>
+                <td>Año</td>
                 <td>Accion</td>
               
 

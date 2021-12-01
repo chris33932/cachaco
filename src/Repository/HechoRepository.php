@@ -57,8 +57,8 @@ class HechoRepository extends ServiceEntityRepository
                     tipologia
                     ON 
                     hecho.tipologia_id = tipologia.id
-                    WHERE hecho.fecha > :fechaDesde
-                        AND hecho.fecha < :fechaHasta
+                    WHERE hecho.fecha >= :fechaDesde
+                        AND hecho.fecha <= :fechaHasta
                         GROUP BY
                         tipologia.descripcion
             SQL;
@@ -95,8 +95,8 @@ class HechoRepository extends ServiceEntityRepository
                        localidad
                        ON 
                        hecho.localidad_id = localidad.id
-                       WHERE hecho.fecha > :fechaDesde
-                           AND hecho.fecha < :fechaHasta
+                       WHERE hecho.fecha >= :fechaDesde
+                           AND hecho.fecha <= :fechaHasta
                            GROUP BY
                            localidad.id
                            ORDER BY cantidad
@@ -136,8 +136,8 @@ class HechoRepository extends ServiceEntityRepository
                        departamento
                        ON 
                        hecho.departamento_id = departamento.id
-                       WHERE hecho.fecha > :fechaDesde
-                           AND hecho.fecha < :fechaHasta
+                       WHERE hecho.fecha >= :fechaDesde
+                           AND hecho.fecha <= :fechaHasta
                            GROUP BY
                            departamento.id
                            ORDER BY cantidad
@@ -171,8 +171,8 @@ class HechoRepository extends ServiceEntityRepository
                        hecho.franja_h_tres AS descripcion,
                         COUNT(hecho.id) AS cantidad
                        FROM hecho 
-                           WHERE hecho.fecha > :fechaDesde
-                           AND hecho.fecha < :fechaHasta
+                           WHERE hecho.fecha >= :fechaDesde
+                           AND hecho.fecha <= :fechaHasta
                            GROUP BY
                            hecho.franja_h_tres
                            ORDER BY cantidad
@@ -205,8 +205,8 @@ class HechoRepository extends ServiceEntityRepository
                        hecho.franja_h_seis AS descripcion,
                         COUNT(hecho.id) AS cantidad
                        FROM hecho 
-                           WHERE hecho.fecha > :fechaDesde
-                           AND hecho.fecha < :fechaHasta
+                           WHERE hecho.fecha >= :fechaDesde
+                           AND hecho.fecha <= :fechaHasta
                            GROUP BY
                            hecho.franja_h_tres
                            ORDER BY cantidad
@@ -245,8 +245,8 @@ class HechoRepository extends ServiceEntityRepository
                    COUNT(hecho.id) AS cantidad
                    FROM
                    hecho
-                   WHERE hecho.fecha > :fechaDesde
-                   AND hecho.fecha < :fechaHasta
+                   WHERE hecho.fecha >= :fechaDesde
+                   AND hecho.fecha <= :fechaHasta
                    GROUP BY
                    dia_ocu
     SQL;
@@ -280,8 +280,8 @@ class HechoRepository extends ServiceEntityRepository
 	
                    FROM
 	               hecho
-                   WHERE hecho.fecha > :fechaDesde
-                   AND hecho.fecha < :fechaHasta
+                   WHERE hecho.fecha >= :fechaDesde
+                   AND hecho.fecha <= :fechaHasta
                    GROUP BY
                    mes
 SQL;
@@ -317,8 +317,8 @@ SQL;
 	               ocasion_delito
 	               ON 
 	            	hecho.oca_delito_id = ocasion_delito.id
-                   WHERE hecho.fecha > :fechaDesde
-                   AND hecho.fecha < :fechaHasta
+                   WHERE hecho.fecha >= :fechaDesde
+                   AND hecho.fecha <= :fechaHasta
                    GROUP BY
                    ocasion_delito.descripcion
 

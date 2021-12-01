@@ -66,8 +66,8 @@ class VictimaRepository extends ServiceEntityRepository
 	            ON 
 		        
 		        detalle_hecho.victima_id = victima.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY
             	departamento.descripcion
 SQL;
@@ -114,8 +114,8 @@ SQL;
         victima
         ON 
             detalle_hecho.victima_id = victima.id
-        WHERE hecho.fecha > :fechaDesde
-        AND hecho.fecha < :fechaHasta
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
         GROUP BY
         localidad.nombre
 
@@ -165,8 +165,8 @@ SQL;
 	            rango_etario
 	            ON 
                 victima.rango_etario_id = rango_etario.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY
                 rango_etario.descripcion
 SQL;
@@ -210,8 +210,8 @@ SQL;
                     edad_legal
                     ON 
 		        victima.edad_legal_id = edad_legal.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY
                 edad_legal.descripcion
 SQL;
@@ -252,8 +252,8 @@ SQL;
                     victima
                     ON 
             		detalle_hecho.victima_id = victima.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY mes
 SQL;
 
@@ -293,8 +293,8 @@ SQL;
                     victima
                     ON 
             		detalle_hecho.victima_id = victima.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY
                     dia_ocu
 SQL;
@@ -339,8 +339,8 @@ SQL;
                     sexo
                     ON 
 		           victima.sexo_id = sexo.id
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY sexo.descripcion
 SQL;
 
@@ -385,8 +385,8 @@ SQL;
                     genero
                     ON 
 	            	genero.id = victima.genero_id 
-                WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY genero.descripcion
 SQL;
 
@@ -430,8 +430,8 @@ SQL;
             mecanismo_muerte
             ON 
             victima.mecanismo_muerte_id = mecanismo_muerte.id
-            WHERE hecho.fecha > :fechaDesde
-            AND hecho.fecha < :fechaHasta
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
             GROUP BY mecanismo_muerte.descripcion
 SQL;
 
@@ -471,8 +471,8 @@ SQL;
                 victima
                 ON 
                     detalle_hecho.victima_id = victima.id
-                    WHERE hecho.fecha > :fechaDesde
-                    AND hecho.fecha < :fechaHasta
+                    WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
                     GROUP BY victima.fuerza_seg
 SQL;
 
@@ -495,6 +495,95 @@ SQL;
 
         return $query->getArrayResult();
     }
+
+
+
+
+
+    // Cantidad de femicidios con exceso en el uso de la violencia letal
+    public function victimasPorExc($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+            SELECT DISTINCT
+            hecho.id AS hecho,
+            victima.id AS victima,
+            sexo.descripcion AS sexo,  
+            victima.femicidio AS femicidio, 
+            victima.violencia_exc AS overkill,
+            tipo_dom_particular.descripcion AS domicilio,
+            detalle_hecho.vinculo AS vinculo,
+            detalle_hecho.vinculo_familiar AS vinculoTipo,
+            detalle_hecho.vinculo_familiar_otro AS vinculoTipoOtro,
+	        detalle_hecho.conviviente AS conviviente, 
+            departamento.descripcion AS departamento, 
+	        localidad.nombre AS localidad,
+	        hecho.fecha AS fecha
+
+
+          
+        FROM
+            hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+            hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            victima
+            ON 
+            detalle_hecho.victima_id = victima.id
+            INNER JOIN
+            sexo
+            ON 
+		    victima.sexo_id = sexo.id
+            LEFT JOIN
+            tipo_dom_particular
+	        ON 
+		    hecho.dom_part_ocu_id = tipo_dom_particular.id
+            INNER JOIN
+	        departamento
+	        ON 
+		    hecho.departamento_id = departamento.id 
+            INNER JOIN
+            localidad
+            ON 
+	
+		    hecho.localidad_id = localidad.id 
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            HAVING femicidio = 'Si'
+                  
+
+SQL;
+    $rsm = new ResultSetMapping();
+    $rsm->addScalarResult('hecho', 'hecho');
+    $rsm->addScalarResult('sexo', 'sexo');
+    $rsm->addScalarResult('victima', 'victima');
+    $rsm->addScalarResult('femicidio', 'femicidio');
+    $rsm->addScalarResult('domicilio', 'domicilio');
+    $rsm->addScalarResult('fecha', 'fecha');
+    $rsm->addScalarResult('overkill', 'overkill');
+    $rsm->addScalarResult('vinculo', 'vinculo');
+    $rsm->addScalarResult('vinculoTipo', 'vinculoTipo');
+    $rsm->addScalarResult('conviviente', 'conviviente');
+    $rsm->addScalarResult('vinculoTipoOtro', 'vinculoTipoOtro');
+    $rsm->addScalarResult('departamento', 'departamento');
+    $rsm->addScalarResult('localidad', 'localidad');
+    
+    
+   
+
+    $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+    $fechaDesdeCorregida = clone $fechaDesde;
+    $fechaHastaCorregida = clone $fechaHasta;
+
+    $fechaDesdeCorregida->setTime(0, 0, 0);
+    $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+    $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+        ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+    return $query->getArrayResult();
+}
 
 
 
