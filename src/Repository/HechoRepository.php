@@ -346,9 +346,251 @@ SQL;
 
 
 
-       
+        //----------------------Hechos espacial ----------------//
 
 
+
+        public function hechosZonaOcu($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                    SELECT
+                    zona.descripcion AS descripcion,
+                    COUNT(hecho.id) AS cantidad
+                    FROM
+	                hecho
+                    LEFT JOIN
+                    zona
+                    ON 
+                    hecho.zona_ocu_id = zona.id
+			
+                    WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
+                    GROUP BY zona.descripcion
+
+SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+
+        
+
+        public function hechosEspOcu($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                    SELECT
+                    tipo_espacio.descripcion AS descripcion,
+	                COUNT(hecho.id) AS cantidad
+                    FROM
+                    hecho
+                    LEFT JOIN
+                    tipo_espacio
+                    ON 
+		       		hecho.tipo_esp_ocu_id = tipo_espacio.id
+			
+                    WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
+                    GROUP BY tipo_espacio.descripcion
+
+SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+        public function hechosAccesoOcu($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                    SELECT
+                    hecho.acceso_ocu AS descripcion,
+                    COUNT(hecho.id) AS cantidad
+                    FROM
+                    hecho
+			
+                    WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
+                    GROUP BY hecho.acceso_ocu
+
+SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+
+
+        public function hechosLugarOcu($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                  SELECT
+                  lugar.descripcion AS descripcion,
+	              COUNT(hecho.id) AS cantidad 
+                  FROM
+                  hecho
+                  LEFT JOIN
+                  lugar
+                  ON 
+                  hecho.lugar_ocu_id = lugar.id
+                  WHERE hecho.fecha >= :fechaDesde
+                  AND hecho.fecha <= :fechaHasta
+                  GROUP BY lugar.descripcion
+    
+SQL;
+        
+                $rsm = new ResultSetMapping();
+        
+                $rsm->addScalarResult('descripcion', 'descripcion');
+                $rsm->addScalarResult('cantidad', 'cantidad');
+               
+        
+                $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+                $fechaDesdeCorregida = clone $fechaDesde;
+                $fechaHastaCorregida = clone $fechaHasta;
+        
+                $fechaDesdeCorregida->setTime(0, 0, 0);
+                $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+        
+                $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                    ->setParameter(':fechaHasta', $fechaHastaCorregida);
+        
+                return $query->getArrayResult();
+            }
+
+
+        public function hechosTipoLugarOcu($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                  SELECT
+                  tipo_lugar.descripcion AS descripcion,
+                  COUNT(hecho.id) AS cantidad
+	            FROM
+                hecho
+                LEFT JOIN
+                tipo_lugar
+                ON 
+                hecho.tipo_lug_ocu_id = tipo_lugar.id
+			
+                    WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
+                    GROUP BY tipo_lugar.descripcion
+
+SQL;
+    
+            $rsm = new ResultSetMapping();
+    
+            $rsm->addScalarResult('descripcion', 'descripcion');
+            $rsm->addScalarResult('cantidad', 'cantidad');
+           
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+        }
+
+        public function hechosDomPartOcu($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+                    SELECT
+	                  tipo_dom_particular.descripcion AS descripcion,
+	                  COUNT(hecho.id) AS cantidad
+                      FROM
+                      hecho
+                      LEFT JOIN
+                      tipo_dom_particular
+                      ON 
+	                  hecho.dom_part_ocu_id = tipo_dom_particular.id
+                
+                        WHERE hecho.fecha >= :fechaDesde
+                        AND hecho.fecha <= :fechaHasta
+                        GROUP BY tipo_dom_particular.descripcion 
+    
+SQL;
+        
+                $rsm = new ResultSetMapping();
+        
+                $rsm->addScalarResult('descripcion', 'descripcion');
+                $rsm->addScalarResult('cantidad', 'cantidad');
+               
+        
+                $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+                $fechaDesdeCorregida = clone $fechaDesde;
+                $fechaHastaCorregida = clone $fechaHasta;
+        
+                $fechaDesdeCorregida->setTime(0, 0, 0);
+                $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+        
+                $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                    ->setParameter(':fechaHasta', $fechaHastaCorregida);
+        
+                return $query->getArrayResult();
+            }
+    
+
+
+
+
+
+
+
+
+
+
+
+    
 
     
 
