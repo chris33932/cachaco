@@ -3,7 +3,7 @@
 {% block title %}Hechos{% endblock %}
 
 {% block body %}{{ parent() }}
-
+<div class="container-fluid">
    <h2 class="text-secondary">Hechos</h2>
         <div class="col-xs-3">
                 {{ form_start(buscar) }}
@@ -162,7 +162,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="54">no records found</td>
+                <td colspan="54">No se hallaron registros...</td>
             </tr>
         {% endfor %}
         </tbody>
