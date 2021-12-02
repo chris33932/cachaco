@@ -398,7 +398,7 @@ class ReportesController extends AbstractController
         }
     }
 
-     //------------------------- VICTIMAS POR MECANISMO DE MUERTE------------------------------//
+     //------------------------- VICTIMAS POR MECANISMO DE MUERTE Y ARMAS------------------------------//
     //------------------------------------------------------------------------------------//
 
     
@@ -427,6 +427,9 @@ class ReportesController extends AbstractController
         $datos = $em->getRepository('App:Victima')
                     ->victimasPorMecanismo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
 
+        $datos1 = $em->getRepository('App:Victima')
+                    ->victimasPorTipoArma($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
         if ($request->getRequestFormat() == 'xlsx') {
             $datosExcel = array(
                 'encabezado' => array(
@@ -442,6 +445,8 @@ class ReportesController extends AbstractController
                     
                 ),
                 'datos' => $datos,
+                'datos1' => $datos1,
+
                 'totales' => array(
                     // 'total 1', 'total 2', 'total 3',
                 ),
@@ -454,6 +459,8 @@ class ReportesController extends AbstractController
                     'fecha_desde' => $rangoFecha['fechaDesde'],
                     'fecha_hasta' => $rangoFecha['fechaHasta'],
                     'datos' => $datos,
+                'datos1' => $datos1,
+
                     'formFechas' => $formFechas->createView()
             ));
         }
@@ -993,94 +1000,6 @@ class ReportesController extends AbstractController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     //------------------------- PRESUNTOS AUTORES POR SEXO Y GENERO------------------------------//
-    //-------------------------------------------------------------------------------------------//
-
-    
-     /**
-     * @Route("/pres_autor_por_sexo_genero", name="pres_autor_por_sexo_genero")
-     */
-    public function presAutorPorSexoGeneroAction(Request $request)
-    {
-
-        $rangoFecha = array(
-            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
-            'fechaHasta' => new \DateTime(),
-        );
-
-        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
-            'action' => $this->generateUrl('victimas_por_sexo_genero'),
-        ));
-
-        $formFechas->handleRequest($request);
-
-        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
-            $rangoFecha = $formFechas->getData();
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $datos = $em->getRepository('App:Victima')
-                    ->presAutorPorSexo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
-                    
-
-        $datos2 = $em->getRepository('App:Victima')
-                    ->presAutorPorGenero($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
-
-        if ($request->getRequestFormat() == 'xlsx') {
-            $datosExcel = array(
-                'encabezado' => array(
-                    'titulo' => 'Victima',
-                    'filtro' => array(
-                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
-                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
-                    ),
-                ),
-                'columnas' => array(
-                    'Descripcion',
-                    'Cantidad',
-                    
-                ),
-                'datos' => $datos,
-                'totales' => array(
-                    // 'total 1', 'total 2', 'total 3',
-                ),
-            );
-
-            return $this->renderExcel($datosExcel);
-        } else {
-            return $this->render(
-                'reportes/pres_autor_por_sexo_genero.html.twig',  array(
-                    'fecha_desde' => $rangoFecha['fechaDesde'],
-                    'fecha_hasta' => $rangoFecha['fechaHasta'],
-                    'datos' => $datos,
-                    'datos2' => $datos2,
-                    'formFechas' => $formFechas->createView()
-            ));
-        }
-    }
-
-
-
       //------------------------- FEMICIDIOS ------------------------------//
     //-------------------------------------------------------------------------------------------//
 
@@ -1156,6 +1075,301 @@ class ReportesController extends AbstractController
             ));
         }
     }
+
+
+     //------------------------- INFORMACION DE VICTIMAS Y VINCULOS CON AUTORES------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+      /**
+     * @Route("/vinculos_reportes", name="vinculos_reportes")
+     */
+    public function victimasPorVinculo(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('vinculos_reportes'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->victimasPorVinculo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+    
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victima',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'hecho',
+                    'victima',
+                    'autor',
+                    'victima',
+                    'vinculo',
+                    'vinculofliar',
+                    'vinculofliarotro',
+                    'vinculonofliar',
+                    'vinculonofliarotro',
+                    'fecha',
+
+                   
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/vinculos_reportes.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                  
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+     //------------------------- PRESUNTOS AUTORES POR SEXO Y GENERO------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/pres_autor_por_sexo_genero", name="pres_autor_por_sexo_genero")
+     */
+    public function presAutorPorSexoGeneroAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('pres_autor_por_sexo_genero'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:PresAutor')
+                    ->presAutorPorSexo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:PresAutor')
+                    ->presAutorPorGenero($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'PresAutor',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/pres_autor_por_sexo_genero.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+
+    
+     //------------------------- PRESUNTOS AUTORES POR DEPTO Y LOC------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/autores_por_departamento_localidad", name="autores_por_departamento_localidad")
+     */
+    public function presAutorPorDeptoLocAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('autores_por_departamento_localidad'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:PresAutor')
+                    ->presAutorPorDepartamento($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:PresAutor')
+                    ->presAutorPorLocalidad($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'PresAutor',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/autores_por_departamento_localidad.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+     //------------------------- PRESUNTOS AUTORES POR DEPTO Y LOC------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+    
+     /**
+     * @Route("/autores_por_rango_etario_edad_legal", name="autores_por_rango_etario_edad_legal")
+     */
+    public function presAutorPorRangoEdadAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('autores_por_rango_etario_edad_legal'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:PresAutor')
+                    ->presAutorPorRango($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos2 = $em->getRepository('App:PresAutor')
+                    ->presAutorPorEdadLegal($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'PresAutor',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/autores_por_rango_etario_edad_legal.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
 
 
 

@@ -1,0 +1,73 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes vínculos{% endblock %}
+
+
+{% block reporte %}
+<div class="container">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h3>Informe sobre vínculos entre víctima y presuntos autores</h3>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #fff2cc;">
+                                                            <tr>
+                                                                <th>Hecho</th>
+                                                                <th>VictimaId</th>
+                                                                <th>AutorId</th>
+                                                                <th>Vinculo</th>
+                                                                <th>Vinculo_fliar</th>
+                                                                <th>Vinculo_fliar_otro</th>
+                                                                <th>Vinculo_no_fliar</th>
+                                                                <th>Vinculo_no_fliar_otro</th>
+                                                                                                                     
+                                                                <th>Fecha</th>
+
+                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.hecho }}</td>
+                                                                <td>{{ fila.victima }}</td>
+                                                                <td>{{ fila.autor  }}</td>
+                                                                <td>{{ fila.vinculo  }}</td>
+                                                                <td>{{ fila.vinculofliar  }}</td>
+                                                                <td>{{ fila.vinculofliarotro  }}</td>
+                                                                <td>{{ fila.vinculonofliar  }}</td>
+                                                                <td>{{ fila.vinculonofliarotro  }}</td>
+                                                                
+                                                                <td>{{ fila.fecha  }}</td>
+
+
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

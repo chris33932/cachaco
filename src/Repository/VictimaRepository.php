@@ -497,6 +497,54 @@ SQL;
     }
 
 
+    // Cantidad de femicidios con exceso en el uso de la violencia letal
+    public function victimasPorTipoArma($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+            SELECT
+            tipo_arma.descripcion AS descripcion,
+            COUNT( DISTINCT victima.id) AS cantidad
+	
+            FROM
+	        hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            victima
+            ON 
+                detalle_hecho.victima_id = victima.id
+            LEFT JOIN
+            tipo_arma
+            ON 
+                victima.tipo_arma_id = tipo_arma.id
+                        WHERE hecho.fecha >= :fechaDesde
+                        AND hecho.fecha <= :fechaHasta
+                        GROUP BY tipo_arma.descripcion
+           
+                  
+
+SQL;
+    $rsm = new ResultSetMapping();
+    $rsm->addScalarResult('descripcion', 'descripcion');
+    $rsm->addScalarResult('cantidad', 'cantidad');
+ 
+    
+    $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+    $fechaDesdeCorregida = clone $fechaDesde;
+    $fechaHastaCorregida = clone $fechaHasta;
+
+    $fechaDesdeCorregida->setTime(0, 0, 0);
+    $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+    $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+        ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+    return $query->getArrayResult();
+}
+
+
 
 
 
@@ -550,6 +598,7 @@ SQL;
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             HAVING femicidio = 'Si'
+            ORDER BY fecha 
                   
 
 SQL;
@@ -583,6 +632,73 @@ SQL;
         ->setParameter(':fechaHasta', $fechaHastaCorregida);
 
     return $query->getArrayResult();
+}
+
+
+// DISTRIBUCION DE VICTIMAS POR VINCULO CON AUTOR
+
+public function victimasPorVinculo($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+        SELECT
+        DISTINCT 
+        detalle_hecho.victima_id AS victima, 
+        detalle_hecho.pres_autor_id AS autor,
+        hecho.id AS hecho,
+        detalle_hecho.vinculo AS vinculo, 
+        detalle_hecho.vinculo_familiar AS vinculofliar, 
+        detalle_hecho.vinculo_familiar_otro AS vinculofliarotro, 
+        detalle_hecho.vinculo_no_familiar AS vinculonofliar, 
+        detalle_hecho.vinculo_no_familiar_otro AS vinculonofliarotro,
+        hecho.fecha AS fecha
+
+        FROM
+	    hecho
+        INNER JOIN
+        detalle_hecho
+        ON 
+            hecho.id = detalle_hecho.hecho_id
+        INNER JOIN
+        victima
+        ON 
+		detalle_hecho.victima_id = victima.id
+
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        ORDER BY
+	    detalle_hecho.vinculo ASC
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('autor', 'autor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('vinculo', 'vinculo');
+        $rsm->addScalarResult('vinculofliar', 'vinculofliar');
+        $rsm->addScalarResult('vinculofliarotro', 'vinculofliarotro');
+        $rsm->addScalarResult('vinculonofliar', 'vinculonofliar');
+        $rsm->addScalarResult('vinculonofliarotro', 'vinculonofliarotro');
+        $rsm->addScalarResult('fecha', 'fecha');
+
+       
+  
+
+
+
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
 }
 
 

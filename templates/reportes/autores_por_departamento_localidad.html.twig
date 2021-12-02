@@ -4,14 +4,14 @@
 
 {% block reporte %}
 <div class="container">
-  <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de víctimas mecanismo de muerte</h3>  
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h3>Distribución de presuntos autores por Departamento</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
             <thead style="background-color: aliceblue;">
                 <tr>
-                    <th><strong>Descripción</strong></th>
+                    <th><strong>Descripcion</strong></th>
                     <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
@@ -38,25 +38,26 @@
            
             </tbody>
         </table>
-     </div>
+      
+    </div>
 </div>
 
 
 <div class="container">
-  <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de víctimas tipo de arma</h3> 
-
-       <table class="table table-hover">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h3>Distribución de presuntos autores por Localidad</h3>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+        <table class="table table-hover">
             
             <thead style="background-color: aliceblue;">
                 <tr>
-                    <th><strong>Descripción</strong></th>
+                    <th><strong>Descripcion</strong></th>
                     <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
             <tbody>
                 {% set sum1 = 0%}
-                {% for fila in datos1 %}
+                {% for fila in datos2 %}
                 {% set sum1 = sum1 + fila.cantidad %}
                
                 <tr>
@@ -77,8 +78,7 @@
            
             </tbody>
         </table>
-
-
+      
     </div>
 </div>
 {% endblock %}

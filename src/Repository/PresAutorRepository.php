@@ -37,7 +37,7 @@ class PresAutorRepository extends ServiceEntityRepository
     }
 
 
-    public function presuntoAutorPorSexo($fechaDesde, $fechaHasta){
+    public function presAutorPorSexo($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
                 SELECT 
             sexo.descripcion AS descripcion,
@@ -84,7 +84,7 @@ SQL;
     }
 
 
-    public function presuntoAutorPorGenero($fechaDesde, $fechaHasta){
+    public function presAutorPorGenero($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
                 SELECT 
             genero.descripcion AS descripcion,
@@ -100,8 +100,8 @@ SQL;
                 pres_autor
                 ON 
                     pres_autor.id = detalle_hecho.pres_autor_id
-                INNER JOIN
-                sexo
+                LEFT JOIN
+                genero
                 ON 
                     pres_autor.genero_id = genero.id
                 WHERE hecho.fecha >= :fechaDesde
@@ -129,6 +129,307 @@ SQL;
 
         return $query->getArrayResult();
     }
+
+
+
+
+
+    public function presAutorPorRango($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+                SELECT 
+                rango_etario.descripcion AS descripcion,
+	            COUNT( DISTINCT detalle_hecho.pres_autor_id) cantidad
+            
+            FROM
+                hecho
+                INNER JOIN
+                detalle_hecho
+                ON 
+                    hecho.id = detalle_hecho.hecho_id
+                INNER JOIN
+                pres_autor
+                ON 
+                    detalle_hecho.pres_autor_id = pres_autor.id
+                LEFT JOIN
+                rango_etario
+                ON 
+                pres_autor.rango_etario_id = rango_etario.id
+                WHERE hecho.fecha >= :fechaDesde
+                AND hecho.fecha <= :fechaHasta
+                GROUP BY
+                rango_etario.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+    public function presAutorPorDepartamento($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+            SELECT 
+            departamento.descripcion AS descripcion,
+            COUNT( DISTINCT detalle_hecho.pres_autor_id) AS cantidad
+
+	
+            FROM
+            hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            pres_autor
+            ON 
+                detalle_hecho.pres_autor_id = pres_autor.id
+            LEFT JOIN
+            departamento
+            ON 
+                hecho.departamento_id = departamento.id 
+                WHERE hecho.fecha >= :fechaDesde
+                AND hecho.fecha <= :fechaHasta
+                GROUP BY
+                departamento.descripcion
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+
+    public function presAutorPorLocalidad($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+        SElECT
+                localidad.nombre AS descripcion, 
+	            COUNT( DISTINCT detalle_hecho.pres_autor_id) AS cantidad
+
+                FROM
+                hecho
+                INNER JOIN
+                detalle_hecho
+                ON 
+                    hecho.id = detalle_hecho.hecho_id
+                INNER JOIN
+                pres_autor
+                ON 
+                    detalle_hecho.pres_autor_id = pres_autor.id
+                INNER JOIN
+                localidad
+                ON 
+                hecho.localidad_id = localidad.id
+                WHERE hecho.fecha >= :fechaDesde
+                AND hecho.fecha <= :fechaHasta
+                GROUP BY
+                localidad.nombre
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+    public function presAutorPorEdadLegal($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+            SELECT pres_autor.edad_legal AS descripcion,
+            COUNT( DISTINCT detalle_hecho.pres_autor_id) AS cantidad
+            FROM
+            hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            pres_autor
+            ON 
+		    detalle_hecho.pres_autor_id = pres_autor.id
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            GROUP BY pres_autor.edad_legal
+            
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+
+    public function presAutorPorDia($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+            SELECT
+	        hecho.dia_ocu AS descripcion, 
+	        COUNT( DISTINCT detalle_hecho.pres_autor_id)
+        FROM
+            hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            pres_autor
+            ON 
+            detalle_hecho.pres_autor_id = pres_autor.id
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            GROUP BY hecho.dia_ocu
+            
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+
+
+    public function presAutorPorMes($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+            SELECT hecho.mes AS descripcion,
+            COUNT( DISTINCT detalle_hecho.pres_autor_id) cantidad 
+	
+        FROM
+            hecho
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            pres_autor
+            ON 
+    		detalle_hecho.pres_autor_id = pres_autor.id
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            GROUP BY hecho.mes
+            
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+    }
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
     // /**
