@@ -4,13 +4,13 @@
 
 {% block reporte %}
 <div class="container-fluid">
-    <div class="table table-responsive">
+  <div class="table table-responsive">
     <caption class="text-justify" > <h3>Distribución de hechos espacial</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         
     
  
-            <div class="row">
+        <div class="row">
             <div class="col">
                     <table class="table table-hover">
                         
@@ -70,8 +70,8 @@
                             <tr><td>No hay resultados disponibles...</td></tr>
                             {% endfor %}
                             <tr>
-                                <td style="background-color: lavender;"><strong>Total</strong></td>
-                                <td style="background-color: lavender;"><strong>{{ sum2  }}</strong></td>
+                                <td style="background-color: lightblue;"><strong>Total</strong></td>
+                                <td style="background-color: lightblue;"><strong>{{ sum2  }}</strong></td>
                             
                             </tr>
                     
@@ -103,8 +103,8 @@
                             <tr><td>No hay resultados disponibles...</td></tr>
                             {% endfor %}
                             <tr>
-                                <td style="background-color: lavender;"><strong>Total</strong></td>
-                                <td style="background-color: lavender;"><strong>{{ sum3  }}</strong></td>
+                                <td style="background-color: lightblue;"><strong>Total</strong></td>
+                                <td style="background-color: lightblue;"><strong>{{ sum3  }}</strong></td>
                             
                             </tr>
                     
@@ -112,9 +112,139 @@
                     </table>
              </div>
             </div>
-     
     </div>
+
+</div>   
+   
+
+
+
+
+{# segunda parte#}
+
+
+
+<div class="container-fluid">
+  <div class="table table-responsive">
+        <div class="row">
+                    <div class="col">
+                            <table class="table table-hover">
+                                
+                                <thead style="background-color: #DFF6DD ;">
+                                    <tr>
+                                        <th><strong>Distribución de hechos por zona </strong></th>
+                                        <th><strong>Cantidad </strong></th>          
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set sum4 = 0%}
+                                    {% for fila in datos4 %}
+                                    {% set sum4 = sum4 + fila.cantidad %}
+                                
+                                    <tr>
+                                        <td>{{ fila.descripcion }}</td>
+                                        <td>{{ fila.cantidad  }}</td>
+                                    
+                                                
+                                    </tr>
+                                
+                                    {% else %}
+                                    <tr><td>No hay resultados disponibles...</td></tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td style="background-color: lavender;"><strong>Total</strong></td>
+                                        <td style="background-color: lavender;"><strong>{{ sum4  }}</strong></td>
+                                    
+                                    </tr>
+                            
+                                </tbody>
+                            </table>
+
+                    </div>
+                    <div class="col">
+                            <table class="table table-hover">
+                                
+                                <thead style="background-color: #DFF6DD;">
+                                    <tr>
+                                        <th><strong>Distribución de hechos por acceso</strong></th>
+                                        <th><strong>Cantidad</strong></th>          
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set sum5 = 0%}
+                                    {% for fila in datos5 %}
+                                    {% set sum5 = sum5 + fila.cantidad %}
+                                
+                                    <tr>
+                                        <td>{{ fila.descripcion }}</td>
+                                        <td>{{ fila.cantidad  }}</td>
+                                    
+                                                
+                                    </tr>
+                                
+                                    {% else %}
+                                    <tr><td>No hay resultados disponibles...</td></tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td style="background-color: lavender;"><strong>Total</strong></td>
+                                        <td style="background-color: lavender;"><strong>{{ sum5  }}</strong></td>
+                                    
+                                    </tr>
+                            
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="col">
+                            <table class="table table-hover">
+                                
+                                <thead style="background-color: #DFF6DD;">
+                                    <tr>
+                                        <th><strong>Distribución de hechos por acceso</strong></th>
+                                        <th><strong>Cantidad</strong></th>          
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set sum6 = 0%}
+                                    {% for fila in datos6 %}
+                                    {% set sum6 = sum6 + fila.cantidad %}
+                                
+                                    <tr>
+                                        <td>{{ fila.descripcion }}</td>
+                                        <td>{{ fila.cantidad  }}</td>
+                                    
+                                                
+                                    </tr>
+                                
+                                    {% else %}
+                                    <tr><td>No hay resultados disponibles...</td></tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td style="background-color: lavender;"><strong>Total</strong></td>
+                                        <td style="background-color: lavender;"><strong>{{ sum6  }}</strong></td>
+                                    
+                                    </tr>
+                            
+                                </tbody>
+                            </table>
+                    </div>
+                    </div>
+            
+            </div>
+        </div>
+   </div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% endblock %}

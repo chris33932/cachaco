@@ -939,6 +939,18 @@ class ReportesController extends AbstractController
                    
         $datos3 = $em->getRepository('App:Hecho')
                     ->hechosAccesoOcu($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos4 = $em->getRepository('App:Hecho')
+                    ->hechosLugarOcu($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        $datos5 = $em->getRepository('App:Hecho')
+                    ->hechosTipoLugarOcu($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+                   
+        $datos6 = $em->getRepository('App:Hecho')
+                    ->hechosDomPartOcu($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
 
         if ($request->getRequestFormat() == 'xlsx') {
             $datosExcel = array(
@@ -969,6 +981,9 @@ class ReportesController extends AbstractController
                     'datos' => $datos,
                     'datos2' => $datos2,
                     'datos3' => $datos3,
+                    'datos4' => $datos4,
+                    'datos5' => $datos5,               
+                    'datos6' => $datos6,
 
                     'formFechas' => $formFechas->createView()
             ));
