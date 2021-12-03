@@ -426,7 +426,7 @@ SQL;
             victima
             ON 
                 detalle_hecho.victima_id = victima.id
-            INNER JOIN
+            LEFT JOIN
             mecanismo_muerte
             ON 
             victima.mecanismo_muerte_id = mecanismo_muerte.id
