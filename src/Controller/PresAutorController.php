@@ -103,13 +103,21 @@ class PresAutorController extends AbstractController
         ));
     }
 
+
+
+
     /**
      * @Route("/{id}", name="pres_autor_show", methods={"GET"})
      */
     public function show(PresAutor $presAutor): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $detallehechos = $em->getRepository('App:detalleHecho')->findByPresAutorId($presAutor->getId());
+       
         return $this->render('pres_autor/show.html.twig', [
             'pres_autor' => $presAutor,
+            'detallehechos' => $detallehechos,
+
         ]);
     }
 

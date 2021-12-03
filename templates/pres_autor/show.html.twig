@@ -111,13 +111,74 @@
         </tbody>
     </table>
 
+
+
+
+
+
 <div class"caja">
     <a href="{{ path('pres_autor_index') }}">back to list</a>
 
     <a href="{{ path('pres_autor_edit', {'id': pres_autor.id}) }}">edit</a>
     <br>
 </div>
+
+
+
+	<div class="container">
+		
+        <h1 class="text-info" ><p class="text-center" >Información del Hecho</p></h1>
+       <table class="table">
+         <thead  style="background-color:#d3ecec">
+             <tr>
+                 
+                <td>Lugar</td>
+                <td>Denuncia previa</td>
+                <td>IdHecho</td>
+                <td>NroPreventivo</td>
+                <td>Mes</td>
+                <td>Año</td>
+                <td>Accion</td>
+              
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for detallehecho in detallehechos %}
+            <tr>
+                <td>{{ detallehecho.hecho.lugarOcu }}</td>
+                <td>{{ detallehecho.denPrevia }}</td>
+                <td>{{ detallehecho.hecho.id }}</td>
+                <td>{{ detallehecho.hecho.nroPreventivo }}</td>
+                <td>{{ detallehecho.hecho.mes }}</td>
+                <td>{{ detallehecho.hecho.anio }}</td>
+               
+                <td>
+                    <a href="{{ path('hecho_show', { 'id': detallehecho.hecho.id } ) }}"
+                        alt="Ver almacen {{ detallehecho.hecho.nroPreventivo }}"
+                        class="btn btn-info btn-ms">
+                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;Ver</a>
+                </td>
+            </tr>
+                {% else %}
+            <tr>
+                  <td colspan="3">no records found</td>
+             </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
 </div>
+
+
+
+
+
+
+</div>
+
+
+
 
     {{ include('pres_autor/_delete_form.html.twig') }}
 {% endblock %}

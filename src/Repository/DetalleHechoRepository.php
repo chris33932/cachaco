@@ -32,6 +32,26 @@ class DetalleHechoRepository extends ServiceEntityRepository
 
     }
 
+
+    public function findByPresAutorId($presAutorId){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('d, partial a.{id, nombre, apellido}, partial h.{id, nro_preventivo, mes, anio, lugar_ocu}')
+            ->from('App:detalleHecho', 'd')
+            ->innerJoin('d.hecho', 'h')
+            ->innerJoin('d.pres_autor', 'a')
+            ->where($qb->expr()->eq('a.id', ':presAutorId'));
+
+        $qb->setParameter('presAutorId', $presAutorId);
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+
+
+
+
+
     public function findByHechoId($hechoId){
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('d, partial v.{id, nombre, apellido}, partial v.{id, nombre, apellido},  partial p.{id, nombre, apellido}')
