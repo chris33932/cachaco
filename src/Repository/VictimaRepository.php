@@ -598,7 +598,7 @@ SQL;
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             HAVING femicidio = 'Si'
-            ORDER BY fecha 
+            ORDER BY fecha
                   
 
 SQL;
@@ -665,7 +665,7 @@ public function victimasPorVinculo($fechaDesde, $fechaHasta){
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
         ORDER BY
-	    detalle_hecho.vinculo ASC
+        	    detalle_hecho.vinculo
               
 
 SQL;
