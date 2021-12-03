@@ -91,6 +91,10 @@
                 <th>Calle_int_ocu</th>
                 <td>{{ hecho.calleIntOcu }}</td>
             </tr>
+              <tr>
+                <th>SIG</th>
+                <td>{{ hecho.repGeoOcu }}</td>
+            </tr>
             <tr>
                 <th>Latitud_ocu</th>
                 <td>{{ hecho.latitudOcu }}</td>
@@ -240,32 +244,61 @@
 
 
 
-<div class="container" style="background-color: #FFFAF0">
+<div class="container-fluid" style="background-color: #FFFAF0">
+  <div class="table table-responsive">
+
        <h1 class="text-info" >
        <p class="text-center" style="padding-top:30px">Más Información </p></h1>    
        <table class="table">
-         <thead>
+         <thead  style="background-color: #FFFAF0">
              <tr>
                  
-                <td ><strong class="text-info">Id_victima</strong></td>
-                <td><strong class="text-info">Nombre_victima</strong></td>
-                <td><strong class="text-info">Apellido_victima</strong></td>
-                <td><strong class="text-secondary">Id_PresAutor</strong></td>
-                <td><strong class="text-secondary">NombrePresAutor</strong></td>
-                <td><strong class="text-secondary">ApellidoPresAutor</strong></td>
+                <td ><strong class="text-secondary" >IdVictima</strong></td>
+                <td><strong class="text-secondary">NombreVictima</strong></td>
+                <td><strong class="text-secondary">ApellidoVictima</strong></td>
+                <td><strong class="text-secondary">IdAutor</strong></td>
+                <td><strong class="text-secondary">NombreAutor</strong></td>
+                <td><strong class="text-secondary">ApellidoAutor</strong></td>
                 
+                <td><strong class="text-secondary">vinculo</strong></td>
+                
+                <td><strong class="text-secondary">vinculoFamiliar</strong></td>
+                <td><strong class="text-secondary">vinculoFamiliarOtro</strong></td>
+
+                <td><strong class="text-secondary">vinculoNoFamiliar</strong></td>
+                <td><strong class="text-secondary">vinculoNoFamiliarOtro</strong></td>
+
+                <td><strong class="text-secondary">Conviviente</strong></td>
+
+                <td><strong class="text-secondary">usoArmaFuego</strong></td>
+                <td><strong class="text-secondary">sitArmaFuego</strong></td>
+                <td><strong class="text-secondary">perArmaFuego</strong></td>
             </tr>
         </thead>
         <tbody>
             {% for detallehecho in detallehechos %}
             <tr>
-                <td>{{ detallehecho.victima.id }}</td>
-                <td>{{ detallehecho.victima.nombre }}</td>
-                <td>{{ detallehecho.victima.apellido }}</td>
+                <td class="text-info">{{ detallehecho.victima.id }}</td>
+                <td class="text-info">{{ detallehecho.victima.nombre }}</td>
+                <td class="text-info">{{ detallehecho.victima.apellido }}</td>
 
                 <td>{{ detallehecho.presAutor.id }}</td>
                 <td>{{ detallehecho.presAutor.nombre }}</td>
                 <td>{{ detallehecho.presAutor.apellido }}</td>
+
+                <td>{{ detallehecho.vinculo }}</td>
+
+                <td>{{ detallehecho.vinculoFamiliar }}</td>
+                <td>{{ detallehecho.vinculoFamiliarOtro }}</td>
+
+                <td>{{ detallehecho.vinculoNoFamiliar }}</td>
+                <td>{{ detallehecho.vinculoNoFamiliarOtro }}</td>
+                <td>{{ detallehecho.conviviente }}</td>
+                <td>{{ detallehecho.usoArmaFue }}</td>
+                <td>{{ detallehecho.sitArmaFue }}</td>
+                <td>{{ detallehecho.perArmaFue }}</td>
+
+
             </tr>
                  {% else %}
             <tr>
@@ -285,7 +318,7 @@
 
     </table>
 
-
+  </div>
 </div>
 
 
