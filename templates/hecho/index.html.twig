@@ -27,6 +27,7 @@
                         <th>N° Prev.</th>
                         <th>Departamento</th>
                         <th>Localidad</th>
+                        <th>GranRcia</th>
                         {#<th>Juzgado</th>#}
                         {#<th>Fiscalia</th>#}
                         {#<th>Fecha</th>#}
@@ -92,13 +93,13 @@
                         <td>{{ hecho.nroPreventivo }}</td>
                         <td>{{ hecho.departamento }}</td>
                         <td>{{ hecho.localidad }}</td>
-                    
+                        <td>{{ hecho.granRcia }}</td>
                         {#<td>{{ hecho.fiscalia }}</td>#}
                         {#<td>{{ hecho.fecha ? hecho.fecha|date('Y-m-d') : '' }}</td>#}
                         <td>{{ hecho.anio }}</td>
                         {#<td>{{ hecho.mes }}</td>
                         {#<td>{{ hecho.codLocIndec }}</td>
-                        {#<td>{{ hecho.granRcia }}</td>
+                        {#
                         {#<td>{{ hecho.horaOcu ? hecho.horaOcu|date('H:i:s') : '' }}</td>
                         {#<td>{{ hecho.diaOcu }}</td>#}
                         {#<td>{{ hecho.franjaHSeis }}</td>#}
