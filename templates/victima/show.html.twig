@@ -228,11 +228,11 @@
        <table class="table">
          <thead  style="background-color:#d3ecec">
              <tr>
-                 
+                <td>HechoId</td>
+                <td>Nro preventivo</td>
                 <td>Lugar</td>
                 <td>Denuncia previa</td>
                 <td >Imputado</td>
-                <td>Nro preventivo</td>
                 <td>Mes</td>
                 <td>Año</td>
                 <td>Accion</td>
@@ -243,10 +243,13 @@
         <tbody>
             {% for detallehecho in detallehechos %}
             <tr>
+                <td>{{ detallehecho.hecho.id }}</td>
+
+                <td>{{ detallehecho.hecho.nroPreventivo }}</td>
                 <td>{{ detallehecho.hecho.lugarOcu }}</td>
                 <td>{{ detallehecho.denPrevia }}</td>
                 <td>{{ detallehecho.presAutor }}</td>
-                <td>{{ detallehecho.hecho.nroPreventivo }}</td>
+                
                 <td>{{ detallehecho.hecho.mes }}</td>
                 <td>{{ detallehecho.hecho.anio }}</td>
                

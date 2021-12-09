@@ -1,0 +1,67 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes femicidios{% endblock %}
+
+
+{% block reporte %}
+<div class="container">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h3>Informe sobre femicidios(contexto femicidio y tipo femicidio, medidas de protección y especificación de las mismas )</h3>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>presAutorId</th>
+                                                                <th>victimaId</th>
+                                                                <th>hechoId</th>
+                                                                <th>TipoFemicicio</th>
+                                                                <th>medidaProteccion</th>
+                                                                <th>medidaProteccionEsp</th>                                                            
+                                                                <th>Fecha</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.presAutorId }}</td>
+                                                                <td>{{ fila.victimaId }}</td>
+                                                                <td>{{ fila.hechoId  }}</td>
+                                                                <td>{{ fila.TipoFemicicio  }}</td>
+                                                                <td>{{ fila.medidaProteccion  }}</td>
+                                                                <td>{{ fila.medidaProteccionEsp  }}</td>
+                                                                <td>{{ fila.fecha  }}</td>
+                                                            
+
+
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

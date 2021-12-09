@@ -1000,10 +1000,144 @@ class ReportesController extends AbstractController
 
 
 
-      //------------------------- FEMICIDIOS ------------------------------//
+
+    //---------------------- Femicidio por depto y localidad -----------------------//
+    //----------------------------------------------------------------------//
+
+     /**
+     * @Route("/femicidio_depto_loc", name="femicidio_depto_loc")
+     */
+    public function femicidioDeptoLocAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('femicidio_depto_loc'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->femicidiosDepartamento($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+        
+        $datos2 = $em->getRepository('App:Victima')
+                    ->femicidiosLocalidad($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hecho',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'datos2' => $datos2,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/femicidio_depto_loc.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+    //---------------------- Femicidio por rango etario y edad legal----------------------//
+    //----------------------------------------------------------------------//
+
+     /**
+     * @Route("/femicidio_r_etario_e_legal", name="femicidio_r_etario_e_legal")
+     */
+    public function femicidioRangoEtarioEdadLegalAction(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('femicidio_r_etario_e_legal'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->femicidiosRangoEtario($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+        
+        $datos2 = $em->getRepository('App:Victima')
+                    ->femicidiosEdadLegal($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hecho',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'Descripcion',
+                    'Cantidad',
+                    
+                ),
+                'datos' => $datos,
+                'datos2' => $datos2,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/femicidio_r_etario_e_legal.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+     //------------------------- FEMICIDIOS vinculo, overkill ------------------------------//
     //-------------------------------------------------------------------------------------------//
 
-      /**
+     /**
      * @Route("/femicidios", name="femicidios")
      */
     public function victimasPorExc(Request $request)
@@ -1075,6 +1209,162 @@ class ReportesController extends AbstractController
             ));
         }
     }
+
+
+
+     //------------------------- FEMICIDIOS contexto femicidio y tipo femicidio, medidas 
+     ///de protección y especificación de las mismas  ------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+     /**
+     * @Route("/femicidio_contexto", name="femicidio_contexto")
+     */
+    public function femicidioContextoTipo(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('femicidio_contexto'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->femicidioContexto($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victima',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'presAutorId',
+                    'victimaId',
+                    'hechoId',
+                    'ContextoFemicida',
+                    'TipoFemicicio',
+                    'medidaProteccion',
+                    'medidaProteccionEsp',
+                    'fecha',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/femicidio_contexto.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+
+
+     //------------------------- FEMICIDIOS femicidio espacio ocurrencia  ------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+     /**
+     * @Route("/femicidio_espacio", name="femicidio_espacio")
+     */
+    public function femicidioEspacioOcurrencia(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('femicidio_espacio'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->femicidioEspacio($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victima',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'presAutorId',
+                    'victimaId',
+                    'hechoId',
+                    'ZonaOcurrencia',
+                    'TipoEspOcurrencia', 
+                    'Lugar', 
+                    'TipoLugarOcurrencia', 
+                    'TipoAcceso', 
+                    'domicilio', 
+                    'domicilioOtro',
+                    
+
+                    'fecha',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/femicidio_espacio.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
 
 
      //------------------------- INFORMACION DE VICTIMAS Y VINCULOS CON AUTORES------------------------------//

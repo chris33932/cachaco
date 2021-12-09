@@ -497,7 +497,7 @@ SQL;
     }
 
 
-    // Cantidad de femicidios con exceso en el uso de la violencia letal
+    // Cantidad de victims por tipo arma
     public function victimasPorTipoArma($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
             SELECT
@@ -552,49 +552,47 @@ SQL;
     public function victimasPorExc($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
             SELECT DISTINCT
-            hecho.id AS hecho,
-            victima.id AS victima,
-            sexo.descripcion AS sexo,  
+            detalle_hecho.pres_autor_id AS PresAutorId,
+            hecho.id AS hecho, 
+            victima.id AS victima, 
+            sexo.descripcion AS sexo, 
             victima.femicidio AS femicidio, 
-            victima.violencia_exc AS overkill,
-            tipo_dom_particular.descripcion AS domicilio,
-            detalle_hecho.vinculo AS vinculo,
-            detalle_hecho.vinculo_familiar AS vinculoTipo,
-            detalle_hecho.vinculo_familiar_otro AS vinculoTipoOtro,
-	        detalle_hecho.conviviente AS conviviente, 
+            victima.violencia_exc AS overkill, 
+            tipo_dom_particular.descripcion AS domicilio, 
+            detalle_hecho.vinculo AS vinculo, 
+            detalle_hecho.vinculo_familiar AS vinculoTipo, 
+            detalle_hecho.vinculo_familiar_otro AS vinculoTipoOtro, 
+            detalle_hecho.conviviente AS conviviente, 
             departamento.descripcion AS departamento, 
-	        localidad.nombre AS localidad,
-	        hecho.fecha AS fecha
+            localidad.nombre AS localidad, 
+            hecho.fecha AS fecha
 
-
-          
-        FROM
-            hecho
-            INNER JOIN
-            detalle_hecho
-            ON 
+    FROM
+        hecho
+        INNER JOIN
+        detalle_hecho
+        ON 
             hecho.id = detalle_hecho.hecho_id
-            INNER JOIN
-            victima
-            ON 
+        INNER JOIN
+        victima
+        ON 
             detalle_hecho.victima_id = victima.id
-            INNER JOIN
-            sexo
-            ON 
-		    victima.sexo_id = sexo.id
-            LEFT JOIN
-            tipo_dom_particular
-	        ON 
-		    hecho.dom_part_ocu_id = tipo_dom_particular.id
-            INNER JOIN
-	        departamento
-	        ON 
-		    hecho.departamento_id = departamento.id 
-            INNER JOIN
-            localidad
-            ON 
-	
-		    hecho.localidad_id = localidad.id 
+        INNER JOIN
+        sexo
+        ON 
+            victima.sexo_id = sexo.id
+        LEFT JOIN
+        tipo_dom_particular
+        ON 
+            hecho.dom_part_ocu_id = tipo_dom_particular.id
+        INNER JOIN
+        departamento
+        ON 
+            hecho.departamento_id = departamento.id
+        INNER JOIN
+        localidad
+        ON 
+		hecho.localidad_id = localidad.id
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             HAVING femicidio = 'Si'
@@ -634,6 +632,211 @@ SQL;
     return $query->getArrayResult();
 }
 
+
+
+// Cantidad de femicidios por departamento
+  public function femicidiosDepartamento($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+        SELECT
+            departamento.descripcion	 AS descripcion,
+            COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+        FROM 
+        hecho
+        INNER JOIN
+        departamento
+        ON 
+        hecho.departamento_id = departamento.id
+        INNER JOIN
+        detalle_hecho
+        ON 
+        hecho.id = detalle_hecho.hecho_id
+        INNER JOIN
+        victima
+        ON 
+        
+        detalle_hecho.victima_id = victima.id
+        WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            AND femicidio = 'Si'
+            GROUP BY  departamento.descripcion
+          
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+        
+
+
+        // Cantidad de femicidios por localidad
+        public function femicidiosLocalidad($fechaDesde, $fechaHasta){
+            $sql = <<<'SQL'
+            SELECT
+            localidad.nombre AS descripcion, 
+            COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+    
+            FROM
+            hecho
+            INNER JOIN
+            localidad
+            ON 
+                hecho.localidad_id = localidad.id
+            INNER JOIN
+            detalle_hecho
+            ON 
+                hecho.id = detalle_hecho.hecho_id
+            INNER JOIN
+            victima
+            ON 
+                detalle_hecho.victima_id = victima.id
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            AND femicidio = 'Si'
+            GROUP BY
+            localidad.nombre
+          
+    
+        SQL;
+    
+                $rsm = new ResultSetMapping();
+    
+                $rsm->addScalarResult('descripcion', 'descripcion');
+                $rsm->addScalarResult('cantidad', 'cantidad');
+            
+    
+                $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+                $fechaDesdeCorregida = clone $fechaDesde;
+                $fechaHastaCorregida = clone $fechaHasta;
+    
+                $fechaDesdeCorregida->setTime(0, 0, 0);
+                $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+                $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                    ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+                return $query->getArrayResult();
+}
+
+
+// Cantidad de femicidios por rango etario
+public function femicidiosRangoEtario($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+        SELECT
+	edad_legal.descripcion AS descripcion, 
+	COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+	
+	
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	INNER JOIN
+	rango_etario
+	ON 
+		victima.rango_etario_id = rango_etario.id
+	INNER JOIN
+	edad_legal
+	ON 
+		victima.edad_legal_id = edad_legal.id
+        WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            AND femicidio = 'Si'
+            GROUP BY  edad_legal.descripcion
+          
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+
+
+
+// Cantidad de femicidios por rango etario
+public function femicidiosEdadLegal($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+       SELECT
+	   rango_etario.descripcion AS descripcion, 
+	   COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	INNER JOIN
+	rango_etario
+	ON 
+		victima.rango_etario_id = rango_etario.id
+        WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            AND femicidio = 'Si'
+            GROUP BY  rango_etario.descripcion
+          
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+        
 
 // DISTRIBUCION DE VICTIMAS POR VINCULO CON AUTOR
 
@@ -681,11 +884,73 @@ SQL;
         $rsm->addScalarResult('vinculonofliarotro', 'vinculonofliarotro');
         $rsm->addScalarResult('fecha', 'fecha');
 
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+
+
+///// <h3>Informe sobre femicidios(contexto femicidio y tipo femicidio, medidas 
+///de protección y especificación de las mismas )</h3>  
+
+public function femicidioContexto($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+    SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutorId, 
+	detalle_hecho.victima_id AS victimaId, 
+	detalle_hecho.hecho_id AS hechoId, 
+	cont_femicida.descripcion AS ContextoFemicida, 
+	tipo_femicidio.descripcion AS TipoFemicicio, 
+	victima.medida_protecc_vigente AS medidaProteccion, 
+	victima.medida_protecc_especif AS medidaProteccionEsp,
+    hecho.fecha AS fecha
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	INNER JOIN
+	cont_femicida
+	ON 
+		victima.cont_femicida_id = cont_femicida.id
+	INNER JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
+
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        AND femicidio = 'Si'
+        ORDER BY
+        	    detalle_hecho.vinculo
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('presAutorId', 'presAutorId');
+        $rsm->addScalarResult('victimaId', 'victimaId');
+        $rsm->addScalarResult('hechoId', 'hechoId');
+        $rsm->addScalarResult('ContextoFemicida', 'ContextoFemicida');
+        $rsm->addScalarResult('TipoFemicicio', 'TipoFemicicio');
+        $rsm->addScalarResult('medidaProteccion', 'medidaProteccion');
+        $rsm->addScalarResult('medidaProteccionEsp', 'medidaProteccionEsp');
+        $rsm->addScalarResult('fecha', 'fecha');
        
-  
-
-
-
+       
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
 
@@ -702,10 +967,90 @@ SQL;
 }
 
 
+    ///de protección y especificación de las mismas )</h3>  
 
+public function femicidioEspacio($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+    SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutorId, 
+	detalle_hecho.victima_id AS victimaId, 
+	detalle_hecho.hecho_id AS hechoId, 
+	zona.descripcion AS ZonaOcurrencia, 
+	tipo_espacio.descripcion AS TipoEspOcurrencia,
+    lugar.descripcion AS Lugar,	
+	hecho.lugar_ocu_otro AS LugarOtro, 
+	tipo_lugar.descripcion AS TipoLugarOcurrencia, 
+	hecho.acceso_ocu AS TipoAcceso, 
+	tipo_dom_particular.descripcion AS domicilio,
+    hecho.dom_part_otro AS domicilioOtro,	
+	hecho.fecha AS fecha
+	
+	
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	INNER JOIN
+	zona
+	ON 
+		hecho.zona_ocu_id = zona.id
+	INNER JOIN
+	tipo_espacio
+	ON 
+		hecho.tipo_esp_ocu_id = tipo_espacio.id
+	INNER JOIN
+	tipo_lugar
+	ON 
+		hecho.tipo_lug_ocu_id = tipo_lugar.id
+	INNER JOIN
+	lugar
+	ON 
+		hecho.lugar_ocu_id = lugar.id
+	INNER JOIN
+	tipo_dom_particular
+	ON 
+		hecho.dom_part_ocu_id = tipo_dom_particular.id
 
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        AND femicidio = 'Si'
+                  
 
+SQL;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('presAutorId', 'presAutorId');
+        $rsm->addScalarResult('victimaId', 'victimaId');
+        $rsm->addScalarResult('hechoId', 'hechoId');
+        $rsm->addScalarResult('ZonaOcurrencia', 'ZonaOcurrencia');
+        $rsm->addScalarResult('TipoEspOcurrencia', 'TipoEspOcurrencia');
+        $rsm->addScalarResult('Lugar', 'Lugar');
+        $rsm->addScalarResult('TipoLugarOcurrencia', 'TipoLugarOcurrencia');
+        $rsm->addScalarResult('TipoAcceso', 'TipoAcceso');
+        $rsm->addScalarResult('domicilio', 'domicilio');
+        $rsm->addScalarResult('domicilioOtro', 'domicilioOtro');
+        $rsm->addScalarResult('fecha', 'fecha');
+       
+       
 
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
 
 
 
