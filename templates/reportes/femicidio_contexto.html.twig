@@ -16,6 +16,8 @@
                                                                 <th>victimaId</th>
                                                                 <th>hechoId</th>
                                                                 <th>TipoFemicicio</th>
+                                                                <th>denPrevia</th>
+                                                                <th>denPreviaDesc</th> 
                                                                 <th>medidaProteccion</th>
                                                                 <th>medidaProteccionEsp</th>                                                            
                                                                 <th>Fecha</th>
@@ -25,10 +27,12 @@
                                                         <tbody>
                                                             {% for fila in datos %}
                                                             <tr>
-                                                                <td>{{ fila.presAutorId }}</td>
-                                                                <td>{{ fila.victimaId }}</td>
+                                                                <td class="text-info"><a href="{{ path('pres_autor_show', { 'id': fila.presAutorId } ) }}">{{fila.presAutorId}}</a></td>
+                                                                <td class="text-info"><a href="{{ path('victima_show', { 'id': fila.victimaId } ) }}">{{fila.victimaId}}</a></td>
                                                                 <td>{{ fila.hechoId  }}</td>
                                                                 <td>{{ fila.TipoFemicicio  }}</td>
+                                                                <td>{{ fila.denPrevia  }}</td>
+                                                                <td>{{ fila.denPreviaDesc  }}</td>
                                                                 <td>{{ fila.medidaProteccion  }}</td>
                                                                 <td>{{ fila.medidaProteccionEsp  }}</td>
                                                                 <td>{{ fila.fecha  }}</td>

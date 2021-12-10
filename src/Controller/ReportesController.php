@@ -1260,6 +1260,8 @@ class ReportesController extends AbstractController
                     'hechoId',
                     'ContextoFemicida',
                     'TipoFemicicio',
+                    'denPrevia',
+                    'denPreviaDesc',
                     'medidaProteccion',
                     'medidaProteccionEsp',
                     'fecha',

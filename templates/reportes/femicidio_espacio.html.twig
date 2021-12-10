@@ -29,8 +29,9 @@
                                                         <tbody>
                                                             {% for fila in datos %}
                                                             <tr>
-                                                                <td>{{ fila.presAutorId }}</td>
-                                                                <td>{{ fila.victimaId }}</td>
+                                                                <td class="text-info"><a href="{{ path('pres_autor_show', { 'id': fila.presAutorId } ) }}">{{fila.presAutorId}}</a></td>
+                                                                <td class="text-info"><a href="{{ path('victima_show', { 'id': fila.victimaId } ) }}">{{fila.victimaId}}</a></td>
+                                                                
                                                                 <td>{{ fila.hechoId  }}</td>
                                                                 <td>{{ fila.ZonaOcurrencia  }}</td>
                                                                 <td>{{ fila.TipoEspOcurrencia  }}</td>

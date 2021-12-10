@@ -35,7 +35,8 @@
                                                             <tr>
                                                                 <td>{{ fila.femicidio }}</td>
                                                                 <td>{{ fila.hecho }}</td>
-                                                                <td>{{ fila.victima  }}</td>
+                                                                <td class="text-info"><a href="{{ path('victima_show', { 'id': fila.victima  } ) }}">{{fila.victima }}</a></td>
+                                                               
                                                                 <td>{{ fila.sexo  }}</td>
                                                                 <td>{{ fila.domicilio  }}</td>
                                                                 <td>{{ fila.vinculo  }}</td>

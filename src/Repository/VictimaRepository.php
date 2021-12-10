@@ -596,7 +596,7 @@ SQL;
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             HAVING femicidio = 'Si'
-            ORDER BY fecha
+            ORDER BY detalle_hecho.victima_id DESC
                   
 
 SQL;
@@ -910,6 +910,8 @@ public function femicidioContexto($fechaDesde, $fechaHasta){
 	detalle_hecho.hecho_id AS hechoId, 
 	cont_femicida.descripcion AS ContextoFemicida, 
 	tipo_femicidio.descripcion AS TipoFemicicio, 
+    detalle_hecho.den_previa AS denPrevia, 
+	detalle_hecho.den_prev_desc AS denPreviaDesc,
 	victima.medida_protecc_vigente AS medidaProteccion, 
 	victima.medida_protecc_especif AS medidaProteccionEsp,
     hecho.fecha AS fecha
@@ -936,16 +938,19 @@ FROM
         AND hecho.fecha <= :fechaHasta
         AND femicidio = 'Si'
         ORDER BY
-        	    detalle_hecho.vinculo
+        detalle_hecho.victima_id DESC
               
 
 SQL;
         $rsm = new ResultSetMapping();
+        
         $rsm->addScalarResult('presAutorId', 'presAutorId');
         $rsm->addScalarResult('victimaId', 'victimaId');
         $rsm->addScalarResult('hechoId', 'hechoId');
         $rsm->addScalarResult('ContextoFemicida', 'ContextoFemicida');
         $rsm->addScalarResult('TipoFemicicio', 'TipoFemicicio');
+        $rsm->addScalarResult('denPrevia', 'denPrevia');
+        $rsm->addScalarResult('denPreviaDesc', 'denPreviaDesc');
         $rsm->addScalarResult('medidaProteccion', 'medidaProteccion');
         $rsm->addScalarResult('medidaProteccionEsp', 'medidaProteccionEsp');
         $rsm->addScalarResult('fecha', 'fecha');
