@@ -12,10 +12,13 @@
             
                                                         <thead style="background-color: #a4eaec;">
                                                             <tr>
-                                                                <th>Femicidio</th>
+                                                                
                                                                 <th>Hecho</th>
                                                                 <th>victimaId</th>
                                                                 <th>Sexo</th>
+                                                                <th>Femicidio</th>
+                                                                <th>TipoFemicidio</th>
+
                                                                 <th>Domicilio</th>
                                                                 <th>Vinculo</th>
                                                                 <th>TipoVinculo</th>
@@ -33,11 +36,15 @@
                                                         <tbody>
                                                             {% for fila in datos %}
                                                             <tr>
-                                                                <td>{{ fila.femicidio }}</td>
+                                                               
                                                                 <td>{{ fila.hecho }}</td>
                                                                 <td class="text-info"><a href="{{ path('victima_show', { 'id': fila.victima  } ) }}">{{fila.victima }}</a></td>
                                                                
                                                                 <td>{{ fila.sexo  }}</td>
+                                                                <td>{{ fila.femicidio  }}</td>
+
+                                                                <td>{{ fila.tipoFemicidio  }}</td>
+
                                                                 <td>{{ fila.domicilio  }}</td>
                                                                 <td>{{ fila.vinculo  }}</td>
                                                                 <td>{{ fila.vinculoTipo  }}</td>

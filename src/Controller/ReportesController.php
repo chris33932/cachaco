@@ -1044,6 +1044,7 @@ class ReportesController extends AbstractController
                 'columnas' => array(
                     'Descripcion',
                     'Cantidad',
+                    'tipoFemicidio',
                     
                 ),
                 'datos' => $datos,
@@ -1108,6 +1109,7 @@ class ReportesController extends AbstractController
                 ),
                 'columnas' => array(
                     'Descripcion',
+                    'tipoFemicidio',
                     'Cantidad',
                     
                 ),
@@ -1188,7 +1190,8 @@ class ReportesController extends AbstractController
                     'conviviente',
                     'vinculoTipoOtro',
                     'departamento',
-                    'localidad'
+                    'localidad',
+                    'tipoFemicidio',
                     
                 ),
                 'datos' => $datos,
@@ -1343,6 +1346,8 @@ class ReportesController extends AbstractController
                     'TipoAcceso', 
                     'domicilio', 
                     'domicilioOtro',
+                    'femicidio',
+                    'tipoFemicidio',
                     
 
                     'fecha',
@@ -1436,6 +1441,83 @@ class ReportesController extends AbstractController
                     'fecha_hasta' => $rangoFecha['fechaHasta'],
                     'datos' => $datos,
                   
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+
+     /**
+     * @Route("/femicidio_mecanismo", name="femicidio_mecanismo")
+     */
+    public function femicidioArmaMecanimos(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('femicidio_mecanismo'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->victimaFemicidioMecanimo($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victima',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'fecha',
+                    'anio',
+                    'mes',
+                    'femicidio',
+                    'tipoFemicidio',
+                    'dia',
+                    'hechoId',
+                    'victimaID',
+                    'mecanismoMuerte',
+                    'mecanismoMuerteOtro',
+                    'tipoArma',
+                    'tipoArmaOtro',
+                    'granRcia',
+                    
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/femicidio_mecanismo.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
                     'formFechas' => $formFechas->createView()
             ));
         }

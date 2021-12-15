@@ -5,13 +5,14 @@
 {% block reporte %}
 <div class="container">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de femicidios por Departamento</h3>  
+    <caption class="text-justify" > <h3>Distribución de femicidios por Departamento y Tipo de Femicidio</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
             <thead style="background-color: skyblue;">
                 <tr>
                     <th><strong>Descripcion</strong></th>
+                    <th><strong>TipoFemicidio</strong></th>
                     <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                
                 <tr>
                     <td>{{ fila.descripcion }}</td>
+                    <td>{{ fila.tipoFemicidio }}</td>
                     <td>{{ fila.cantidad  }}</td>
                  
                                
@@ -32,6 +34,9 @@
                 {% endfor %}
                  <tr>
                     <td style="background-color: lavender;"><strong>Total</strong></td>
+                    
+                    <td style="background-color: lavender;"><strong></strong></td>
+
                     <td style="background-color: lavender;"><strong>{{ sum  }}</strong></td>
                    
                 </tr>
@@ -49,13 +54,14 @@
 
 <div class="container">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de femicidios por Localidad</h3>  
+    <caption class="text-justify" > <h3>Distribución de femicidios por Localidad y Tipo de Femicidio</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
             <thead style="background-color: aliceblue;">
                 <tr>
                     <th><strong>Descripcion</strong></th>
+                    <th><strong>TipoFemicidio</strong></th>
                     <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
@@ -66,6 +72,7 @@
                
                 <tr>
                     <td>{{ fila.descripcion }}</td>
+                    <td>{{ fila.tipoFemicidio }}</td>
                     <td>{{ fila.cantidad  }}</td>
                  
                                
@@ -76,6 +83,7 @@
                 {% endfor %}
                  <tr>
                     <td style="background-color: lavender;"><strong>Total</strong></td>
+                    <td style="background-color: lavender;"><strong>      </strong></td>
                     <td style="background-color: lavender;"><strong>{{ sum1  }}</strong></td>
                    
                 </tr>

@@ -262,7 +262,7 @@
          <thead  style="background-color: #FFFAF0">
              <tr>
                  
-                <td ><strong class="text-secondary" >IdVictima</strong></td>
+                <td ><strong class="text-secondary">IdVictima</strong></td>
                 <td><strong class="text-secondary">NombreVictima</strong></td>
                 <td><strong class="text-secondary">ApellidoVictima</strong></td>
                 <td><strong class="text-secondary">IdAutor</strong></td>
@@ -286,12 +286,17 @@
         </thead>
         <tbody>
             {% for detallehecho in detallehechos %}
-            <tr>
-                <td class="text-info">{{ detallehecho.victima.id }}</td>
+            <tr>  
+
+                <td>
+                    <a href="{{ path('victima_show', { 'id':detallehecho.victima.id  } ) }}">{{detallehecho.victima.id}}</a>
+                </td>
+
                 <td class="text-info">{{ detallehecho.victima.nombre }}</td>
                 <td class="text-info">{{ detallehecho.victima.apellido }}</td>
-
-                <td>{{ detallehecho.presAutor.id }}</td>
+                <td>
+                    <a href="{{ path('pres_autor_show', { 'id':detallehecho.presAutor.id  } ) }}">{{ detallehecho.presAutor.id }}</a>
+                </td>
                 <td>{{ detallehecho.presAutor.nombre }}</td>
                 <td>{{ detallehecho.presAutor.apellido }}</td>
 

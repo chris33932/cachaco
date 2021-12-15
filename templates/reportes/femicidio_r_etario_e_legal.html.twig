@@ -12,6 +12,8 @@
             <thead style="background-color: skyblue;">
                 <tr>
                     <th><strong>Descripcion</strong></th>
+                    <th><strong>TipoFemicidio</strong></th>
+
                     <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
@@ -22,6 +24,8 @@
                
                 <tr>
                     <td>{{ fila.descripcion }}</td>
+                    <td>{{ fila.tipoFemicidio }}</td>
+
                     <td>{{ fila.cantidad  }}</td>
                  
                                
@@ -32,6 +36,8 @@
                 {% endfor %}
                  <tr>
                     <td style="background-color: lavender;"><strong>Total</strong></td>
+                    <td style="background-color: lavender;"><strong>      </strong></td>
+
                     <td style="background-color: lavender;"><strong>{{ sum  }}</strong></td>
                    
                 </tr>
@@ -56,6 +62,8 @@
             <thead style="background-color: aliceblue;">
                 <tr>
                     <th><strong>Descripcion</strong></th>
+                    <th><strong>TipoFemicidio</strong></th>
+
                     <th><strong>Cantidad</strong></th>          
                 </tr>
             </thead>
@@ -66,6 +74,8 @@
                
                 <tr>
                     <td>{{ fila.descripcion }}</td>
+                    <td>{{ fila.tipoFemicidio }}</td>
+
                     <td>{{ fila.cantidad  }}</td>
                  
                                
@@ -76,6 +86,8 @@
                 {% endfor %}
                  <tr>
                     <td style="background-color: lavender;"><strong>Total</strong></td>
+                    <td style="background-color: lavender;"><strong>     </strong></td>
+
                     <td style="background-color: lavender;"><strong>{{ sum1  }}</strong></td>
                    
                 </tr>

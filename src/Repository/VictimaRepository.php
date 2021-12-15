@@ -556,7 +556,8 @@ SQL;
             hecho.id AS hecho, 
             victima.id AS victima, 
             sexo.descripcion AS sexo, 
-            victima.femicidio AS femicidio, 
+            victima.femicidio AS femicidio,
+            tipo_femicidio.descripcion AS tipoFemicidio, 
             victima.violencia_exc AS overkill, 
             tipo_dom_particular.descripcion AS domicilio, 
             detalle_hecho.vinculo AS vinculo, 
@@ -593,6 +594,10 @@ SQL;
         localidad
         ON 
 		hecho.localidad_id = localidad.id
+        INNER JOIN
+	    tipo_femicidio
+     	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             HAVING femicidio = 'Si'
@@ -605,6 +610,7 @@ SQL;
     $rsm->addScalarResult('sexo', 'sexo');
     $rsm->addScalarResult('victima', 'victima');
     $rsm->addScalarResult('femicidio', 'femicidio');
+    $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio'); 
     $rsm->addScalarResult('domicilio', 'domicilio');
     $rsm->addScalarResult('fecha', 'fecha');
     $rsm->addScalarResult('overkill', 'overkill');
@@ -638,7 +644,7 @@ SQL;
   public function femicidiosDepartamento($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
         SELECT
-            departamento.descripcion	 AS descripcion,
+            departamento.descripcion	 AS descripcion, tipo_femicidio.descripcion AS tipoFemicidio,
             COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
         FROM 
         hecho
@@ -653,18 +659,23 @@ SQL;
         INNER JOIN
         victima
         ON 
-        
         detalle_hecho.victima_id = victima.id
+        INNER JOIN
+        tipo_femicidio
+        ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id 
         WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             AND femicidio = 'Si'
-            GROUP BY  departamento.descripcion
+            GROUP BY  departamento.descripcion, tipo_femicidio.descripcion
           
 SQL;
 
         $rsm = new ResultSetMapping();
 
         $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+
         $rsm->addScalarResult('cantidad', 'cantidad');
 
 
@@ -681,6 +692,7 @@ SQL;
 
         return $query->getArrayResult();
 }
+
         
 
 
@@ -688,7 +700,7 @@ SQL;
         public function femicidiosLocalidad($fechaDesde, $fechaHasta){
             $sql = <<<'SQL'
             SELECT
-            localidad.nombre AS descripcion, 
+            localidad.nombre AS descripcion, tipo_femicidio.descripcion AS tipoFemicidio,
             COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
     
             FROM
@@ -696,27 +708,33 @@ SQL;
             INNER JOIN
             localidad
             ON 
-                hecho.localidad_id = localidad.id
+            hecho.localidad_id = localidad.id
             INNER JOIN
             detalle_hecho
             ON 
-                hecho.id = detalle_hecho.hecho_id
+            hecho.id = detalle_hecho.hecho_id
             INNER JOIN
             victima
             ON 
-                detalle_hecho.victima_id = victima.id
+            detalle_hecho.victima_id = victima.id 
+            INNER JOIN
+            tipo_femicidio
+            ON 
+		    victima.tipo_femicidio_id = tipo_femicidio.id   
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             AND femicidio = 'Si'
             GROUP BY
-            localidad.nombre
+            localidad.nombre, tipo_femicidio.descripcion
           
     
-        SQL;
+SQL;
     
                 $rsm = new ResultSetMapping();
     
                 $rsm->addScalarResult('descripcion', 'descripcion');
+                $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+
                 $rsm->addScalarResult('cantidad', 'cantidad');
             
     
@@ -739,11 +757,10 @@ SQL;
 public function femicidiosRangoEtario($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
         SELECT
-	edad_legal.descripcion AS descripcion, 
+	edad_legal.descripcion AS descripcion, tipo_femicidio.descripcion AS tipoFemicidio,  
 	COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
-	
-	
-FROM
+	 	
+    FROM
 	hecho
 	INNER JOIN
 	detalle_hecho
@@ -761,16 +778,21 @@ FROM
 	edad_legal
 	ON 
 		victima.edad_legal_id = edad_legal.id
+    INNER JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
         WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             AND femicidio = 'Si'
-            GROUP BY  edad_legal.descripcion
+            GROUP BY  edad_legal.descripcion, tipo_femicidio.descripcion
           
 SQL;
 
         $rsm = new ResultSetMapping();
 
         $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');       
         $rsm->addScalarResult('cantidad', 'cantidad');
 
 
@@ -790,11 +812,11 @@ SQL;
 
 
 
-// Cantidad de femicidios por rango etario
+// Cantidad de femicidios por edad legal
 public function femicidiosEdadLegal($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
        SELECT
-	   rango_etario.descripcion AS descripcion, 
+	   rango_etario.descripcion AS descripcion, tipo_femicidio.descripcion AS tipoFemicidio,  
 	   COUNT(DISTINCT detalle_hecho.victima_id) AS cantidad
 FROM
 	hecho
@@ -809,17 +831,22 @@ FROM
 	INNER JOIN
 	rango_etario
 	ON 
-		victima.rango_etario_id = rango_etario.id
+	victima.rango_etario_id = rango_etario.id
+    INNER JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
         WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
             AND femicidio = 'Si'
-            GROUP BY  rango_etario.descripcion
+            GROUP BY  rango_etario.descripcion, tipo_femicidio.descripcion
           
 SQL;
 
         $rsm = new ResultSetMapping();
 
         $rsm->addScalarResult('descripcion', 'descripcion');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
         $rsm->addScalarResult('cantidad', 'cantidad');
 
 
@@ -972,7 +999,7 @@ SQL;
 }
 
 
-    ///de protección y especificación de las mismas )</h3>  
+    ///femicidio por espacio de ocurrencia  
 
 public function femicidioEspacio($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
@@ -988,6 +1015,8 @@ public function femicidioEspacio($fechaDesde, $fechaHasta){
 	hecho.acceso_ocu AS TipoAcceso, 
 	tipo_dom_particular.descripcion AS domicilio,
     hecho.dom_part_otro AS domicilioOtro,	
+    victima.femicidio AS femicidio, 
+    tipo_femicidio.descripcion AS tipoFemicidio,
 	hecho.fecha AS fecha
 	
 	
@@ -1020,7 +1049,11 @@ FROM
 	INNER JOIN
 	tipo_dom_particular
 	ON 
-		hecho.dom_part_ocu_id = tipo_dom_particular.id
+	hecho.dom_part_ocu_id = tipo_dom_particular.id
+    INNER JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
 
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
@@ -1039,6 +1072,9 @@ SQL;
         $rsm->addScalarResult('TipoAcceso', 'TipoAcceso');
         $rsm->addScalarResult('domicilio', 'domicilio');
         $rsm->addScalarResult('domicilioOtro', 'domicilioOtro');
+        $rsm->addScalarResult('femicidio', 'femicidio');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+
         $rsm->addScalarResult('fecha', 'fecha');
        
        
@@ -1055,6 +1091,90 @@ SQL;
             ->setParameter(':fechaHasta', $fechaHastaCorregida);
 
         return $query->getArrayResult();
+}
+
+
+
+    // Femicidio por mecanismo y arma
+    public function victimaFemicidioMecanimo($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+    SELECT
+	fecha AS fecha,
+    hecho.anio AS anio,
+    hecho.mes AS mes,
+    hecho.dia_ocu AS dia,
+    hecho.gran_rcia AS granRcia,	
+	hecho_id AS hechoId, 
+    victima.id  AS victimaID,
+	victima.femicidio AS femicidio, 
+	tipo_femicidio.descripcion AS tipoFemicidio, 
+    
+	mecanismo_muerte.descripcion AS mecanismoMuerte,
+	victima.mecanismo_muerte_otro AS mecanismoMuerteOtro, 
+	tipo_arma.descripcion  AS tipoArma,
+	victima.tipo_arma_otro AS tipoArmaOtro
+	
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	INNER JOIN
+	tipo_arma
+	ON 
+		victima.tipo_arma_id = tipo_arma.id
+	INNER JOIN
+	mecanismo_muerte
+	ON 
+	victima.mecanismo_muerte_id = mecanismo_muerte.id
+    INNER JOIN
+	tipo_femicidio
+	ON 
+	victima.tipo_femicidio_id = tipo_femicidio.id
+            WHERE hecho.fecha >= :fechaDesde
+            AND hecho.fecha <= :fechaHasta
+            HAVING femicidio = 'Si'
+            ORDER BY hecho.fecha
+                  
+
+SQL;
+    $rsm = new ResultSetMapping();
+    $rsm->addScalarResult('fecha', 'fecha');
+    $rsm->addScalarResult('anio', 'anio');
+    $rsm->addScalarResult('mes', 'mes');
+    $rsm->addScalarResult('femicidio', 'femicidio');
+    $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+   
+    $rsm->addScalarResult('dia', 'dia');
+    $rsm->addScalarResult('hechoId', 'hechoId');
+    $rsm->addScalarResult('victimaID', 'victimaID');
+    
+    $rsm->addScalarResult('mecanismoMuerte', 'mecanismoMuerte');
+    $rsm->addScalarResult('mecanismoMuerteOtro', 'mecanismoMuerteOtro');
+    $rsm->addScalarResult('tipoArma', 'tipoArma');
+    $rsm->addScalarResult('tipoArmaOtro', 'tipoArmaOtro');
+    $rsm->addScalarResult('granRcia', 'granRcia');
+    
+    
+   
+
+    $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+    $fechaDesdeCorregida = clone $fechaDesde;
+    $fechaHastaCorregida = clone $fechaHasta;
+
+    $fechaDesdeCorregida->setTime(0, 0, 0);
+    $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+    $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+        ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+    return $query->getArrayResult();
 }
 
 

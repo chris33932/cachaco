@@ -1,0 +1,83 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes femicidios{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h3>Informe sobre femicidios(Tipo de arma, mecanimos de muerte)</h3>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>fecha</th>
+                                                                <th>Año</th>
+                                                                <th>Mes</th>
+                                                                <th>Día</th>
+                                                                <th>GranRcia</th>
+                                                                <th>HechoId</th>
+                                                                <th>VictimaId</th>
+                                                                <th>Femicidio</th>
+                                                                <th>TipoFemicidio</th>
+                                                                <th>mecanismoMuerte</th>
+                                                                <th>OvermecanismoMuerteOtro</th>
+                                                                <th>tipoArma</th>
+                                                                <th>tipoArmaOtro</th>
+                                                                                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.fecha }}</td>
+                                                                <td>{{ fila.anio }}</td>
+                                                                <td>{{ fila.mes  }}</td>
+                                                                <td>{{ fila.dia  }}</td>
+                                                                <td>{{ fila.granRcia  }}</td>
+                                                                <td>{{ fila.hechoId  }}</td>
+                                                                <td class="text-info">
+                                                                    <a href="{{ path('victima_show', { 'id': fila.victimaID  } ) }}">
+                                                                        {{fila.victimaID }}
+                                                                    </a>
+                                                                </td>
+                                                                <td>{{ fila.femicidio  }}</td>
+                                                                <td>{{ fila.tipoFemicidio  }}</td>
+
+                                                                <td>{{ fila.mecanismoMuerte  }}</td>
+                                                                <td>{{ fila.mecanismoMuerteOtro  }}</td>
+                                                                <td>{{ fila.tipoArma  }}</td>
+                                                                <td>{{ fila.tipoArmaOtro  }}</td>
+
+
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}
