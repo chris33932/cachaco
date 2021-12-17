@@ -545,10 +545,72 @@ SQL;
 }
 
 
+// DISTRIBUCION DE VICTIMAS POR VINCULO CON AUTOR
+
+public function victimasPorVinculo($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+        SELECT
+        DISTINCT 
+        detalle_hecho.victima_id AS victima, 
+        detalle_hecho.pres_autor_id AS autor,
+        hecho.id AS hecho,
+        detalle_hecho.vinculo AS vinculo, 
+        detalle_hecho.vinculo_familiar AS vinculofliar, 
+        detalle_hecho.vinculo_familiar_otro AS vinculofliarotro, 
+        detalle_hecho.vinculo_no_familiar AS vinculonofliar, 
+        detalle_hecho.vinculo_no_familiar_otro AS vinculonofliarotro,
+        hecho.fecha AS fecha
+
+        FROM
+	    hecho
+        INNER JOIN
+        detalle_hecho
+        ON 
+            hecho.id = detalle_hecho.hecho_id
+        INNER JOIN
+        victima
+        ON 
+		detalle_hecho.victima_id = victima.id
+
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        ORDER BY
+        	    detalle_hecho.vinculo
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('autor', 'autor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('vinculo', 'vinculo');
+        $rsm->addScalarResult('vinculofliar', 'vinculofliar');
+        $rsm->addScalarResult('vinculofliarotro', 'vinculofliarotro');
+        $rsm->addScalarResult('vinculonofliar', 'vinculonofliar');
+        $rsm->addScalarResult('vinculonofliarotro', 'vinculonofliarotro');
+        $rsm->addScalarResult('fecha', 'fecha');
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
 
 
 
-    // Cantidad de femicidios con exceso en el uso de la violencia letal
+
+
+    // Cantidad de femicidios con exceso en el uso de la violencia letal = "Esta por presunto autor distinto,
+    // para hacer consultas sobre los mismos, si lo hago por victima se pierde el registro de los autores"
     public function victimasPorExc($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
             SELECT DISTINCT
@@ -640,7 +702,7 @@ SQL;
 
 
 
-// Cantidad de femicidios por departamento
+// Cantidad de femicidios agrupado por departamento y tipo femicidio
   public function femicidiosDepartamento($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
         SELECT
@@ -696,7 +758,7 @@ SQL;
         
 
 
-        // Cantidad de femicidios por localidad
+        // Cantidad de femicidios agrupado por localidad y por tipo femicidio(vinculado no vinculado)
         public function femicidiosLocalidad($fechaDesde, $fechaHasta){
             $sql = <<<'SQL'
             SELECT
@@ -753,7 +815,7 @@ SQL;
 }
 
 
-// Cantidad de femicidios por rango etario
+// Cantidad de femicidios agrupado por rango etario y por tipo femicidio(vinculado no vinculado)
 public function femicidiosRangoEtario($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
         SELECT
@@ -812,7 +874,7 @@ SQL;
 
 
 
-// Cantidad de femicidios por edad legal
+// Cantidad de femicidios agrupado por edad legal y por tipo femicidio(vinculado no vinculado)
 public function femicidiosEdadLegal($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
        SELECT
@@ -865,68 +927,10 @@ SQL;
 }
         
 
-// DISTRIBUCION DE VICTIMAS POR VINCULO CON AUTOR
-
-public function victimasPorVinculo($fechaDesde, $fechaHasta){
-    $sql = <<<'SQL'
-        SELECT
-        DISTINCT 
-        detalle_hecho.victima_id AS victima, 
-        detalle_hecho.pres_autor_id AS autor,
-        hecho.id AS hecho,
-        detalle_hecho.vinculo AS vinculo, 
-        detalle_hecho.vinculo_familiar AS vinculofliar, 
-        detalle_hecho.vinculo_familiar_otro AS vinculofliarotro, 
-        detalle_hecho.vinculo_no_familiar AS vinculonofliar, 
-        detalle_hecho.vinculo_no_familiar_otro AS vinculonofliarotro,
-        hecho.fecha AS fecha
-
-        FROM
-	    hecho
-        INNER JOIN
-        detalle_hecho
-        ON 
-            hecho.id = detalle_hecho.hecho_id
-        INNER JOIN
-        victima
-        ON 
-		detalle_hecho.victima_id = victima.id
-
-        WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
-        ORDER BY
-        	    detalle_hecho.vinculo
-              
-
-SQL;
-        $rsm = new ResultSetMapping();
-        $rsm->addScalarResult('victima', 'victima');
-        $rsm->addScalarResult('autor', 'autor');
-        $rsm->addScalarResult('victima', 'victima');
-        $rsm->addScalarResult('hecho', 'hecho');
-        $rsm->addScalarResult('vinculo', 'vinculo');
-        $rsm->addScalarResult('vinculofliar', 'vinculofliar');
-        $rsm->addScalarResult('vinculofliarotro', 'vinculofliarotro');
-        $rsm->addScalarResult('vinculonofliar', 'vinculonofliar');
-        $rsm->addScalarResult('vinculonofliarotro', 'vinculonofliarotro');
-        $rsm->addScalarResult('fecha', 'fecha');
-
-        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
-
-        $fechaDesdeCorregida = clone $fechaDesde;
-        $fechaHastaCorregida = clone $fechaHasta;
-
-        $fechaDesdeCorregida->setTime(0, 0, 0);
-        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
-
-        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
-            ->setParameter(':fechaHasta', $fechaHastaCorregida);
-
-        return $query->getArrayResult();
-}
 
 
-///// <h3>Informe sobre femicidios(contexto femicidio y tipo femicidio, medidas 
+
+///// Informe sobre femicidios(contexto femicidio y tipo femicidio, medidas 
 ///de protección y especificación de las mismas )</h3>  
 
 public function femicidioContexto($fechaDesde, $fechaHasta){
