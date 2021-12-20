@@ -18,7 +18,6 @@
                                                                 <th>Sexo</th>
                                                                 <th>Femicidio</th>
                                                                 <th>TipoFemicidio</th>
-
                                                                 <th>Domicilio</th>
                                                                 <th>Vinculo</th>
                                                                 <th>TipoVinculo</th>
@@ -71,20 +70,12 @@
 </div>
 {% endblock %}
 {% block body %}
-    {% set path_excel = "" %}
+    {% set path_excel = "femicidioReportes" %}
     {{ parent() }}
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
-
-<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
-<script>
-    $(document).ready(function(){
-        $('#imprimir').on('click', function(e){
-            e.preventDefault();
-            window.print();
-        });
 
 </script>
 {% endblock %}

@@ -33,20 +33,11 @@
 </div>
 {% endblock %}
 {% block body %}
-    {% set path_excel = "" %}
+    {% set path_excel = 'victimas_reportes' %}
     {{ parent() }}
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
 
-<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
-<script>
-    $(document).ready(function(){
-        $('#imprimir').on('click', function(e){
-            e.preventDefault();
-            window.print();
-        });
-
-</script>
 {% endblock %}

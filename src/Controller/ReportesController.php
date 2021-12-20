@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use PHPExcel;
 use Twig\Template;
 use App\Form\RangoFechaType;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,8 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
   /**
     * @Route("/reportes", defaults={"_format": "html"}, requirements={"_format": "html|xlsx"})
@@ -31,7 +32,7 @@ class ReportesController extends AbstractController
     }
 
      /**
-     * @Route("/victimas_reportes", name="victimas_reportes")
+     * @Route("/victimas_reportes.{_format}", name="victimas_reportes")
      */
     public function victimasReportesAction(Request $request)
     {
@@ -67,7 +68,7 @@ class ReportesController extends AbstractController
                 'columnas' => array(
                     'Descripcion',
                     'Cantidad',
-                    'Monto',
+                    //'Monto',
                 ),
                 'datos' => $datos,
                 'totales' => array(
@@ -151,7 +152,7 @@ class ReportesController extends AbstractController
     //----------------------------------------------------------------------//
 
      /**
-     * @Route("/victimas_por_edad_legal", name="victimas_por_edad_legal")
+     * @Route("/victimas_por_edad_legal.{_format}", name="victimas_por_edad_legal")
      */
     public function victimasPorEdadLegalAction(Request $request)
     {
@@ -246,7 +247,7 @@ class ReportesController extends AbstractController
                 'columnas' => array(
                     'Descripcion',
                     'Cantidad',
-                    'Monto',
+                    //'Monto',
                 ),
                 'datos' => $datos,
                 'totales' => array(
@@ -271,7 +272,7 @@ class ReportesController extends AbstractController
 
     
      /**
-     * @Route("/victimas_por_sexo_genero", name="victimas_por_sexo_genero")
+     * @Route("/victimas_por_sexo_genero.{_format}", name="victimas_por_sexo_genero")
      */
     public function victimasPorSexoGeneroAction(Request $request)
     {
@@ -1140,7 +1141,7 @@ class ReportesController extends AbstractController
     //-------------------------------------------------------------------------------------------//
 
      /**
-     * @Route("/femicidios", name="femicidios")
+     * @Route("/femicidios.{_format}", name="femicidios")
      */
     public function victimasPorExc(Request $request)
     {
@@ -1179,19 +1180,21 @@ class ReportesController extends AbstractController
                 ),
                 'columnas' => array(
                     'hecho',
+                    'victima',
+
                     'sexo',
                     'femicidio',
-                    'victima',
-                    'overkill',
+                    'tipoFemicidio',
                     'domicilio',
-                    'fecha',
                     'vinculo',
                     'vinculoTipo',
-                    'conviviente',
                     'vinculoTipoOtro',
+                    'conviviente',
+                    'overkill',
                     'departamento',
                     'localidad',
-                    'tipoFemicidio',
+                    'fecha',
+
                     
                 ),
                 'datos' => $datos,
@@ -1742,6 +1745,226 @@ class ReportesController extends AbstractController
             ));
         }
     }
+
+
+         /////////////////////////////////////////////////
+        // -----------------EXCEL --------------------//
+        ////////////////////////////////////////////////
+
+private function renderExcel($datos)
+{
+    $excel = new \PHPExcel();
+    $excel->setActiveSheetIndex(0);
+    $this->ponerPropiedades($excel, $datos['encabezado']['titulo']);
+    $this->generarEncabezadoExcel($excel, $datos['encabezado']);
+    $this->generarEncabezadoColumnas($excel, $datos['columnas']);
+    $this->generarDatos($excel, $datos['datos']);
+    $this->generarTotales($excel, $datos['totales']);
+    $this->formatearExcel($excel, $datos['encabezado']['titulo']);
+    $response = $this->generarExcelResponse($excel);
+
+    return $response->send();
+}
+
+private function ponerPropiedades($excel, $titulo)
+{
+    $excel->getProperties()
+            ->setCreator('Sistema almacenes')
+            ->setLastModifiedBy('Sistema')
+            ->setTitle($titulo)
+            ->setSubject('')
+            ->setDescription('')
+            ->setKeywords('')
+            ->setCategory('');
+}
+
+private function generarEncabezadoExcel($excel, $encabezado)
+{
+    $excel->getActiveSheet()
+            ->setCellValue('A1', $encabezado['titulo']);
+
+    $columna = 0;
+    foreach ($encabezado['filtro'] as $filtro => $valor) {
+        $excel->getActiveSheet()->setCellValueByColumnAndRow($columna++, 3, $filtro.': '.$valor);
+    }
+}
+
+private function generarEncabezadoColumnas($excel, $encabezadoColumnas, $fila = 5)
+{
+    $columna = 0;
+    foreach ($encabezadoColumnas as $titulo) {
+        $excel->getActiveSheet()->setCellValueByColumnAndRow($columna++, $fila, $titulo);
+    }
+    $rango = 'A'.$fila.':'.chr(65 + --$columna).$fila;
+
+    
+    $excel->getActiveSheet()
+            ->setSharedStyle(
+                $this->estiloTituloColumnas(),
+                $rango
+             );
+}
+
+private function generarDatos($excel, $datos)
+{
+    $fila = 6;
+    foreach ($datos as $filas) {
+        $columna = 0;
+        foreach ($filas as $valor) {
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($columna++, $fila, $valor);
+        }
+        ++$fila;
+    }
+}
+
+private function generarTotales($excel, $totales)
+{
+    $fila = 2 + $excel->getActiveSheet()->getHighestRow();
+    $columna = 0;
+    foreach ($totales as $total) {
+        $excel->getActiveSheet()->setCellValueByColumnAndRow($columna++, $fila, $total);
+    }
+}
+
+private function formatearExcel($excel, $titulo)
+{
+    $ultimaColumna = $excel->getActiveSheet()->getHighestColumn();
+    $excel->getActiveSheet()->mergeCells('A1:'.$ultimaColumna.'1');
+
+    $estiloTitulo = $this->estiloTitulo();
+    $excel->getActiveSheet()->setSharedStyle($estiloTitulo, 'A1:'.$ultimaColumna.'1');
+
+    $excel->getActiveSheet()->setTitle(substr($titulo, 0, 30));
+
+    for ($i = 'A'; $i <= $ultimaColumna; ++$i)
+    {
+        $excel->getActiveSheet()->getColumnDimension($i)->setAutoSize(true);
+    }
+
+}
+
+private function generarExcelResponse($excel)
+{
+    $nombre = str_replace(' ', '_', $excel->getActiveSheet()->getTitle()).'_'.(new \DateTime())->format('YmdHisz').'.xlsx';
+    $response = new StreamedResponse();
+    $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    $response->headers->set('Content-Disposition', 'attachment;filename="'.$nombre.'"');
+    $response->headers->set('Cache-Control', 'max-age=0');
+    $objWriter = \PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+    $response->setCallback(function () use ($objWriter) {
+        $objWriter->save('php://output');
+    });
+
+    return $response;
+}
+
+private function estiloTitulo()
+{
+    return (new \PHPExcel_Style)->applyFromArray(array(
+        'font' => array(
+            'name' => 'Verdana',
+            'bold' => true,
+            'italic' => false,
+            'strike' => false,
+            'size' => 16,
+            'color' => array(
+                'rgb' => 'FFFFFF',
+            ),
+        ),
+        'fill' => array(
+            'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => array(
+                'argb' => 'FF48D1CC',
+            ),
+        ),
+        'borders' => array(
+            'allborders' => array(
+                'style' => \PHPExcel_Style_Border::BORDER_THIN,
+            ),
+        ),
+        'alignment' => array(
+            'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            'rotation' => 0,
+            'wrap' => true,
+        ),
+    )
+    );
+}
+
+private function estiloTituloColumnas()
+{
+    return (new \PHPExcel_Style())->applyFromArray(array(
+        'font' => array(
+            'name' => 'Arial',
+            'bold' => true,
+            'color' => array(
+                'rgb' => '000000',
+            ),
+        ),
+        'fill' => array(
+            'type' => \PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
+            'rotation' => 90,
+            'startcolor' => array(
+                'rgb' => 'CCFFE5',
+            ),
+            'endcolor' => array(
+                'argb' => 'CCFFE5',
+            ),
+        ),
+        'borders' => array(
+            'top' => array(
+                'style' => \PHPExcel_Style_Border::BORDER_HAIR,
+                'color' => array(
+                    'rgb' => '143860',
+                ),
+            ),
+            'bottom' => array(
+                'style' => \PHPExcel_Style_Border::BORDER_HAIR,
+                'color' => array(
+                    'rgb' => '143860',
+                ),
+            ),
+        ),
+        'alignment' => array(
+            'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            'wrap' => true,
+        ),
+    ));
+}
+
+private function estiloDatos()
+{
+    return (new \PHPExcel_Style)->applyFromArray(array(
+        'font' => array(
+            'name' => 'Arial',
+            'color' => array(
+                'rgb' => '000000',
+            ),
+        ),
+        'fill' => array(
+            'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => array(
+                'argb' => 'FFd9b7f4',
+            ),
+        ),
+        'borders' => array(
+            'left' => array(
+                'style' => \PHPExcel_Style_Border::BORDER_MEDIUM,
+                'color' => array(
+                    'rgb' => '3a2a47',
+                ),
+            ),
+        ),
+    ));
+}
+
+
+
+
+
+
 
 
 
