@@ -1,0 +1,91 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes femicidios{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre femicidios(Situación socio-económica)</h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>presAutor</th>
+                                                                <th>victima</th>
+                                                                <th>hecho</th>
+                                                                <th>discapacidad</th>
+                                                                <th>privadaLibertad</th>
+                                                                <th>ejerProstitucion</th>
+                                                                <th>puebloOrig</th>
+                                                                <th>etnia</th>
+                                                                <th>etniaOtro</th>
+                                                                <th>sitLaboral</th>
+                                                                <th>otraSitLaboral</th>
+                                                                <th>condActividad</th>
+                                                                <th>hijoCargo</th>
+                                                                <th>cantACargo</th>
+                                                                <th>benefLeyBrisa</th>
+                                                                <th>cantBenefLeyBrisa</th>
+                                                                <th>nivInst</th>
+                                                                <th>nifInstFormal</th>
+                                                                <th>tipoFemicidio</th>
+                                                                <th>anio</th>
+                                                                                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.presAutor }}</td>
+                                                                <td>{{ fila.victima }}</td>
+                                                                <td>{{ fila.hecho  }}</td>
+                                                                <td>{{ fila.discapacidad  }}</td>
+                                                                <td>{{ fila.privadaLibertad  }}</td>
+                                                                <td>{{ fila.ejerProstitucion  }}</td>
+                                                                <td>{{ fila.puebloOrig  }}</td>
+                                                                <td>{{ fila.etnia  }}</td>
+                                                                <td>{{ fila.etniaOtro  }}</td>
+                                                                <td>{{ fila.sitLaboral  }}</td>
+                                                                <td>{{ fila.otraSitLaboral  }}</td>
+                                                                <td>{{ fila.condActividad  }}</td>
+                                                                <td>{{ fila.hijoCargo  }}</td>
+                                                                <td>{{ fila.cantACargo  }}</td>
+                                                                <td>{{ fila.benefLeyBrisa  }}</td>
+                                                                <td>{{ fila.cantBenefLeyBrisa  }}</td>
+                                                                <td>{{ fila.nivInst  }}</td>
+                                                                <td>{{ fila.nifInstFormal  }}</td>
+                                                                <td>{{ fila.tipoFemicidio  }}</td>
+
+                                                                <td>{{ fila.anio  }}</td>
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

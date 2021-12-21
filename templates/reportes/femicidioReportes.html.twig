@@ -5,7 +5,7 @@
 {% block reporte %}
 <div class="container-fluid">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Informe sobre femicidios(Vinculo con presunto autores, convivencia, overkill)</h3>  
+    <caption class="text-justify" > <h4>Informe sobre femicidios(Vinculo con presunto autores, convivencia, overkill)</h4>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
 
                              <table class="table table-hover">
@@ -13,51 +13,39 @@
                                                         <thead style="background-color: #a4eaec;">
                                                             <tr>
                                                                 
-                                                                <th>Hecho</th>
-                                                                <th>victimaId</th>
-                                                                <th>Sexo</th>
-                                                                <th>Femicidio</th>
-                                                                <th>TipoFemicidio</th>
-                                                                <th>Domicilio</th>
-                                                                <th>Vinculo</th>
-                                                                <th>TipoVinculo</th>
-                                                                <th>TipoVinculoOtro</th>
-                                                                <th>Conviviente</th>
-                                                                <th>Overkill</th>
-                                                                <th>Departamento</th>
-                                                                <th>Localidad</th>
-                                                                
-                                                                <th>Fecha</th>
-
-                                                            
+                                                                <th>presAutor</th>
+                                                                <th>victima</th>
+                                                                <th>hecho</th>
+                                                                <th>sexo</th>
+                                                                <th>genero</th>
+                                                                <th>genetoOtro</th>
+                                                                <th>edad</th>
+                                                                <th>edadLegal</th>
+                                                                <th>estado_civil</th>
+                                                                <th>tipoFemicidio</th>
+                                                                <th>anio</th>
+                                                                                                                            
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             {% for fila in datos %}
                                                             <tr>
                                                                
-                                                                <td>{{ fila.hecho }}</td>
-                                                                <td class="text-info"><a href="{{ path('victima_show', { 'id': fila.victima  } ) }}">{{fila.victima }}</a></td>
-                                                               
+                                                                <td>{{ fila.presAutor }}</td>
+                                                              
+                                                                <td>{{ fila.victima  }}</td>
+                                                                <td>{{ fila.hecho  }}</td>
+
                                                                 <td>{{ fila.sexo  }}</td>
-                                                                <td>{{ fila.femicidio  }}</td>
 
+                                                                <td>{{ fila.genero  }}</td>
+                                                                <td>{{ fila.genetoOtro  }}</td>
+                                                                <td>{{ fila.edad  }}</td>
+                                                                <td>{{ fila.edadLegal  }}</td>
+                                                                <td>{{ fila.estado_civil  }}</td>
                                                                 <td>{{ fila.tipoFemicidio  }}</td>
-
-                                                                <td>{{ fila.domicilio  }}</td>
-                                                                <td>{{ fila.vinculo  }}</td>
-                                                                <td>{{ fila.vinculoTipo  }}</td>
-                                                                <td>{{ fila.vinculoTipoOtro  }}</td>
-                                                                <td>{{ fila.conviviente  }}</td>
-                                                                
-                                                                <td>{{ fila.overkill  }}</td>
-                                                                <td>{{ fila.departamento  }}</td>
-                                                                <td>{{ fila.localidad  }}</td>
-
-                                                                <td>{{ fila.fecha  }}</td>
-
-
-                                                            
+                                                                <td>{{ fila.anio  }}</td>
+                                          
                                                             </tr>
                                                             {% else %}
                                                             <tr><td>No hay resultados disponibles...</td></tr>

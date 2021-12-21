@@ -1,0 +1,88 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes femicidios{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre femicidios(Vinculo/Denuncias previas/Convivencia/Uso de Arma/Ext intox autor/Comp autor hecho)</h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>autor</th>
+                                                                <th>victima</th>
+                                                                <th>hecho</th>
+                                                                <th>denPrevia</th>
+                                                                <th>denPreviaDesc</th>
+                                                                <th>vinculo</th>
+                                                                <th>vinculoFliar</th>
+                                                                <th>vinculoFliarOtro</th>
+                                                                <th>vinculoNoFliar</th>
+                                                                <th>vinculoNoFliarOtro</th>
+                                                                <th>conviviente</th>
+                                                                <th>usoArmaFuego</th>
+                                                                <th>sitArmaFuego</th>
+                                                                <th>tipoFemicidio</th>
+                                                                <th>estIntox</th>
+                                                                <th>estIntoxOtro</th>
+                                                                <th>compHecho</th>
+                                                                <th>compHechoOtro</th>
+                                                                <th>anio</th>
+                                                                                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.autor }}</td>
+                                                                <td>{{ fila.victima }}</td>
+                                                                <td>{{ fila.hecho  }}</td>
+                                                                <td>{{ fila.denPrevia  }}</td>
+                                                                <td>{{ fila.denPreviaDesc  }}</td>
+                                                                <td>{{ fila.vinculo  }}</td>
+                                                                <td>{{ fila.vinculoFliar  }}</td>
+                                                                <td>{{ fila.vinculoFliarOtro  }}</td>
+                                                                <td>{{ fila.vinculoNoFliar  }}</td>
+                                                                <td>{{ fila.vinculoNoFliarOtro  }}</td>
+                                                                <td>{{ fila.conviviente  }}</td>
+                                                                <td>{{ fila.usoArmaFuego  }}</td>
+                                                                <td>{{ fila.sitArmaFuego  }}</td>
+                                                                <td>{{ fila.tipoFemicidio  }}</td>
+                                                                <td>{{ fila.estIntox  }}</td>
+                                                                <td>{{ fila.estIntoxOtro  }}</td>
+                                                                <td>{{ fila.compHecho  }}</td>
+                                                                <td>{{ fila.compHechoOtro  }}</td>
+                                                                <td>{{ fila.anio  }}</td>
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

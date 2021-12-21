@@ -613,78 +613,78 @@ SQL;
     // para hacer consultas sobre los mismos, si lo hago por victima se pierde el registro de los autores"
     public function victimasPorExc($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
-            SELECT DISTINCT
-            detalle_hecho.pres_autor_id AS PresAutorId,
-            hecho.id AS hecho, 
-            victima.id AS victima, 
-            sexo.descripcion AS sexo, 
-            victima.femicidio AS femicidio,
-            tipo_femicidio.descripcion AS tipoFemicidio, 
-            victima.violencia_exc AS overkill, 
-            tipo_dom_particular.descripcion AS domicilio, 
-            detalle_hecho.vinculo AS vinculo, 
-            detalle_hecho.vinculo_familiar AS vinculoTipo, 
-            detalle_hecho.vinculo_familiar_otro AS vinculoTipoOtro, 
-            detalle_hecho.conviviente AS conviviente, 
-            departamento.descripcion AS departamento, 
-            localidad.nombre AS localidad, 
-            hecho.fecha AS fecha
+    SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	detalle_hecho.victima_id AS victima, 
+	hecho.id AS hecho, 
+	sexo.descripcion AS sexo, 
+	genero.descripcion AS genero, 
+	victima.genero_otro AS genetoOtro,
+    victima.edad AS edad, 
+	rango_etario.descripcion AS grupoEtario, 
+	edad_legal.descripcion AS edadLegal, 
+	estado_civil.descripcion AS estado_civil,
+	tipo_femicidio.descripcion AS tipoFemicidio, 
+	hecho.anio
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	INNER JOIN
+	sexo
+	ON 
+		victima.sexo_id = sexo.id
 
-    FROM
-        hecho
-        INNER JOIN
-        detalle_hecho
-        ON 
-            hecho.id = detalle_hecho.hecho_id
-        INNER JOIN
-        victima
-        ON 
-            detalle_hecho.victima_id = victima.id
-        INNER JOIN
-        sexo
-        ON 
-            victima.sexo_id = sexo.id
-        LEFT JOIN
-        tipo_dom_particular
-        ON 
-            hecho.dom_part_ocu_id = tipo_dom_particular.id
-        INNER JOIN
-        departamento
-        ON 
-            hecho.departamento_id = departamento.id
-        INNER JOIN
-        localidad
-        ON 
-		hecho.localidad_id = localidad.id
-        INNER JOIN
-	    tipo_femicidio
-     	ON 
+	LEFT JOIN
+	tipo_femicidio
+	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
+	LEFT JOIN
+	genero
+	ON 
+		victima.genero_id = genero.id
+	LEFT JOIN
+	rango_etario
+	ON 
+		victima.rango_etario_id = rango_etario.id
+	LEFT JOIN
+	edad_legal
+	ON 
+		victima.edad_legal_id = edad_legal.id
+	LEFT JOIN
+	estado_civil
+	ON 
+		victima.estado_civil_id = estado_civil.id
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
-            HAVING femicidio = 'Si'
+            AND femicidio = 'Si'
             ORDER BY detalle_hecho.victima_id DESC
                   
 
 SQL;
     $rsm = new ResultSetMapping();
+    $rsm->addScalarResult('presAutor', 'presAutor');
+    $rsm->addScalarResult('victima', 'victima');
     $rsm->addScalarResult('hecho', 'hecho');
     $rsm->addScalarResult('sexo', 'sexo');
-    $rsm->addScalarResult('victima', 'victima');
-    $rsm->addScalarResult('femicidio', 'femicidio');
-    $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio'); 
-    $rsm->addScalarResult('domicilio', 'domicilio');
-    $rsm->addScalarResult('fecha', 'fecha');
-    $rsm->addScalarResult('overkill', 'overkill');
-    $rsm->addScalarResult('vinculo', 'vinculo');
-    $rsm->addScalarResult('vinculoTipo', 'vinculoTipo');
-    $rsm->addScalarResult('conviviente', 'conviviente');
-    $rsm->addScalarResult('vinculoTipoOtro', 'vinculoTipoOtro');
-    $rsm->addScalarResult('departamento', 'departamento');
-    $rsm->addScalarResult('localidad', 'localidad');
-    
-    
+    $rsm->addScalarResult('genero', 'genero'); 
+    $rsm->addScalarResult('genetoOtro', 'genetoOtro');
+    $rsm->addScalarResult('edad', 'edad');
+    $rsm->addScalarResult('grupoEtario', 'grupoEtario');
+    $rsm->addScalarResult('edadLegal', 'edadLegal');
+
+    $rsm->addScalarResult('estado_civil', 'estado_civil');
+    $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+    $rsm->addScalarResult('anio', 'anio');
    
+
+      
 
     $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
 
@@ -698,6 +698,103 @@ SQL;
         ->setParameter(':fechaHasta', $fechaHastaCorregida);
 
     return $query->getArrayResult();
+}
+
+// DISTRIBUCION DE VICTIMAS DE FEMICIDIO DETALLES CON AUTOR
+
+public function victimasFemVinculo($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+        SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS autor, 
+	detalle_hecho.victima_id AS victima, 
+	hecho.id AS hecho, 
+	detalle_hecho.den_previa AS denPrevia, 
+	detalle_hecho.den_prev_desc AS denPreviaDesc, 
+	detalle_hecho.vinculo AS vinculo, 
+	detalle_hecho.vinculo_familiar AS vinculoFliar, 
+	detalle_hecho.vinculo_familiar_otro AS vinculoFliarOtro, 
+	detalle_hecho.vinculo_no_familiar AS vinculoNoFliar, 
+	detalle_hecho.vinculo_no_familiar_otro AS vinculoNoFliarOtro, 
+	detalle_hecho.conviviente AS conviviente, 
+	detalle_hecho.uso_arma_fue AS usoArmaFuego, 
+	situacion_arma.descripcion AS sitArmaFuego, 
+	tipo_femicidio.descripcion AS tipoFemicidio, 
+	detalle_hecho.est_intox AS estIntox, 
+	detalle_hecho.est_intox_otro AS estIntoxOtro, 
+	comp_hecho.descripcion AS compHecho, 
+	detalle_hecho.comp_hecho_otro AS compHechoOtro,
+	hecho.anio AS anio
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	LEFT JOIN
+	situacion_arma
+	ON 
+		detalle_hecho.sit_arma_fue_id = situacion_arma.id
+	LEFT JOIN
+	tipo_per_arma
+	ON 
+		detalle_hecho.per_arma_fue_id = tipo_per_arma.id
+	LEFT JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
+	LEFT JOIN
+	comp_hecho
+	ON 
+		detalle_hecho.comp_hecho_id = comp_hecho.id
+
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        AND femicidio= 'Si'
+        ORDER BY
+        	    detalle_hecho.vinculo
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('autor', 'autor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('denPrevia', 'denPrevia');
+        $rsm->addScalarResult('denPreviaDesc', 'denPreviaDesc');
+        $rsm->addScalarResult('vinculo', 'vinculo');
+        $rsm->addScalarResult('vinculoFliar', 'vinculoFliar');
+        $rsm->addScalarResult('vinculoFliarOtro', 'vinculoFliarOtro');
+        $rsm->addScalarResult('vinculoNoFliar', 'vinculoNoFliar');
+        $rsm->addScalarResult('vinculoNoFliarOtro', 'vinculoNoFliarOtro');
+        $rsm->addScalarResult('conviviente', 'conviviente');
+        $rsm->addScalarResult('usoArmaFuego', 'usoArmaFuego');
+        $rsm->addScalarResult('sitArmaFuego', 'sitArmaFuego');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+        $rsm->addScalarResult('estIntox', 'estIntox');
+        $rsm->addScalarResult('estIntoxOtro', 'estIntoxOtro');
+        $rsm->addScalarResult('compHecho', 'compHecho');
+        $rsm->addScalarResult('compHechoOtro', 'compHechoOtro');
+
+        $rsm->addScalarResult('anio', 'anio');
+
+
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
 }
 
 
@@ -930,22 +1027,18 @@ SQL;
 
 
 
-///// Informe sobre femicidios(contexto femicidio y tipo femicidio, medidas 
-///de protección y especificación de las mismas )</h3>  
+///// Informe sobre femicidios(contexto femicidio y tipo femicidio )</h3>  
 
 public function femicidioContexto($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
-    SELECT DISTINCT
-	detalle_hecho.pres_autor_id AS presAutorId, 
-	detalle_hecho.victima_id AS victimaId, 
-	detalle_hecho.hecho_id AS hechoId, 
-	cont_femicida.descripcion AS ContextoFemicida, 
-	tipo_femicidio.descripcion AS TipoFemicicio, 
-    detalle_hecho.den_previa AS denPrevia, 
-	detalle_hecho.den_prev_desc AS denPreviaDesc,
-	victima.medida_protecc_vigente AS medidaProteccion, 
-	victima.medida_protecc_especif AS medidaProteccionEsp,
-    hecho.fecha AS fecha
+ SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	detalle_hecho.victima_id AS victima, 
+	detalle_hecho.hecho_id AS hecho, 
+	cont_femicida.descripcion AS contextoFemicida, 
+	tipo_femicidio.descripcion AS tipoFemicicio, 
+
+    hecho.anio AS anio
 FROM
 	hecho
 	INNER JOIN
@@ -956,11 +1049,11 @@ FROM
 	victima
 	ON 
 		detalle_hecho.victima_id = victima.id
-	INNER JOIN
+	LEFT JOIN
 	cont_femicida
 	ON 
 		victima.cont_femicida_id = cont_femicida.id
-	INNER JOIN
+    LEFT JOIN
 	tipo_femicidio
 	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
@@ -975,16 +1068,14 @@ FROM
 SQL;
         $rsm = new ResultSetMapping();
         
-        $rsm->addScalarResult('presAutorId', 'presAutorId');
-        $rsm->addScalarResult('victimaId', 'victimaId');
-        $rsm->addScalarResult('hechoId', 'hechoId');
-        $rsm->addScalarResult('ContextoFemicida', 'ContextoFemicida');
-        $rsm->addScalarResult('TipoFemicicio', 'TipoFemicicio');
-        $rsm->addScalarResult('denPrevia', 'denPrevia');
-        $rsm->addScalarResult('denPreviaDesc', 'denPreviaDesc');
-        $rsm->addScalarResult('medidaProteccion', 'medidaProteccion');
-        $rsm->addScalarResult('medidaProteccionEsp', 'medidaProteccionEsp');
-        $rsm->addScalarResult('fecha', 'fecha');
+        $rsm->addScalarResult('presAutor', 'presAutor');
+        $rsm->addScalarResult('victima', 'victima');
+       
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('contextoFemicida', 'contextoFemicida');
+        $rsm->addScalarResult('tipoFemicicio', 'tipoFemicicio');
+
+        $rsm->addScalarResult('anio', 'anio');
        
        
 
@@ -1002,27 +1093,30 @@ SQL;
         return $query->getArrayResult();
 }
 
+///// Informe sobre femicidios(DISTRIBUCIÓN DE FEMICIDIOS POR TIEMPO)</h3>  
 
-    ///femicidio por espacio de ocurrencia  
-
-public function femicidioEspacio($fechaDesde, $fechaHasta){
+public function femicidiosTiempo($fechaDesde, $fechaHasta){
     $sql = <<<'SQL'
-    SELECT DISTINCT
-	detalle_hecho.pres_autor_id AS presAutorId, 
-	detalle_hecho.victima_id AS victimaId, 
-	detalle_hecho.hecho_id AS hechoId, 
-	zona.descripcion AS ZonaOcurrencia, 
-	tipo_espacio.descripcion AS TipoEspOcurrencia,
-    lugar.descripcion AS Lugar,	
-	hecho.lugar_ocu_otro AS LugarOtro, 
-	tipo_lugar.descripcion AS TipoLugarOcurrencia, 
-	hecho.acceso_ocu AS TipoAcceso, 
-	tipo_dom_particular.descripcion AS domicilio,
-    hecho.dom_part_otro AS domicilioOtro,	
-    victima.femicidio AS femicidio, 
-    tipo_femicidio.descripcion AS tipoFemicidio,
-	hecho.fecha AS fecha
-	
+ SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	detalle_hecho.victima_id AS victima, 
+	detalle_hecho.hecho_id AS hecho, 
+	tipo_femicidio.descripcion AS tipoFemicicio, 
+	hecho.fecha AS fecha,
+	hecho.anio AS anio, 
+	hecho.mes AS mes, 
+	hecho.hora_ocu AS hora, 
+	hecho.dia_ocu AS dia, 
+	hecho.franja_h_seis AS franjaSeis, 
+	hecho.franja_h_tres AS franjaTres, 
+	hecho.barrio_ocu AS barrio, 
+	hecho.calle_ocu AS calle, 
+	hecho.altura_ocu AS altura, 
+	hecho.intersecc_ocu AS interseccion, 
+	hecho.calle_int_ocu AS calleInterseccion, 
+	rep_geografica.descripcion AS repGeo,
+	hecho.latitud_ocu AS latitud, 
+	hecho.longitud_ocu AS longitud
 	
 FROM
 	hecho
@@ -1034,30 +1128,123 @@ FROM
 	victima
 	ON 
 		detalle_hecho.victima_id = victima.id
-	INNER JOIN
-	zona
-	ON 
-		hecho.zona_ocu_id = zona.id
-	INNER JOIN
-	tipo_espacio
-	ON 
-		hecho.tipo_esp_ocu_id = tipo_espacio.id
-	INNER JOIN
-	tipo_lugar
-	ON 
-		hecho.tipo_lug_ocu_id = tipo_lugar.id
-	INNER JOIN
-	lugar
-	ON 
-		hecho.lugar_ocu_id = lugar.id
-	INNER JOIN
-	tipo_dom_particular
-	ON 
-	hecho.dom_part_ocu_id = tipo_dom_particular.id
-    INNER JOIN
+	LEFT JOIN
 	tipo_femicidio
 	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
+	LEFT JOIN
+	rep_geografica
+	ON 
+	hecho.rep_geo_ocu_id = rep_geografica.id
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        AND femicidio = 'Si'
+        ORDER BY
+        detalle_hecho.victima_id DESC
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        
+        $rsm->addScalarResult('presAutor', 'presAutor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('tipoFemicicio', 'tipoFemicicio');
+        $rsm->addScalarResult('fecha', 'fecha');
+        $rsm->addScalarResult('anio', 'anio');
+        $rsm->addScalarResult('mes', 'mes');
+        $rsm->addScalarResult('hora', 'hora');
+        $rsm->addScalarResult('dia', 'dia');
+        $rsm->addScalarResult('franjaSeis', 'franjaSeis');
+        $rsm->addScalarResult('franjaTres', 'franjaTres');
+        $rsm->addScalarResult('barrio', 'barrio');
+        $rsm->addScalarResult('calle', 'calle');
+        $rsm->addScalarResult('altura', 'altura');
+        $rsm->addScalarResult('interseccion', 'interseccion');
+        $rsm->addScalarResult('calleInterseccion', 'calleInterseccion');
+        $rsm->addScalarResult('repGeo', 'repGeo');
+        $rsm->addScalarResult('latitud', 'latitud');
+        $rsm->addScalarResult('longitud', 'longitud');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+
+
+///femicidio por espacio de ocurrencia  
+
+public function femicidioEspacio($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+    SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	detalle_hecho.victima_id AS victima, 
+	detalle_hecho.hecho_id AS hecho, 
+	departamento.descripcion AS departamento, 
+	localidad.nombre AS localidad, 
+	hecho.gran_rcia AS granRcia, 
+	zona.descripcion AS zonaOcurrencia, 
+	tipo_espacio.descripcion AS tipoEspOcurrencia, 
+	lugar.descripcion AS lugar, 
+	hecho.lugar_ocu_otro AS lugarOtro, 
+	tipo_lugar.descripcion AS tipoLugarOcurrencia, 
+	hecho.acceso_ocu AS tipoAcceso, 
+	tipo_dom_particular.descripcion AS domicilio, 
+	hecho.dom_part_otro AS domicilioOtro, 
+	tipo_femicidio.descripcion AS tipoFemicidio, 
+	hecho.anio AS anio
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	LEFT JOIN
+	zona
+	ON 
+		hecho.zona_ocu_id = zona.id
+	LEFT JOIN
+	tipo_espacio
+	ON 
+		hecho.tipo_esp_ocu_id = tipo_espacio.id
+	LEFT JOIN
+	tipo_lugar
+	ON 
+		hecho.tipo_lug_ocu_id = tipo_lugar.id
+	LEFT JOIN
+	lugar
+	ON 
+		hecho.lugar_ocu_id = lugar.id
+	LEFT JOIN
+	tipo_dom_particular
+	ON 
+		hecho.dom_part_ocu_id = tipo_dom_particular.id
+	LEFT JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
+	LEFT JOIN
+	departamento
+	ON 
+		hecho.departamento_id = departamento.id
+	LEFT JOIN
+	localidad
+	ON 
+		hecho.localidad_id = localidad.id
 
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
@@ -1066,20 +1253,22 @@ FROM
 
 SQL;
         $rsm = new ResultSetMapping();
-        $rsm->addScalarResult('presAutorId', 'presAutorId');
-        $rsm->addScalarResult('victimaId', 'victimaId');
-        $rsm->addScalarResult('hechoId', 'hechoId');
-        $rsm->addScalarResult('ZonaOcurrencia', 'ZonaOcurrencia');
-        $rsm->addScalarResult('TipoEspOcurrencia', 'TipoEspOcurrencia');
-        $rsm->addScalarResult('Lugar', 'Lugar');
-        $rsm->addScalarResult('TipoLugarOcurrencia', 'TipoLugarOcurrencia');
-        $rsm->addScalarResult('TipoAcceso', 'TipoAcceso');
+        $rsm->addScalarResult('presAutor', 'presAutor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('departamento', 'departamento');
+        $rsm->addScalarResult('localidad', 'localidad');
+        $rsm->addScalarResult('granRcia', 'granRcia');
+        $rsm->addScalarResult('zonaOcurrencia', 'zonaOcurrencia');
+        $rsm->addScalarResult('tipoEspOcurrencia', 'tipoEspOcurrencia');
+        $rsm->addScalarResult('lugar', 'lugar');
+        $rsm->addScalarResult('lugarOtro', 'lugarOtro');
+        $rsm->addScalarResult('tipoLugarOcurrencia', 'tipoLugarOcurrencia');
+        $rsm->addScalarResult('tipoAcceso', 'tipoAcceso');
         $rsm->addScalarResult('domicilio', 'domicilio');
         $rsm->addScalarResult('domicilioOtro', 'domicilioOtro');
-        $rsm->addScalarResult('femicidio', 'femicidio');
         $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
-
-        $rsm->addScalarResult('fecha', 'fecha');
+        $rsm->addScalarResult('anio', 'anio');
        
        
 
@@ -1099,25 +1288,33 @@ SQL;
 
 
 
-    // Femicidio por mecanismo y arma
-    public function victimaFemicidioMecanimo($fechaDesde, $fechaHasta){
-        $sql = <<<'SQL'
-    SELECT
-	fecha AS fecha,
-    hecho.anio AS anio,
-    hecho.mes AS mes,
-    hecho.dia_ocu AS dia,
-    hecho.gran_rcia AS granRcia,	
-	hecho_id AS hechoId, 
-    victima.id  AS victimaID,
-	victima.femicidio AS femicidio, 
-	tipo_femicidio.descripcion AS tipoFemicidio, 
-    
-	mecanismo_muerte.descripcion AS mecanismoMuerte,
-	victima.mecanismo_muerte_otro AS mecanismoMuerteOtro, 
-	tipo_arma.descripcion  AS tipoArma,
-	victima.tipo_arma_otro AS tipoArmaOtro
-	
+
+    ///femicidio situación socio-económica
+
+public function femicidioSitEco($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+    SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	detalle_hecho.victima_id AS victima, 
+	detalle_hecho.hecho_id AS hecho, 
+	victima.discapacidad AS discapacidad, 
+	victima.embarazada AS embarazada, 
+	victima.privada_libertad AS privadaLibertad, 
+	victima.ejer_prostitucion AS ejerProstitucion, 
+	victima.pueblo_originario AS puebloOrig, 
+	etnia.descripcion AS etnia, 
+	victima.etnia_otro AS etniaOtro, 
+	situacion_laboral.descripcion AS sitLaboral, 
+	victima.otra_sit_laboral AS otraSitLaboral, 
+	condicion_actividad.descripcion AS condActividad, 
+	victima.hijos_pers_cargo AS hijoCargo, 
+	victima.cant_a_cargo AS cantACargo, 
+	victima.benef_ley_brisa AS benefLeyBrisa, 
+	victima.cant_benef AS cantBenefLeyBrisa, 
+	nivel_instruccion.descripcion AS nivInst, 
+	nivel_inst_formal.descripcion AS nifInstFormal,
+    tipo_femicidio.descripcion AS tipoFemicidio,
+    hecho.anio AS anio
 FROM
 	hecho
 	INNER JOIN
@@ -1128,45 +1325,63 @@ FROM
 	victima
 	ON 
 		detalle_hecho.victima_id = victima.id
-	INNER JOIN
-	tipo_arma
+	LEFT JOIN
+	etnia
 	ON 
-		victima.tipo_arma_id = tipo_arma.id
-	INNER JOIN
-	mecanismo_muerte
+		victima.etnia_id = etnia.id
+	LEFT JOIN
+	situacion_laboral
 	ON 
-	victima.mecanismo_muerte_id = mecanismo_muerte.id
-    INNER JOIN
+		victima.sit_laboral_id = situacion_laboral.id
+	LEFT JOIN
+	condicion_actividad
+	ON 
+		victima.cond_actividad_id = condicion_actividad.id
+	LEFT JOIN
+	nivel_instruccion
+	ON 
+		victima.niv_inst_id = nivel_instruccion.id
+	LEFT JOIN
+	nivel_inst_formal
+	ON 
+		victima.niv_inst_form_id = nivel_inst_formal.id
+	LEFT JOIN
 	tipo_femicidio
 	ON 
-	victima.tipo_femicidio_id = tipo_femicidio.id
+		victima.tipo_femicidio_id = tipo_femicidio.id
+
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
-            HAVING femicidio = 'Si'
+            AND femicidio = 'Si'
             ORDER BY hecho.fecha
                   
 
 SQL;
     $rsm = new ResultSetMapping();
-    $rsm->addScalarResult('fecha', 'fecha');
-    $rsm->addScalarResult('anio', 'anio');
-    $rsm->addScalarResult('mes', 'mes');
-    $rsm->addScalarResult('femicidio', 'femicidio');
+    $rsm->addScalarResult('presAutor', 'presAutor');
+    $rsm->addScalarResult('victima', 'victima');
+    $rsm->addScalarResult('hecho', 'hecho');
+    $rsm->addScalarResult('discapacidad', 'discapacidad');
+    $rsm->addScalarResult('embarazada', 'embarazada');
+   
+    $rsm->addScalarResult('privadaLibertad', 'privadaLibertad');
+    $rsm->addScalarResult('ejerProstitucion', 'ejerProstitucion');
+    $rsm->addScalarResult('puebloOrig', 'puebloOrig');
+    $rsm->addScalarResult('etnia', 'etnia');
+    $rsm->addScalarResult('etniaOtro', 'etniaOtro');
+    $rsm->addScalarResult('sitLaboral', 'sitLaboral');
+    $rsm->addScalarResult('otraSitLaboral', 'otraSitLaboral');
+    $rsm->addScalarResult('condActividad', 'condActividad');
+    $rsm->addScalarResult('hijoCargo', 'hijoCargo');
+    $rsm->addScalarResult('cantACargo', 'cantACargo');
+    $rsm->addScalarResult('benefLeyBrisa', 'benefLeyBrisa');
+    $rsm->addScalarResult('cantBenefLeyBrisa', 'cantBenefLeyBrisa');
+    $rsm->addScalarResult('nivInst', 'nivInst');
+    $rsm->addScalarResult('nifInstFormal', 'nifInstFormal');
     $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
-   
-    $rsm->addScalarResult('dia', 'dia');
-    $rsm->addScalarResult('hechoId', 'hechoId');
-    $rsm->addScalarResult('victimaID', 'victimaID');
-    
-    $rsm->addScalarResult('mecanismoMuerte', 'mecanismoMuerte');
-    $rsm->addScalarResult('mecanismoMuerteOtro', 'mecanismoMuerteOtro');
-    $rsm->addScalarResult('tipoArma', 'tipoArma');
-    $rsm->addScalarResult('tipoArmaOtro', 'tipoArmaOtro');
-    $rsm->addScalarResult('granRcia', 'granRcia');
+    $rsm->addScalarResult('anio', 'anio');
     
     
-   
-
     $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
 
     $fechaDesdeCorregida = clone $fechaDesde;

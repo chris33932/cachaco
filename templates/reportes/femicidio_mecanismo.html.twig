@@ -5,52 +5,57 @@
 {% block reporte %}
 <div class="container-fluid">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Informe sobre femicidios(Tipo de arma, mecanimos de muerte)</h3>  
+    <caption class="text-justify" > <h4>Informe sobre femicidios(Mecanimos de muerte/Tipo de arma/Fuerza de Seguridad......)</h4>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
 
                              <table class="table table-hover">
             
                                                         <thead style="background-color: #a4eaec;">
                                                             <tr>
-                                                                <th>fecha</th>
-                                                                <th>Año</th>
-                                                                <th>Mes</th>
-                                                                <th>Día</th>
-                                                                <th>GranRcia</th>
-                                                                <th>HechoId</th>
-                                                                <th>VictimaId</th>
-                                                                <th>Femicidio</th>
-                                                                <th>TipoFemicidio</th>
+                                                                <th>presAutor</th>
+                                                                <th>victima</th>
+                                                                <th>hechoId</th>
+                                                                <th>tipoFemicidio</th>
                                                                 <th>mecanismoMuerte</th>
-                                                                <th>OvermecanismoMuerteOtro</th>
+                                                                <th>mecanismoMuerteOtro</th>
                                                                 <th>tipoArma</th>
                                                                 <th>tipoArmaOtro</th>
+                                                                <th>fuerzaSeguridad</th>
+                                                                <th>fuerzaDescripcion</th>
+                                                                <th>otraFuerzaDescripcion</th>
+                                                                <th>estadoPolicial</th>
+                                                                <th>funcionEjercicio</th>
+                                                                <th>medidaProteccion</th>
+                                                                <th>medidaProteccionEspec</th>
+                                                                <th>overkill</th>
+                                                                <th>estadoIntox</th>
+                                                                <th>desapAntesHecho</th>
+                                                                <th>anio</th>
                                                                                                                             
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             {% for fila in datos %}
                                                             <tr>
-                                                                <td>{{ fila.fecha }}</td>
-                                                                <td>{{ fila.anio }}</td>
-                                                                <td>{{ fila.mes  }}</td>
-                                                                <td>{{ fila.dia  }}</td>
-                                                                <td>{{ fila.granRcia  }}</td>
+                                                                <td>{{ fila.presAutor }}</td>
+                                                                <td>{{ fila.victima }}</td>
                                                                 <td>{{ fila.hechoId  }}</td>
-                                                                <td class="text-info">
-                                                                    <a href="{{ path('victima_show', { 'id': fila.victimaID  } ) }}">
-                                                                        {{fila.victimaID }}
-                                                                    </a>
-                                                                </td>
-                                                                <td>{{ fila.femicidio  }}</td>
                                                                 <td>{{ fila.tipoFemicidio  }}</td>
-
                                                                 <td>{{ fila.mecanismoMuerte  }}</td>
                                                                 <td>{{ fila.mecanismoMuerteOtro  }}</td>
                                                                 <td>{{ fila.tipoArma  }}</td>
                                                                 <td>{{ fila.tipoArmaOtro  }}</td>
-
-
+                                                                <td>{{ fila.fuerzaSeguridad  }}</td>
+                                                                <td>{{ fila.fuerzaDescripcion  }}</td>
+                                                                <td>{{ fila.otraFuerzaDescripcion  }}</td>
+                                                                <td>{{ fila.estadoPolicial  }}</td>
+                                                                <td>{{ fila.funcionEjercicio  }}</td>
+                                                                <td>{{ fila.medidaProteccion  }}</td>
+                                                                <td>{{ fila.medidaProteccionEspec  }}</td>
+                                                                <td>{{ fila.overkill  }}</td>
+                                                                <td>{{ fila.estadoIntox  }}</td>
+                                                                <td>{{ fila.desapAntesHecho  }}</td>
+                                                                <td>{{ fila.anio  }}</td>
                                                             
                                                             </tr>
                                                             {% else %}
