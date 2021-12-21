@@ -1102,7 +1102,7 @@ class ReportesController extends AbstractController
         if ($request->getRequestFormat() == 'xlsx') {
             $datosExcel = array(
                 'encabezado' => array(
-                    'titulo' => 'Hecho',
+                    'titulo' => 'Informe sobre femicidios(Genero, generoOtro, edad, edad legal, estado civil)',
                     'filtro' => array(
                         'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
                         'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
@@ -1342,6 +1342,9 @@ class ReportesController extends AbstractController
                     'hechoId',
                     'ContextoFemicida',
                     'TipoFemicicio',
+                    'ocasionDelito',
+                    'ocaDelitoOtro',
+
                     'anio',
                     
                 ),
