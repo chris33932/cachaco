@@ -412,7 +412,7 @@ SQL;
 
     public function victimasPorMecanismo($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
-                SELECT
+         SELECT
         mecanismo_muerte.descripcion AS descripcion,
         COUNT( DISTINCT detalle_hecho.victima_id) AS cantidad
             
@@ -497,7 +497,7 @@ SQL;
     }
 
 
-    // Cantidad de victims por tipo arma
+    // Cantidad de victimas por tipo arma
     public function victimasPorTipoArma($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
             SELECT
@@ -1395,6 +1395,119 @@ SQL;
 
     return $query->getArrayResult();
 }
+
+
+///// Informe sobre femicidios OTROS</h3>  
+
+public function victimaFemicidioMecanismo($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+    SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	detalle_hecho.victima_id AS victima, 
+	detalle_hecho.hecho_id AS hecho, 
+	tipo_femicidio.descripcion AS tipoFemicidio, 
+	mecanismo_muerte.descripcion AS mecanismoMuerte, 
+	victima.mecanismo_muerte_otro AS mecanismoMuerteOtro, 
+	tipo_arma.descripcion AS tipoArma, 
+	victima.tipo_arma_otro AS tipoArmaOtro, 
+	victima.fuerza_seg AS fuerzaSeguridad , 
+	fuerza_seg_pert.descripcion AS fuerzaDescripcion, 
+	victima.otra_fuer_pert AS otraFuerzaDescripcion , 
+	estado_policial.descripcion AS estadoPolicial , 
+	funcion_mom_hecho.descripcion AS funcionEjercicio, 
+	victima.medida_protecc_vigente AS medidaProteccion , 
+	victima.medida_protecc_especif AS medidaProteccionEspec, 
+	victima.violencia_exc AS overkill , 
+	victima.estado_intox AS estadoIntox , 
+	estado_intox.descripcion AS estadoIntoxDesc, 
+	victima.est_intox_otro AS estadoIntoxOtro , 
+	victima.desap_ant_hecho AS desapAntesHecho,
+    hecho.anio AS anio
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	LEFT JOIN
+	tipo_femicidio
+	ON 
+		victima.tipo_femicidio_id = tipo_femicidio.id
+	LEFT JOIN
+	mecanismo_muerte
+	ON 
+		victima.mecanismo_muerte_id = mecanismo_muerte.id
+	LEFT JOIN
+	tipo_arma
+	ON 
+		victima.tipo_arma_id = tipo_arma.id
+	LEFT JOIN
+	fuerza_seg_pert
+	ON 
+		victima.fuer_seg_pert_id = fuerza_seg_pert.id
+	LEFT JOIN
+	estado_policial
+	ON 
+		victima.est_pol_id = estado_policial.id
+	LEFT JOIN
+	estado_intox
+	ON 
+		victima.tipo_est_intox_id = estado_intox.id 
+    LEFT JOIN
+	funcion_mom_hecho
+	ON 
+		victima.ejer_funcion_id = funcion_mom_hecho.id 
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        AND femicidio = 'Si'
+        ORDER BY
+        detalle_hecho.victima_id DESC
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        
+        $rsm->addScalarResult('presAutor', 'presAutor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+        $rsm->addScalarResult('mecanismoMuerte', 'mecanismoMuerte');
+        $rsm->addScalarResult('mecanismoMuerteOtro', 'mecanismoMuerteOtro');
+        $rsm->addScalarResult('tipoArma', 'tipoArma');
+        $rsm->addScalarResult('tipoArmaOtro', 'tipoArmaOtro');
+        $rsm->addScalarResult('fuerzaSeguridad', 'fuerzaSeguridad');
+        $rsm->addScalarResult('fuerzaDescripcion', 'fuerzaDescripcion');
+        $rsm->addScalarResult('otraFuerzaDescripcion', 'otraFuerzaDescripcion');
+        $rsm->addScalarResult('estadoPolicial', 'estadoPolicial');
+        $rsm->addScalarResult('funcionEjercicio', 'funcionEjercicio');
+        $rsm->addScalarResult('medidaProteccion', 'medidaProteccion');
+        $rsm->addScalarResult('medidaProteccionEspec', 'medidaProteccionEspec');
+        $rsm->addScalarResult('overkill', 'overkill');
+        $rsm->addScalarResult('estadoIntox', 'estadoIntox');
+        $rsm->addScalarResult('estadoIntoxDesc', 'estadoIntoxDesc');
+        $rsm->addScalarResult('estadoIntoxOtro', 'estadoIntoxOtro');
+        $rsm->addScalarResult('desapAntesHecho', 'desapAntesHecho');
+        $rsm->addScalarResult('anio', 'anio');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+
 
 
 
