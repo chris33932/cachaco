@@ -1513,6 +1513,132 @@ SQL;
 
 
 
+///// Informe sobre femicidios(Informe sobre presuntos autores)  
+
+public function femicidiosPresAutorInfo($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+ SELECT DISTINCT
+	detalle_hecho.pres_autor_id AS presAutor, 
+	departamento.descripcion AS deptoAutor, 
+	localidad.nombre AS locAutor,
+  	detalle_hecho.victima_id AS victima,	
+	detalle_hecho.hecho_id AS hecho, 
+	rango_etario.descripcion AS rangoEtario, 
+	pres_autor.edad AS edad, 
+	pres_autor.edad_legal AS edadLegal, 
+	pres_autor.fuerza_seg AS fuerzaSeguridad, 
+	fuerza_seg_pert.descripcion AS fuerzaDescripcion, 
+	pres_autor.ejer_func AS funciones, 
+	nivel_instruccion.descripcion AS nivelInst, 
+	nivel_inst_formal.descripcion AS nivelInstFormal, 
+	estado_policial.descripcion AS estadoPolicial, 
+	estado_civil.descripcion AS estadoCivil, 
+	situacion_laboral.descripcion AS sitLaboral, 
+	pres_autor.otra_sit_lab AS otraSitLaboral, 
+	tipo_femicidio.descripcion AS tipoFemicidio, 
+	hecho.anio AS anio
+
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	pres_autor
+	ON 
+		detalle_hecho.pres_autor_id = pres_autor.id
+	LEFT JOIN
+	rango_etario
+	ON 
+		pres_autor.rango_etario_id = rango_etario.id
+	LEFT JOIN
+	fuerza_seg_pert
+	ON 
+		pres_autor.fuer_seg_pert_id = fuerza_seg_pert.id
+	LEFT JOIN
+	nivel_instruccion
+	ON 
+		pres_autor.niv_inst_id = nivel_instruccion.id
+	LEFT JOIN
+	nivel_inst_formal
+	ON 
+		pres_autor.niv_inst_formal_id = nivel_inst_formal.id
+	LEFT JOIN
+	estado_policial
+	ON 
+		pres_autor.est_pol_id = estado_policial.id
+	LEFT JOIN
+	estado_civil
+	ON 
+		pres_autor.estado_civil_id = estado_civil.id
+	LEFT JOIN
+	situacion_laboral
+	ON 
+		pres_autor.sit_lab_id = situacion_laboral.id
+	INNER JOIN
+	tipo_femicidio
+	INNER JOIN
+	departamento
+	ON 
+		pres_autor.departamento_id = departamento.id
+	INNER JOIN
+	localidad
+	ON 
+		pres_autor.localidad_id = localidad.id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id AND
+		tipo_femicidio.id = victima.tipo_femicidio_id
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        AND femicidio = 'Si'
+        ORDER BY
+        detalle_hecho.victima_id DESC
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        
+        $rsm->addScalarResult('presAutor', 'presAutor');
+        $rsm->addScalarResult('deptoAutor', 'deptoAutor');
+        $rsm->addScalarResult('locAutor', 'locAutor');
+        $rsm->addScalarResult('victima', 'victima');
+        $rsm->addScalarResult('hecho', 'hecho');
+        $rsm->addScalarResult('rangoEtario', 'rangoEtario');
+        $rsm->addScalarResult('edad', 'edad');
+        $rsm->addScalarResult('edadLegal', 'edadLegal');
+        $rsm->addScalarResult('fuerzaSeguridad', 'fuerzaSeguridad');
+        $rsm->addScalarResult('fuerzaDescripcion', 'fuerzaDescripcion');
+        $rsm->addScalarResult('funciones', 'funciones');
+        $rsm->addScalarResult('nivelInst', 'nivelInst');
+        $rsm->addScalarResult('nivelInstFormal', 'nivelInstFormal');
+        $rsm->addScalarResult('estadoPolicial', 'estadoPolicial');
+        $rsm->addScalarResult('estadoCivil', 'estadoCivil');
+        $rsm->addScalarResult('sitLaboral', 'sitLaboral');
+        $rsm->addScalarResult('otraSitLaboral', 'otraSitLaboral');
+        $rsm->addScalarResult('anio', 'anio');
+        $rsm->addScalarResult('tipoFemicidio', 'tipoFemicidio');
+       
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+
+
+
+
 
 
     // /**
