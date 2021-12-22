@@ -1352,8 +1352,9 @@ class ReportesController extends AbstractController
                     'estadoCivil',
                     'sitLaboral',
                     'otraSitLaboral',
-                    'anio',
                     'tipoFemicidio',
+                    'anio',
+                   
                     
                 ),
                 'datos' => $datos,
