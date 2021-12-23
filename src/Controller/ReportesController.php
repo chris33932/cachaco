@@ -1581,6 +1581,7 @@ class ReportesController extends AbstractController
                     'hecho',
                     'discapacidad',
                     'embarazada',
+                    'estadoCivil',
                     'privadaLibertad',
                     'ejerProstitucion',
                     'puebloOrig',

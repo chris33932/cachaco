@@ -1058,6 +1058,10 @@ FROM
 	tipo_femicidio
 	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
+        LEFT JOIN
+	ocasion_delito
+	ON
+	hecho.oca_delito_id=ocasion_delito.id
 
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
@@ -1302,6 +1306,7 @@ public function femicidioSitEco($fechaDesde, $fechaHasta){
 	detalle_hecho.hecho_id AS hecho, 
 	victima.discapacidad AS discapacidad, 
 	victima.embarazada AS embarazada, 
+    estado_civil.descripcion AS estadoCivil,
 	victima.privada_libertad AS privadaLibertad, 
 	victima.ejer_prostitucion AS ejerProstitucion, 
 	victima.pueblo_originario AS puebloOrig, 
@@ -1352,6 +1357,10 @@ FROM
 	tipo_femicidio
 	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
+    LEFT JOIN
+	estado_civil
+	ON 
+		victima.estado_civil_id = estado_civil.id
 
             WHERE hecho.fecha >= :fechaDesde
             AND hecho.fecha <= :fechaHasta
@@ -1366,6 +1375,7 @@ SQL;
     $rsm->addScalarResult('hecho', 'hecho');
     $rsm->addScalarResult('discapacidad', 'discapacidad');
     $rsm->addScalarResult('embarazada', 'embarazada');
+    $rsm->addScalarResult('estadoCivil', 'estadoCivil');
    
     $rsm->addScalarResult('privadaLibertad', 'privadaLibertad');
     $rsm->addScalarResult('ejerProstitucion', 'ejerProstitucion');
