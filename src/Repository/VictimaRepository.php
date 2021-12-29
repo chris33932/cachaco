@@ -1548,7 +1548,7 @@ public function femicidiosPresAutorInfo($fechaDesde, $fechaHasta){
 	tipo_femicidio.descripcion AS tipoFemicidio, 
 	hecho.anio AS anio
 
-FROM
+    FROM
 	hecho
 	INNER JOIN
 	detalle_hecho
@@ -1586,21 +1586,22 @@ FROM
 	situacion_laboral
 	ON 
 		pres_autor.sit_lab_id = situacion_laboral.id
-	INNER JOIN
-	tipo_femicidio
-	INNER JOIN
+ 
+	LEFT JOIN
 	departamento
 	ON 
 		pres_autor.departamento_id = departamento.id
-	INNER JOIN
+  LEFT JOIN
 	localidad
 	ON 
 		pres_autor.localidad_id = localidad.id
-	INNER JOIN
+  LEFT JOIN
 	victima
 	ON 
-		detalle_hecho.victima_id = victima.id AND
-		tipo_femicidio.id = victima.tipo_femicidio_id
+		detalle_hecho.victima_id = victima.id 
+	LEFT JOIN	
+	tipo_femicidio
+	ON tipo_femicidio.id = victima.tipo_femicidio_id
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
         AND femicidio = 'Si'

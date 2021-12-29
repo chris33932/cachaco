@@ -5,13 +5,13 @@
 {% block reporte %}
 <div class="container">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de femicidios por Rango etario</h3>  
+    <caption class="text-justify" > <h3>Distribución de femicidios por Edad legal</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
             <thead style="background-color: skyblue;">
                 <tr>
-                    <th><strong>Descripcion</strong></th>
+                    <th><strong>EdadLegal</strong></th>
                     <th><strong>TipoFemicidio</strong></th>
 
                     <th><strong>Cantidad</strong></th>          
@@ -55,13 +55,13 @@
 
 <div class="container">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h3>Distribución de femicidios por Edad Legal</h3>  
+    <caption class="text-justify" > <h3>Distribución de femicidios por Rango etario</h3>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
         <table class="table table-hover">
             
             <thead style="background-color: aliceblue;">
                 <tr>
-                    <th><strong>Descripcion</strong></th>
+                    <th><strong>RangoEtario</strong></th>
                     <th><strong>TipoFemicidio</strong></th>
 
                     <th><strong>Cantidad</strong></th>          
