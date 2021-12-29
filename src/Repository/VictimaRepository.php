@@ -1039,6 +1039,7 @@ public function femicidioContexto($fechaDesde, $fechaHasta){
 	tipo_femicidio.descripcion AS tipoFemicicio, 
     ocasion_delito.descripcion AS ocasionDelito, 
 	hecho.oca_delito_otro AS ocaDelitoOtro,
+    hecho.cant_vic_col AS victimasColateral,
     hecho.anio AS anio
 FROM
 	hecho
@@ -1081,7 +1082,8 @@ SQL;
         $rsm->addScalarResult('tipoFemicicio', 'tipoFemicicio');
         $rsm->addScalarResult('ocasionDelito', 'ocasionDelito');
         $rsm->addScalarResult('ocaDelitoOtro', 'ocaDelitoOtro');
-
+        $rsm->addScalarResult('victimasColateral', 'victimasColateral');
+        
         $rsm->addScalarResult('anio', 'anio');
        
        
