@@ -5,7 +5,7 @@
 {% block reporte %}
 <div class="container-fluid">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h4>Informe sobre femicidios(Vinculo con presunto autores, convivencia, overkill)</h4>  
+    <caption class="text-justify" > <h4>Informe sobre femicidios(Genero, generoOtro, edad, edad legal, estado civil)</h4>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
 
                              <table class="table table-hover">
@@ -21,6 +21,8 @@
                                                                 <th>genetoOtro</th>
                                                                 <th>edad</th>
                                                                 <th>edadLegal</th>
+                                                                <th>grupoEtario</th>
+
                                                                 <th>estado_civil</th>
                                                                 <th>tipoFemicidio</th>
                                                                 <th>anio</th>
@@ -42,6 +44,8 @@
                                                                 <td>{{ fila.genetoOtro  }}</td>
                                                                 <td>{{ fila.edad  }}</td>
                                                                 <td>{{ fila.edadLegal  }}</td>
+                                                                <td>{{ fila.grupoEtario  }}</td>
+
                                                                 <td>{{ fila.estado_civil  }}</td>
                                                                 <td>{{ fila.tipoFemicidio  }}</td>
                                                                 <td>{{ fila.anio  }}</td>

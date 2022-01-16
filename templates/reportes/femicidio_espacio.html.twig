@@ -3,9 +3,9 @@
 
 
 {% block reporte %}
-<div class="container">
+<div class="container-fluid">
     <div class="table table-responsive">
-    <caption class="text-justify" > <h4>Informe sobre femicidios( Dept/Loc/GRcia/Zona/Espacio/Tipo de lugar/Acceso/Domicilio)</h4>  
+    <caption class="text-justify" > <h4>Informe sobre femicidios( Dept/ Loc/ GRcia/ Zona/ Espacio/ Tipo de lugar/ Acceso/ Domicilio)</h4>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
 
                              <table class="table table-hover">
@@ -28,13 +28,11 @@
                                                                 <th>domicilioOtro</th>
                                                                 <th>tipoFemicidio</th>
                                                                 <th>anio</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             {% for fila in datos %}
                                                             <tr>
-                                                                
                                                                 <td>{{ fila.presAutor  }}</td>
                                                                 <td>{{ fila.victima  }}</td>
                                                                 <td>{{ fila.hecho  }}</td>
@@ -51,8 +49,6 @@
                                                                 <td>{{ fila.domicilioOtro  }}</td>
                                                                 <td>{{ fila.tipoFemicidio  }}</td>
                                                                 <td>{{ fila.anio  }}</td>
-
-                                                            
                                                             </tr>
                                                             {% else %}
                                                             <tr><td>No hay resultados disponibles...</td></tr>

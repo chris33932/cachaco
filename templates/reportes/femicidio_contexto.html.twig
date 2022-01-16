@@ -3,7 +3,7 @@
 
 
 {% block reporte %}
-<div class="container">
+<div class="container-fluid">
     <div class="table table-responsive">
     <caption class="text-justify" > <h4>Informe sobre femicidios(contexto femicidio y tipo femicidio )</h4>  
       {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
@@ -17,6 +17,10 @@
                                                                 <th>hecho</th>
                                                                 <th>contextoFemicida</th>
                                                                 <th>tipoFemicicio</th>
+                                                                <th>ocasionDelito</th>
+                                                                <th>ocaDelitoOtro</th>
+                                                                <th>cantVicColateral</th>
+
                                                                 <th>anio</th>
                                                                
                                                             </tr>
@@ -29,6 +33,10 @@
                                                                 <td>{{ fila.hecho  }}</td>
                                                                 <td>{{ fila.contextoFemicida  }}</td>
                                                                 <td>{{ fila.tipoFemicicio  }}</td>
+                                                                <td>{{ fila.ocasionDelito  }}</td>
+                                                                <td>{{ fila.ocaDelitoOtro  }}</td>
+                                                                <td>{{ fila.victimasColateral  }}</td>
+                                                                
                                                                 <td>{{ fila.anio  }}</td>
                                                             
                                                             </tr>
