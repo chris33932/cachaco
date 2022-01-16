@@ -2496,6 +2496,8 @@ class ReportesController extends AbstractController
                     'compHechoOtro',
                     'anio',
                     'fecha',
+                    'link',
+                    'observacion'
 
 
                                        
@@ -2705,7 +2707,7 @@ private function generarEncabezadoColumnas($excel, $encabezadoColumnas, $fila = 
     foreach ($encabezadoColumnas as $titulo) {
         $excel->getActiveSheet()->setCellValueByColumnAndRow($columna++, $fila, $titulo);
     }
-    $rango = 'X'.$fila.':'.chr(65 + --$columna).$fila;
+    $rango = 'ZZ'.$fila.':'.chr(65 + --$columna).$fila;
 
     
     $excel->getActiveSheet()

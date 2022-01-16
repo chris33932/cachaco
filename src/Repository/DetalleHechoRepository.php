@@ -96,7 +96,9 @@ class DetalleHechoRepository extends ServiceEntityRepository
 	comp_hecho.descripcion AS compHecho, 
 	detalle_hecho.comp_hecho_otro AS compHechoOtro,
     hecho.anio AS anio,
-    hecho.fecha AS fecha
+    hecho.fecha AS fecha,
+    hecho.link AS link, 
+	hecho.observacion AS observacion
 FROM
 	hecho
 	INNER JOIN
@@ -133,7 +135,7 @@ FROM
 		detalle_hecho.comp_hecho_id = comp_hecho.id
                 WHERE hecho.fecha >= :fechaDesde
                     AND hecho.fecha <= :fechaHasta
-                    ORDER BY hechoId
+                    ORDER BY hecho.id
 SQL;
 
         $rsm = new ResultSetMapping();
@@ -161,6 +163,8 @@ SQL;
         $rsm->addScalarResult('compHechoOtro', 'compHechoOtro');
         $rsm->addScalarResult('anio', 'anio');
         $rsm->addScalarResult('fecha', 'fecha');
+        $rsm->addScalarResult('link', 'link');
+        $rsm->addScalarResult('observacion', 'observacion');
      
 
       
