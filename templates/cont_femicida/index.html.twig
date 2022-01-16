@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContFemicida{% endblock %}
+
+{% block body %}
+    <h1>Contexto Femicida</h1>
+        <div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cont_femicida in cont_femicidas %}
+            <tr>
+                <td>{{ cont_femicida.id }}</td>
+                <td>{{ cont_femicida.descripcion }}</td>
+                <td>
+                    <a href="{{ path('cont_femicida_show', {'id': cont_femicida.id}) }}">show</a>
+                    <a href="{{ path('cont_femicida_edit', {'id': cont_femicida.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cont_femicida_new') }}">Create new</a>
+{% endblock %}

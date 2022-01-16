@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoLugar {% endblock %}
+
+{% block body %}
+    <h1>TipoLugar </h1>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipo_lugar in tipo_lugars %}
+            <tr>
+                <td>{{ tipo_lugar.id }}</td>
+                <td>{{ tipo_lugar.descripcion }}</td>
+                <td>
+                    <a href="{{ path('tipo_lugar_show', {'id': tipo_lugar.id}) }}">show</a>
+                    <a href="{{ path('tipo_lugar_edit', {'id': tipo_lugar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_lugar_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TipoDomParticular{% endblock %}
+
+{% block body %}
+    <h1>Edit TipoDomParticular</h1>
+
+    {{ include('tipo_dom_particular/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('tipo_dom_particular_index') }}">back to list</a>
+
+    {{ include('tipo_dom_particular/_delete_form.html.twig') }}
+{% endblock %}

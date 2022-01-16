@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ContFemicida{% endblock %}
+
+{% block body %}
+    <h1>Edit ContFemicida</h1>
+
+    {{ include('cont_femicida/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cont_femicida_index') }}">back to list</a>
+
+    {{ include('cont_femicida/_delete_form.html.twig') }}
+{% endblock %}

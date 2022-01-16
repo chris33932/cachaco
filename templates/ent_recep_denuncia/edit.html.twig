@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EntRecepDenuncia{% endblock %}
+
+{% block body %}
+    <h1>Edit EntRecepDenuncia</h1>
+
+    {{ include('ent_recep_denuncia/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ent_recep_denuncia_index') }}">back to list</a>
+
+    {{ include('ent_recep_denuncia/_delete_form.html.twig') }}
+{% endblock %}

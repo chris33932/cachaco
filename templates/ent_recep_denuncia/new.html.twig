@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New EntRecepDenuncia{% endblock %}
+
+{% block body %}
+    <h1>Create new EntRecepDenuncia</h1>
+
+    {{ include('ent_recep_denuncia/_form.html.twig') }}
+
+    <a href="{{ path('ent_recep_denuncia_index') }}">back to list</a>
+{% endblock %}

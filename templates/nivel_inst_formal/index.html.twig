@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NivelInstFormal{% endblock %}
+
+{% block body %}
+    <h1>Nivel InstFormal</h1>
+        <div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nivel_inst_formal in nivel_inst_formals %}
+            <tr>
+                <td>{{ nivel_inst_formal.id }}</td>
+                <td>{{ nivel_inst_formal.descripcion }}</td>
+                <td>
+                    <a href="{{ path('nivel_inst_formal_show', {'id': nivel_inst_formal.id}) }}">show</a>
+                    <a href="{{ path('nivel_inst_formal_edit', {'id': nivel_inst_formal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('nivel_inst_formal_new') }}">Create new</a>
+{% endblock %}

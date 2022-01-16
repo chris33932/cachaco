@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TipoLugar{% endblock %}
+
+{% block body %}
+    <h1>Edit TipoLugar</h1>
+
+    {{ include('tipo_lugar/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('tipo_lugar_index') }}">back to list</a>
+
+    {{ include('tipo_lugar/_delete_form.html.twig') }}
+{% endblock %}

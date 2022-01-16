@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit NivelInstFormal{% endblock %}
+
+{% block body %}
+    <h1>Edit NivelInstFormal</h1>
+
+    {{ include('nivel_inst_formal/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('nivel_inst_formal_index') }}">back to list</a>
+
+    {{ include('nivel_inst_formal/_delete_form.html.twig') }}
+{% endblock %}

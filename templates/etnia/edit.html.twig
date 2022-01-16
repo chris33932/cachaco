@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Etnia{% endblock %}
+
+{% block body %}
+    <h1>Edit Etnia</h1>
+
+    {{ include('etnia/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('etnia_index') }}">back to list</a>
+
+    {{ include('etnia/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FuncionMomHecho index{% endblock %}
+
+{% block body %}
+    <h1>FuncionMomHecho index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for funcion_mom_hecho in funcion_mom_hechos %}
+            <tr>
+                <td>{{ funcion_mom_hecho.id }}</td>
+                <td>{{ funcion_mom_hecho.descripcion }}</td>
+                <td>
+                    <a href="{{ path('funcion_mom_hecho_show', {'id': funcion_mom_hecho.id}) }}">show</a>
+                    <a href="{{ path('funcion_mom_hecho_edit', {'id': funcion_mom_hecho.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('funcion_mom_hecho_new') }}">Create new</a>
+{% endblock %}

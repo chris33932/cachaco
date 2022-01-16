@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New EstadoPolicial{% endblock %}
+
+{% block body %}
+    <h1>Create new EstadoPolicial</h1>
+
+    {{ include('estado_policial/_form.html.twig') }}
+
+    <a href="{{ path('estado_policial_index') }}">back to list</a>
+{% endblock %}

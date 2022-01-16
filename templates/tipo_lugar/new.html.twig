@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TipoLugar{% endblock %}
+
+{% block body %}
+    <h1>Create new TipoLugar</h1>
+
+    {{ include('tipo_lugar/_form.html.twig') }}
+
+    <a href="{{ path('tipo_lugar_index') }}">back to list</a>
+{% endblock %}

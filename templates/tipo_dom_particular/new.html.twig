@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TipoDomParticular{% endblock %}
+
+{% block body %}
+    <h1>Create new TipoDomParticular</h1>
+
+    {{ include('tipo_dom_particular/_form.html.twig') }}
+
+    <a href="{{ path('tipo_dom_particular_index') }}">back to list</a>
+{% endblock %}

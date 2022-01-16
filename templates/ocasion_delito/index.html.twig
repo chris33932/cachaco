@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcasionDelito{% endblock %}
+
+{% block body %}
+    <h1>OcasionDelito</h1>
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ocasion_delito in ocasion_delitos %}
+            <tr>
+                <td>{{ ocasion_delito.id }}</td>
+                <td>{{ ocasion_delito.descripcion }}</td>
+                <td>
+                    <a href="{{ path('ocasion_delito_show', {'id': ocasion_delito.id}) }}">show</a>
+                    <a href="{{ path('ocasion_delito_edit', {'id': ocasion_delito.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ocasion_delito_new') }}">Create new</a>
+{% endblock %}

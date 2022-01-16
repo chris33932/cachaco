@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ContFemicida{% endblock %}
+
+{% block body %}
+    <h1>Create new ContFemicida</h1>
+
+    {{ include('cont_femicida/_form.html.twig') }}
+
+    <a href="{{ path('cont_femicida_index') }}">back to list</a>
+{% endblock %}

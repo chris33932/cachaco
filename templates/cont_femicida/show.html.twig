@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContFemicida{% endblock %}
+
+{% block body %}
+    <h1>ContFemicida</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cont_femicida.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ cont_femicida.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cont_femicida_index') }}">back to list</a>
+
+    <a href="{{ path('cont_femicida_edit', {'id': cont_femicida.id}) }}">edit</a>
+
+    {{ include('cont_femicida/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MecanismoMuerte{% endblock %}
+
+{% block body %}
+    <h1>Edit MecanismoMuerte</h1>
+
+    {{ include('mecanismo_muerte/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('mecanismo_muerte_index') }}">back to list</a>
+
+    {{ include('mecanismo_muerte/_delete_form.html.twig') }}
+{% endblock %}

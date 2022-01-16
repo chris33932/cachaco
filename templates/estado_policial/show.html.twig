@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EstadoPolicial{% endblock %}
+
+{% block body %}
+    <h1>EstadoPolicial</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ estado_policial.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ estado_policial.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('estado_policial_index') }}">back to list</a>
+
+    <a href="{{ path('estado_policial_edit', {'id': estado_policial.id}) }}">edit</a>
+
+    {{ include('estado_policial/_delete_form.html.twig') }}
+{% endblock %}

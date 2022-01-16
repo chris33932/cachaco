@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FuerzaSegPert{% endblock %}
+
+{% block body %}
+    <h1>FuerzaSegPert</h1>
+        <div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fuerza_seg_pert in fuerza_seg_perts %}
+            <tr>
+                <td>{{ fuerza_seg_pert.id }}</td>
+                <td>{{ fuerza_seg_pert.descripcion }}</td>
+                <td>
+                    <a href="{{ path('fuerza_seg_pert_show', {'id': fuerza_seg_pert.id}) }}">show</a>
+                    <a href="{{ path('fuerza_seg_pert_edit', {'id': fuerza_seg_pert.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fuerza_seg_pert_new') }}">Create new</a>
+{% endblock %}

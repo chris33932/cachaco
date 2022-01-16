@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EstadoPolicial{% endblock %}
+
+{% block body %}
+    <h1>Edit EstadoPolicial</h1>
+
+    {{ include('estado_policial/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('estado_policial_index') }}">back to list</a>
+
+    {{ include('estado_policial/_delete_form.html.twig') }}
+{% endblock %}

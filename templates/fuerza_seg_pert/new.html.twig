@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FuerzaSegPert{% endblock %}
+
+{% block body %}
+    <h1>Create new FuerzaSegPert</h1>
+
+    {{ include('fuerza_seg_pert/_form.html.twig') }}
+
+    <a href="{{ path('fuerza_seg_pert_index') }}">back to list</a>
+{% endblock %}

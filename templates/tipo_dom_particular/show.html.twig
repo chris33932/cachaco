@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoDomParticular{% endblock %}
+
+{% block body %}
+    <h1>TipoDomParticular</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tipo_dom_particular.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ tipo_dom_particular.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_dom_particular_index') }}">back to list</a>
+
+    <a href="{{ path('tipo_dom_particular_edit', {'id': tipo_dom_particular.id}) }}">edit</a>
+
+    {{ include('tipo_dom_particular/_delete_form.html.twig') }}
+{% endblock %}

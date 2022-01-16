@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MecanismoMuerte{% endblock %}
+
+{% block body %}
+    <h1>MecanismoMuerte</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mecanismo_muerte.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ mecanismo_muerte.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('mecanismo_muerte_index') }}">back to list</a>
+
+    <a href="{{ path('mecanismo_muerte_edit', {'id': mecanismo_muerte.id}) }}">edit</a>
+
+    {{ include('mecanismo_muerte/_delete_form.html.twig') }}
+{% endblock %}

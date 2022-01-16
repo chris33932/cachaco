@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CondicionActividad{% endblock %}
+
+{% block body %}
+    <h1>CondicionActividad</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ condicion_actividad.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ condicion_actividad.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('condicion_actividad_index') }}">back to list</a>
+
+    <a href="{{ path('condicion_actividad_edit', {'id': condicion_actividad.id}) }}">edit</a>
+
+    {{ include('condicion_actividad/_delete_form.html.twig') }}
+{% endblock %}

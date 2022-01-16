@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CondicionActividad{% endblock %}
+
+{% block body %}
+    <h1>Edit CondicionActividad</h1>
+
+    {{ include('condicion_actividad/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('condicion_actividad_index') }}">back to list</a>
+
+    {{ include('condicion_actividad/_delete_form.html.twig') }}
+{% endblock %}

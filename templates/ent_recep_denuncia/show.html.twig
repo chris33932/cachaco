@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EntRecepDenuncia{% endblock %}
+
+{% block body %}
+    <h1>EntRecepDenuncia</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ent_recep_denuncium.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ ent_recep_denuncium.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ent_recep_denuncia_index') }}">back to list</a>
+
+    <a href="{{ path('ent_recep_denuncia_edit', {'id': ent_recep_denuncium.id}) }}">edit</a>
+
+    {{ include('ent_recep_denuncia/_delete_form.html.twig') }}
+{% endblock %}

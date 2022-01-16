@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TipoFemicidio{% endblock %}
+
+{% block body %}
+    <h1>Edit TipoFemicidio</h1>
+
+    {{ include('tipo_femicidio/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('tipo_femicidio_index') }}">back to list</a>
+
+    {{ include('tipo_femicidio/_delete_form.html.twig') }}
+{% endblock %}

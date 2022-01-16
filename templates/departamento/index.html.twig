@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Departamento index{% endblock %}
+{% block title %}Departamentos{% endblock %}
 
 {% block body %}
-    <h1>Departamento index</h1>
-
+    <h1>Departamentos</h1>
+<div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -31,5 +31,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('departamento_new') }}">Create new</a>
+    <a href="{{ path('departamento_new') }}">Crear</a>
+</div>
 {% endblock %}

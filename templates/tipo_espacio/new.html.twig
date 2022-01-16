@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TipoEspacio{% endblock %}
+
+{% block body %}
+    <h1>Create new TipoEspacio</h1>
+
+    {{ include('tipo_espacio/_form.html.twig') }}
+
+    <a href="{{ path('tipo_espacio_index') }}">back to list</a>
+{% endblock %}

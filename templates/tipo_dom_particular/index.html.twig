@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoDomParticular{% endblock %}
+
+{% block body %}
+    <h1>TipoDomParticular</h1>
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipo_dom_particular in tipo_dom_particulars %}
+            <tr>
+                <td>{{ tipo_dom_particular.id }}</td>
+                <td>{{ tipo_dom_particular.descripcion }}</td>
+                <td>
+                    <a href="{{ path('tipo_dom_particular_show', {'id': tipo_dom_particular.id}) }}">show</a>
+                    <a href="{{ path('tipo_dom_particular_edit', {'id': tipo_dom_particular.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_dom_particular_new') }}">Create new</a>
+{% endblock %}

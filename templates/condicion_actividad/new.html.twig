@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CondicionActividad{% endblock %}
+
+{% block body %}
+    <h1>Create new CondicionActividad</h1>
+
+    {{ include('condicion_actividad/_form.html.twig') }}
+
+    <a href="{{ path('condicion_actividad_index') }}">back to list</a>
+{% endblock %}

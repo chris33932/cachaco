@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcasionDelito{% endblock %}
+
+{% block body %}
+    <h1>OcasionDelito</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ocasion_delito.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ ocasion_delito.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ocasion_delito_index') }}">back to list</a>
+
+    <a href="{{ path('ocasion_delito_edit', {'id': ocasion_delito.id}) }}">edit</a>
+
+    {{ include('ocasion_delito/_delete_form.html.twig') }}
+{% endblock %}

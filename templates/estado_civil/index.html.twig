@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EstadoCivil{% endblock %}
+
+{% block body %}
+    <h1>EstadoCivil</h1>
+        <div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for estado_civil in estado_civils %}
+            <tr>
+                <td>{{ estado_civil.id }}</td>
+                <td>{{ estado_civil.descripcion }}</td>
+                <td>
+                    <a href="{{ path('estado_civil_show', {'id': estado_civil.id}) }}">show</a>
+                    <a href="{{ path('estado_civil_edit', {'id': estado_civil.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('estado_civil_new') }}">Create new</a>
+{% endblock %}

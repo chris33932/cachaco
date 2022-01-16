@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrigenRegistro{% endblock %}
+
+{% block body %}
+    <h1>OrigenRegistro</h1>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for origen_registro in origen_registros %}
+            <tr>
+                <td>{{ origen_registro.id }}</td>
+                <td>{{ origen_registro.descripcion }}</td>
+                <td>
+                    <a href="{{ path('origen_registro_show', {'id': origen_registro.id}) }}">show</a>
+                    <a href="{{ path('origen_registro_edit', {'id': origen_registro.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('origen_registro_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New EdadLegal{% endblock %}
+
+{% block body %}
+    <h1>Create new EdadLegal</h1>
+
+    {{ include('edad_legal/_form.html.twig') }}
+
+    <a href="{{ path('edad_legal_index') }}">back to list</a>
+{% endblock %}

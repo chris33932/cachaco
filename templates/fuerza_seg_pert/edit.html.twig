@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit FuerzaSegPert{% endblock %}
+
+{% block body %}
+    <h1>Edit FuerzaSegPert</h1>
+
+    {{ include('fuerza_seg_pert/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('fuerza_seg_pert_index') }}">back to list</a>
+
+    {{ include('fuerza_seg_pert/_delete_form.html.twig') }}
+{% endblock %}
