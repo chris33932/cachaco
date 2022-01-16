@@ -74,7 +74,7 @@ class DetalleHechoRepository extends ServiceEntityRepository
     public function detalleHechoInfoGral($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
     SELECT
-	detalle_hecho.id AS hechoId, 
+	hecho.id AS hechoId, 
 	detalle_hecho.hecho_id AS detalleHechoId, 
 	detalle_hecho.victima_id AS victimaId, 
 	detalle_hecho.pres_autor_id AS presAutorId, 
@@ -133,7 +133,7 @@ FROM
 		detalle_hecho.comp_hecho_id = comp_hecho.id
                 WHERE hecho.fecha >= :fechaDesde
                     AND hecho.fecha <= :fechaHasta
-                    ORDER BY hecho.anio
+                    ORDER BY hechoId
 SQL;
 
         $rsm = new ResultSetMapping();

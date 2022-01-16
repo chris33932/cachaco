@@ -124,7 +124,7 @@ class ReportesController extends AbstractController
         if ($request->getRequestFormat() == 'xlsx') {
             $datosExcel = array(
                 'encabezado' => array(
-                    'titulo' => 'Victimas info personal situación socio-económica',
+                    'titulo' => 'Victimas situación socio-económica',
                     'filtro' => array(
                         'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
                         'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
@@ -133,6 +133,7 @@ class ReportesController extends AbstractController
                 'columnas' => array(
                     'victimaId',
                     'hechoId',
+                    'anio',
                     'nombre',
                     'apellido',
                     'NroDoc',
@@ -2704,7 +2705,7 @@ private function generarEncabezadoColumnas($excel, $encabezadoColumnas, $fila = 
     foreach ($encabezadoColumnas as $titulo) {
         $excel->getActiveSheet()->setCellValueByColumnAndRow($columna++, $fila, $titulo);
     }
-    $rango = 'A'.$fila.':'.chr(65 + --$columna).$fila;
+    $rango = 'X'.$fila.':'.chr(65 + --$columna).$fila;
 
     
     $excel->getActiveSheet()
@@ -2806,7 +2807,7 @@ private function estiloTituloColumnas()
     return (new \PHPExcel_Style())->applyFromArray(array(
         'font' => array(
             'name' => 'Arial',
-            'bold' => true,
+            'bold' => false,
             'color' => array(
                 'rgb' => '000000',
             ),
@@ -2815,23 +2816,23 @@ private function estiloTituloColumnas()
             'type' => \PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
             'rotation' => 90,
             'startcolor' => array(
-                'rgb' => 'CCFFE5',
+                'rgb' => 'FFFFFF',
             ),
             'endcolor' => array(
-                'argb' => 'CCFFE5',
+                'argb' => 'FFFFFF',
             ),
         ),
         'borders' => array(
             'top' => array(
                 'style' => \PHPExcel_Style_Border::BORDER_HAIR,
                 'color' => array(
-                    'rgb' => '143860',
+                    'rgb' => 'FFFFFF',
                 ),
             ),
             'bottom' => array(
                 'style' => \PHPExcel_Style_Border::BORDER_HAIR,
                 'color' => array(
-                    'rgb' => '143860',
+                    'rgb' => 'FFFFFF',
                 ),
             ),
         ),

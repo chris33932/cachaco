@@ -51,7 +51,6 @@ class HechoRepository extends ServiceEntityRepository
     public function hechoInfoGral($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
     SELECT
-	DISTINCT 
     hecho.id AS hechoId, 
 	detalle_hecho.id AS detalleHechoId, 
 	victima.id AS victimaId, 
@@ -175,7 +174,7 @@ FROM
 		detalle_hecho.pres_autor_id = pres_autor.id
                 WHERE hecho.fecha >= :fechaDesde
                     AND hecho.fecha <= :fechaHasta
-                    ORDER BY hecho.anio
+                    ORDER BY hechoId
 SQL;
 
         $rsm = new ResultSetMapping();
