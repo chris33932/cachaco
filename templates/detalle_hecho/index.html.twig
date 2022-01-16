@@ -40,7 +40,7 @@
           {% for detalle_hecho in detalle_hechos %}
               <tr>
 
-                  <td>'Prueba'{#<a href="{{ path('hecho_show', { 'id': detalle_hecho.hecho.id }) }}">{{ detalle_hecho.hecho.id }}</a>#}</td>
+                  <td><a href="{{ path('hecho_show', { 'id': detalle_hecho.hecho.id }) }}">{{ detalle_hecho.hecho.id }}</a></td>
 
                   <td>{{ detalle_hecho.id }}</td>
                   
@@ -66,7 +66,7 @@
 
             
                 
-                {# <td>
+                {#<td>
                       <a href="{{ path('detalle_hecho_show', {'id': detalle_hecho.id}) }}">show</a>
                       <a href="{{ path('detalle_hecho_edit', {'id': detalle_hecho.id}) }}">edit</a>
                   </td>#}
@@ -79,9 +79,9 @@
           </tbody>
       </table>
   </div>
-  {#<a href="{{ path('detalle_hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">
+  <a href="{{ path('detalle_hecho_new') }}"class="btn btn-primary btn-sm" alt="Nuevo">  <span class="glyphicon glyphicon-plus"></span> Nuevo</a>
  
-</div>                       <span class="glyphicon glyphicon-plus"></span> Nuevo</a>#}
+</div>                     
 {% endblock %}
 
  {% block footer %}{{ parent() }}

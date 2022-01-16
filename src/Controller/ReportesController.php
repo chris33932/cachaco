@@ -88,6 +88,227 @@ class ReportesController extends AbstractController
         }
     }
 
+    
+
+    //---------------------- víctimas información socio-economica -----------------------//
+    //----------------------------------------------------------------------//
+    /**
+     * @Route("/victima_info_general.{_format}", name="victima_info_general")
+     */
+    public function informeGeneralVictima(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('victima_info_general'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->informeGralVictima($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victimas info personal situación socio-económica',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'victimaId',
+                    'hechoId',
+                    'nombre',
+                    'apellido',
+                    'NroDoc',
+                    'sexo',
+                    'genero',
+                    'generoOtro',
+                    'edad',
+                    'rangoEtario',
+                    'edadLegal',
+                    'nacionalidad',
+                    'nacOtra',
+                    'estadoCivil',
+                    'provincia',
+                    'departamento',
+                    'localidad',
+                    'barrio',
+                    'calle',
+                    'altura',
+                    'interseccion',
+                    'calleInter',
+                    'sig',
+                    'latitud',
+                    'longitud',
+                    'fraccion',
+                    'radio',
+                    'discapacidad',
+                    'embarazada',
+                    'privLibertad',
+                    'ejerProstitucion',
+                    'migranteInternac',
+                    'migranteIntraProv',
+                    'migranteInterProv',
+                    'puebloOrig',
+                    'etnia',
+                    'etniaOtro',
+                    'nativoEsp',
+                    'homoSexBisex',
+                    'refActivista',
+                    'otraSitInterseccionalidad',
+                    'sitLaboral',
+                    'sitLabOtra',
+                    'condActividad',
+                    'hijosACargo',
+                    'cantHijosACargo',
+                    'benefLeyBrisa',
+                    'cantBenef',
+                    'nivInst',
+                    'nivInstFormal',
+                   
+                 
+                                       
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/victima_info_general.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+     //---------------------- víctimas información sobre mecanismo de muerte-----------------------//
+    //--------------------------------------------------------------------------------------------//
+    /**
+     * @Route("/victima_info_mecanismo.{_format}", name="victima_info_mecanismo")
+     */
+    public function infoMecaVictima(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('victima_info_mecanismo'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Victima')
+                    ->infoMecaVictimas($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Victimas info personal situación socio-económica',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'victimaId',
+                    'hechoId',
+                    'nombre',
+                    'apellido',
+                    'NroDoc',
+                    'mecanismoMuerte',
+                    'mecaMuerteOtro',
+                    'tipoArma',
+                    'tipoArmaOtro',
+                    'fuerzaSeg',
+                    'fuerzaSegPert',
+                    'fuerzaSegPertOtra',
+                    'estPolicial',
+                    'funcMomHecho',
+                    'medidaProteccVigente',
+                    'medidaProteccVigenteEspec',
+                    'overkill',
+                    'estIntox',
+                    'estIntoxDesc',
+                    'estIntoxOtro',
+                    'desapAntesHecho',
+               
+                   
+                 
+                                       
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/victima_info_mecanismo.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //---------------------- víctimas por rango etario -----------------------//
     //----------------------------------------------------------------------//
 
@@ -1996,6 +2217,357 @@ class ReportesController extends AbstractController
     }
 
 
+
+
+
+
+
+
+
+
+     //------------------------- Hechos Información general ------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+     /**
+     * @Route("/hecho_info.{_format}", name="hecho_info")
+     */
+    public function hechoInfoGeneral(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('hecho_info'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:Hecho')
+                    ->hechoInfoGral($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Hechos info gral.',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'hechoId',
+                    'detalleHechoId',
+                    'victimaId',
+                    'presAutorId',
+                    'nroPrev',
+                    'sumario',
+                    'nroExpJud',
+                    'juzgado',
+                    'fiscalia',
+                    'comisaria',
+                    'fecha',
+                    'anio',
+                    'mes',
+                    'dia',
+                    'provincia',
+                    'depto',
+                    'localidad',
+                    'codIndec',
+                    'gRcia',
+                    'hora',
+                    'franjaSeis',
+                    'franjaTres',
+                    'barrio',
+                    'calle',
+                    'altura',
+                    'intersecc',
+                    'calleIntersecc',
+                    'sig',
+                    'latitud',
+                    'longitud',
+                    'zona',
+                    'tipoEsp',
+                    'tipoLugar',
+                    'acceso',
+                    'lugar',
+                    'lugarOtro',
+                    'domParticular',
+                    'domParticular',
+                    'fraccion',
+                    'radio',
+                    'coincLugarHallazgo',
+                    'ocaDelito',
+                    'ocaDelitoOtro',
+                    'regOrigen',
+                    'regOrigOtro',
+                    'recepDenuncia',
+                    'recepDenOtro',
+                    'tipologia',
+                    'cantVictima',
+                    'cantidadVicCol',
+                    'cantPresAutores',
+
+                                       
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/hecho_info.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+         //------------------------- DETALLE DE LOS Hechos Información general ------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+     /**
+     * @Route("/detalle_hecho_info.{_format}", name="detalle_hecho_info")
+     */
+    public function detalleHechoInfoGeneral(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('detalle_hecho_info'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:DetalleHecho')
+                    ->detalleHechoInfoGral($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Detalle de los Hechos info gral.',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'hechoId',
+                    'detalleHechoId',
+                    'victimaId',
+                    'presAutorId',
+                    'denPrevia',
+                    'denPrevDesc',
+                    'vinculo',
+                    'vincFliar',
+                    'vincFliarOtro',
+                    'vincNoFliar',
+                    'vincNoFliarOtro',
+                    'conviviente',
+                    'usoArmaFuego',
+                    'situacionArma',
+                    'permisoArma',
+                    'estIntox',
+                    'tipoEstIntox',
+                    'estIntoxOtro',
+                    'sitProcesal',
+                    'compHecho',
+                    'compHechoOtro',
+                    'anio',
+                    'fecha',
+
+
+                                       
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/detalle_hecho_info.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+    //------------------------- consulta sobre autores Información general ------------------------------//
+    //-------------------------------------------------------------------------------------------//
+
+     /**
+     * @Route("/pres_autor_info.{_format}", name="pres_autor_info")
+     */
+    public function presAutoresInfo(Request $request)
+    {
+
+        $rangoFecha = array(
+            'fechaDesde' => (new \DateTime())->sub(new \DateInterval('P1M')),
+            'fechaHasta' => new \DateTime(),
+        );
+
+        $formFechas = $this->createForm(RangoFechaType::class, $rangoFecha, array(
+            'action' => $this->generateUrl('pres_autor_info'),
+        ));
+
+        $formFechas->handleRequest($request);
+
+        if ($formFechas->isSubmitted() && $formFechas->isValid()) {
+            $rangoFecha = $formFechas->getData();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $datos = $em->getRepository('App:PresAutor')
+                    ->presAutorInfoGral($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+                    
+
+        //$datos2 = $em->getRepository('App:Victima')
+           //         ->victimasPorExc($rangoFecha['fechaDesde'], $rangoFecha['fechaHasta']);
+
+        if ($request->getRequestFormat() == 'xlsx') {
+            $datosExcel = array(
+                'encabezado' => array(
+                    'titulo' => 'Pres Autores info general.',
+                    'filtro' => array(
+                        'Fecha Desde' => $rangoFecha['fechaDesde']->format('d-M-Y'),
+                        'Fecha Hasta' => $rangoFecha['fechaHasta']->format('d-M-Y'),
+                    ),
+                ),
+                'columnas' => array(
+                    'hechoId',
+                    'presAutorId',
+                    'victimaId',
+                    'anio',
+                    'fecha',
+                    'nombre',
+                    'apellido',
+                    'nroDoc',
+                    'sexo',
+                    'genero',
+                    'generoOtro',
+                    'edad',
+                    'edadLegal',
+                    'rangoEtario',
+                    'prov',
+                    'depto',
+                    'localidad',
+                    'barrio',
+                    'calle',
+                    'altura',
+                    'intersecc',
+                    'calleIntersecc',
+                    'sig',
+                    'latitud',
+                    'longitud',
+                    'fraccion',
+                    'radio',
+                    'nacionalidad',
+                    'nacionalidadOtro',
+                    'estCivil',
+                    'sitLab',
+                    'sitLabOtro',
+                    'condAct',
+                    'nivInst',
+                    'nivInstFormal',
+                    'reincidente',
+                    'antPenal',
+                    'antPenalEspec',
+                    'fuerzaSeg',
+                    'fuerzaSegPert',
+                    'fuerzaSegPertOtra',
+                    'estPolicial',
+                    'ejerFunc',
+                    'observacion',
+                    
+
+
+                                       
+                ),
+                'datos' => $datos,
+                'totales' => array(
+                    // 'total 1', 'total 2', 'total 3',
+                ),
+            );
+
+            return $this->renderExcel($datosExcel);
+        } else {
+            return $this->render(
+                'reportes/pres_autor_info.html.twig',  array(
+                    'fecha_desde' => $rangoFecha['fechaDesde'],
+                    'fecha_hasta' => $rangoFecha['fechaHasta'],
+                    'datos' => $datos,
+                    //'datos2' => $datos2,
+                    'formFechas' => $formFechas->createView()
+            ));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
          /////////////////////////////////////////////////
         // -----------------EXCEL --------------------//
         ////////////////////////////////////////////////
@@ -2018,7 +2590,7 @@ private function renderExcel($datos)
 private function ponerPropiedades($excel, $titulo)
 {
     $excel->getProperties()
-            ->setCreator('Sistema almacenes')
+            ->setCreator('Sistema centro de delitos')
             ->setLastModifiedBy('Sistema')
             ->setTitle($titulo)
             ->setSubject('')

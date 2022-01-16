@@ -1,0 +1,156 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes hechos{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre vicimas (Información personal y Situación socio-económica) </h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>victimaId</th>
+                                                                <th>hechoId</th>
+                                                                <th>nombre</th>
+                                                                <th>apellido</th>
+                                                                <th>NroDoc</th>
+                                                                <th>sexo</th>
+                                                                <th>genero</th>
+                                                                <th>generoOtro</th>
+                                                                <th>edad</th>
+                                                                <th>rangoEtario</th>
+                                                                <th>edadLegal</th>
+                                                                <th>nacionalidad</th>
+                                                                <th>nacOtra</th>
+                                                                <th>estadoCivil</th>
+                                                                <th>provincia</th>
+                                                                <th>departamento</th>
+                                                                <th>localidad</th>
+                                                                <th>barrio</th>
+                                                                <th>calle</th>
+                                                                <th>altura</th>
+                                                                <th>interseccion</th>
+                                                                <th>calleInter</th>
+                                                                <th>sig</th>
+                                                                <th>latitud</th>
+                                                                <th>longitud</th>
+                                                                <th>fraccion</th>
+                                                                <th>radio</th>
+                                                                <th>discapacidad</th>
+                                                                <th>embarazada</th>
+                                                                <th>privLibertad</th>
+                                                                <th>ejerProstitucion</th>
+                                                                <th>migranteInternac</th>
+                                                                <th>migranteIntraProv</th>
+                                                                <th>migranteInterProv</th>
+                                                                <th>puebloOrig</th>
+                                                                <th>etnia</th>
+                                                                <th>etniaOtro</th>
+                                                                <th>nativoEsp</th>
+                                                                <th>homoSexBisex</th>
+                                                                <th>refActivista</th>
+                                                                <th>otraSitInterseccionalidad</th>
+                                                                <th>sitLaboral</th>
+                                                                <th>sitLabOtra</th>
+                                                                <th>condActividad</th>
+                                                                <th>hijosACargo</th>
+                                                                <th>cantHijosACargo</th>
+                                                                <th>benefLeyBrisa</th>
+                                                                <th>cantBenef</th>
+                                                                <th>nivInst</th>
+                                                                <th>nivInstFormal</th>
+                                                               
+                                                              
+
+                                                                
+                                                                                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.victimaId}}</td>
+                                                                <td>{{ fila.hechoId}}</td>
+                                                                <td>{{ fila.nombre}}</td>
+                                                                <td>{{ fila.apellido}}</td>
+                                                                <td>{{ fila.NroDoc}}</td>
+                                                                <td>{{ fila.sexo}}</td>
+                                                                <td>{{ fila.genero}}</td>
+                                                                <td>{{ fila.generoOtro}}</td>
+                                                                <td>{{ fila.edad}}</td>
+                                                                <td>{{ fila.rangoEtario}}</td>
+                                                                <td>{{ fila.edadLegal}}</td>
+                                                                <td>{{ fila.nacionalidad}}</td>
+                                                                <td>{{ fila.nacOtra}}</td>
+                                                                <td>{{ fila.estadoCivil}}</td>
+                                                                <td>{{ fila.provincia}}</td>
+                                                                <td>{{ fila.departamento}}</td>
+                                                                <td>{{ fila.localidad}}</td>
+                                                                <td>{{ fila.barrio}}</td>
+                                                                <td>{{ fila.calle}}</td>
+                                                                <td>{{ fila.altura}}</td>
+                                                                <td>{{ fila.interseccion}}</td>
+                                                                <td>{{ fila.calleInter}}</td>
+                                                                <td>{{ fila.sig}}</td>
+                                                                <td>{{ fila.latitud}}</td>
+                                                                <td>{{ fila.longitud}}</td>
+                                                                <td>{{ fila.fraccion}}</td>
+                                                                <td>{{ fila.radio}}</td>
+                                                                <td>{{ fila.discapacidad}}</td>
+                                                                <td>{{ fila.embarazada}}</td>
+                                                                <td>{{ fila.privLibertad}}</td>
+                                                                <td>{{ fila.ejerProstitucion}}</td>
+                                                                <td>{{ fila.migranteInternac}}</td>
+                                                                <td>{{ fila.migranteIntraProv}}</td>
+                                                                <td>{{ fila.migranteInterProv}}</td>
+                                                                <td>{{ fila.puebloOrig}}</td>
+                                                                <td>{{ fila.etnia}}</td>
+                                                                <td>{{ fila.etniaOtro}}</td>
+                                                                <td>{{ fila.nativoEsp}}</td>
+                                                                <td>{{ fila.homoSexBisex}}</td>
+                                                                <td>{{ fila.refActivista}}</td>
+                                                                <td>{{ fila.otraSitInterseccionalidad}}</td>
+                                                                <td>{{ fila.sitLaboral}}</td>
+                                                                <td>{{ fila.sitLabOtra}}</td>
+                                                                <td>{{ fila.condActividad}}</td>
+                                                                <td>{{ fila.hijosACargo}}</td>
+                                                                <td>{{ fila.cantHijosACargo}}</td>
+                                                                <td>{{ fila.benefLeyBrisa}}</td>
+                                                                <td>{{ fila.cantBenef}}</td>
+                                                                <td>{{ fila.nivInst}}</td>
+                                                                <td>{{ fila.nivInstFormal}}</td>
+                                                                                                                         
+                                                               
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

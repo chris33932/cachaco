@@ -46,6 +46,383 @@ class VictimaRepository extends ServiceEntityRepository
 
 
 
+    ///// Informe sobre todas las categorias de victimaS</h3>  
+
+public function informeGralVictima($fechaDesde, $fechaHasta){
+    $sql = <<<'SQL'
+ SELECT 
+	DISTINCT 
+	detalle_hecho.victima_id AS victimaId, 
+	detalle_hecho.hecho_id AS hechoId, 
+	hecho.anio AS anio, 
+	victima.nombre AS nombre, 
+	victima.apellido AS apellido, 
+	victima.documento_nro AS NroDoc, 
+	sexo.descripcion AS sexo, 
+	genero.descripcion AS genero, 
+	victima.genero_otro AS generoOtro, 
+	victima.edad AS edad, 
+	rango_etario.descripcion AS rangoEtario, 
+	edad_legal.descripcion AS edadLegal, 
+	nacionalidad.descripcion AS nacionalidad, 
+	victima.nacionalidad_otra AS nacOtra, 
+	estado_civil.descripcion AS estadoCivil, 
+	provincia.descripcion AS provincia, 
+	departamento.descripcion AS departamento, 
+	localidad.nombre AS localidad, 
+	victima.barrio AS barrio, 
+	victima.calle AS calle, 
+	victima.altura AS altura, 
+	victima.interseccion AS interseccion, 
+	victima.calle_interseccion AS calleInter, 
+	rep_geografica.descripcion AS sig, 
+	victima.latitud AS latitud, 
+	victima.longitud AS longitud, 
+	victima.fraccion AS fraccion, 
+	victima.radio AS radio, 
+	victima.discapacidad AS discapacidad, 
+	victima.embarazada AS embarazada, 
+	victima.privada_libertad AS privLibertad, 
+	victima.ejer_prostitucion AS ejerProstitucion, 
+	victima.migrante_internacional AS migranteInternac, 
+	victima.migrante_intraprov AS migranteIntraProv, 
+	victima.migrante_interprov AS migranteInterProv, 
+	victima.pueblo_originario AS puebloOrig, 
+	etnia.descripcion AS etnia, 
+	victima.etnia_otro AS etniaOtro, 
+	victima.hab_nativo_esp AS nativoEsp, 
+	victima.homosex_bisex AS homoSexBisex, 
+	victima.ref_activista AS refActivista, 
+	victima.afro AS afro, 
+	victima.otra_sit_intersecc AS otraSitInterseccionalidad, 
+	situacion_laboral.descripcion AS sitLaboral, 
+	victima.otra_sit_laboral AS sitLabOtra, 
+	condicion_actividad.descripcion AS condActividad, 
+	victima.hijos_pers_cargo AS hijosACargo, 
+	victima.cant_a_cargo AS cantHijosACargo, 
+	victima.benef_ley_brisa AS benefLeyBrisa, 
+	victima.cant_benef AS cantBenef, 
+	nivel_instruccion.descripcion AS nivInst, 
+	nivel_inst_formal.descripcion AS nivInstFormal
+	
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	LEFT JOIN
+	sexo
+	ON 
+		victima.sexo_id = sexo.id
+	LEFT JOIN
+	genero
+	ON 
+		victima.genero_id = genero.id
+	LEFT JOIN
+	rango_etario
+	ON 
+		victima.rango_etario_id = rango_etario.id
+	LEFT JOIN
+	edad_legal
+	ON 
+		victima.edad_legal_id = edad_legal.id
+	LEFT JOIN
+	nacionalidad
+	ON 
+		victima.nacionalidad_id = nacionalidad.id
+	LEFT JOIN
+	estado_civil
+	ON 
+		victima.estado_civil_id = estado_civil.id
+	LEFT JOIN
+	provincia
+	ON 
+		victima.provincia_id = provincia.id
+	LEFT JOIN
+	departamento
+	ON 
+		victima.departamento_id = departamento.id
+	LEFT JOIN
+	localidad
+	ON 
+		victima.localidad_id = localidad.id
+	LEFT JOIN
+	rep_geografica
+	ON 
+		victima.rep_geo_id = rep_geografica.id
+	LEFT JOIN
+	etnia
+	ON 
+		victima.etnia_id = etnia.id
+	LEFT JOIN
+	situacion_laboral
+	ON 
+		victima.sit_laboral_id = situacion_laboral.id
+	LEFT JOIN
+	condicion_actividad
+	ON 
+		victima.cond_actividad_id = condicion_actividad.id
+	LEFT JOIN
+	nivel_instruccion
+	ON 
+		victima.niv_inst_id = nivel_instruccion.id
+	LEFT JOIN
+	nivel_inst_formal
+	ON 
+		victima.niv_inst_form_id = nivel_inst_formal.id
+	
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        ORDER BY
+        detalle_hecho.victima_id DESC
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        
+        $rsm->addScalarResult('victimaId', 'victimaId');
+        $rsm->addScalarResult('hechoId', 'hechoId');
+        $rsm->addScalarResult('anio', 'anio');
+        $rsm->addScalarResult('nombre', 'nombre');
+        $rsm->addScalarResult('apellido', 'apellido');
+        $rsm->addScalarResult('NroDoc', 'NroDoc');
+        $rsm->addScalarResult('sexo', 'sexo');
+        $rsm->addScalarResult('genero', 'genero');
+        $rsm->addScalarResult('generoOtro', 'generoOtro');
+        $rsm->addScalarResult('edad', 'edad');
+        $rsm->addScalarResult('rangoEtario', 'rangoEtario');
+        $rsm->addScalarResult('edadLegal', 'edadLegal');
+        $rsm->addScalarResult('nacionalidad', 'nacionalidad');
+        $rsm->addScalarResult('nacOtra', 'nacOtra');
+        $rsm->addScalarResult('estadoCivil', 'estadoCivil');
+        $rsm->addScalarResult('provincia', 'provincia');
+        $rsm->addScalarResult('departamento', 'departamento');
+        $rsm->addScalarResult('localidad', 'localidad');
+        $rsm->addScalarResult('barrio', 'barrio');
+        $rsm->addScalarResult('calle', 'calle');
+        $rsm->addScalarResult('altura', 'altura');
+        $rsm->addScalarResult('interseccion', 'interseccion');
+        $rsm->addScalarResult('calleInter', 'calleInter');
+        $rsm->addScalarResult('sig', 'sig');
+        $rsm->addScalarResult('latitud', 'latitud');
+        $rsm->addScalarResult('longitud', 'longitud');
+        $rsm->addScalarResult('fraccion', 'fraccion');
+        $rsm->addScalarResult('radio', 'radio');
+        $rsm->addScalarResult('discapacidad', 'discapacidad');
+        $rsm->addScalarResult('embarazada', 'embarazada');
+        $rsm->addScalarResult('privLibertad', 'privLibertad');
+        $rsm->addScalarResult('ejerProstitucion', 'ejerProstitucion');
+        $rsm->addScalarResult('migranteInternac', 'migranteInternac');
+        $rsm->addScalarResult('migranteIntraProv', 'migranteIntraProv');
+        $rsm->addScalarResult('migranteInterProv', 'migranteInterProv');
+        $rsm->addScalarResult('puebloOrig', 'puebloOrig');
+        $rsm->addScalarResult('etnia', 'etnia');
+        $rsm->addScalarResult('etniaOtro', 'etniaOtro');
+        $rsm->addScalarResult('nativoEsp', 'nativoEsp');
+        $rsm->addScalarResult('homoSexBisex', 'homoSexBisex');
+        $rsm->addScalarResult('refActivista', 'refActivista');
+        $rsm->addScalarResult('otraSitInterseccionalidad', 'otraSitInterseccionalidad');
+        $rsm->addScalarResult('sitLaboral', 'sitLaboral');
+        $rsm->addScalarResult('sitLabOtra', 'sitLabOtra');
+        $rsm->addScalarResult('condActividad', 'condActividad');
+        $rsm->addScalarResult('hijosACargo', 'hijosACargo');
+        $rsm->addScalarResult('cantHijosACargo', 'cantHijosACargo');
+        $rsm->addScalarResult('benefLeyBrisa', 'benefLeyBrisa');
+        $rsm->addScalarResult('cantBenef', 'cantBenef');
+        $rsm->addScalarResult('nivInst', 'nivInst');
+        $rsm->addScalarResult('nivInstFormal', 'nivInstFormal');
+                
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
+}
+
+
+    ///// Informe sobre mecanismo de muerte victimas</h3>  
+
+    public function infoMecaVictimas($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+    SELECT 
+	DISTINCT 
+	detalle_hecho.victima_id AS victimaId, 
+	detalle_hecho.hecho_id AS hechoId, 
+	hecho.anio AS anio, 
+	victima.nombre AS nombre, 
+	victima.apellido AS apellido, 
+	victima.documento_nro AS NroDoc, 
+	mecanismo_muerte.descripcion AS mecanismoMuerte, 
+	victima.mecanismo_muerte_otro AS mecaMuerteOtro, 
+	tipo_arma.descripcion AS tipoArma, 
+	victima.tipo_arma_otro AS tipoArmaOtro, 
+	victima.fuerza_seg AS fuerzaSeg, 
+	fuerza_seg_pert.descripcion AS fuerzaSegPert, 
+	victima.otra_fuer_pert AS fuerzaSegPertOtra, 
+	estado_policial.descripcion AS estPolicial, 
+	funcion_mom_hecho.descripcion AS funcMomHecho, 
+	victima.medida_protecc_vigente AS medidaProteccVigente, 
+	victima.medida_protecc_especif AS medidaProteccVigenteEspec, 
+	victima.violencia_exc AS overkill, 
+	victima.estado_intox AS estIntox, 
+	estado_intox.descripcion AS estIntoxDesc, 
+	victima.est_intox_otro AS estIntoxOtro, 
+	victima.desap_ant_hecho AS desapAntesHecho
+	
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	LEFT JOIN
+	sexo
+	ON 
+		victima.sexo_id = sexo.id
+	LEFT JOIN
+	genero
+	ON 
+		victima.genero_id = genero.id
+	LEFT JOIN
+	rango_etario
+	ON 
+		victima.rango_etario_id = rango_etario.id
+	LEFT JOIN
+	edad_legal
+	ON 
+		victima.edad_legal_id = edad_legal.id
+	LEFT JOIN
+	nacionalidad
+	ON 
+		victima.nacionalidad_id = nacionalidad.id
+	LEFT JOIN
+	estado_civil
+	ON 
+		victima.estado_civil_id = estado_civil.id
+	LEFT JOIN
+	provincia
+	ON 
+		victima.provincia_id = provincia.id
+	LEFT JOIN
+	departamento
+	ON 
+		victima.departamento_id = departamento.id
+	LEFT JOIN
+	localidad
+	ON 
+		victima.localidad_id = localidad.id
+	LEFT JOIN
+	rep_geografica
+	ON 
+		victima.rep_geo_id = rep_geografica.id
+	LEFT JOIN
+	etnia
+	ON 
+		victima.etnia_id = etnia.id
+	LEFT JOIN
+	situacion_laboral
+	ON 
+		victima.sit_laboral_id = situacion_laboral.id
+	LEFT JOIN
+	condicion_actividad
+	ON 
+		victima.cond_actividad_id = condicion_actividad.id
+	LEFT JOIN
+	nivel_instruccion
+	ON 
+		victima.niv_inst_id = nivel_instruccion.id
+	LEFT JOIN
+	nivel_inst_formal
+	ON 
+		victima.niv_inst_form_id = nivel_inst_formal.id
+	LEFT JOIN
+	mecanismo_muerte
+	ON 
+		victima.mecanismo_muerte_id = mecanismo_muerte.id
+	LEFT JOIN
+	tipo_arma
+	ON 
+		victima.tipo_arma_id = tipo_arma.id
+	LEFT JOIN
+	fuerza_seg_pert
+	ON 
+		victima.fuer_seg_pert_id = fuerza_seg_pert.id
+	LEFT JOIN
+	estado_policial
+	ON 
+		victima.est_pol_id = estado_policial.id
+	LEFT JOIN
+	funcion_mom_hecho
+	ON 
+		victima.ejer_funcion_id = funcion_mom_hecho.id
+	LEFT JOIN
+	estado_intox
+	ON 
+		victima.tipo_est_intox_id = estado_intox.id 
+        WHERE hecho.fecha >= :fechaDesde
+        AND hecho.fecha <= :fechaHasta
+        ORDER BY
+        detalle_hecho.victima_id DESC
+              
+
+SQL;
+        $rsm = new ResultSetMapping();
+        
+        $rsm->addScalarResult('victimaId', 'victimaId');
+        $rsm->addScalarResult('hechoId', 'hechoId');
+        $rsm->addScalarResult('anio', 'anio');
+        $rsm->addScalarResult('nombre', 'nombre');
+        $rsm->addScalarResult('apellido', 'apellido');
+        $rsm->addScalarResult('NroDoc', 'NroDoc');
+        $rsm->addScalarResult('mecanismoMuerte', 'mecanismoMuerte');
+        $rsm->addScalarResult('mecaMuerteOtro', 'mecaMuerteOtro');
+        $rsm->addScalarResult('tipoArma', 'tipoArma');
+        $rsm->addScalarResult('tipoArmaOtro', 'tipoArmaOtro');
+        $rsm->addScalarResult('fuerzaSeg', 'fuerzaSeg');
+        $rsm->addScalarResult('fuerzaSegPert', 'fuerzaSegPert');
+        $rsm->addScalarResult('fuerzaSegPertOtra', 'fuerzaSegPertOtra');
+        $rsm->addScalarResult('estPolicial', 'estPolicial');
+        $rsm->addScalarResult('funcMomHecho', 'funcMomHecho');
+        $rsm->addScalarResult('medidaProteccVigente', 'medidaProteccVigente');
+        $rsm->addScalarResult('medidaProteccVigenteEspec', 'medidaProteccVigenteEspec');
+        $rsm->addScalarResult('overkill', 'overkill');
+        $rsm->addScalarResult('estIntox', 'estIntox');
+        $rsm->addScalarResult('estIntoxDesc', 'estIntoxDesc');
+        $rsm->addScalarResult('estIntoxOtro', 'estIntoxOtro');
+        $rsm->addScalarResult('desapAntesHecho', 'desapAntesHecho');
+                    
+    
+            $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+    
+            $fechaDesdeCorregida = clone $fechaDesde;
+            $fechaHastaCorregida = clone $fechaHasta;
+    
+            $fechaDesdeCorregida->setTime(0, 0, 0);
+            $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+    
+            $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+                ->setParameter(':fechaHasta', $fechaHastaCorregida);
+    
+            return $query->getArrayResult();
+    }
+
     public function victimasPorDepartamento($fechaDesde, $fechaHasta){
         $sql = <<<'SQL'
                 SELECT

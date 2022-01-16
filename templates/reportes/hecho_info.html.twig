@@ -1,0 +1,154 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes hechos{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre hechos sin detalle</h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>hechoId</th>
+                                                                <th>detalleHechoId</th>
+                                                                <th>victimaId</th>
+                                                                <th>presAutorId</th>
+                                                                <th>nroPrev</th>
+                                                                <th>sumario</th>
+                                                                <th>nroExpJud</th>
+                                                                <th>juzgado</th>
+                                                                <th>fiscalia</th>
+                                                                <th>comisaria</th>
+                                                                <th>fecha</th>
+                                                                <th>anio</th>
+                                                                <th>mes</th>
+                                                                <th>dia</th>
+                                                                <th>provincia</th>
+                                                                <th>depto</th>
+                                                                <th>localidad</th>
+                                                                <th>codIndec</th>
+                                                                <th>gRcia</th>
+                                                                <th>hora</th>
+                                                                <th>franjaSeis</th>
+                                                                <th>franjaTres</th>
+                                                                <th>barrio</th>
+                                                                <th>calle</th>
+                                                                <th>altura</th>
+                                                                <th>intersecc</th>
+                                                                <th>calleIntersecc</th>
+                                                                <th>sig</th>
+                                                                <th>latitud</th>
+                                                                <th>longitud</th>
+                                                                <th>zona</th>
+                                                                <th>tipoEsp</th>
+                                                                <th>tipoLugar</th>
+                                                                <th>acceso</th>
+                                                                <th>lugar</th>
+                                                                <th>lugarOtro</th>
+                                                                <th>domParticular</th>
+                                                                <th>domParticular</th>
+                                                                <th>fraccion</th>
+                                                                <th>radio</th>
+                                                                <th>coincLugarHallazgo</th>
+                                                                <th>ocaDelito</th>
+                                                                <th>ocaDelitoOtro</th>
+                                                                <th>regOrigen</th>
+                                                                <th>regOrigOtro</th>
+                                                                <th>recepDenuncia</th>
+                                                                <th>recepDenOtro</th>
+                                                                <th>tipologia</th>
+                                                                <th>cantVictima</th>
+                                                                <th>cantidadVicCol</th>
+                                                                <th>cantPresAutores</th>
+                                                                
+                                                                                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.hechoId}}</td>
+                                                                <td>{{ fila.detalleHechoId}}</td>
+                                                                <td>{{ fila.victimaId}}</td>
+                                                                <td>{{ fila.presAutorId}}</td>
+                                                                <td>{{ fila.nroPrev}}</td>
+                                                                <td>{{ fila.sumario}}</td>
+                                                                <td>{{ fila.nroExpJud}}</td>
+                                                                <td>{{ fila.juzgado}}</td>
+                                                                <td>{{ fila.fiscalia}}</td>
+                                                                <td>{{ fila.comisaria}}</td>
+                                                                <td>{{ fila.fecha}}</td>
+                                                                <td>{{ fila.anio}}</td>
+                                                                <td>{{ fila.mes}}</td>
+                                                                <td>{{ fila.dia}}</td>
+                                                                <td>{{ fila.provincia}}</td>
+                                                                <td>{{ fila.depto}}</td>
+                                                                <td>{{ fila.localidad}}</td>
+                                                                <td>{{ fila.codIndec}}</td>
+                                                                <td>{{ fila.gRcia}}</td>
+                                                                <td>{{ fila.hora}}</td>
+                                                                <td>{{ fila.franjaSeis}}</td>
+                                                                <td>{{ fila.franjaTres}}</td>
+                                                                <td>{{ fila.barrio}}</td>
+                                                                <td>{{ fila.calle}}</td>
+                                                                <td>{{ fila.altura}}</td>
+                                                                <td>{{ fila.intersecc}}</td>
+                                                                <td>{{ fila.calleIntersecc}}</td>
+                                                                <td>{{ fila.sig}}</td>
+                                                                <td>{{ fila.latitud}}</td>
+                                                                <td>{{ fila.longitud}}</td>
+                                                                <td>{{ fila.zona}}</td>
+                                                                <td>{{ fila.tipoEsp}}</td>
+                                                                <td>{{ fila.tipoLugar}}</td>
+                                                                <td>{{ fila.acceso}}</td>
+                                                                <td>{{ fila.lugar}}</td>
+                                                                <td>{{ fila.lugarOtro}}</td>
+                                                                <td>{{ fila.domParticular}}</td>
+                                                                <td>{{ fila.domParticular}}</td>
+                                                                <td>{{ fila.fraccion}}</td>
+                                                                <td>{{ fila.radio}}</td>
+                                                                <td>{{ fila.coincLugarHallazgo}}</td>
+                                                                <td>{{ fila.ocaDelito}}</td>
+                                                                <td>{{ fila.ocaDelitoOtro}}</td>
+                                                                <td>{{ fila.regOrigen}}</td>
+                                                                <td>{{ fila.regOrigOtro}}</td>
+                                                                <td>{{ fila.recepDenuncia}}</td>
+                                                                <td>{{ fila.recepDenOtro}}</td>
+                                                                <td>{{ fila.tipologia}}</td>
+                                                                <td>{{ fila.cantVictima}}</td>
+                                                                <td>{{ fila.cantidadVicCol}}</td>
+                                                                <td>{{ fila.cantPresAutores}}</td>
+                                                               
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

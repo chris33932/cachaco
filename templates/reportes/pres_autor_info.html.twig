@@ -1,0 +1,140 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes presuntosAutores{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre presuntos autores de los hechos</h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>hechoId</th>
+                                                                <th>presAutorId</th>
+
+                                                                <th>victimaId</th>
+                                                                <th>anio</th>
+                                                                <th>fecha</th>
+                                                                <th>nombre</th>
+                                                                <th>apellido</th>
+                                                                <th>nroDoc</th>
+                                                                <th>sexo</th>
+                                                                <th>genero</th>
+                                                                <th>generoOtro</th>
+                                                                <th>edad</th>
+                                                                <th>edadLegal</th>
+                                                                <th>rangoEtario</th>
+                                                                <th>prov</th>
+                                                                <th>depto</th>
+                                                                <th>localidad</th>
+                                                                <th>barrio</th>
+                                                                <th>calle</th>
+                                                                <th>altura</th>
+                                                                <th>intersecc</th>
+                                                                <th>calleIntersecc</th>
+                                                                <th>sig</th>
+                                                                <th>latitud</th>
+                                                                <th>longitud</th>
+                                                                <th>fraccion</th>
+                                                                <th>radio</th>
+                                                                <th>nacionalidad</th>
+                                                                <th>nacionalidadOtro</th>
+                                                                <th>estCivil</th>
+                                                                <th>sitLab</th>
+                                                                <th>sitLabOtro</th>
+                                                                <th>condAct</th>
+                                                                <th>nivInst</th>
+                                                                <th>nivInstFormal</th>
+                                                                <th>reincidente</th>
+                                                                <th>antPenal</th>
+                                                                <th>antPenalEspec</th>
+                                                                <th>fuerzaSeg</th>
+                                                                <th>fuerzaSegPert</th>
+                                                                <th>fuerzaSegPertOtra</th>
+                                                                <th>estPolicial</th>
+                                                                <th>ejerFunc</th>
+                                                                <th>observacion</th>
+                                                                                                                           
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.hechoId}}</td>
+                                                                <td>{{ fila.presAutorId}}</td>
+
+                                                                <td>{{ fila.victimaId}}</td>
+                                                                <td>{{ fila.anio}}</td>
+                                                                <td>{{ fila.fecha}}</td>
+                                                                <td>{{ fila.nombre}}</td>
+                                                                <td>{{ fila.apellido}}</td>
+                                                                <td>{{ fila.nroDoc}}</td>
+                                                                <td>{{ fila.sexo}}</td>
+                                                                <td>{{ fila.genero}}</td>
+                                                                <td>{{ fila.generoOtro}}</td>
+                                                                <td>{{ fila.edad}}</td>
+                                                                <td>{{ fila.edadLegal}}</td>
+                                                                <td>{{ fila.rangoEtario}}</td>
+                                                                <td>{{ fila.prov}}</td>
+                                                                <td>{{ fila.depto}}</td>
+                                                                <td>{{ fila.localidad}}</td>
+                                                                <td>{{ fila.barrio}}</td>
+                                                                <td>{{ fila.calle}}</td>
+                                                                <td>{{ fila.altura}}</td>
+                                                                <td>{{ fila.intersecc}}</td>
+                                                                <td>{{ fila.calleIntersecc}}</td>
+                                                                <td>{{ fila.sig}}</td>
+                                                                <td>{{ fila.latitud}}</td>
+                                                                <td>{{ fila.longitud}}</td>
+                                                                <td>{{ fila.fraccion}}</td>
+                                                                <td>{{ fila.radio}}</td>
+                                                                <td>{{ fila.nacionalidad}}</td>
+                                                                <td>{{ fila.nacionalidadOtro}}</td>
+                                                                <td>{{ fila.estCivil}}</td>
+                                                                <td>{{ fila.sitLab}}</td>
+                                                                <td>{{ fila.sitLabOtro}}</td>
+                                                                <td>{{ fila.condAct}}</td>
+                                                                <td>{{ fila.nivInst}}</td>
+                                                                <td>{{ fila.nivInstFormal}}</td>
+                                                                <td>{{ fila.reincidente}}</td>
+                                                                <td>{{ fila.antPenal}}</td>
+                                                                <td>{{ fila.antPenalEspec}}</td>
+                                                                <td>{{ fila.fuerzaSeg}}</td>
+                                                                <td>{{ fila.fuerzaSegPert}}</td>
+                                                                <td>{{ fila.fuerzaSegPertOtra}}</td>
+                                                                <td>{{ fila.estPolicial}}</td>
+                                                                <td>{{ fila.ejerFunc}}</td>
+                                                                <td>{{ fila.observacion}}</td>
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

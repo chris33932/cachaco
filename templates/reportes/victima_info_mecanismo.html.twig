@@ -1,0 +1,97 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes hechos{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre vicimas </h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>victimaId</th>
+                                                                <th>hechoId</th>
+                                                                <th>nombre</th>
+                                                                <th>apellido</th>
+                                                                <th>NroDoc</th>
+                                                                <th>mecanismoMuerte</th>
+                                                                <th>mecaMuerteOtro</th>
+                                                                <th>tipoArma</th>
+                                                                <th>tipoArmaOtro</th>
+                                                                <th>fuerzaSeg</th>
+                                                                <th>fuerzaSegPert</th>
+                                                                <th>fuerzaSegPertOtra</th>
+                                                                <th>estPolicial</th>
+                                                                <th>funcMomHecho</th>
+                                                                <th>medidaProteccVigente</th>
+                                                                <th>medidaProteccVigenteEspec</th>
+                                                                <th>overkill</th>
+                                                                <th>estIntox</th>
+                                                                <th>estIntoxDesc</th>
+                                                                <th>estIntoxOtro</th>
+                                                                <th>desapAntesHecho</th>
+                                                              
+
+                                                                
+                                                                                                                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                <td>{{ fila.victimaId}}</td>
+                                                                <td>{{ fila.hechoId}}</td>
+                                                                <td>{{ fila.nombre}}</td>
+                                                                <td>{{ fila.apellido}}</td>
+                                                                <td>{{ fila.NroDoc}}</td>
+                                                                <td>{{ fila.mecanismoMuerte}}</td>
+                                                                <td>{{ fila.mecaMuerteOtro}}</td>
+                                                                <td>{{ fila.tipoArma}}</td>
+                                                                <td>{{ fila.tipoArmaOtro}}</td>
+                                                                <td>{{ fila.fuerzaSeg}}</td>
+                                                                <td>{{ fila.fuerzaSegPert}}</td>
+                                                                <td>{{ fila.fuerzaSegPertOtra}}</td>
+                                                                <td>{{ fila.estPolicial}}</td>
+                                                                <td>{{ fila.funcMomHecho}}</td>
+                                                                <td>{{ fila.medidaProteccVigente}}</td>
+                                                                <td>{{ fila.medidaProteccVigenteEspec}}</td>
+                                                                <td>{{ fila.overkill}}</td>
+                                                                <td>{{ fila.estIntox}}</td>
+                                                                <td>{{ fila.estIntoxDesc}}</td>
+                                                                <td>{{ fila.estIntoxOtro}}</td>
+                                                                <td>{{ fila.desapAntesHecho}}</td>
+                                                              
+                                                               
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}

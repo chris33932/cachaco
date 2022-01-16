@@ -28,6 +28,8 @@
                                 Hechos
                                 </button>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('hecho_info') }}" target="_blank">Hechos sin detalle</a>
+                                    <a class="dropdown-item" href="{{ path('detalle_hecho_info') }}" target="_blank">Detalle de los hechos</a>
                                 
                                     <a class="dropdown-item" href="{{ path('hechos_por_tipologia') }}" target="_blank">Hechos por tipología</a>
                                     <a class="dropdown-item" href="{{ path('hechos_por_localidad') }}" target="_blank">Distribución de hechos por localidad</a>
@@ -73,6 +75,7 @@
                                 Presuntos Autores
                                 </button>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('pres_autor_info') }}" target="_blank">PresAutores información general</a>
                                 
                                     <a class="dropdown-item" href="{{ path('pres_autor_por_sexo_genero') }}" target="_blank">PresAutores por sexo y género</a>
                                     <a class="dropdown-item" href="{{ path('autores_por_departamento_localidad') }}" target="_blank">PresAutores por ublicación geográfica</a>
@@ -91,8 +94,11 @@
                                 Víctimas
                                 </button>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('victima_info_general') }}">Victimas Información Personal y Situación socio/económica</a>
                                 
-                                    <a class="dropdown-item" href="{{ path('victimas_reportes') }}">Victimas de víctimas por departamento</a>
+                                    <a class="dropdown-item" href="{{ path('victima_info_mecanismo') }}">Victimas Información Sobre mecanismo de muerte</a>
+
+                                    <a class="dropdown-item" href="{{ path('victimas_reportes') }}">Distribución de víctimas por departamento</a>
                                     <a class="dropdown-item" href="{{ path('victimas_por_localidad') }}">Distribución de víctimas por localidad</a>
                                     <a class="dropdown-item" href="{{ path('victimas_por_rango_etario') }}">Distribución de víctimas por rango etario</a>
                                     <a class="dropdown-item" href="{{ path('victimas_por_edad_legal') }}">Distribución de víctimas por edad legal</a>

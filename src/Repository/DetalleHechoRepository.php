@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use Doctrine\ORM\Query\ResultSetMapping;
 use App\Entity\DetalleHecho;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -65,6 +65,118 @@ class DetalleHechoRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
 
+    }
+
+
+
+    // consulta sobre los detalles dentro de cada hecho
+
+    public function detalleHechoInfoGral($fechaDesde, $fechaHasta){
+        $sql = <<<'SQL'
+    SELECT
+	detalle_hecho.id AS hechoId, 
+	detalle_hecho.hecho_id AS detalleHechoId, 
+	detalle_hecho.victima_id AS victimaId, 
+	detalle_hecho.pres_autor_id AS presAutorId, 
+	detalle_hecho.den_previa AS denPrevia, 
+	detalle_hecho.den_prev_desc AS denPrevDesc, 
+	detalle_hecho.vinculo AS vinculo, 
+	detalle_hecho.vinculo_familiar AS vincFliar, 
+	detalle_hecho.vinculo_familiar_otro AS vincFliarOtro, 
+	detalle_hecho.vinculo_no_familiar AS vincNoFliar, 
+	detalle_hecho.vinculo_no_familiar_otro AS vincNoFliarOtro, 
+	detalle_hecho.conviviente AS conviviente, 
+	detalle_hecho.uso_arma_fue AS usoArmaFuego, 
+	situacion_arma.descripcion AS situacionArma, 
+	tipo_per_arma.descripcion AS permisoArma, 
+	detalle_hecho.est_intox AS estIntox, 
+    estado_intox.descripcion  AS tipoEstIntox, 
+	detalle_hecho.est_intox_otro AS estIntoxOtro, 
+	sit_procesal.descripcion AS sitProcesal, 
+	comp_hecho.descripcion AS compHecho, 
+	detalle_hecho.comp_hecho_otro AS compHechoOtro,
+    hecho.anio AS anio,
+    hecho.fecha AS fecha
+FROM
+	hecho
+	INNER JOIN
+	detalle_hecho
+	ON 
+		hecho.id = detalle_hecho.hecho_id
+	INNER JOIN
+	pres_autor
+	ON 
+		detalle_hecho.pres_autor_id = pres_autor.id
+	INNER JOIN
+	victima
+	ON 
+		detalle_hecho.victima_id = victima.id
+	LEFT JOIN
+	situacion_arma
+	ON 
+		detalle_hecho.sit_arma_fue_id = situacion_arma.id
+	LEFT JOIN
+	tipo_per_arma
+	ON 
+		detalle_hecho.per_arma_fue_id = tipo_per_arma.id
+	LEFT JOIN
+	estado_intox
+	ON 
+		detalle_hecho.tipo_e_intox_id = estado_intox.id
+	LEFT JOIN
+	sit_procesal
+	ON 
+		detalle_hecho.sit_procesal_id = sit_procesal.id
+	LEFT JOIN
+	comp_hecho
+	ON 
+		detalle_hecho.comp_hecho_id = comp_hecho.id
+                WHERE hecho.fecha >= :fechaDesde
+                    AND hecho.fecha <= :fechaHasta
+                    ORDER BY hecho.anio
+SQL;
+
+        $rsm = new ResultSetMapping();
+
+        $rsm->addScalarResult('hechoId', 'hechoId');
+        $rsm->addScalarResult('detalleHechoId', 'detalleHechoId');
+        $rsm->addScalarResult('victimaId', 'victimaId');
+        $rsm->addScalarResult('presAutorId', 'presAutorId');
+        $rsm->addScalarResult('denPrevia', 'denPrevia');
+        $rsm->addScalarResult('denPrevDesc', 'denPrevDesc');
+        $rsm->addScalarResult('vinculo', 'vinculo');
+        $rsm->addScalarResult('vincFliar', 'vincFliar');
+        $rsm->addScalarResult('vincFliarOtro', 'vincFliarOtro');
+        $rsm->addScalarResult('vincNoFliar', 'vincNoFliar');
+        $rsm->addScalarResult('vincNoFliarOtro', 'vincNoFliarOtro');
+        $rsm->addScalarResult('conviviente', 'conviviente');
+        $rsm->addScalarResult('usoArmaFuego', 'usoArmaFuego');
+        $rsm->addScalarResult('situacionArma', 'situacionArma');
+        $rsm->addScalarResult('permisoArma', 'permisoArma');
+        $rsm->addScalarResult('estIntox', 'estIntox');
+        $rsm->addScalarResult('tipoEstIntox', 'tipoEstIntox');
+        $rsm->addScalarResult('estIntoxOtro', 'estIntoxOtro');
+        $rsm->addScalarResult('sitProcesal', 'sitProcesal');
+        $rsm->addScalarResult('compHecho', 'compHecho');
+        $rsm->addScalarResult('compHechoOtro', 'compHechoOtro');
+        $rsm->addScalarResult('anio', 'anio');
+        $rsm->addScalarResult('fecha', 'fecha');
+     
+
+      
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+
+        $fechaDesdeCorregida = clone $fechaDesde;
+        $fechaHastaCorregida = clone $fechaHasta;
+
+        $fechaDesdeCorregida->setTime(0, 0, 0);
+        $fechaHastaCorregida->add(new \DateInterval('P1D'))->setTime(0, 0, 0);
+
+        $query->setParameter(':fechaDesde', $fechaDesdeCorregida)
+            ->setParameter(':fechaHasta', $fechaHastaCorregida);
+
+        return $query->getArrayResult();
     }
 
 

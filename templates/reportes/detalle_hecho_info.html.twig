@@ -1,0 +1,98 @@
+{% extends "reportes/baseRepo.html.twig" %}
+{% block title %}Reportes detalle-hechos{% endblock %}
+
+
+{% block reporte %}
+<div class="container-fluid">
+    <div class="table table-responsive">
+    <caption class="text-justify" > <h4>Informe sobre los detalles de cada hecho</h4>  
+      {{ fecha_desde | fechaCorta }} hasta {{ fecha_hasta | fechaCorta }}</caption>
+
+                             <table class="table table-hover">
+            
+                                                        <thead style="background-color: #a4eaec;">
+                                                            <tr>
+                                                                <th>hechoId</th>
+                                                                <th>detalleHechoId</th>
+                                                                <th>victimaId</th>
+                                                                <th>presAutorId</th>
+                                                                <th>denPrevia</th>
+                                                                <th>denPrevDesc</th>
+                                                                <th>vinculo</th>
+                                                                <th>vincFliar</th>
+                                                                <th>vincFliarOtro</th>
+                                                                <th>vincNoFliar</th>
+                                                                <th>vincNoFliarOtro</th>
+                                                                <th>conviviente</th>
+                                                                <th>usoArmaFuego</th>
+                                                                <th>situacionArma</th>
+                                                                <th>permisoArma</th>
+                                                                <th>estIntox</th>
+                                                                <th>tipoEstIntox</th>
+                                                                <th>estIntoxOtro</th>
+                                                                <th>sitProcesal</th>
+                                                                <th>compHecho</th>
+                                                                <th>compHechoOtro</th>
+                                                                <th>anio</th>
+                                                                <th>fecha</th>
+
+                                                                                                                                                                                        
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fila in datos %}
+                                                            <tr>
+                                                                  <td>{{ fila.hechoId}}</td>
+                                                                <td>{{ fila.detalleHechoId}}</td>
+                                                                <td>{{ fila.victimaId}}</td>
+                                                                <td>{{ fila.presAutorId}}</td>
+                                                                <td>{{ fila.denPrevia}}</td>
+                                                                <td>{{ fila.denPrevDesc}}</td>
+                                                                <td>{{ fila.vinculo}}</td>
+                                                                <td>{{ fila.vincFliar}}</td>
+                                                                <td>{{ fila.vincFliarOtro}}</td>
+                                                                <td>{{ fila.vincNoFliar}}</td>
+                                                                <td>{{ fila.vincNoFliarOtro}}</td>
+                                                                <td>{{ fila.conviviente}}</td>
+                                                                <td>{{ fila.usoArmaFuego}}</td>
+                                                                <td>{{ fila.situacionArma}}</td>
+                                                                <td>{{ fila.permisoArma}}</td>
+                                                                <td>{{ fila.estIntox}}</td>
+                                                                <td>{{ fila.tipoEstIntox}}</td>
+                                                                <td>{{ fila.estIntoxOtro}}</td>
+                                                                <td>{{ fila.sitProcesal}}</td>
+                                                                <td>{{ fila.compHecho}}</td>
+                                                                <td>{{ fila.compHechoOtro}}</td>
+                                                                <td>{{ fila.anio}}</td>
+                                                                <td>{{ fila.fecha}}</td>
+                                                               
+                                                            
+                                                            </tr>
+                                                            {% else %}
+                                                            <tr><td>No hay resultados disponibles...</td></tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+       
+      
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+    {% set path_excel = "" %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#imprimir').on('click', function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+</script>
+{% endblock %}
