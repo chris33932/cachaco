@@ -179,7 +179,7 @@ FROM
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
         ORDER BY
-        detalle_hecho.victima_id DESC
+        detalle_hecho.victima_id 
               
 
 SQL;
@@ -379,7 +379,7 @@ FROM
         WHERE hecho.fecha >= :fechaDesde
         AND hecho.fecha <= :fechaHasta
         ORDER BY
-        detalle_hecho.victima_id DESC
+        detalle_hecho.victima_id 
               
 
 SQL;

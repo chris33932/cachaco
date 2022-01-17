@@ -250,6 +250,7 @@ class ReportesController extends AbstractController
                 'columnas' => array(
                     'victimaId',
                     'hechoId',
+                    'anio',
                     'nombre',
                     'apellido',
                     'NroDoc',
