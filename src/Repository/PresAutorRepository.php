@@ -105,7 +105,7 @@ SQL;
                 ON 
                     pres_autor.genero_id = genero.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY
                     genero.descripcion
 SQL;
@@ -155,7 +155,7 @@ SQL;
                 ON 
                 pres_autor.rango_etario_id = rango_etario.id
                 WHERE hecho.fecha >= :fechaDesde
-                AND hecho.fecha <= :fechaHasta
+                AND hecho.fecha < :fechaHasta
                 GROUP BY
                 rango_etario.descripcion
 SQL;
@@ -203,7 +203,7 @@ SQL;
             ON 
                 hecho.departamento_id = departamento.id 
                 WHERE hecho.fecha >= :fechaDesde
-                AND hecho.fecha <= :fechaHasta
+                AND hecho.fecha < :fechaHasta
                 GROUP BY
                 departamento.descripcion
 SQL;
@@ -251,7 +251,7 @@ SQL;
                 ON 
                 hecho.localidad_id = localidad.id
                 WHERE hecho.fecha >= :fechaDesde
-                AND hecho.fecha <= :fechaHasta
+                AND hecho.fecha < :fechaHasta
                 GROUP BY
                 localidad.nombre
 SQL;
@@ -292,7 +292,7 @@ SQL;
             ON 
 		    detalle_hecho.pres_autor_id = pres_autor.id
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             GROUP BY pres_autor.edad_legal
             
 SQL;
@@ -335,7 +335,7 @@ SQL;
             ON 
             detalle_hecho.pres_autor_id = pres_autor.id
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             GROUP BY hecho.dia_ocu
             
 SQL;
@@ -379,7 +379,7 @@ SQL;
             ON 
     		detalle_hecho.pres_autor_id = pres_autor.id
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             GROUP BY hecho.mes
             
 SQL;
@@ -526,7 +526,7 @@ FROM
 		pres_autor.est_pol_id = estado_policial.id
   
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     ORDER BY hecho.anio
 SQL;
 

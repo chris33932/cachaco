@@ -103,7 +103,8 @@ public function informeGralVictima($fechaDesde, $fechaHasta){
 	victima.benef_ley_brisa AS benefLeyBrisa, 
 	victima.cant_benef AS cantBenef, 
 	nivel_instruccion.descripcion AS nivInst, 
-	nivel_inst_formal.descripcion AS nivInstFormal
+	nivel_inst_formal.descripcion AS nivInstFormal,
+    hecho.fecha AS fecha
 	
 FROM
 	hecho
@@ -177,7 +178,7 @@ FROM
 		victima.niv_inst_form_id = nivel_inst_formal.id
 	
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         ORDER BY
         detalle_hecho.victima_id 
               
@@ -236,6 +237,7 @@ SQL;
         $rsm->addScalarResult('cantBenef', 'cantBenef');
         $rsm->addScalarResult('nivInst', 'nivInst');
         $rsm->addScalarResult('nivInstFormal', 'nivInstFormal');
+        $rsm->addScalarResult('fecha', 'fecha');
                 
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
@@ -377,7 +379,7 @@ FROM
 	ON 
 		victima.tipo_est_intox_id = estado_intox.id 
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         ORDER BY
         detalle_hecho.victima_id 
               
@@ -444,7 +446,7 @@ SQL;
 		        
 		        detalle_hecho.victima_id = victima.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY
             	departamento.descripcion
 SQL;
@@ -492,7 +494,7 @@ SQL;
         ON 
             detalle_hecho.victima_id = victima.id
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         GROUP BY
         localidad.nombre
 
@@ -543,7 +545,7 @@ SQL;
 	            ON 
                 victima.rango_etario_id = rango_etario.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY
                 rango_etario.descripcion
 SQL;
@@ -588,7 +590,7 @@ SQL;
                     ON 
 		        victima.edad_legal_id = edad_legal.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY
                 edad_legal.descripcion
 SQL;
@@ -630,7 +632,7 @@ SQL;
                     ON 
             		detalle_hecho.victima_id = victima.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY mes
 SQL;
 
@@ -671,7 +673,7 @@ SQL;
                     ON 
             		detalle_hecho.victima_id = victima.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY
                     dia_ocu
 SQL;
@@ -717,7 +719,7 @@ SQL;
                     ON 
 		           victima.sexo_id = sexo.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY sexo.descripcion
 SQL;
 
@@ -763,7 +765,7 @@ SQL;
                     ON 
 	            	genero.id = victima.genero_id 
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY genero.descripcion
 SQL;
 
@@ -808,7 +810,7 @@ SQL;
             ON 
             victima.mecanismo_muerte_id = mecanismo_muerte.id
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             GROUP BY mecanismo_muerte.descripcion
 SQL;
 
@@ -849,7 +851,7 @@ SQL;
                 ON 
                     detalle_hecho.victima_id = victima.id
                     WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY victima.fuerza_seg
 SQL;
 
@@ -896,7 +898,7 @@ SQL;
             ON 
                 victima.tipo_arma_id = tipo_arma.id
                         WHERE hecho.fecha >= :fechaDesde
-                        AND hecho.fecha <= :fechaHasta
+                        AND hecho.fecha < :fechaHasta
                         GROUP BY tipo_arma.descripcion
            
                   
@@ -950,7 +952,7 @@ public function victimasPorVinculo($fechaDesde, $fechaHasta){
 		detalle_hecho.victima_id = victima.id
 
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         ORDER BY
         	    detalle_hecho.vinculo
               
@@ -1039,7 +1041,7 @@ FROM
 	ON 
 		victima.estado_civil_id = estado_civil.id
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             AND femicidio = 'Si'
             ORDER BY detalle_hecho.victima_id DESC
                   
@@ -1129,7 +1131,7 @@ FROM
 		detalle_hecho.comp_hecho_id = comp_hecho.id
 
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         AND femicidio= 'Si'
         ORDER BY
         	    detalle_hecho.vinculo
@@ -1201,7 +1203,7 @@ SQL;
         ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id 
         WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             AND femicidio = 'Si'
             GROUP BY  departamento.descripcion, tipo_femicidio.descripcion
           
@@ -1258,7 +1260,7 @@ SQL;
             ON 
 		    victima.tipo_femicidio_id = tipo_femicidio.id   
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             AND femicidio = 'Si'
             GROUP BY
             localidad.nombre, tipo_femicidio.descripcion
@@ -1319,7 +1321,7 @@ public function femicidiosRangoEtario($fechaDesde, $fechaHasta){
 	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
         WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             AND femicidio = 'Si'
             GROUP BY  edad_legal.descripcion, tipo_femicidio.descripcion
           
@@ -1373,7 +1375,7 @@ FROM
 	ON 
 		victima.tipo_femicidio_id = tipo_femicidio.id
         WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             AND femicidio = 'Si'
             GROUP BY  rango_etario.descripcion, tipo_femicidio.descripcion
           
@@ -1442,7 +1444,7 @@ FROM
 	hecho.oca_delito_id=ocasion_delito.id
 
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         AND femicidio = 'Si'
         ORDER BY
         detalle_hecho.victima_id DESC
@@ -1523,7 +1525,7 @@ FROM
 	ON 
 	hecho.rep_geo_ocu_id = rep_geografica.id
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         AND femicidio = 'Si'
         ORDER BY
         detalle_hecho.victima_id DESC
@@ -1633,7 +1635,7 @@ FROM
 		hecho.localidad_id = localidad.id
 
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         AND femicidio = 'Si'
                   
 
@@ -1742,7 +1744,7 @@ FROM
 		victima.estado_civil_id = estado_civil.id
 
             WHERE hecho.fecha >= :fechaDesde
-            AND hecho.fecha <= :fechaHasta
+            AND hecho.fecha < :fechaHasta
             AND femicidio = 'Si'
             ORDER BY hecho.fecha
                   
@@ -1854,7 +1856,7 @@ FROM
 	ON 
 		victima.ejer_funcion_id = funcion_mom_hecho.id 
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         AND femicidio = 'Si'
         ORDER BY
         detalle_hecho.victima_id DESC
@@ -1982,7 +1984,7 @@ public function femicidiosPresAutorInfo($fechaDesde, $fechaHasta){
 	tipo_femicidio
 	ON tipo_femicidio.id = victima.tipo_femicidio_id
         WHERE hecho.fecha >= :fechaDesde
-        AND hecho.fecha <= :fechaHasta
+        AND hecho.fecha < :fechaHasta
         AND femicidio = 'Si'
         ORDER BY
         detalle_hecho.victima_id DESC

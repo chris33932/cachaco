@@ -173,7 +173,7 @@ FROM
 	ON 
 		detalle_hecho.pres_autor_id = pres_autor.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     ORDER BY hechoId
 SQL;
 
@@ -259,7 +259,7 @@ SQL;
                     ON 
                     hecho.tipologia_id = tipologia.id
                     WHERE hecho.fecha >= :fechaDesde
-                        AND hecho.fecha <= :fechaHasta
+                        AND hecho.fecha < :fechaHasta
                         GROUP BY
                         tipologia.descripcion
             SQL;
@@ -297,7 +297,7 @@ SQL;
                        ON 
                        hecho.localidad_id = localidad.id
                        WHERE hecho.fecha >= :fechaDesde
-                           AND hecho.fecha <= :fechaHasta
+                           AND hecho.fecha < :fechaHasta
                            GROUP BY
                            localidad.id
                            ORDER BY cantidad
@@ -338,7 +338,7 @@ SQL;
                        ON 
                        hecho.departamento_id = departamento.id
                        WHERE hecho.fecha >= :fechaDesde
-                           AND hecho.fecha <= :fechaHasta
+                           AND hecho.fecha < :fechaHasta
                            GROUP BY
                            departamento.id
                            ORDER BY cantidad
@@ -373,7 +373,7 @@ SQL;
                         COUNT(hecho.id) AS cantidad
                        FROM hecho 
                            WHERE hecho.fecha >= :fechaDesde
-                           AND hecho.fecha <= :fechaHasta
+                           AND hecho.fecha < :fechaHasta
                            GROUP BY
                            hecho.franja_h_tres
                            ORDER BY cantidad
@@ -407,7 +407,7 @@ SQL;
                         COUNT(hecho.id) AS cantidad
                        FROM hecho 
                            WHERE hecho.fecha >= :fechaDesde
-                           AND hecho.fecha <= :fechaHasta
+                           AND hecho.fecha < :fechaHasta
                            GROUP BY
                            hecho.franja_h_tres
                            ORDER BY cantidad
@@ -447,7 +447,7 @@ SQL;
                    FROM
                    hecho
                    WHERE hecho.fecha >= :fechaDesde
-                   AND hecho.fecha <= :fechaHasta
+                   AND hecho.fecha < :fechaHasta
                    GROUP BY
                    dia_ocu
     SQL;
@@ -482,7 +482,7 @@ SQL;
                    FROM
 	               hecho
                    WHERE hecho.fecha >= :fechaDesde
-                   AND hecho.fecha <= :fechaHasta
+                   AND hecho.fecha < :fechaHasta
                    GROUP BY
                    mes
 SQL;
@@ -519,7 +519,7 @@ SQL;
 	               ON 
 	            	hecho.oca_delito_id = ocasion_delito.id
                    WHERE hecho.fecha >= :fechaDesde
-                   AND hecho.fecha <= :fechaHasta
+                   AND hecho.fecha < :fechaHasta
                    GROUP BY
                    ocasion_delito.descripcion
 
@@ -564,7 +564,7 @@ SQL;
                     hecho.zona_ocu_id = zona.id
 			
                     WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY zona.descripcion
 
 SQL;
@@ -605,7 +605,7 @@ SQL;
 		       		hecho.tipo_esp_ocu_id = tipo_espacio.id
 			
                     WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY tipo_espacio.descripcion
 
 SQL;
@@ -639,7 +639,7 @@ SQL;
                     hecho
 			
                     WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY hecho.acceso_ocu
 
 SQL;
@@ -678,7 +678,7 @@ SQL;
                   ON 
                   hecho.lugar_ocu_id = lugar.id
                   WHERE hecho.fecha >= :fechaDesde
-                  AND hecho.fecha <= :fechaHasta
+                  AND hecho.fecha < :fechaHasta
                   GROUP BY lugar.descripcion
     
 SQL;
@@ -717,7 +717,7 @@ SQL;
                 hecho.tipo_lug_ocu_id = tipo_lugar.id
 			
                     WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     GROUP BY tipo_lugar.descripcion
 
 SQL;
@@ -755,7 +755,7 @@ SQL;
 	                  hecho.dom_part_ocu_id = tipo_dom_particular.id
                 
                         WHERE hecho.fecha >= :fechaDesde
-                        AND hecho.fecha <= :fechaHasta
+                        AND hecho.fecha < :fechaHasta
                         GROUP BY tipo_dom_particular.descripcion 
     
 SQL;
