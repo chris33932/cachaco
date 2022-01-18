@@ -3,13 +3,16 @@
 {% block title %}Editar PresAutor{% endblock %}
 
 {% block body %}
+<div class="container-fluid">
     <h1>Editar Presunto Autor</h1>
-
-    {{ include('pres_autor/_form.html.twig', {'button_label': 'Actualizar'}) }}
-<div style="padding: 10px 0px 30px;">
-    <a href="{{ path('pres_autor_index') }}" class="btn btn-primary stretched-link">Volver</a>
 </div>
+    {{ include('pres_autor/_form.html.twig', {'button_label': 'Actualizar'}) }}
+ <div style="padding: 10px 0px 30px;">
+    <a href="{{ path('pres_autor_index') }}" class="btn btn-info btn-sm" alt="Volver">
+                        <span class="glyphicon glyphicon-step-backward"></span> Volver</a>
+ </div>
+
    
 
-   {# {{ include('pres_autor/_delete_form.html.twig') }} #}
+   {#  {{ include('pres_autor/_delete_form.html.twig') }} #}
 {% endblock %}

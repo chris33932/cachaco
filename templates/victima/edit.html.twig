@@ -3,12 +3,17 @@
 {% block title %}Editar Victima{% endblock %}
 
 {% block body %}
-    <h1>Editar Victima</h1>
+<div class="container-fluid">
+    <h1>Editar Víctima</h1>
+</div>
 
     {{ include('victima/_form.html.twig', {'button_label': 'Actualizar'}) }}
 <div style="padding: 10px 0px 30px;">
-    <a href="{{ path('victima_index') }}" class="btn btn-primary stretched-link">Volver</a>
+    <a href="{{ path('victima_index') }}"class="btn btn-info btn-sm" alt="Volver">
+                        <span class="glyphicon glyphicon-step-backward"></span> Volver</a> 
 </div>
 
-  {#  {{ include('victima/_delete_form.html.twig') }} #}
+  {#  {{ include('victima/_delete_form.html.twig') }}
+     <a href="{{ path('hecho_index') }}" class="btn btn-info btn-sm" alt="Volver">
+                        <span class="glyphicon glyphicon-step-backward"></span> Volver</a> #}
 {% endblock %}
