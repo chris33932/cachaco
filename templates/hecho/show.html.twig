@@ -6,7 +6,7 @@
     
 
 <div class="container">
-	 <h1 class="text-info"  style="padding-top:50px; padding-bottom:50px">Hecho</h1>
+	 <h1 class="text-info"  style="padding-top:50px; padding-bottom:50px">Hecho/Detalles</h1>
         <div class="table-responsive">
              <table class="table table-hover">
 
@@ -136,7 +136,7 @@
                 <th>Coinc_lug_ocu</th>
                 <td>{{ hecho.coincLugOcu }}</td>
             </tr>
-            {#<tr>
+            <tr>
                 <th>Fecha_hgo</th>
                 <td>{{ hecho.fechaHgo ? hecho.fechaHgo|date('Y-m-d') : '' }}</td>
             </tr>
@@ -148,14 +148,14 @@
                 <th>Dia_hgo</th>
                 <td>{{ hecho.diaHgo }}</td>
             </tr>
-            <tr>
+            {#<tr>
                 <th>F_hora_hgo_seis</th>
-                <td>{{ hecho.fHoraHgoSeis }}</td>
+                <td>{{ hecho.F_hora_hgo_seis }}</td>
             </tr>
             <tr>
                 <th>F_hora_hgo_tres</th>
-                <td>{{ hecho.fHoraHgoTres }}</td>
-            </tr>
+                <td>{{ hecho.F_hora_hgo_tres }}</td>
+            </tr>#}
             <tr>
                 <th>Barrio_hgo</th>
                 <td>{{ hecho.barrioHgo }}</td>
@@ -203,15 +203,15 @@
             <tr>
                 <th>Radio_hgo</th>
                 <td>{{ hecho.radioHgo }}</td>
-            </tr>#}
+            </tr>
             <tr>
                 <th>Oca_delito</th>
                 <td>{{ hecho.ocaDelito }}</td>
             </tr>
-            {#<tr>
+            <tr>
                 <th>Orig_reg_otro</th>
                 <td>{{ hecho.origRegOtro }}</td>
-            </tr>#}
+            </tr>
             <tr>
                 <th>Tipologia</th>
                 <td>{{ hecho.tipologia }}</td>

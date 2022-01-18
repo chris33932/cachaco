@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Centro de Analisis{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+           <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+     
+  
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+           
+			
+			      <script
+                src="https://code.jquery.com/jquery-2.2.4.min.js"
+                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+                crossorigin="anonymous"></script>
+               <script src="{{ asset('js/app.js') }}"></script>
+               <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+               <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+               <script src="{{ asset('js/jquery.min.js') }}"></script>
+           
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a class="navbar-brand" href="{{ path('home')}}"><p class="text-warning">Volver</p></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                {#<li class="nav-item">
+                    <a class="nav-link" href="#">Hechos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('victima_index')}}">Victimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('pres_autor_index')}}">Presunto autor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('detalle_hecho_index')}}">DetalleDeHechos</a>
+                </li>
+             
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('reporte_index')}}">Reportes</a>
+                </li>
+
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
+                    Variables victima/presunto autor
+                    </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ path('provincia_index')}}">Provincia</a>
+                     <a class="dropdown-item" href="{{ path('departamento_index')}}">Departamento</a>
+                      <a class="dropdown-item" href="{{ path('localidad_index')}}">Localidad</a>
+                      <a class="dropdown-item" href="{{ path('tipo_documento_index')}}">Tipo documento</a>
+                      <a class="dropdown-item" href="{{ path('tipo_documento_index')}}">Tipo documento</a>
+                      <a class="dropdown-item" href="{{ path('sexo_index')}}">Sexo</a>
+                      <a class="dropdown-item" href="{{ path('genero_index')}}">Género</a>
+                      <a class="dropdown-item" href="{{ path('etnia_index')}}">Etnia</a>
+
+                      <a class="dropdown-item" href="{{ path('edad_legal_index')}}">Edad legal</a>
+                      <a class="dropdown-item" href="{{ path('nacionalidad_index')}}">Nacionalidad</a>
+                      <a class="dropdown-item" href="{{ path('estado_civil_index')}}">Estado civil</a>
+                      <a class="dropdown-item" href="{{ path('situacion_laboral_index')}}">Ocupacion</a>
+                      <a class="dropdown-item" href="{{ path('condicion_actividad_index')}}">Condición de act.</a>
+                      <a class="dropdown-item" href="{{ path('nivel_instruccion_index')}}">Nivel de inst.</a>
+                      <a class="dropdown-item" href="{{ path('nivel_inst_formal_index')}}">Nivel de inst. formal</a>
+                      <a class="dropdown-item" href="{{ path('mecanismo_muerte_index')}}">Mecanismo de muerte</a>
+                      <a class="dropdown-item" href="{{ path('fuerza_seg_pert_index')}}">Fuerza de seguridad pert.</a>
+                      <a class="dropdown-item" href="{{ path('estado_policial_index')}}">Estado policial</a>
+                      <a class="dropdown-item" href="{{ path('tipo_femicidio_index')}}">Tipo femicidio</a>
+                     
+                      <a class="dropdown-item" href="{{ path('cont_femicida_index')}}">Contexto femicida</a>
+                      <a class="dropdown-item" href="{{ path('funcion_mom_hecho_index')}}">Funcion al mom. del hecho</a>
+                      
+
+                    </div>
+                </li>  
+               
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Variables hecho/detalle
+                    </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ path('provincia_index')}}">Provincia</a>
+                      <a class="dropdown-item" href="{{ path('departamento_index')}}">Departamento</a>
+                      <a class="dropdown-item" href="{{ path('localidad_index')}}">Localidad</a>
+                     
+                      <a class="dropdown-item" href="{{ path('comisaria_index')}}">Comisaria</a>
+                      <a class="dropdown-item" href="{{ path('zona_index')}}">Zona</a>
+                      <a class="dropdown-item" href="{{ path('tipo_espacio_index')}}">Tipo de espacio</a>
+                      <a class="dropdown-item" href="{{ path('lugar_index')}}">Lugar</a>
+                      
+                      <a class="dropdown-item" href="{{ path('tipo_lugar_index')}}">Tipo de lugar</a>
+                      
+                      <a class="dropdown-item" href="{{ path('tipo_dom_particular_index')}}">Tipo domicilio part.</a>
+                      <a class="dropdown-item" href="{{ path('ocasion_delito_index')}}">Ocasión delito</a>
+                      <a class="dropdown-item" href="{{ path('origen_registro_index')}}">Origen registro</a>
+                      <a class="dropdown-item" href="{{ path('ent_recep_denuncia_index')}}">Entidad recep. denuncia</a>
+                      <a class="dropdown-item" href="{{ path('tipologia_index')}}">Tipología</a>
+                      <a class="dropdown-item" href="{{ path('situacion_arma_index')}}">Situación del arma</a>
+                      <a class="dropdown-item" href="{{ path('tipo_per_arma_index')}}">Permiso del arma</a>
+
+                      <a class="dropdown-item" href="{{ path('estado_intox_index')}}">Estado de intox</a>
+                      <a class="dropdown-item" href="{{ path('sit_procesal_index')}}">Situación procesal</a>
+                      <a class="dropdown-item" href="{{ path('comp_hecho_index')}}"> Comportamiento posterior</a>
+  
+                      <a class="dropdown-item" href="{{ path('rep_geografica_index')}}">Rep Geog</a>
+                    </div>
+                </li> #}
+              
+                </ul>
+                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <span class="navbar-text">
+                            <span class="glyphicon glyphicon-user">
+                            </span>{{ app.user.username | capitalize}}</span>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_logout') }}">
+                              <span class="glyphicon glyphicon-log-out" alt="Cerrar Sesión">
+                              </span> Salir
+                            </a>
+                        </li>
+                        {% else %}
+                            <a href="{{ path('app_login')  }}">
+                                <span class="glyphicon glyphicon-log-in" alt="Iniciar Sesión"></span>
+                                Ingresar
+                            </a>
+                        {% endif %}
+                        </li>
+                    </ul>
+             </div>  
+        </nav>
+
+<br>
+
+       
+   
+  {% endblock %}
+
+ </body> 
+ {% block footer %}
+
+ {# <footer class="py-4 bg-dark">
+           <div class="container px-5"><p class="sm-5 text-center text-white">Centro de Analisis Chaco - {{ "now"|date("Y") }}</p></div>
+        </footer>#}
+ {% endblock %}
+    
+   
+</html>
