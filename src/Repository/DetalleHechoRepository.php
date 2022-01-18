@@ -134,7 +134,7 @@ FROM
 	ON 
 		detalle_hecho.comp_hecho_id = comp_hecho.id
                 WHERE hecho.fecha >= :fechaDesde
-                    AND hecho.fecha <= :fechaHasta
+                    AND hecho.fecha < :fechaHasta
                     ORDER BY hecho.id
 SQL;
 

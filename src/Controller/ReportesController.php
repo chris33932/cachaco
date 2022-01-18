@@ -182,6 +182,7 @@ class ReportesController extends AbstractController
                     'cantBenef',
                     'nivInst',
                     'nivInstFormal',
+                    'fecha'
                    
                  
                                        
