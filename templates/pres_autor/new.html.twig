@@ -7,8 +7,12 @@
     <h3 class="text-muted">Alta presunto autor</h3>
 
     {{ include('pres_autor/_form.html.twig') }}
-
-    <a href="{{ path('pres_autor_index') }}">Volver a la lista</a>
+  <div class="caja">
+       
+       <button type="button" class="btn btn-info"><a href="{{ path('pres_autor_index') }}">Volver</a></button>
+     
+    </div> 
+  
 </div>
 {% endblock %}
 
