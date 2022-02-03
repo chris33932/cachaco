@@ -20,13 +20,11 @@
 
 {% block body %}{{ parent() }}
 
-<h3 class="display-5"><p class="text-center">Crear nuevo sssshecho</p></h3>
+<h3 class="display-5"><p class="text-center">Crear nuevo hecho</p></h3>
  {{ include('hecho/_form.html.twig') }}
 
-<div class="container"style="padding: 10px 0px 30px 10px;">
-    <a href="{{ path('hecho_index') }}" class="btn btn-info btn-sm" alt="Volver">
-                        <span class="glyphicon glyphicon-step-backward"></span> Volver</a>
-</div>
+<a href="{{ path('hecho_index') }}" >Volver</a>
+
 {% endblock %}
 
 {% block javascripts %} {{ parent() }}
